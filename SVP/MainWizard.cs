@@ -72,6 +72,23 @@ namespace SVP
             TEA_Values.Add(new RMValue("KT", "Keine Teilerwertung"));
             TEA_Values.Add(new RMValue("ZT", "Teilerwertung mit zehntel Teiler"));
             TEA_Values.Add(new RMValue("HT", "Teilerwertung mit hundertstel Teile"));
+
+            Random ran = new Random();
+            List<RMResult> res = new List<RMResult>();
+            for(int i = 0;i<10;i++)
+            {
+                RMResult r = new RMResult();
+                r.Angle = ran.NextDouble() * 2;
+                r.Rings = ran.Next(10);
+                r.ShotNumber = i + 1;
+                r.FactorValue = ran.Next(2500);
+                res.Add(r);
+            }
+            Monitor m = new Monitor();
+            m.Height = 1080;
+            m.Width = 1920;
+            m.Show();
+            m.AddResult(new DisplayResult("Christopher Schenk", res));
         }
 
         private void wizardControl1_SelectedPageChanged(object sender, EventArgs e)
