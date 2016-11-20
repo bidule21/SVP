@@ -28,7 +28,11 @@ namespace SVP
         public string name { get; set; }
         public System.DateTime birthday { get; set; }
         public int club_id { get; set; }
-    
+
+        public override string ToString()
+        {
+            return string.Format("{0}, {1}", name, firstname);
+        }
         public virtual club club { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<sequence> sequence { get; set; }

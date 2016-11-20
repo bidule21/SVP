@@ -29,6 +29,11 @@ namespace DisagLib
             started = true;
         }
 
+        public void Stop()
+        {
+            _serialport.Close();
+        }
+
         public List<RMResult> GetShots(string profile)
         {
             List<RMResult> results = new List<RMResult>();

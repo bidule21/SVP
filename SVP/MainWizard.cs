@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace SVP
 {
@@ -14,9 +15,11 @@ namespace SVP
         private List<RMValue> RIB_Values;
         private List<RMValue> TEA_Values;
         private profile profile;
+        private DISAGRM machine;
         public MainWizard()
         {
             InitializeComponent();
+            machine = new DISAGRM();
             SCH_Values = new List<RMValue>();
             SCH_Values.Add(new RMValue("LG10", "Luftgewehr 10er Band"));
             SCH_Values.Add(new RMValue("LG5", "Luftgewehr 5er Band"));
@@ -79,7 +82,7 @@ namespace SVP
         private void startPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
         {
             if (startTraining.Checked)
-                throw new NotImplementedException();
+                startPage.NextPage = startTrainingPage;
             if (startTempTraining.Checked)
                 throw new NotImplementedException();
             if (startCompetition.Checked)
@@ -308,9 +311,70 @@ namespace SVP
             using (svpEntities context = new svpEntities())
             {
                 var disag = context.disagprofile.Where(x => x.profile_id == profile.id).FirstOrDefault();
-                if(disag != null)
+                if (disag != null)
                     setProfileString(disag.value);
             }
+        }
+
+        private void btnTrainingRead_Click(object sender, EventArgs e)
+        {
+            if (cbTrainingClub.SelectedIndex >= 0 && cbTrainingMember.SelectedIndex >= 0)
+            {
+                btnTrainingRead.Enabled = false;
+                using (svpEntities context = new svpEntities())
+                {
+                    disagprofile profile = context.disagprofile.Where(x => x.profile_id == this.profile.id).First();
+                    System.Threading.Tasks.Task ta = System.Threading.Tasks.Task.Factory.StartNew<List<RMResult>>(() => readShots(profile.value));
+                
+                while (!ta.IsCompleted)
+                {
+                    Application.DoEvents();
+                }
+
+
+                }
+            }
+        }
+
+        private List<RMResult> readShots(string profile)
+        {
+            var bla = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings;
+            machine.Start(ConfigurationManager.AppSettings["ComPort"]);
+            List<RMResult> results = machine.GetShots(profile);
+            machine.Stop();
+            return results;
+        }
+
+        private void TrainingPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
+        {
+            using (svpEntities context = new svpEntities())
+            {
+                cbTrainingClub.Items.Clear();
+                cbTrainingClub.Items.AddRange(context.club.ToArray());
+            }
+        }
+
+        private void startTrainingPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
+        {
+            using (svpEntities context = new svpEntities())
+            {
+                cbTrainingProfile.Items.Clear();
+                cbTrainingProfile.Items.AddRange(context.profile.ToArray());
+            }
+        }
+
+        private void cbTrainingClub_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            using (svpEntities context = new svpEntities())
+            {
+                cbTrainingMember.Items.Clear();
+                cbTrainingMember.Items.AddRange(context.member.Where(x => x.club_id == ((club)(cbTrainingClub.SelectedItem)).id).ToArray());
+            }
+        }
+
+        private void startTrainingPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
+        {
+            profile = (profile)cbTrainingProfile.SelectedItem;
         }
     }
 }

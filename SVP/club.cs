@@ -19,7 +19,12 @@ namespace SVP
         {
             this.member = new HashSet<member>();
         }
-    
+
+        public override string ToString()
+        {
+            return name;
+        }
+
         public int id { get; set; }
         public string name { get; set; }
         public Nullable<bool> isTemporary { get; set; }
