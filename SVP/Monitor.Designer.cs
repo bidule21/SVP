@@ -129,6 +129,8 @@
             this.Controls.Add(this.dgResultList);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Monitor";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Monitor";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.Monitor_Load);

@@ -782,7 +782,7 @@
             this.cbTrainingClub.Location = new System.Drawing.Point(116, 9);
             this.cbTrainingClub.Name = "cbTrainingClub";
             this.cbTrainingClub.Size = new System.Drawing.Size(121, 23);
-            this.cbTrainingClub.TabIndex = 7;
+            this.cbTrainingClub.TabIndex = 0;
             this.cbTrainingClub.SelectedIndexChanged += new System.EventHandler(this.cbTrainingClub_SelectedIndexChanged);
             // 
             // label22
@@ -839,7 +839,7 @@
             this.btnTrainingRead.Location = new System.Drawing.Point(6, 67);
             this.btnTrainingRead.Name = "btnTrainingRead";
             this.btnTrainingRead.Size = new System.Drawing.Size(229, 63);
-            this.btnTrainingRead.TabIndex = 1;
+            this.btnTrainingRead.TabIndex = 2;
             this.btnTrainingRead.Text = "Einlesen";
             this.btnTrainingRead.UseVisualStyleBackColor = true;
             this.btnTrainingRead.Click += new System.EventHandler(this.btnTrainingRead_Click);
@@ -852,7 +852,7 @@
             this.cbTrainingMember.Location = new System.Drawing.Point(116, 38);
             this.cbTrainingMember.Name = "cbTrainingMember";
             this.cbTrainingMember.Size = new System.Drawing.Size(121, 23);
-            this.cbTrainingMember.TabIndex = 0;
+            this.cbTrainingMember.TabIndex = 1;
             // 
             // MainWizard
             // 

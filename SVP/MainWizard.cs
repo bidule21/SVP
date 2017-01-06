@@ -16,6 +16,7 @@ namespace SVP
         private List<RMValue> TEA_Values;
         private profile profile;
         private DISAGRM machine;
+        Monitor monitor;
         public MainWizard()
         {
             InitializeComponent();
@@ -72,23 +73,8 @@ namespace SVP
             TEA_Values.Add(new RMValue("KT", "Keine Teilerwertung"));
             TEA_Values.Add(new RMValue("ZT", "Teilerwertung mit zehntel Teiler"));
             TEA_Values.Add(new RMValue("HT", "Teilerwertung mit hundertstel Teile"));
-
-            Random ran = new Random();
-            List<RMResult> res = new List<RMResult>();
-            for(int i = 0;i<10;i++)
-            {
-                RMResult r = new RMResult();
-                r.Angle = ran.NextDouble() * 2;
-                r.Rings = ran.Next(10);
-                r.ShotNumber = i + 1;
-                r.FactorValue = ran.Next(2500);
-                res.Add(r);
-            }
-            Monitor m = new Monitor();
-            m.Height = 1080;
-            m.Width = 1920;
-            m.Show();
-            m.AddResult(new DisplayResult("Christopher Schenk", res));
+            monitor = new Monitor();
+            monitor.Show();
         }
 
         private void wizardControl1_SelectedPageChanged(object sender, EventArgs e)
@@ -341,13 +327,14 @@ namespace SVP
                 using (svpEntities context = new svpEntities())
                 {
                     disagprofile profile = context.disagprofile.Where(x => x.profile_id == this.profile.id).First();
-                    System.Threading.Tasks.Task ta = System.Threading.Tasks.Task.Factory.StartNew<List<RMResult>>(() => readShots(profile.value));
+                    System.Threading.Tasks.Task<List<RMResult>> ta = System.Threading.Tasks.Task.Factory.StartNew<List<RMResult>>(() => readShots(profile.value));
                 
                 while (!ta.IsCompleted)
                 {
                     Application.DoEvents();
                 }
-
+                    DisplayResult result = new DisplayResult(cbTrainingMember.SelectedItem.ToString(), ta.Result);
+                    monitor.AddResult(result);
 
                 }
             }

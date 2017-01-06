@@ -18,9 +18,17 @@ namespace SVP
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.Manual;
-            this.DesktopLocation = new Point(Screen.AllScreens[1].WorkingArea.X, Screen.AllScreens[1].WorkingArea.Y);
-            this.Height = Screen.AllScreens[1].WorkingArea.Height;
-            this.Width = Screen.AllScreens[1].WorkingArea.Width;
+            if (Screen.AllScreens.Length > 1)
+            {
+                this.DesktopLocation = new Point(Screen.AllScreens[1].WorkingArea.X, Screen.AllScreens[1].WorkingArea.Y);
+                this.Height = Screen.AllScreens[1].WorkingArea.Height;
+                this.Width = Screen.AllScreens[1].WorkingArea.Width;
+            }else
+            {
+                this.Height = Screen.AllScreens[0].WorkingArea.Height;
+                this.Width = Screen.AllScreens[0].WorkingArea.Width;
+                this.TopMost = false;
+            }
         }
 
         private void Monitor_Load(object sender, EventArgs e)
@@ -65,14 +73,14 @@ namespace SVP
             lbCurrentResult.Text = shot.Rings.ToString();
             pbTarget.Refresh();
             Graphics graphics = pbTarget.CreateGraphics();
-            int size = 80;
+            int size = 40;
             int x = pbTarget.Width / 2;
             int y = pbTarget.Width / 2;
-            double factor = shot.FactorValue / 5;
+            double factor = (shot.FactorValue / 30000) * (pbTarget.Width / 2);
             double angle = shot.Angle;// * (Math.PI / 180);
-            angle -= (0.5 * Math.PI);
-            x += (int)(Math.Cos(angle) * factor);
-            y += (int)(Math.Sin(angle) * factor);
+            angle += (0.5 * Math.PI);
+            x += (int)(Math.Sin(angle) * factor);
+            y += (int)(Math.Cos(angle) * factor);
             graphics.FillEllipse(Brushes.Red, x - (size / 2), y - (size / 2), size, size);
             graphics.Dispose();
         }

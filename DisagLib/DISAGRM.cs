@@ -24,7 +24,7 @@ namespace DisagLib
 
         public void Start(string portName)
         {
-            _serialport = new SerialPort(portName, 38400, Parity.None, 8, StopBits.One);
+            _serialport = new SerialPort("COM3", 38400, Parity.None, 8, StopBits.One);
             _serialport.Open();
             started = true;
         }
