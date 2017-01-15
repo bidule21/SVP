@@ -4,6 +4,10 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Configuration;
+using System.Web;
+using System.Web.Script.Serialization;
+using System.Diagnostics;
+using System.Net;
 
 namespace SVP
 {
@@ -17,6 +21,37 @@ namespace SVP
         private profile profile;
         private DISAGRM machine;
         Monitor monitor;
+
+        private List<DisplayResult> ReadCSV(string filename)
+        {
+            DisplayResult[] results = new DisplayResult[12];
+            using (System.IO.StreamReader sr = new System.IO.StreamReader(filename))
+            {
+                string line = sr.ReadLine();
+                line = sr.ReadLine();
+
+                for (int i = 0; i < 12; i++)
+                    results[i] = new DisplayResult("Schütze " + (i + 1), new List<RMResult>());
+                while(line!=null)
+                {
+                    RMResult result = new RMResult();
+                    
+                    string[] values = line.Split(';');
+                    result.ShotNumber = int.Parse(values[1]);
+                    result.FactorValue = double.Parse(values[2]) / 10;
+                    result.Angle = double.Parse(values[3]) / 10;
+                    result.Rings = double.Parse(values[4]) / 10;
+                    result.Validity = ValidFlag.Valid;
+                    results[int.Parse(values[0]) - 1].Results.Add(result);
+                    line = sr.ReadLine();
+                }
+            }
+            List<DisplayResult> returnvalue = new List<DisplayResult>();
+            for (int i = 0; i < 12; i++)
+                returnvalue.Add(results[i]);
+            return returnvalue;
+        }
+
         public MainWizard()
         {
             InitializeComponent();
@@ -74,7 +109,28 @@ namespace SVP
             TEA_Values.Add(new RMValue("ZT", "Teilerwertung mit zehntel Teiler"));
             TEA_Values.Add(new RMValue("HT", "Teilerwertung mit hundertstel Teile"));
             monitor = new Monitor();
-            monitor.Show();
+            //monitor.Show();
+
+            DisplayResult result = new DisplayResult("Christopher Schenk", new List<RMResult>());
+            var t = ReadCSV("test.csv");
+            monitor.AddResult(t[10]);
+            ShowResult(t[10]);
+        }
+
+        private void ShowResult(DisplayResult result)
+        {
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            using (WebClient client = new WebClient())
+            {
+
+                byte[] response =
+                client.UploadValues("http://172.16.2.178/put.php", new System.Collections.Specialized.NameValueCollection()
+                {
+                    { "data", ser.Serialize(result) },
+                });
+
+                string rv = System.Text.Encoding.UTF8.GetString(response);
+            }
         }
 
         private void wizardControl1_SelectedPageChanged(object sender, EventArgs e)
@@ -188,10 +244,8 @@ namespace SVP
         {
             using (svpEntities context = new svpEntities())
             {
-                foreach (var p in context.profile)
-                {
-                    cbProfile.Items.Add(p);
-                }
+                cbProfile.Items.Clear();
+                cbProfile.Items.AddRange(context.profile.ToArray());
             }
         }
 
@@ -335,7 +389,8 @@ namespace SVP
                 }
                     DisplayResult result = new DisplayResult(cbTrainingMember.SelectedItem.ToString(), ta.Result);
                     monitor.AddResult(result);
-
+                    JavaScriptSerializer ser = new JavaScriptSerializer();
+                    ser.Serialize(result);
                 }
             }
         }

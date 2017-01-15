@@ -11,7 +11,7 @@ namespace SVP
     {
         public string Name { get; private set; }
         public double ResultSum { get; private set; }
-        public List<RMResult> Results { get; private set; }
+        public List<RMResult> Results { get; private set; } //private set
 
         public DisplayResult(string name, List<RMResult> results)
         {

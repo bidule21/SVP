@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,7 @@ namespace DisagLib
 
         public void Start(string portName)
         {
-            _serialport = new SerialPort("COM3", 38400, Parity.None, 8, StopBits.One);
+            _serialport = new SerialPort(portName, 38400, Parity.None, 8, StopBits.One);
             _serialport.Open();
             started = true;
         }
@@ -137,9 +138,9 @@ namespace DisagLib
             RMResult result = new RMResult();
             string[] values = reply.Split(';');
             result.ShotNumber = int.Parse(values[0].Split('=')[1]);
-            result.Rings = double.Parse(values[1]);
-            result.FactorValue = double.Parse(values[2]);
-            result.Angle = double.Parse(values[3]);
+            result.Rings = Convert.ToDouble(values[1], CultureInfo.InvariantCulture);
+            result.FactorValue = Convert.ToDouble(values[2], CultureInfo.InvariantCulture);
+            result.Angle = Convert.ToDouble(values[3], CultureInfo.InvariantCulture);
             switch (values[4])
             {
                 case "G":

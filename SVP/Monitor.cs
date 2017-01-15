@@ -73,14 +73,14 @@ namespace SVP
             lbCurrentResult.Text = shot.Rings.ToString();
             pbTarget.Refresh();
             Graphics graphics = pbTarget.CreateGraphics();
-            int size = 40;
+            int size = (int)(pbTarget.Width / 11.5);
             int x = pbTarget.Width / 2;
             int y = pbTarget.Width / 2;
-            double factor = (shot.FactorValue / 30000) * (pbTarget.Width / 2);
-            double angle = shot.Angle;// * (Math.PI / 180);
+            double factor = (shot.FactorValue / 2300) * (pbTarget.Width / 2);
+            double angle = shot.Angle * (Math.PI / 180);
             angle += (0.5 * Math.PI);
-            x += (int)(Math.Sin(angle) * factor);
-            y += (int)(Math.Cos(angle) * factor);
+            x += (int)(Math.Cos(angle) * factor);
+            y += (int)(Math.Sin(angle) * factor);
             graphics.FillEllipse(Brushes.Red, x - (size / 2), y - (size / 2), size, size);
             graphics.Dispose();
         }
