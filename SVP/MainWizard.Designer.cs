@@ -87,6 +87,8 @@
             this.cbTrainingProfile = new System.Windows.Forms.ComboBox();
             this.cbTrainingShowNames = new System.Windows.Forms.CheckBox();
             this.TrainingPage = new AeroWizard.WizardPage();
+            this.label21 = new System.Windows.Forms.Label();
+            this.cbTrainingSelectedProfile = new System.Windows.Forms.ComboBox();
             this.cbTrainingClub = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
             this.lbResult = new System.Windows.Forms.Label();
@@ -761,6 +763,8 @@
             // 
             // TrainingPage
             // 
+            this.TrainingPage.Controls.Add(this.label21);
+            this.TrainingPage.Controls.Add(this.cbTrainingSelectedProfile);
             this.TrainingPage.Controls.Add(this.cbTrainingClub);
             this.TrainingPage.Controls.Add(this.label22);
             this.TrainingPage.Controls.Add(this.lbResult);
@@ -777,21 +781,39 @@
             this.TrainingPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.TrainingPage_Commit);
             this.TrainingPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.TrainingPage_Initialize);
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(3, 12);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(38, 15);
+            this.label21.TabIndex = 7;
+            this.label21.Text = "Profil:";
+            // 
+            // cbTrainingSelectedProfile
+            // 
+            this.cbTrainingSelectedProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTrainingSelectedProfile.FormattingEnabled = true;
+            this.cbTrainingSelectedProfile.Location = new System.Drawing.Point(116, 9);
+            this.cbTrainingSelectedProfile.Name = "cbTrainingSelectedProfile";
+            this.cbTrainingSelectedProfile.Size = new System.Drawing.Size(259, 23);
+            this.cbTrainingSelectedProfile.TabIndex = 0;
+            // 
             // cbTrainingClub
             // 
             this.cbTrainingClub.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbTrainingClub.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbTrainingClub.FormattingEnabled = true;
-            this.cbTrainingClub.Location = new System.Drawing.Point(116, 9);
+            this.cbTrainingClub.Location = new System.Drawing.Point(116, 38);
             this.cbTrainingClub.Name = "cbTrainingClub";
-            this.cbTrainingClub.Size = new System.Drawing.Size(121, 23);
-            this.cbTrainingClub.TabIndex = 0;
+            this.cbTrainingClub.Size = new System.Drawing.Size(259, 23);
+            this.cbTrainingClub.TabIndex = 1;
             this.cbTrainingClub.SelectedIndexChanged += new System.EventHandler(this.cbTrainingClub_SelectedIndexChanged);
             // 
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(3, 12);
+            this.label22.Location = new System.Drawing.Point(3, 41);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(42, 15);
             this.label22.TabIndex = 6;
@@ -809,7 +831,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(3, 41);
+            this.label20.Location = new System.Drawing.Point(3, 70);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(107, 15);
             this.label20.TabIndex = 4;
@@ -821,7 +843,7 @@
             this.rbStopTraining.Location = new System.Drawing.Point(6, 199);
             this.rbStopTraining.Name = "rbStopTraining";
             this.rbStopTraining.Size = new System.Drawing.Size(117, 19);
-            this.rbStopTraining.TabIndex = 3;
+            this.rbStopTraining.TabIndex = 5;
             this.rbStopTraining.Text = "Training beenden";
             this.rbStopTraining.UseVisualStyleBackColor = true;
             // 
@@ -832,17 +854,17 @@
             this.rbTrainingContinue.Location = new System.Drawing.Point(6, 173);
             this.rbTrainingContinue.Name = "rbTrainingContinue";
             this.rbTrainingContinue.Size = new System.Drawing.Size(123, 19);
-            this.rbTrainingContinue.TabIndex = 2;
+            this.rbTrainingContinue.TabIndex = 4;
             this.rbTrainingContinue.TabStop = true;
             this.rbTrainingContinue.Text = "Training fortsetzen";
             this.rbTrainingContinue.UseVisualStyleBackColor = true;
             // 
             // btnTrainingRead
             // 
-            this.btnTrainingRead.Location = new System.Drawing.Point(6, 67);
+            this.btnTrainingRead.Location = new System.Drawing.Point(146, 96);
             this.btnTrainingRead.Name = "btnTrainingRead";
             this.btnTrainingRead.Size = new System.Drawing.Size(229, 63);
-            this.btnTrainingRead.TabIndex = 2;
+            this.btnTrainingRead.TabIndex = 3;
             this.btnTrainingRead.Text = "Einlesen";
             this.btnTrainingRead.UseVisualStyleBackColor = true;
             this.btnTrainingRead.Click += new System.EventHandler(this.btnTrainingRead_Click);
@@ -852,10 +874,10 @@
             this.cbTrainingMember.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbTrainingMember.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbTrainingMember.FormattingEnabled = true;
-            this.cbTrainingMember.Location = new System.Drawing.Point(116, 38);
+            this.cbTrainingMember.Location = new System.Drawing.Point(116, 67);
             this.cbTrainingMember.Name = "cbTrainingMember";
-            this.cbTrainingMember.Size = new System.Drawing.Size(121, 23);
-            this.cbTrainingMember.TabIndex = 1;
+            this.cbTrainingMember.Size = new System.Drawing.Size(259, 23);
+            this.cbTrainingMember.TabIndex = 2;
             // 
             // MainWizard
             // 
@@ -958,5 +980,7 @@
         private System.Windows.Forms.RadioButton rbTrainingContinue;
         private System.Windows.Forms.Button btnTrainingRead;
         private System.Windows.Forms.ComboBox cbTrainingMember;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.ComboBox cbTrainingSelectedProfile;
     }
 }

@@ -167,6 +167,7 @@ namespace SVP
                     newClub.isTemporary = cbClubTemporary.Checked;
                     context.club.Add(newClub);
                     context.SaveChanges();
+                    txtClubName.Text = "";
                 }
                 addClubPage.NextPage = startPage;
             }
@@ -198,6 +199,11 @@ namespace SVP
                     newMember.name = txtMemberName.Text;
                     newMember.birthday = dtMemberBirthday.Value;
                     newMember.club_id = ((ComboboxItem)cbMemberClub.SelectedItem).Id;
+                    cbMemberClub.SelectedIndex = -1;
+                    txtMemberFirstname.Text = "";
+                    txtMemberName.Text = "";
+                    txtMemberShortName.Text = "";
+                    cbMemberClub.Items.Clear();
                     context.member.Add(newMember);
                     context.SaveChanges();
                 }
@@ -380,7 +386,7 @@ namespace SVP
                 btnTrainingRead.Enabled = false;
                 using (svpEntities context = new svpEntities())
                 {
-                    disagprofile profile = context.disagprofile.Where(x => x.profile_id == this.profile.id).First();
+                    disagprofile profile = context.disagprofile.Where(x => x.profile_id == ((profile)cbTrainingSelectedProfile.SelectedItem).id).First();
                     System.Threading.Tasks.Task<List<RMResult>> ta = System.Threading.Tasks.Task.Factory.StartNew<List<RMResult>>(() => readShots(profile.value));
                 
                 while (!ta.IsCompleted)
@@ -418,9 +424,12 @@ namespace SVP
         {
             using (svpEntities context = new svpEntities())
             {
+                cbTrainingSelectedProfile.Items.Clear();
                 cbTrainingMember.Items.Clear();
                 cbTrainingClub.Items.Clear();
                 cbTrainingClub.Items.AddRange(context.club.ToArray());
+                cbTrainingSelectedProfile.Items.AddRange(context.profile.ToArray());
+                cbTrainingSelectedProfile.SelectedIndex = cbTrainingSelectedProfile.FindStringExact(profile.ToString());
             }
         }
 
