@@ -139,6 +139,7 @@
     <Compile Include="sequence.cs">
       <DependentUpon>svpModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="shot.cs">
       <DependentUpon>svpModel.tt</DependentUpon>
     </Compile>

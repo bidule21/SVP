@@ -109,12 +109,12 @@ namespace SVP
             TEA_Values.Add(new RMValue("ZT", "Teilerwertung mit zehntel Teiler"));
             TEA_Values.Add(new RMValue("HT", "Teilerwertung mit hundertstel Teile"));
             monitor = new Monitor();
-            //monitor.Show();
+            monitor.Show();
 
-            DisplayResult result = new DisplayResult("Christopher Schenk", new List<RMResult>());
-            var t = ReadCSV("test.csv");
-            monitor.AddResult(t[10]);
-            ShowResult(t[10]);
+            //DisplayResult result = new DisplayResult("Christopher Schenk", new List<RMResult>());
+            //var t = ReadCSV("test.csv");
+            //monitor.AddResult(t[10]);
+            //ShowResult(t[10]);
         }
 
         private void ShowResult(DisplayResult result)
@@ -348,16 +348,16 @@ namespace SVP
             using (svpEntities context = new svpEntities())
             {
 
-                var disag = context.disagprofile.Where(x => x.profile_id == profile.id).FirstOrDefault();
-                if (disag == null)
+                var disagProfile = context.disagprofile.Where(x => x.profile_id == profile.id).FirstOrDefault();
+                if (disagProfile == null)
                 {
-                    profile.disagprofile.First().value = getProfileString();
-                    context.profile.Add(profile);
+                    this.profile.disagprofile.First().value = getProfileString();
+                    context.profile.Add(this.profile);
                 }
                 else
                 {
-                    disag.value = getProfileString();
-                    context.Entry(disag).State = System.Data.Entity.EntityState.Modified;
+                    disagProfile.value = getProfileString();
+                    context.Entry((disagprofile)disagProfile).State = System.Data.Entity.EntityState.Modified;
                 }
                 context.SaveChanges();
             }
@@ -387,27 +387,38 @@ namespace SVP
                 {
                     Application.DoEvents();
                 }
+                    if (ta.Result == null)
+                    {
+                        btnTrainingRead.Enabled = true;
+                        return;
+                    }
                     DisplayResult result = new DisplayResult(cbTrainingMember.SelectedItem.ToString(), ta.Result);
                     monitor.AddResult(result);
-                    JavaScriptSerializer ser = new JavaScriptSerializer();
-                    ser.Serialize(result);
                 }
             }
         }
 
         private List<RMResult> readShots(string profile)
         {
-            var bla = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings;
-            machine.Start(ConfigurationManager.AppSettings["ComPort"]);
-            List<RMResult> results = machine.GetShots(profile);
-            machine.Stop();
-            return results;
+            try
+            {
+                machine.Start(SVP.Properties.Settings.Default.ComPort);
+                List<RMResult> results = machine.GetShots(profile);
+                machine.Stop();
+                return results;
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Fehler beim einlesen der Ergebnisse:\r\n" + e.Message, "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return null;
         }
 
         private void TrainingPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
         {
             using (svpEntities context = new svpEntities())
             {
+                cbTrainingMember.Items.Clear();
                 cbTrainingClub.Items.Clear();
                 cbTrainingClub.Items.AddRange(context.club.ToArray());
             }
@@ -433,7 +444,28 @@ namespace SVP
 
         private void startTrainingPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
         {
+            if (cbTrainingProfile.SelectedIndex < 0)
+                e.Cancel = true;
             profile = (profile)cbTrainingProfile.SelectedItem;
+        }
+
+        private void TrainingPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
+        {
+            if(rbTrainingContinue.Checked)
+            {
+                cbTrainingClub.Items.Clear();
+                cbTrainingMember.Items.Clear();
+                cbTrainingClub.SelectedIndex = -1;
+                cbTrainingMember.SelectedIndex = -1;
+                cbTrainingClub.Text = "";
+                cbTrainingMember.Text = "";
+                TrainingPage_Initialize(this, null);
+                TrainingPage.NextPage = TrainingPage;
+                //TODO: Save Results
+            }else
+            {
+                TrainingPage.NextPage = null;
+            }
         }
     }
 }

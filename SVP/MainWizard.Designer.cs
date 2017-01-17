@@ -91,7 +91,7 @@
             this.label22 = new System.Windows.Forms.Label();
             this.lbResult = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.rbStopTraining = new System.Windows.Forms.RadioButton();
             this.rbTrainingContinue = new System.Windows.Forms.RadioButton();
             this.btnTrainingRead = new System.Windows.Forms.Button();
             this.cbTrainingMember = new System.Windows.Forms.ComboBox();
@@ -458,6 +458,7 @@
             this.editProfilePage.Controls.Add(this.label17);
             this.editProfilePage.Controls.Add(this.label18);
             this.editProfilePage.Name = "editProfilePage";
+            this.editProfilePage.NextPage = this.startPage;
             this.editProfilePage.Size = new System.Drawing.Size(527, 261);
             this.editProfilePage.TabIndex = 4;
             this.editProfilePage.Text = "Profil bearbeiten";
@@ -764,14 +765,16 @@
             this.TrainingPage.Controls.Add(this.label22);
             this.TrainingPage.Controls.Add(this.lbResult);
             this.TrainingPage.Controls.Add(this.label20);
-            this.TrainingPage.Controls.Add(this.radioButton2);
+            this.TrainingPage.Controls.Add(this.rbStopTraining);
             this.TrainingPage.Controls.Add(this.rbTrainingContinue);
             this.TrainingPage.Controls.Add(this.btnTrainingRead);
             this.TrainingPage.Controls.Add(this.cbTrainingMember);
             this.TrainingPage.Name = "TrainingPage";
+            this.TrainingPage.NextPage = this.TrainingPage;
             this.TrainingPage.Size = new System.Drawing.Size(527, 261);
             this.TrainingPage.TabIndex = 6;
             this.TrainingPage.Text = "Training";
+            this.TrainingPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.TrainingPage_Commit);
             this.TrainingPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.TrainingPage_Initialize);
             // 
             // cbTrainingClub
@@ -812,15 +815,15 @@
             this.label20.TabIndex = 4;
             this.label20.Text = "Schütze / Schützin:";
             // 
-            // radioButton2
+            // rbStopTraining
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(6, 199);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(117, 19);
-            this.radioButton2.TabIndex = 3;
-            this.radioButton2.Text = "Training beenden";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rbStopTraining.AutoSize = true;
+            this.rbStopTraining.Location = new System.Drawing.Point(6, 199);
+            this.rbStopTraining.Name = "rbStopTraining";
+            this.rbStopTraining.Size = new System.Drawing.Size(117, 19);
+            this.rbStopTraining.TabIndex = 3;
+            this.rbStopTraining.Text = "Training beenden";
+            this.rbStopTraining.UseVisualStyleBackColor = true;
             // 
             // rbTrainingContinue
             // 
@@ -951,7 +954,7 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label lbResult;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton rbStopTraining;
         private System.Windows.Forms.RadioButton rbTrainingContinue;
         private System.Windows.Forms.Button btnTrainingRead;
         private System.Windows.Forms.ComboBox cbTrainingMember;

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="svpModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="svpModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="award">
           <Key>
             <PropertyRef Name="id" />
@@ -40,7 +40,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="value" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="value" Type="varchar" MaxLength="255" />
           <Property Name="profile_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="evaluation">
@@ -83,6 +83,7 @@
           <Property Name="firstname" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="birthday" Type="date" Nullable="false" />
+          <Property Name="shortname" Type="varchar" MaxLength="45" />
           <Property Name="club_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="participant">
@@ -129,7 +130,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="sequence">
           <Key>
@@ -545,8 +546,7 @@
             <End Role="shot" EntitySet="shot" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="svpModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -583,7 +583,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="value" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="profile_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="profile" Relationship="Self.fk_disagProfile_profile1" FromRole="disagprofile" ToRole="profile" />
         </EntityType>
@@ -630,6 +630,7 @@
           <NavigationProperty Name="award" Relationship="Self.award_has_winner" FromRole="member" ToRole="award" />
           <NavigationProperty Name="group" Relationship="Self.group_has_member" FromRole="member" ToRole="group" />
           <NavigationProperty Name="participant" Relationship="Self.participant_has_member" FromRole="member" ToRole="participant" />
+          <Property Name="shortname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="participant">
           <Key>
@@ -658,7 +659,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="disagprofile" Relationship="Self.fk_disagProfile_profile1" FromRole="profile" ToRole="disagprofile" />
           <NavigationProperty Name="manualprofile" Relationship="Self.fk_manualProfile_profile1" FromRole="profile" ToRole="manualprofile" />
           <NavigationProperty Name="sequence" Relationship="Self.fk_shot_profile1" FromRole="profile" ToRole="sequence" />
@@ -996,6 +997,7 @@
           <EntitySetMapping Name="member">
             <EntityTypeMapping TypeName="svpModel.member">
               <MappingFragment StoreEntitySet="member">
+                <ScalarProperty Name="shortname" ColumnName="shortname" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="firstname" ColumnName="firstname" />
                 <ScalarProperty Name="name" ColumnName="name" />
