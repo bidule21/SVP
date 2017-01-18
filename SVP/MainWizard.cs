@@ -119,17 +119,24 @@ namespace SVP
 
         private void ShowResult(DisplayResult result)
         {
-            JavaScriptSerializer ser = new JavaScriptSerializer();
-            using (WebClient client = new WebClient())
+            try
             {
-
-                byte[] response =
-                client.UploadValues("http://172.16.2.178/put.php", new System.Collections.Specialized.NameValueCollection()
+                JavaScriptSerializer ser = new JavaScriptSerializer();
+                using (WebClient client = new WebClient())
                 {
-                    { "data", ser.Serialize(result) },
-                });
 
-                string rv = System.Text.Encoding.UTF8.GetString(response);
+                    byte[] response =
+                    client.UploadValues("http://" + SVP.Properties.Settings.Default.MonitorIP + "/put.php", new System.Collections.Specialized.NameValueCollection()
+                    {
+                    { "data", ser.Serialize(result) },
+                    });
+
+                    string rv = System.Text.Encoding.UTF8.GetString(response);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
             }
         }
 
@@ -400,6 +407,7 @@ namespace SVP
                     }
                     DisplayResult result = new DisplayResult(cbTrainingMember.SelectedItem.ToString(), ta.Result);
                     monitor.AddResult(result);
+                    ShowResult(result);
                 }
             }
         }

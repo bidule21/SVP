@@ -31,5 +31,14 @@ namespace SVP.Properties {
                 return ((string)(this["ComPort"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("172.16.2.178")]
+        public string MonitorIP {
+            get {
+                return ((string)(this["MonitorIP"]));
+            }
+        }
     }
 }
