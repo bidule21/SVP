@@ -20,7 +20,8 @@ namespace SVP
         private List<RMValue> TEA_Values;
         private profile profile;
         private DISAGRM machine;
-        Monitor monitor;
+        private Monitor monitor;
+        private DisplayResult lastResult;
 
         private List<DisplayResult> ReadCSV(string filename)
         {
@@ -111,10 +112,11 @@ namespace SVP
             monitor = new Monitor();
             monitor.Show();
 
-            DisplayResult result = new DisplayResult("Christopher Schenk", new List<RMResult>());
-            var t = ReadCSV("test.csv");
-            monitor.AddResult(t[10]);
-            ShowResult(t[10]);
+            //DisplayResult result = new DisplayResult("Christopher Schenk", new List<RMResult>());
+            //var t = ReadCSV("test.csv");
+            //monitor.AddResult(t[10]);
+            //ShowResult(t[10]);
+            //lastResult = t[10];
         }
 
         private void ShowResult(DisplayResult result)
@@ -394,7 +396,7 @@ namespace SVP
                 btnTrainingRead.Enabled = false;
                 using (svpEntities context = new svpEntities())
                 {
-                    disagprofile profile = context.disagprofile.Where(x => x.profile_id == ((profile)cbTrainingSelectedProfile.SelectedItem).id).First();
+                    disagprofile profile = context.disagprofile.Where(x => x.profile_id == ((ComboboxItem)cbTrainingSelectedProfile.SelectedItem).Id).First();
                     System.Threading.Tasks.Task<List<RMResult>> ta = System.Threading.Tasks.Task.Factory.StartNew<List<RMResult>>(() => readShots(profile.value));
                 
                 while (!ta.IsCompleted)
@@ -406,9 +408,9 @@ namespace SVP
                         btnTrainingRead.Enabled = true;
                         return;
                     }
-                    DisplayResult result = new DisplayResult(cbTrainingMember.SelectedItem.ToString(), ta.Result);
-                    monitor.AddResult(result);
-                    ShowResult(result);
+                     lastResult = new DisplayResult(cbTrainingMember.SelectedItem.ToString(), ta.Result);
+                    monitor.AddResult(lastResult);
+                    ShowResult(lastResult);
                 }
             }
         }
@@ -437,7 +439,8 @@ namespace SVP
                 cbTrainingMember.Items.Clear();
                 cbTrainingClub.Items.Clear();
                 cbTrainingClub.Items.AddRange(context.club.ToArray());
-                cbTrainingSelectedProfile.Items.AddRange(context.profile.ToArray());
+                foreach(profile p in context.profile)
+                    cbTrainingSelectedProfile.Items.Add(new ComboboxItem(p.name, p.id));
                 cbTrainingSelectedProfile.SelectedIndex = cbTrainingSelectedProfile.FindStringExact(profile.ToString());
             }
         }
@@ -456,7 +459,8 @@ namespace SVP
             using (svpEntities context = new svpEntities())
             {
                 cbTrainingMember.Items.Clear();
-                cbTrainingMember.Items.AddRange(context.member.Where(x => x.club_id == ((club)(cbTrainingClub.SelectedItem)).id).ToArray());
+                foreach(member m in context.member.Where(x => x.club_id == ((club)(cbTrainingClub.SelectedItem)).id))
+                    cbTrainingMember.Items.Add(new ComboboxItem(m.ToString(), m.id));
             }
         }
 
@@ -472,6 +476,22 @@ namespace SVP
         {
             if(rbTrainingContinue.Checked)
             {
+                using (svpEntities context = new svpEntities())
+                {
+                    sequence sequence = new sequence();
+                    sequence.date = DateTime.Now;
+                    sequence.member_id = ((ComboboxItem)cbTrainingMember.SelectedItem).Id;
+                    sequence.profile_id = ((ComboboxItem)cbTrainingSelectedProfile.SelectedItem).Id;
+
+                    foreach (RMResult result in lastResult.Results)
+                    {
+                        shot s = new shot();
+                        s.value = result.Rings;
+                        sequence.shot.Add(s);
+                    }
+                    context.sequence.Add(sequence);
+                    context.SaveChanges();
+                }
                 cbTrainingClub.Items.Clear();
                 cbTrainingMember.Items.Clear();
                 cbTrainingClub.SelectedIndex = -1;
@@ -481,8 +501,8 @@ namespace SVP
                 btnTrainingRead.Enabled = true;
                 TrainingPage_Initialize(this, null);
                 TrainingPage.NextPage = TrainingPage;
-                //TODO: Save Results
-            }else
+            }
+            else
             {
                 TrainingPage.NextPage = null;
             }
