@@ -70,7 +70,7 @@ namespace SVP
             SCH_Values.Add(new RMValue("LPSF", "LP Schnellfeuer"));
             SCH_Values.Add(new RMValue("SCHFE", "Schnellfeuer- und Duell Scheibe."));
             SCH_Values.Add(new RMValue("USE1", "Benutzerdefiniert 1"));
-            SCH_Values.Add(new RMValue("USE2", "Benutzerdefiniert 1"));
+            SCH_Values.Add(new RMValue("USE2", "Benutzerdefiniert 2"));
 
             RIA_Values = new List<RMValue>();
             RIA_Values.Add(new RMValue("GR", "Ganze Ringe"));
