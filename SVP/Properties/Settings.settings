@@ -8,5 +8,8 @@
     <Setting Name="MonitorIP" Type="System.String" Scope="Application">
       <Value Profile="(Default)">172.16.2.178</Value>
     </Setting>
+    <Setting Name="DefaultName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Anonym</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgResultList = new System.Windows.Forms.DataGridView();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.result = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbResults = new System.Windows.Forms.Label();
             this.lbCurrentResult = new System.Windows.Forms.Label();
             this.pbTarget = new System.Windows.Forms.PictureBox();
+            this.rtResults = new System.Windows.Forms.RichTextBox();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.result = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgResultList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTarget)).BeginInit();
             this.SuspendLayout();
@@ -48,14 +49,14 @@
             this.dgResultList.AllowUserToResizeRows = false;
             this.dgResultList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dgResultList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgResultList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgResultList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgResultList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgResultList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.name,
@@ -65,28 +66,12 @@
             this.dgResultList.Name = "dgResultList";
             this.dgResultList.ReadOnly = true;
             this.dgResultList.RowHeadersVisible = false;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgResultList.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgResultList.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgResultList.RowTemplate.Height = 40;
             this.dgResultList.Size = new System.Drawing.Size(301, 531);
             this.dgResultList.TabIndex = 0;
             this.dgResultList.TabStop = false;
-            // 
-            // name
-            // 
-            this.name.Frozen = true;
-            this.name.HeaderText = "Name";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.Width = 103;
-            // 
-            // result
-            // 
-            this.result.Frozen = true;
-            this.result.HeaderText = "Ergebnis";
-            this.result.Name = "result";
-            this.result.ReadOnly = true;
-            this.result.Width = 135;
             // 
             // lbResults
             // 
@@ -94,9 +79,9 @@
             this.lbResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbResults.Location = new System.Drawing.Point(12, 398);
             this.lbResults.Name = "lbResults";
-            this.lbResults.Size = new System.Drawing.Size(97, 58);
+            this.lbResults.Size = new System.Drawing.Size(79, 29);
             this.lbResults.TabIndex = 2;
-            this.lbResults.Text = "label1+\r\nblafasel\r\n";
+            this.lbResults.Text = "label1";
             // 
             // lbCurrentResult
             // 
@@ -118,11 +103,41 @@
             this.pbTarget.TabIndex = 1;
             this.pbTarget.TabStop = false;
             // 
+            // rtResults
+            // 
+            this.rtResults.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtResults.Location = new System.Drawing.Point(12, 438);
+            this.rtResults.Name = "rtResults";
+            this.rtResults.ReadOnly = true;
+            this.rtResults.Size = new System.Drawing.Size(572, 35);
+            this.rtResults.TabIndex = 4;
+            this.rtResults.Text = "";
+            // 
+            // name
+            // 
+            this.name.Frozen = true;
+            this.name.HeaderText = "Name";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.name.Width = 103;
+            // 
+            // result
+            // 
+            this.result.Frozen = true;
+            this.result.HeaderText = "Ergebnis";
+            this.result.Name = "result";
+            this.result.ReadOnly = true;
+            this.result.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.result.Width = 135;
+            // 
             // Monitor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(931, 555);
+            this.Controls.Add(this.rtResults);
             this.Controls.Add(this.lbCurrentResult);
             this.Controls.Add(this.lbResults);
             this.Controls.Add(this.pbTarget);
@@ -144,11 +159,12 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgResultList;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn result;
         private System.Windows.Forms.PictureBox pbTarget;
         private System.Windows.Forms.Label lbResults;
         private System.Windows.Forms.Label lbCurrentResult;
+        private System.Windows.Forms.RichTextBox rtResults;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn result;
     }
 }
 
