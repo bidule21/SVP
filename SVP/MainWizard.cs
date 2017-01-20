@@ -476,6 +476,7 @@ namespace SVP
                 cbTrainingMember.SelectedIndex = -1;
                 cbTrainingClub.Text = "";
                 cbTrainingMember.Text = "";
+                btnTrainingRead.Enabled = true;
                 TrainingPage_Initialize(this, null);
                 TrainingPage.NextPage = TrainingPage;
                 //TODO: Save Results

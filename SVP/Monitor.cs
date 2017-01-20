@@ -42,7 +42,7 @@ namespace SVP
             lbResults.Location = new Point(3, (int)(this.Width * 0.5));
             lbCurrentResult.Location = new Point((int)(this.Width * 0.5) - 100, (int)(this.Width * 0.5));
             Timer timer = new Timer();
-            timer.Interval = 2000;
+            timer.Interval = 5000;
             timer.Tick += Timer_Tick;
             timer.Start();
         }
@@ -78,7 +78,7 @@ namespace SVP
             int y = pbTarget.Width / 2;
             double factor = (shot.FactorValue / 2300) * (pbTarget.Width / 2);
             double angle = shot.Angle * (Math.PI / 180);
-            angle += (0.5 * Math.PI);
+            angle += (1.5 * Math.PI);
             x += (int)(Math.Cos(angle) * factor);
             y += (int)(Math.Sin(angle) * factor);
             graphics.FillEllipse(Brushes.Red, x - (size / 2), y - (size / 2), size, size);
