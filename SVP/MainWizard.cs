@@ -411,6 +411,7 @@ namespace SVP
                      lastResult = new DisplayResult(cbTrainingMember.SelectedItem.ToString(), ta.Result);
                     monitor.AddResult(lastResult);
                     ShowResult(lastResult);
+                    MessageBox.Show(lastResult.ResultSum.ToString());
                 }
             }
         }
@@ -421,12 +422,15 @@ namespace SVP
             {
                 machine.Start(SVP.Properties.Settings.Default.ComPort);
                 List<RMResult> results = machine.GetShots(profile);
-                machine.Stop();
                 return results;
             }
             catch(Exception e)
             {
                 MessageBox.Show("Fehler beim einlesen der Ergebnisse:\r\n" + e.Message, "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                machine.Stop();
             }
             return null;
         }

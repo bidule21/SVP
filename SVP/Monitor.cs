@@ -75,7 +75,7 @@ namespace SVP
             dgResultList.FirstDisplayedScrollingRowIndex = dgResultList.RowCount - 1;
         }
 
-        private void DrawShot(RMResult shot, Graphics graphics)
+        private void DrawShot(RMResult shot, Graphics graphics, Brush brush)
         {
             int size = (int)(pbTarget.Width / 11.5);
             int x = pbTarget.Width / 2;
@@ -85,7 +85,7 @@ namespace SVP
             angle += (1.5 * Math.PI);
             x += (int)(Math.Cos(angle) * factor);
             y += (int)(Math.Sin(angle) * factor);
-            graphics.FillEllipse(Brushes.Red, x - (size / 2), y - (size / 2), size, size);
+            graphics.FillEllipse(brush, x - (size / 2), y - (size / 2), size, size);
         }
 
         internal void DisplayShot(RMResult shot)
@@ -95,18 +95,18 @@ namespace SVP
             {
                 if(result == shot)
                 {
-                    shots += "     " + @"\b " + result.Rings.ToString() + @"\b0 ";
+                    shots += "     " + @"\cf2 " + result.Rings.ToString();
                 }
                 else
                 {
-                    shots += "     " + result.Rings.ToString();
+                    shots += "     \\cf0" + result.Rings.ToString();
                 }
             }
-            rtResults.Rtf = @"{\rtf1\ansi" + shots + "}";
+            rtResults.Rtf = @"{\rtf1\ansi {\colortbl;\red0\green0\blue0;\red255\green0\blue0;}" + shots + "}";
             lbCurrentResult.Text = shot.Rings.ToString();
             pbTarget.Refresh();
             Graphics graphics = pbTarget.CreateGraphics();
-            DrawShot(shot, graphics);
+            DrawShot(shot, graphics, Brushes.Red);
             graphics.Dispose();
         }
         internal void DisplayAllShots()
@@ -119,8 +119,15 @@ namespace SVP
             lbCurrentResult.Text = currentResult.ResultSum.ToString();
             pbTarget.Refresh();
             Graphics graphics = pbTarget.CreateGraphics();
-            foreach(RMResult result in currentResult.Results)
-                DrawShot(result, graphics);
+            for(int i = 0; i < currentResult.Results.Count;i++)
+            {
+                if (i == 0)
+                    DrawShot(currentResult.Results[i], graphics, Brushes.Green);
+                else if (i == currentResult.Results.Count - 1)
+                    DrawShot(currentResult.Results[i], graphics, Brushes.Blue);
+                else
+                    DrawShot(currentResult.Results[i], graphics, Brushes.Red);
+            }
             graphics.Dispose();
         }
     }
