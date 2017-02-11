@@ -12,6 +12,7 @@ namespace SVP
 {
     public partial class Monitor : Form
     {
+        public static Monitor MyMonitor;
         private DisplayResult currentResult;
         private int currentShot = 0;
         public bool ShowNames { get; set; }

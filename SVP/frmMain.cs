@@ -16,11 +16,12 @@ namespace SVP
         public frmMain()
         {
             InitializeComponent();
+            Monitor.MyMonitor = new Monitor();
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-
+            Monitor.MyMonitor.Show();
         }
     }
 }

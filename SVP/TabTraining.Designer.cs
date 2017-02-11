@@ -216,10 +216,10 @@
             this.dvResults.AllowUserToDeleteRows = false;
             this.dvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dvResults.Dock = System.Windows.Forms.DockStyle.Right;
-            this.dvResults.Location = new System.Drawing.Point(414, 0);
+            this.dvResults.Location = new System.Drawing.Point(447, 0);
             this.dvResults.Name = "dvResults";
             this.dvResults.ReadOnly = true;
-            this.dvResults.Size = new System.Drawing.Size(381, 510);
+            this.dvResults.Size = new System.Drawing.Size(381, 569);
             this.dvResults.TabIndex = 18;
             // 
             // TabTraining
@@ -237,7 +237,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbClub);
             this.Name = "TabTraining";
-            this.Size = new System.Drawing.Size(795, 510);
+            this.Size = new System.Drawing.Size(828, 569);
             this.Load += new System.EventHandler(this.TabTraining_Load);
             this.gbRead.ResumeLayout(false);
             this.gbRead.PerformLayout();
