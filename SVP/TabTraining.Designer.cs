@@ -45,6 +45,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cbClub = new System.Windows.Forms.ComboBox();
             this.dvResults = new System.Windows.Forms.DataGridView();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.profile = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbRead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvResults)).BeginInit();
             this.SuspendLayout();
@@ -215,12 +218,34 @@
             this.dvResults.AllowUserToAddRows = false;
             this.dvResults.AllowUserToDeleteRows = false;
             this.dvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dvResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.name,
+            this.value,
+            this.profile});
             this.dvResults.Dock = System.Windows.Forms.DockStyle.Right;
             this.dvResults.Location = new System.Drawing.Point(447, 0);
             this.dvResults.Name = "dvResults";
             this.dvResults.ReadOnly = true;
             this.dvResults.Size = new System.Drawing.Size(381, 569);
             this.dvResults.TabIndex = 18;
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Name";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
+            // value
+            // 
+            this.value.HeaderText = "Ringe";
+            this.value.Name = "value";
+            this.value.ReadOnly = true;
+            // 
+            // profile
+            // 
+            this.profile.HeaderText = "Profile";
+            this.profile.Name = "profile";
+            this.profile.ReadOnly = true;
             // 
             // TabTraining
             // 
@@ -266,5 +291,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbClub;
         private System.Windows.Forms.DataGridView dvResults;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn value;
+        private System.Windows.Forms.DataGridViewTextBoxColumn profile;
     }
 }

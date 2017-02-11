@@ -121,9 +121,14 @@ namespace SVP
                     s.valid = (result.Validity == ValidFlag.Valid);
                     sequence.shot.Add(s);
                 }
+                DataGridViewRow row = new DataGridViewRow();
+                row.Tag = sequence.id;
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.member.ToString() });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.shot.Sum(s => s.value) });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.profile.ToString()});
+                dvResults.Rows.Add(row);
                 context.sequence.Add(sequence);
                 context.SaveChanges();
-
             }
         }
 
