@@ -109,9 +109,7 @@ namespace SVP
             TEA_Values.Add(new RMValue("KT", "Keine Teilerwertung"));
             TEA_Values.Add(new RMValue("ZT", "Teilerwertung mit zehntel Teiler"));
             TEA_Values.Add(new RMValue("HT", "Teilerwertung mit hundertstel Teile"));
-            monitor = new Monitor();
-            monitor.Show();
-
+            
             //DisplayResult result = new DisplayResult("Christopher Schenk", new List<RMResult>());
             //var t = ReadCSV("test.csv");
             //monitor.AddResult(t[10]);

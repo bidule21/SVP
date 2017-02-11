@@ -12,12 +12,20 @@ namespace SVP
 {
     public partial class Monitor : Form
     {
-        public static Monitor MyMonitor;
+        private static Monitor MyMonitor;
         private DisplayResult currentResult;
         private int currentShot = 0;
         public bool ShowNames { get; set; }
         private Timer timer;
-        public Monitor()
+
+        public static Monitor GetMonitor()
+        {
+            if (MyMonitor == null)
+                MyMonitor = new Monitor();
+            return MyMonitor;
+        }
+
+        private Monitor()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.Manual;
