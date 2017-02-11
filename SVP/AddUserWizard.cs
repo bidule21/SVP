@@ -55,5 +55,21 @@ namespace SVP
                 e.Cancel = true;
             }
         }
+
+        private void updateNickname()
+        {
+            string nickname = (txtMemberName.Text + txtMemberFirstname.Text);
+            txtMemberShortName.Text = nickname.Substring(0, Math.Min(10, nickname.Length));
+        }
+
+        private void txtMemberFirstname_TextChanged(object sender, EventArgs e)
+        {
+            updateNickname();
+        }
+
+        private void txtMemberName_TextChanged(object sender, EventArgs e)
+        {
+            updateNickname();
+        }
     }
 }

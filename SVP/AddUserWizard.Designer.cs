@@ -105,6 +105,7 @@
             this.txtMemberName.Name = "txtMemberName";
             this.txtMemberName.Size = new System.Drawing.Size(228, 23);
             this.txtMemberName.TabIndex = 6;
+            this.txtMemberName.TextChanged += new System.EventHandler(this.txtMemberName_TextChanged);
             // 
             // txtMemberFirstname
             // 
@@ -112,6 +113,7 @@
             this.txtMemberFirstname.Name = "txtMemberFirstname";
             this.txtMemberFirstname.Size = new System.Drawing.Size(228, 23);
             this.txtMemberFirstname.TabIndex = 5;
+            this.txtMemberFirstname.TextChanged += new System.EventHandler(this.txtMemberFirstname_TextChanged);
             // 
             // label4
             // 
