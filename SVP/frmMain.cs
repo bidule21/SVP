@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Aga.Controls.Tree;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,17 @@ namespace SVP
         public frmMain()
         {
             InitializeComponent();
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnNewMember_Click(object sender, EventArgs e)
+        {
+            AddUserWizard wizard = new AddUserWizard();
+            wizard.ShowDialog();
         }
     }
 }

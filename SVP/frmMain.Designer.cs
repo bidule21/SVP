@@ -162,6 +162,7 @@
             this.btnNewMember.TabIndex = 7;
             this.btnNewMember.Text = "Neuer Schütze";
             this.btnNewMember.UseVisualStyleBackColor = true;
+            this.btnNewMember.Click += new System.EventHandler(this.btnNewMember_Click);
             // 
             // btnStart
             // 
@@ -272,6 +273,7 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "frmMain";
             this.Text = "frmMain";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.tabControl1.ResumeLayout(false);
             this.tpTraining.ResumeLayout(false);
             this.tpTraining.PerformLayout();

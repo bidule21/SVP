@@ -114,6 +114,12 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddUserWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddUserWizard.Designer.cs">
+      <DependentUpon>AddUserWizard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Monitor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +176,9 @@
     </Compile>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddUserWizard.resx">
+      <DependentUpon>AddUserWizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWizard.resx">
       <DependentUpon>MainWizard.cs</DependentUpon>
