@@ -15,6 +15,7 @@ namespace SVP
         private DisplayResult currentResult;
         private int currentShot = 0;
         public bool ShowNames { get; set; }
+        private Timer timer;
         public Monitor()
         {
             InitializeComponent();
@@ -43,7 +44,7 @@ namespace SVP
             lbResults.Location = new Point(3, (int)(this.Width * 0.5));
             rtResults.Location = new Point(3, (int)(this.Width * 0.5) + 40);
             lbCurrentResult.Location = new Point((int)(this.Width * 0.5) - 100, (int)(this.Width * 0.5));
-            Timer timer = new Timer();
+            timer = new Timer();
             timer.Interval = 5000;
             timer.Tick += Timer_Tick;
             timer.Start();
@@ -57,6 +58,7 @@ namespace SVP
                 {
                     DisplayAllShots();
                     currentShot = 0;
+                    this.timer.Stop();
                 }
                 else
                 {
@@ -73,6 +75,7 @@ namespace SVP
             lbResults.Text = this.ShowNames ? result.Name : SVP.Properties.Settings.Default.DefaultName;
             dgResultList.Rows.Add(lbResults.Text, result.ResultSum.ToString());
             dgResultList.FirstDisplayedScrollingRowIndex = dgResultList.RowCount - 1;
+            timer.Start();
         }
 
         private void DrawShot(RMResult shot, Graphics graphics, Brush brush)
@@ -95,14 +98,14 @@ namespace SVP
             {
                 if(result == shot)
                 {
-                    shots += "     " + @"\cf2 " + result.Rings.ToString();
+                    shots += "     " + @"\cf1 " + result.Rings.ToString();
                 }
                 else
                 {
-                    shots += "     \\cf0" + result.Rings.ToString();
+                    shots += "     \\cf0 " + result.Rings.ToString();
                 }
             }
-            rtResults.Rtf = @"{\rtf1\ansi {\colortbl;\red0\green0\blue0;\red255\green0\blue0;}" + shots + "}";
+            rtResults.Rtf = @"{\rtf1\ansi {\colortbl; \red255\green0\blue0;}" + shots + "}";
             lbCurrentResult.Text = shot.Rings.ToString();
             pbTarget.Refresh();
             Graphics graphics = pbTarget.CreateGraphics();

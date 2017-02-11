@@ -112,11 +112,14 @@ namespace SVP
             monitor = new Monitor();
             monitor.Show();
 
-            DisplayResult result = new DisplayResult("Christopher Schenk", new List<RMResult>());
-            var t = ReadCSV("test.csv");
-            monitor.AddResult(t[10]);
-            ShowResult(t[10]);
-            lastResult = t[10];
+            //DisplayResult result = new DisplayResult("Christopher Schenk", new List<RMResult>());
+            //Random rand = new Random();
+            //for (int i = 0; i < 10; i++)
+                //result.Results.Add(new RMResult() { Rings = rand.Next(0, 10) });
+            //var t = ReadCSV("test.csv");
+            //monitor.AddResult(result);
+            //ShowResult(t[10]);
+            //lastResult = t[10];
         }
 
         private void ShowResult(DisplayResult result)
