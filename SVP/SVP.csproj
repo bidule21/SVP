@@ -176,6 +176,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>svpModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="TabTraining.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabTraining.Designer.cs">
+      <DependentUpon>TabTraining.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -201,6 +207,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TabTraining.resx">
+      <DependentUpon>TabTraining.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
