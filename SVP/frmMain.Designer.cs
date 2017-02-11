@@ -30,7 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpTraining = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbRead = new System.Windows.Forms.GroupBox();
             this.btnReRead = new System.Windows.Forms.Button();
             this.btnRead = new System.Windows.Forms.Button();
             this.lblMember = new System.Windows.Forms.Label();
@@ -50,7 +50,7 @@
             this.dgResults = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tpTraining.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gbRead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgResults)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,7 +68,7 @@
             // 
             // tpTraining
             // 
-            this.tpTraining.Controls.Add(this.groupBox1);
+            this.tpTraining.Controls.Add(this.gbRead);
             this.tpTraining.Controls.Add(this.btnStart);
             this.tpTraining.Controls.Add(this.btnNewMember);
             this.tpTraining.Controls.Add(this.btnNewClub);
@@ -84,23 +84,23 @@
             this.tpTraining.Text = "Trainingsschießen";
             this.tpTraining.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // gbRead
             // 
-            this.groupBox1.Controls.Add(this.btnReRead);
-            this.groupBox1.Controls.Add(this.btnRead);
-            this.groupBox1.Controls.Add(this.lblMember);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.lblClub);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.cbProfile);
-            this.groupBox1.Enabled = false;
-            this.groupBox1.Location = new System.Drawing.Point(11, 91);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(400, 175);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Einlesen";
+            this.gbRead.Controls.Add(this.btnReRead);
+            this.gbRead.Controls.Add(this.btnRead);
+            this.gbRead.Controls.Add(this.lblMember);
+            this.gbRead.Controls.Add(this.label5);
+            this.gbRead.Controls.Add(this.lblClub);
+            this.gbRead.Controls.Add(this.label4);
+            this.gbRead.Controls.Add(this.label3);
+            this.gbRead.Controls.Add(this.cbProfile);
+            this.gbRead.Enabled = false;
+            this.gbRead.Location = new System.Drawing.Point(11, 91);
+            this.gbRead.Name = "gbRead";
+            this.gbRead.Size = new System.Drawing.Size(400, 175);
+            this.gbRead.TabIndex = 9;
+            this.gbRead.TabStop = false;
+            this.gbRead.Text = "Einlesen";
             // 
             // btnReRead
             // 
@@ -120,6 +120,7 @@
             this.btnRead.TabIndex = 12;
             this.btnRead.Text = "Einlesen";
             this.btnRead.UseVisualStyleBackColor = true;
+            this.btnRead.Click += new System.EventHandler(this.btnRead_Click);
             // 
             // lblMember
             // 
@@ -183,6 +184,7 @@
             this.btnStart.TabIndex = 8;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // btnNewMember
             // 
@@ -248,7 +250,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(828, 569);
+            this.tabPage2.Size = new System.Drawing.Size(420, 569);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -278,8 +280,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tpTraining.ResumeLayout(false);
             this.tpTraining.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbRead.ResumeLayout(false);
+            this.gbRead.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgResults)).EndInit();
             this.ResumeLayout(false);
 
@@ -298,7 +300,7 @@
         private System.Windows.Forms.Button btnNewClub;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbMember;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbRead;
         private System.Windows.Forms.Button btnReRead;
         private System.Windows.Forms.Button btnRead;
         private System.Windows.Forms.Label lblMember;
