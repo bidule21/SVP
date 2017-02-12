@@ -34,6 +34,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="date" Type="date" Nullable="false" />
           <Property Name="group_competition" Type="bool" />
         </EntityType>
@@ -585,6 +586,7 @@
           <NavigationProperty Name="group" Relationship="Self.fk_group_competition1" FromRole="competition" ToRole="group" />
           <NavigationProperty Name="price" Relationship="Self.fk_price_competition1" FromRole="competition" ToRole="price" />
           <Property Name="group_competition" Type="Boolean" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="disagprofile">
           <Key>
@@ -966,6 +968,7 @@
           <EntitySetMapping Name="competition">
             <EntityTypeMapping TypeName="svpModel.competition">
               <MappingFragment StoreEntitySet="competition">
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="group_competition" ColumnName="group_competition" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="date" ColumnName="date" />
