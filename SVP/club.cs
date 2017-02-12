@@ -26,10 +26,5 @@ namespace SVP
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<member> member { get; set; }
-
-        public override string ToString()
-        {
-            return this.name;
-        }
     }
 }

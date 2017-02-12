@@ -10,6 +10,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="competition_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="award_has_winner">
@@ -562,6 +563,7 @@
           <Property Name="competition_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="competition" Relationship="Self.fk_award_competition1" FromRole="award" ToRole="competition" />
           <NavigationProperty Name="member" Relationship="Self.award_has_winner" FromRole="award" ToRole="member" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="club">
           <Key>
@@ -944,6 +946,7 @@
           <EntitySetMapping Name="award">
             <EntityTypeMapping TypeName="svpModel.award">
               <MappingFragment StoreEntitySet="award">
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="competition_id" ColumnName="competition_id" />
               </MappingFragment>
