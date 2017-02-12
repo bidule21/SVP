@@ -24,6 +24,7 @@ namespace SVP
     
         public int id { get; set; }
         public System.DateTime date { get; set; }
+        public Nullable<bool> group_competition { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<award> award { get; set; }

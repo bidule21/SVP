@@ -35,6 +35,7 @@
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="group_competition" Type="bool" />
         </EntityType>
         <EntityType Name="disagprofile">
           <Key>
@@ -583,6 +584,7 @@
           <NavigationProperty Name="award" Relationship="Self.fk_award_competition1" FromRole="competition" ToRole="award" />
           <NavigationProperty Name="group" Relationship="Self.fk_group_competition1" FromRole="competition" ToRole="group" />
           <NavigationProperty Name="price" Relationship="Self.fk_price_competition1" FromRole="competition" ToRole="price" />
+          <Property Name="group_competition" Type="Boolean" />
         </EntityType>
         <EntityType Name="disagprofile">
           <Key>
@@ -964,6 +966,7 @@
           <EntitySetMapping Name="competition">
             <EntityTypeMapping TypeName="svpModel.competition">
               <MappingFragment StoreEntitySet="competition">
+                <ScalarProperty Name="group_competition" ColumnName="group_competition" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="date" ColumnName="date" />
               </MappingFragment>
