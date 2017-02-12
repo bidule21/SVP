@@ -19,11 +19,11 @@ namespace SVP
         }
         private void reload_Controls()
         {
-            cbClub.Items.Clear();
+            cbClubGroup.Items.Clear();
             cbProfile.Items.Clear();
             using (svpEntities context = new svpEntities())
             {
-                cbClub.Items.AddRange(context.club.ToArray());
+                cbClubGroup.Items.AddRange(context.club.ToArray());
                 foreach (var p in context.profile)
                 {
                     cbProfile.Items.Add(new ComboboxItem(p.name, p.id));
@@ -68,12 +68,12 @@ namespace SVP
 
         private void cbClub_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbClub.SelectedIndex >= 0)
+            if (cbClubGroup.SelectedIndex >= 0)
             {
                 using (svpEntities context = new svpEntities())
                 {
                     cbMember.Items.Clear();
-                    foreach (member m in context.member.Where(x => x.club_id == ((club)(cbClub.SelectedItem)).id))
+                    foreach (member m in context.member.Where(x => x.club_id == ((club)(cbClubGroup.SelectedItem)).id))
                         cbMember.Items.Add(new ComboboxItem(m.ToString(), m.id));
                 }
             }
@@ -82,7 +82,7 @@ namespace SVP
         private void btnStart_Click(object sender, EventArgs e)
         {
             gbRead.Enabled = true;
-            lblClub.Text = cbClub.SelectedItem.ToString();
+            lblClub.Text = cbClubGroup.SelectedItem.ToString();
             lblMember.Text = cbMember.SelectedItem.ToString();
             profile p = null;
             using (svpEntities context = new svpEntities())

@@ -39,17 +39,27 @@
             this.cbProfile = new System.Windows.Forms.ComboBox();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnNewMember = new System.Windows.Forms.Button();
-            this.btnNewClub = new System.Windows.Forms.Button();
+            this.btnNewClubGroup = new System.Windows.Forms.Button();
             this.cbMember = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbClub = new System.Windows.Forms.ComboBox();
+            this.lblClubGroup = new System.Windows.Forms.Label();
+            this.cbClubGroup = new System.Windows.Forms.ComboBox();
             this.dvResults = new System.Windows.Forms.DataGridView();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.profile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gbCompetition = new System.Windows.Forms.GroupBox();
+            this.btnEndCompetition = new System.Windows.Forms.Button();
+            this.dvCompetition = new System.Windows.Forms.DataGridView();
+            this.btnEditCompetition = new System.Windows.Forms.Button();
+            this.btnCreateCompetition = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.gbMember = new System.Windows.Forms.GroupBox();
             this.gbRead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvResults)).BeginInit();
+            this.gbCompetition.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dvCompetition)).BeginInit();
+            this.gbMember.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbRead
@@ -63,9 +73,9 @@
             this.gbRead.Controls.Add(this.label3);
             this.gbRead.Controls.Add(this.cbProfile);
             this.gbRead.Enabled = false;
-            this.gbRead.Location = new System.Drawing.Point(6, 94);
+            this.gbRead.Location = new System.Drawing.Point(6, 385);
             this.gbRead.Name = "gbRead";
-            this.gbRead.Size = new System.Drawing.Size(400, 175);
+            this.gbRead.Size = new System.Drawing.Size(435, 175);
             this.gbRead.TabIndex = 17;
             this.gbRead.TabStop = false;
             this.gbRead.Text = "Einlesen";
@@ -73,7 +83,7 @@
             // btnReRead
             // 
             this.btnReRead.Enabled = false;
-            this.btnReRead.Location = new System.Drawing.Point(301, 139);
+            this.btnReRead.Location = new System.Drawing.Point(313, 139);
             this.btnReRead.Name = "btnReRead";
             this.btnReRead.Size = new System.Drawing.Size(93, 23);
             this.btnReRead.TabIndex = 13;
@@ -82,7 +92,7 @@
             // 
             // btnRead
             // 
-            this.btnRead.Location = new System.Drawing.Point(301, 110);
+            this.btnRead.Location = new System.Drawing.Point(313, 110);
             this.btnRead.Name = "btnRead";
             this.btnRead.Size = new System.Drawing.Size(93, 23);
             this.btnRead.TabIndex = 12;
@@ -146,7 +156,7 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(313, 65);
+            this.btnStart.Location = new System.Drawing.Point(316, 71);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(93, 23);
             this.btnStart.TabIndex = 16;
@@ -156,7 +166,7 @@
             // 
             // btnNewMember
             // 
-            this.btnNewMember.Location = new System.Drawing.Point(313, 36);
+            this.btnNewMember.Location = new System.Drawing.Point(316, 42);
             this.btnNewMember.Name = "btnNewMember";
             this.btnNewMember.Size = new System.Drawing.Size(93, 23);
             this.btnNewMember.TabIndex = 15;
@@ -164,22 +174,22 @@
             this.btnNewMember.UseVisualStyleBackColor = true;
             this.btnNewMember.Click += new System.EventHandler(this.btnNewMember_Click);
             // 
-            // btnNewClub
+            // btnNewClubGroup
             // 
-            this.btnNewClub.Location = new System.Drawing.Point(313, 9);
-            this.btnNewClub.Name = "btnNewClub";
-            this.btnNewClub.Size = new System.Drawing.Size(93, 23);
-            this.btnNewClub.TabIndex = 14;
-            this.btnNewClub.Text = "Neuer Verein";
-            this.btnNewClub.UseVisualStyleBackColor = true;
-            this.btnNewClub.Click += new System.EventHandler(this.btnNewClub_Click);
+            this.btnNewClubGroup.Location = new System.Drawing.Point(316, 11);
+            this.btnNewClubGroup.Name = "btnNewClubGroup";
+            this.btnNewClubGroup.Size = new System.Drawing.Size(93, 23);
+            this.btnNewClubGroup.TabIndex = 14;
+            this.btnNewClubGroup.Text = "Neuer Verein";
+            this.btnNewClubGroup.UseVisualStyleBackColor = true;
+            this.btnNewClubGroup.Click += new System.EventHandler(this.btnNewClub_Click);
             // 
             // cbMember
             // 
             this.cbMember.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbMember.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbMember.FormattingEnabled = true;
-            this.cbMember.Location = new System.Drawing.Point(112, 36);
+            this.cbMember.Location = new System.Drawing.Point(115, 42);
             this.cbMember.Name = "cbMember";
             this.cbMember.Size = new System.Drawing.Size(195, 21);
             this.cbMember.TabIndex = 13;
@@ -187,31 +197,31 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 39);
+            this.label2.Location = new System.Drawing.Point(6, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(101, 13);
             this.label2.TabIndex = 12;
             this.label2.Text = "Schütze / Schützin:";
             // 
-            // label1
+            // lblClubGroup
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Verein:";
+            this.lblClubGroup.AutoSize = true;
+            this.lblClubGroup.Location = new System.Drawing.Point(6, 16);
+            this.lblClubGroup.Name = "lblClubGroup";
+            this.lblClubGroup.Size = new System.Drawing.Size(40, 13);
+            this.lblClubGroup.TabIndex = 11;
+            this.lblClubGroup.Text = "Verein:";
             // 
-            // cbClub
+            // cbClubGroup
             // 
-            this.cbClub.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cbClub.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbClub.FormattingEnabled = true;
-            this.cbClub.Location = new System.Drawing.Point(112, 9);
-            this.cbClub.Name = "cbClub";
-            this.cbClub.Size = new System.Drawing.Size(195, 21);
-            this.cbClub.TabIndex = 10;
-            this.cbClub.SelectedIndexChanged += new System.EventHandler(this.cbClub_SelectedIndexChanged);
+            this.cbClubGroup.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbClubGroup.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbClubGroup.FormattingEnabled = true;
+            this.cbClubGroup.Location = new System.Drawing.Point(115, 13);
+            this.cbClubGroup.Name = "cbClubGroup";
+            this.cbClubGroup.Size = new System.Drawing.Size(195, 21);
+            this.cbClubGroup.TabIndex = 10;
+            this.cbClubGroup.SelectedIndexChanged += new System.EventHandler(this.cbClub_SelectedIndexChanged);
             // 
             // dvResults
             // 
@@ -248,28 +258,105 @@
             this.profile.Name = "profile";
             this.profile.ReadOnly = true;
             // 
-            // TabTraining
+            // gbCompetition
+            // 
+            this.gbCompetition.Controls.Add(this.btnEndCompetition);
+            this.gbCompetition.Controls.Add(this.dvCompetition);
+            this.gbCompetition.Controls.Add(this.btnEditCompetition);
+            this.gbCompetition.Enabled = false;
+            this.gbCompetition.Location = new System.Drawing.Point(3, 32);
+            this.gbCompetition.Name = "gbCompetition";
+            this.gbCompetition.Size = new System.Drawing.Size(438, 202);
+            this.gbCompetition.TabIndex = 19;
+            this.gbCompetition.TabStop = false;
+            this.gbCompetition.Text = "Pokalschießen";
+            // 
+            // btnEndCompetition
+            // 
+            this.btnEndCompetition.Location = new System.Drawing.Point(132, 173);
+            this.btnEndCompetition.Name = "btnEndCompetition";
+            this.btnEndCompetition.Size = new System.Drawing.Size(147, 23);
+            this.btnEndCompetition.TabIndex = 2;
+            this.btnEndCompetition.Text = "Pokalschießen beenden";
+            this.btnEndCompetition.UseVisualStyleBackColor = true;
+            // 
+            // dvCompetition
+            // 
+            this.dvCompetition.AllowUserToAddRows = false;
+            this.dvCompetition.AllowUserToDeleteRows = false;
+            this.dvCompetition.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dvCompetition.Location = new System.Drawing.Point(6, 19);
+            this.dvCompetition.Name = "dvCompetition";
+            this.dvCompetition.ReadOnly = true;
+            this.dvCompetition.Size = new System.Drawing.Size(426, 148);
+            this.dvCompetition.TabIndex = 1;
+            // 
+            // btnEditCompetition
+            // 
+            this.btnEditCompetition.Location = new System.Drawing.Point(285, 173);
+            this.btnEditCompetition.Name = "btnEditCompetition";
+            this.btnEditCompetition.Size = new System.Drawing.Size(147, 23);
+            this.btnEditCompetition.TabIndex = 0;
+            this.btnEditCompetition.Text = "Pokalschießen bearbeiten";
+            this.btnEditCompetition.UseVisualStyleBackColor = true;
+            // 
+            // btnCreateCompetition
+            // 
+            this.btnCreateCompetition.Location = new System.Drawing.Point(3, 3);
+            this.btnCreateCompetition.Name = "btnCreateCompetition";
+            this.btnCreateCompetition.Size = new System.Drawing.Size(147, 23);
+            this.btnCreateCompetition.TabIndex = 0;
+            this.btnCreateCompetition.Text = "Pokalschießen erstellen";
+            this.btnCreateCompetition.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(156, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(147, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Pokalschießen fortführen";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // gbMember
+            // 
+            this.gbMember.Controls.Add(this.lblClubGroup);
+            this.gbMember.Controls.Add(this.cbClubGroup);
+            this.gbMember.Controls.Add(this.label2);
+            this.gbMember.Controls.Add(this.cbMember);
+            this.gbMember.Controls.Add(this.btnNewClubGroup);
+            this.gbMember.Controls.Add(this.btnNewMember);
+            this.gbMember.Controls.Add(this.btnStart);
+            this.gbMember.Enabled = false;
+            this.gbMember.Location = new System.Drawing.Point(3, 240);
+            this.gbMember.Name = "gbMember";
+            this.gbMember.Size = new System.Drawing.Size(438, 139);
+            this.gbMember.TabIndex = 20;
+            this.gbMember.TabStop = false;
+            this.gbMember.Text = "Schütze / Schützin";
+            // 
+            // TabCompetition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Controls.Add(this.gbMember);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.gbCompetition);
+            this.Controls.Add(this.btnCreateCompetition);
             this.Controls.Add(this.dvResults);
             this.Controls.Add(this.gbRead);
-            this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.btnNewMember);
-            this.Controls.Add(this.btnNewClub);
-            this.Controls.Add(this.cbMember);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.cbClub);
-            this.Name = "TabTraining";
+            this.Name = "TabCompetition";
             this.Size = new System.Drawing.Size(828, 569);
             this.Load += new System.EventHandler(this.TabTraining_Load);
             this.gbRead.ResumeLayout(false);
             this.gbRead.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvResults)).EndInit();
+            this.gbCompetition.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dvCompetition)).EndInit();
+            this.gbMember.ResumeLayout(false);
+            this.gbMember.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -286,14 +373,21 @@
         private System.Windows.Forms.ComboBox cbProfile;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnNewMember;
-        private System.Windows.Forms.Button btnNewClub;
+        private System.Windows.Forms.Button btnNewClubGroup;
         private System.Windows.Forms.ComboBox cbMember;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cbClub;
+        private System.Windows.Forms.Label lblClubGroup;
+        private System.Windows.Forms.ComboBox cbClubGroup;
         private System.Windows.Forms.DataGridView dvResults;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn value;
         private System.Windows.Forms.DataGridViewTextBoxColumn profile;
+        private System.Windows.Forms.GroupBox gbCompetition;
+        private System.Windows.Forms.Button btnEndCompetition;
+        private System.Windows.Forms.DataGridView dvCompetition;
+        private System.Windows.Forms.Button btnEditCompetition;
+        private System.Windows.Forms.Button btnCreateCompetition;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox gbMember;
     }
 }
