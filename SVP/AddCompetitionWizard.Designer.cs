@@ -40,11 +40,11 @@
             this.rbAddAward = new System.Windows.Forms.RadioButton();
             this.rbAddPrice = new System.Windows.Forms.RadioButton();
             this.dvCompetition = new System.Windows.Forms.DataGridView();
+            this.PriceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PriceKind = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addAwardPage = new AeroWizard.WizardPage();
             this.txtAwardName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.PriceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PriceKind = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
             this.startPage.SuspendLayout();
             this.addPricePage.SuspendLayout();
@@ -74,7 +74,7 @@
             this.startPage.Controls.Add(this.rbSingleCompetition);
             this.startPage.Name = "startPage";
             this.startPage.NextPage = this.addPricePage;
-            this.startPage.Size = new System.Drawing.Size(527, 261);
+            this.startPage.Size = new System.Drawing.Size(527, 267);
             this.startPage.TabIndex = 0;
             this.startPage.Text = "Was möchtest du tun?";
             this.startPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.startPage_Commit);
@@ -130,6 +130,7 @@
             // 
             // competitionOverviewPage
             // 
+            this.competitionOverviewPage.AllowBack = false;
             this.competitionOverviewPage.Controls.Add(this.rbFinished);
             this.competitionOverviewPage.Controls.Add(this.rbAddAward);
             this.competitionOverviewPage.Controls.Add(this.rbAddPrice);
@@ -191,6 +192,20 @@
             this.dvCompetition.Size = new System.Drawing.Size(521, 180);
             this.dvCompetition.TabIndex = 0;
             // 
+            // PriceName
+            // 
+            this.PriceName.HeaderText = "Name";
+            this.PriceName.Name = "PriceName";
+            this.PriceName.ReadOnly = true;
+            this.PriceName.Width = 250;
+            // 
+            // PriceKind
+            // 
+            this.PriceKind.HeaderText = "Art";
+            this.PriceKind.Name = "PriceKind";
+            this.PriceKind.ReadOnly = true;
+            this.PriceKind.Width = 260;
+            // 
             // addAwardPage
             // 
             this.addAwardPage.Controls.Add(this.txtAwardName);
@@ -218,20 +233,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Name / Motiv:";
             // 
-            // PriceName
-            // 
-            this.PriceName.HeaderText = "Name";
-            this.PriceName.Name = "PriceName";
-            this.PriceName.ReadOnly = true;
-            this.PriceName.Width = 250;
-            // 
-            // PriceKind
-            // 
-            this.PriceKind.HeaderText = "Art";
-            this.PriceKind.Name = "PriceKind";
-            this.PriceKind.ReadOnly = true;
-            this.PriceKind.Width = 260;
-            // 
             // AddCompetitionWizard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -240,6 +241,7 @@
             this.Controls.Add(this.wizardControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "AddCompetitionWizard";
+            this.Load += new System.EventHandler(this.AddCompetitionWizard_Load);
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).EndInit();
             this.startPage.ResumeLayout(false);
             this.startPage.PerformLayout();

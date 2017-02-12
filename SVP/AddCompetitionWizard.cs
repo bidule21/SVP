@@ -14,15 +14,22 @@ namespace SVP
     public partial class AddCompetitionWizard : Form
     {
         private competition myCompetition;
+        public competition Competition { get { return myCompetition; } }
         public AddCompetitionWizard()
         {
             InitializeComponent();
         }
 
+        public AddCompetitionWizard(competition competition)
+        {
+            InitializeComponent();
+            myCompetition = competition;
+        }
+
         private void startPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
         {
             myCompetition = new competition();
-            //myCompetition.group = dfsg
+            myCompetition.group_competition = rbGroupCompetition.Checked;
         }
 
         private void addPricePage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
@@ -42,7 +49,7 @@ namespace SVP
         {
             if (txtAwardName.Text.Length > 0)
             {
-                //myCompetition.award.Add(new award() { name = txtAwardName.Text });
+                myCompetition.award.Add(new award() { name = txtAwardName.Text });
                 txtAwardName.Text = "";
             }
             else
@@ -69,6 +76,8 @@ namespace SVP
                 competitionOverviewPage.NextPage = addPricePage;
             else if (rbFinished.Checked)
                 competitionOverviewPage.NextPage = null;
+            competitionOverviewPage.IsFinishPage = rbFinished.Checked;
+            wizardControl1.Update();
         }
 
         private void competitionOverviewPage_Enter(object sender, EventArgs e)
@@ -77,7 +86,7 @@ namespace SVP
             foreach (award a in myCompetition.award)
             {
                 DataGridViewRow row = new DataGridViewRow();
-                //row.Cells.Add(new DataGridViewTextBoxCell() { Value = a.name });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = a.name });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = "Ehrenscheibe" });
                 dvCompetition.Rows.Add(row);
             }
@@ -87,6 +96,14 @@ namespace SVP
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = p.name });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = "Pokal" });
                 dvCompetition.Rows.Add(row);
+            }
+        }
+
+        private void AddCompetitionWizard_Load(object sender, EventArgs e)
+        {
+            if(myCompetition != null)
+            {
+                wizardControl1.NextPage(competitionOverviewPage);
             }
         }
     }
