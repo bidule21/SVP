@@ -122,6 +122,12 @@
     <Compile Include="AddClubWizard.Designer.cs">
       <DependentUpon>AddClubWizard.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddCompetitionWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddCompetitionWizard.Designer.cs">
+      <DependentUpon>AddCompetitionWizard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Monitor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddClubWizard.resx">
       <DependentUpon>AddClubWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddCompetitionWizard.resx">
+      <DependentUpon>AddCompetitionWizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWizard.resx">
       <DependentUpon>MainWizard.cs</DependentUpon>
