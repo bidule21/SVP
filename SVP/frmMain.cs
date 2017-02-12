@@ -21,8 +21,6 @@ namespace SVP
         private void frmMain_Load(object sender, EventArgs e)
         {
             Monitor.GetMonitor().Show();
-            AddCompetitionWizard wiz = new AddCompetitionWizard();
-            wiz.ShowDialog();
         }
     }
 }

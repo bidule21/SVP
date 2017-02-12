@@ -28,15 +28,24 @@ namespace SVP
 
         private void startPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
         {
-            myCompetition = new competition();
-            myCompetition.group_competition = rbGroupCompetition.Checked;
+            if (txtCompetitionName.Text.Length == 0)
+                e.Cancel = true;
+            else
+            {
+                myCompetition = new competition();
+                myCompetition.group_competition = rbGroupCompetition.Checked;
+                myCompetition.name = txtCompetitionName.Text;
+            }
         }
 
         private void addPricePage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
         {
-            if(txtPriceName.Text.Length > 0)
+            if(txtPriceName.Text.Length > 0 && cbEvaluation.SelectedIndex >= 0)
             {
-                myCompetition.price.Add(new price() { name = txtPriceName.Text });
+                price p = new price() { name = txtPriceName.Text };
+                p.evaluation_id = ((evaluation)cbEvaluation.SelectedItem).id;
+                myCompetition.price.Add(p);
+                cbEvaluation.SelectedIndex = -1;
                 txtPriceName.Text = "";
             }
             else
@@ -104,6 +113,10 @@ namespace SVP
             if(myCompetition != null)
             {
                 wizardControl1.NextPage(competitionOverviewPage);
+            }
+            using (svpEntities context = new svpEntities())
+            {
+                cbEvaluation.Items.AddRange(context.evaluation.ToArray());
             }
         }
     }

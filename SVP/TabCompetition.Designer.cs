@@ -53,8 +53,11 @@
             this.dvCompetition = new System.Windows.Forms.DataGridView();
             this.btnEditCompetition = new System.Windows.Forms.Button();
             this.btnCreateCompetition = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnContinueCompetition = new System.Windows.Forms.Button();
             this.gbMember = new System.Windows.Forms.GroupBox();
+            this.lblCompetitionName = new System.Windows.Forms.Label();
+            this.PriceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PriceKind = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbRead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvResults)).BeginInit();
             this.gbCompetition.SuspendLayout();
@@ -260,6 +263,7 @@
             // 
             // gbCompetition
             // 
+            this.gbCompetition.Controls.Add(this.lblCompetitionName);
             this.gbCompetition.Controls.Add(this.btnEndCompetition);
             this.gbCompetition.Controls.Add(this.dvCompetition);
             this.gbCompetition.Controls.Add(this.btnEditCompetition);
@@ -285,10 +289,14 @@
             this.dvCompetition.AllowUserToAddRows = false;
             this.dvCompetition.AllowUserToDeleteRows = false;
             this.dvCompetition.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvCompetition.Location = new System.Drawing.Point(6, 19);
+            this.dvCompetition.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.PriceName,
+            this.PriceKind});
+            this.dvCompetition.Location = new System.Drawing.Point(6, 40);
             this.dvCompetition.Name = "dvCompetition";
             this.dvCompetition.ReadOnly = true;
-            this.dvCompetition.Size = new System.Drawing.Size(426, 148);
+            this.dvCompetition.RowHeadersVisible = false;
+            this.dvCompetition.Size = new System.Drawing.Size(426, 127);
             this.dvCompetition.TabIndex = 1;
             // 
             // btnEditCompetition
@@ -308,15 +316,17 @@
             this.btnCreateCompetition.TabIndex = 0;
             this.btnCreateCompetition.Text = "Pokalschießen erstellen";
             this.btnCreateCompetition.UseVisualStyleBackColor = true;
+            this.btnCreateCompetition.Click += new System.EventHandler(this.btnCreateCompetition_Click);
             // 
-            // button1
+            // btnContinueCompetition
             // 
-            this.button1.Location = new System.Drawing.Point(156, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(147, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Pokalschießen fortführen";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnContinueCompetition.Location = new System.Drawing.Point(156, 3);
+            this.btnContinueCompetition.Name = "btnContinueCompetition";
+            this.btnContinueCompetition.Size = new System.Drawing.Size(147, 23);
+            this.btnContinueCompetition.TabIndex = 1;
+            this.btnContinueCompetition.Text = "Pokalschießen fortführen";
+            this.btnContinueCompetition.UseVisualStyleBackColor = true;
+            this.btnContinueCompetition.Click += new System.EventHandler(this.btnContinueCompetition_Click);
             // 
             // gbMember
             // 
@@ -335,13 +345,35 @@
             this.gbMember.TabStop = false;
             this.gbMember.Text = "Schütze / Schützin";
             // 
+            // lblCompetitionName
+            // 
+            this.lblCompetitionName.AutoSize = true;
+            this.lblCompetitionName.Location = new System.Drawing.Point(3, 16);
+            this.lblCompetitionName.Name = "lblCompetitionName";
+            this.lblCompetitionName.Size = new System.Drawing.Size(0, 13);
+            this.lblCompetitionName.TabIndex = 3;
+            // 
+            // PriceName
+            // 
+            this.PriceName.HeaderText = "Name";
+            this.PriceName.Name = "PriceName";
+            this.PriceName.ReadOnly = true;
+            this.PriceName.Width = 220;
+            // 
+            // PriceKind
+            // 
+            this.PriceKind.HeaderText = "Art";
+            this.PriceKind.Name = "PriceKind";
+            this.PriceKind.ReadOnly = true;
+            this.PriceKind.Width = 200;
+            // 
             // TabCompetition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.gbMember);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnContinueCompetition);
             this.Controls.Add(this.gbCompetition);
             this.Controls.Add(this.btnCreateCompetition);
             this.Controls.Add(this.dvResults);
@@ -353,6 +385,7 @@
             this.gbRead.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvResults)).EndInit();
             this.gbCompetition.ResumeLayout(false);
+            this.gbCompetition.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvCompetition)).EndInit();
             this.gbMember.ResumeLayout(false);
             this.gbMember.PerformLayout();
@@ -387,7 +420,10 @@
         private System.Windows.Forms.DataGridView dvCompetition;
         private System.Windows.Forms.Button btnEditCompetition;
         private System.Windows.Forms.Button btnCreateCompetition;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnContinueCompetition;
         private System.Windows.Forms.GroupBox gbMember;
+        private System.Windows.Forms.Label lblCompetitionName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PriceName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PriceKind;
     }
 }

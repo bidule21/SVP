@@ -13,6 +13,7 @@ namespace SVP
 {
     public partial class TabCompetition : UserControl
     {
+        private competition currentCompetition;
         public TabCompetition()
         {
             InitializeComponent();
@@ -29,6 +30,39 @@ namespace SVP
                     cbProfile.Items.Add(new ComboboxItem(p.name, p.id));
                 }
             }
+            gbCompetition.Enabled = (currentCompetition != null);
+            gbMember.Enabled = (currentCompetition != null);
+            gbRead.Enabled = (currentCompetition != null);
+            if(currentCompetition != null)
+            {
+                lblCompetitionName.Text = currentCompetition.name;
+                dvCompetition.Rows.Clear();
+                foreach (award a in currentCompetition.award)
+                {
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = a.name });
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = "Ehrenscheibe" });
+                    dvCompetition.Rows.Add(row);
+                }
+                foreach (price p in currentCompetition.price)
+                {
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = p.name });
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = "Pokal" });
+                    dvCompetition.Rows.Add(row);
+                }
+                if (currentCompetition.group_competition == true)
+                {
+                    lblClubGroup.Text = "Gruppe: ";
+                    btnNewClubGroup.Text = "Neue Gruppe";
+                }
+                else
+                {
+                    lblClubGroup.Text = "Verein: ";
+                    btnNewClubGroup.Text = "Neuer Verein";
+                }
+            }
+
         }
 
 
@@ -135,6 +169,26 @@ namespace SVP
         private void TabTraining_Load(object sender, EventArgs e)
         {
             reload_Controls();
+        }
+
+        private void btnCreateCompetition_Click(object sender, EventArgs e)
+        {
+            AddCompetitionWizard wizard = new AddCompetitionWizard();
+            if (wizard.ShowDialog() == DialogResult.OK && wizard.Competition != null)
+            {
+                using (svpEntities context = new svpEntities())
+                {
+                    context.competition.Add(wizard.Competition);
+                    context.SaveChanges();
+                    currentCompetition = wizard.Competition;
+                }
+                reload_Controls();
+            }
+        }
+
+        private void btnContinueCompetition_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

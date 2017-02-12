@@ -30,6 +30,8 @@
         {
             this.wizardControl1 = new AeroWizard.WizardControl();
             this.startPage = new AeroWizard.WizardPage();
+            this.txtCompetitionName = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.rbGroupCompetition = new System.Windows.Forms.RadioButton();
             this.rbSingleCompetition = new System.Windows.Forms.RadioButton();
             this.addPricePage = new AeroWizard.WizardPage();
@@ -45,6 +47,8 @@
             this.addAwardPage = new AeroWizard.WizardPage();
             this.txtAwardName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cbEvaluation = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
             this.startPage.SuspendLayout();
             this.addPricePage.SuspendLayout();
@@ -70,19 +74,37 @@
             // 
             // startPage
             // 
+            this.startPage.Controls.Add(this.txtCompetitionName);
+            this.startPage.Controls.Add(this.label3);
             this.startPage.Controls.Add(this.rbGroupCompetition);
             this.startPage.Controls.Add(this.rbSingleCompetition);
             this.startPage.Name = "startPage";
             this.startPage.NextPage = this.addPricePage;
-            this.startPage.Size = new System.Drawing.Size(527, 267);
+            this.startPage.Size = new System.Drawing.Size(527, 261);
             this.startPage.TabIndex = 0;
             this.startPage.Text = "Was möchtest du tun?";
             this.startPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.startPage_Commit);
             // 
+            // txtCompetitionName
+            // 
+            this.txtCompetitionName.Location = new System.Drawing.Point(70, 50);
+            this.txtCompetitionName.Name = "txtCompetitionName";
+            this.txtCompetitionName.Size = new System.Drawing.Size(236, 23);
+            this.txtCompetitionName.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(22, 53);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(42, 15);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Name:";
+            // 
             // rbGroupCompetition
             // 
             this.rbGroupCompetition.AutoSize = true;
-            this.rbGroupCompetition.Location = new System.Drawing.Point(25, 53);
+            this.rbGroupCompetition.Location = new System.Drawing.Point(25, 108);
             this.rbGroupCompetition.Name = "rbGroupCompetition";
             this.rbGroupCompetition.Size = new System.Drawing.Size(281, 19);
             this.rbGroupCompetition.TabIndex = 1;
@@ -93,7 +115,7 @@
             // 
             this.rbSingleCompetition.AutoSize = true;
             this.rbSingleCompetition.Checked = true;
-            this.rbSingleCompetition.Location = new System.Drawing.Point(25, 28);
+            this.rbSingleCompetition.Location = new System.Drawing.Point(25, 83);
             this.rbSingleCompetition.Name = "rbSingleCompetition";
             this.rbSingleCompetition.Size = new System.Drawing.Size(265, 19);
             this.rbSingleCompetition.TabIndex = 0;
@@ -103,6 +125,8 @@
             // 
             // addPricePage
             // 
+            this.addPricePage.Controls.Add(this.cbEvaluation);
+            this.addPricePage.Controls.Add(this.label4);
             this.addPricePage.Controls.Add(this.txtPriceName);
             this.addPricePage.Controls.Add(this.label2);
             this.addPricePage.Name = "addPricePage";
@@ -114,7 +138,7 @@
             // 
             // txtPriceName
             // 
-            this.txtPriceName.Location = new System.Drawing.Point(71, 26);
+            this.txtPriceName.Location = new System.Drawing.Point(85, 26);
             this.txtPriceName.Name = "txtPriceName";
             this.txtPriceName.Size = new System.Drawing.Size(242, 23);
             this.txtPriceName.TabIndex = 1;
@@ -233,6 +257,24 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Name / Motiv:";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(23, 58);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(56, 15);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Wertung:";
+            // 
+            // cbEvaluation
+            // 
+            this.cbEvaluation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEvaluation.FormattingEnabled = true;
+            this.cbEvaluation.Location = new System.Drawing.Point(85, 55);
+            this.cbEvaluation.Name = "cbEvaluation";
+            this.cbEvaluation.Size = new System.Drawing.Size(242, 23);
+            this.cbEvaluation.TabIndex = 3;
+            // 
             // AddCompetitionWizard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -275,5 +317,9 @@
         private System.Windows.Forms.DataGridView dvCompetition;
         private System.Windows.Forms.DataGridViewTextBoxColumn PriceName;
         private System.Windows.Forms.DataGridViewTextBoxColumn PriceKind;
+        private System.Windows.Forms.TextBox txtCompetitionName;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cbEvaluation;
+        private System.Windows.Forms.Label label4;
     }
 }
