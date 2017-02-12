@@ -176,6 +176,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>svpModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="TabCompetition.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabCompetition.Designer.cs">
+      <DependentUpon>TabCompetition.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabTraining.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -207,6 +213,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TabCompetition.resx">
+      <DependentUpon>TabCompetition.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TabTraining.resx">
       <DependentUpon>TabTraining.cs</DependentUpon>
     </EmbeddedResource>

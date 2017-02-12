@@ -1,6 +1,6 @@
 ﻿namespace SVP
 {
-    partial class TabTraining
+    partial class TabCompetition
     {
         /// <summary> 
         /// Erforderliche Designervariable.

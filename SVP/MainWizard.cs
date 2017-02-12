@@ -20,7 +20,6 @@ namespace SVP
         private List<RMValue> TEA_Values;
         private profile profile;
         private DISAGRM machine;
-        private Monitor monitor;
         private DisplayResult lastResult;
 
         private List<DisplayResult> ReadCSV(string filename)
@@ -407,7 +406,6 @@ namespace SVP
                         return;
                     }
                      lastResult = new DisplayResult(cbTrainingMember.SelectedItem.ToString(), ta.Result);
-                    monitor.AddResult(lastResult);
                     ShowResult(lastResult);
                     MessageBox.Show(lastResult.ResultSum.ToString());
                 }
@@ -470,7 +468,6 @@ namespace SVP
         {
             if (cbTrainingProfile.SelectedIndex < 0)
                 e.Cancel = true;
-            monitor.ShowNames = cbTrainingShowNames.Checked;
             profile = (profile)cbTrainingProfile.SelectedItem;
         }
 
