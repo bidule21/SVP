@@ -93,10 +93,12 @@
     <Compile Include="club.cs">
       <DependentUpon>svpModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="club.part.cs" />
     <Compile Include="ComboboxItem.cs" />
     <Compile Include="competition.cs">
       <DependentUpon>svpModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="competition.part.cs" />
     <Compile Include="disagprofile.cs">
       <DependentUpon>svpModel.tt</DependentUpon>
     </Compile>
@@ -128,6 +130,8 @@
     <Compile Include="AddCompetitionWizard.Designer.cs">
       <DependentUpon>AddCompetitionWizard.cs</DependentUpon>
     </Compile>
+    <Compile Include="group.part.cs" />
+    <Compile Include="member.part.cs" />
     <Compile Include="Monitor.cs">
       <SubType>Form</SubType>
     </Compile>
