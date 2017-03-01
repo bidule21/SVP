@@ -49,15 +49,15 @@
             this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.profile = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbCompetition = new System.Windows.Forms.GroupBox();
+            this.lblCompetitionName = new System.Windows.Forms.Label();
             this.btnEndCompetition = new System.Windows.Forms.Button();
             this.dvCompetition = new System.Windows.Forms.DataGridView();
+            this.PriceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PriceKind = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEditCompetition = new System.Windows.Forms.Button();
             this.btnCreateCompetition = new System.Windows.Forms.Button();
             this.btnContinueCompetition = new System.Windows.Forms.Button();
             this.gbMember = new System.Windows.Forms.GroupBox();
-            this.lblCompetitionName = new System.Windows.Forms.Label();
-            this.PriceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PriceKind = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbRead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvResults)).BeginInit();
             this.gbCompetition.SuspendLayout();
@@ -275,6 +275,14 @@
             this.gbCompetition.TabStop = false;
             this.gbCompetition.Text = "Pokalschießen";
             // 
+            // lblCompetitionName
+            // 
+            this.lblCompetitionName.AutoSize = true;
+            this.lblCompetitionName.Location = new System.Drawing.Point(3, 16);
+            this.lblCompetitionName.Name = "lblCompetitionName";
+            this.lblCompetitionName.Size = new System.Drawing.Size(0, 13);
+            this.lblCompetitionName.TabIndex = 3;
+            // 
             // btnEndCompetition
             // 
             this.btnEndCompetition.Location = new System.Drawing.Point(132, 173);
@@ -299,6 +307,20 @@
             this.dvCompetition.Size = new System.Drawing.Size(426, 127);
             this.dvCompetition.TabIndex = 1;
             // 
+            // PriceName
+            // 
+            this.PriceName.HeaderText = "Name";
+            this.PriceName.Name = "PriceName";
+            this.PriceName.ReadOnly = true;
+            this.PriceName.Width = 220;
+            // 
+            // PriceKind
+            // 
+            this.PriceKind.HeaderText = "Art";
+            this.PriceKind.Name = "PriceKind";
+            this.PriceKind.ReadOnly = true;
+            this.PriceKind.Width = 200;
+            // 
             // btnEditCompetition
             // 
             this.btnEditCompetition.Location = new System.Drawing.Point(285, 173);
@@ -307,6 +329,7 @@
             this.btnEditCompetition.TabIndex = 0;
             this.btnEditCompetition.Text = "Pokalschießen bearbeiten";
             this.btnEditCompetition.UseVisualStyleBackColor = true;
+            this.btnEditCompetition.Click += new System.EventHandler(this.btnEditCompetition_Click);
             // 
             // btnCreateCompetition
             // 
@@ -344,28 +367,6 @@
             this.gbMember.TabIndex = 20;
             this.gbMember.TabStop = false;
             this.gbMember.Text = "Schütze / Schützin";
-            // 
-            // lblCompetitionName
-            // 
-            this.lblCompetitionName.AutoSize = true;
-            this.lblCompetitionName.Location = new System.Drawing.Point(3, 16);
-            this.lblCompetitionName.Name = "lblCompetitionName";
-            this.lblCompetitionName.Size = new System.Drawing.Size(0, 13);
-            this.lblCompetitionName.TabIndex = 3;
-            // 
-            // PriceName
-            // 
-            this.PriceName.HeaderText = "Name";
-            this.PriceName.Name = "PriceName";
-            this.PriceName.ReadOnly = true;
-            this.PriceName.Width = 220;
-            // 
-            // PriceKind
-            // 
-            this.PriceKind.HeaderText = "Art";
-            this.PriceKind.Name = "PriceKind";
-            this.PriceKind.ReadOnly = true;
-            this.PriceKind.Width = 200;
             // 
             // TabCompetition
             // 

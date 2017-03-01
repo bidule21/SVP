@@ -32,8 +32,7 @@ namespace SVP
             }
             gbCompetition.Enabled = (currentCompetition != null);
             gbMember.Enabled = (currentCompetition != null);
-            gbRead.Enabled = (currentCompetition != null);
-            if(currentCompetition != null)
+            if (currentCompetition != null)
             {
                 lblCompetitionName.Text = currentCompetition.name;
                 dvCompetition.Rows.Clear();
@@ -115,14 +114,17 @@ namespace SVP
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            gbRead.Enabled = true;
-            lblClub.Text = cbClubGroup.SelectedItem.ToString();
-            lblMember.Text = cbMember.SelectedItem.ToString();
-            profile p = null;
-            using (svpEntities context = new svpEntities())
-                p = context.profile.Where(x => x.id == SVP.Properties.Settings.Default.DefaultProfile).FirstOrDefault();
-            if (p != null)
-                cbProfile.SelectedIndex = cbProfile.FindStringExact(p.name);
+            if (cbMember.SelectedIndex >= 0)
+            {
+                gbRead.Enabled = true;
+                lblClub.Text = cbClubGroup.SelectedItem.ToString();
+                lblMember.Text = cbMember.SelectedItem.ToString();
+                profile p = null;
+                using (svpEntities context = new svpEntities())
+                    p = context.profile.Where(x => x.id == SVP.Properties.Settings.Default.DefaultProfile).FirstOrDefault();
+                if (p != null)
+                    cbProfile.SelectedIndex = cbProfile.FindStringExact(p.name);
+            }
         }
 
         private void btnRead_Click(object sender, EventArgs e)
@@ -159,7 +161,7 @@ namespace SVP
                 row.Tag = sequence.id;
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.member.ToString() });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.shot.Sum(s => s.value) });
-                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.profile.ToString()});
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.profile.ToString() });
                 dvResults.Rows.Add(row);
                 context.sequence.Add(sequence);
                 context.SaveChanges();
@@ -189,6 +191,16 @@ namespace SVP
         private void btnContinueCompetition_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnEditCompetition_Click(object sender, EventArgs e)
+        {
+            AddCompetitionWizard wizard = new AddCompetitionWizard(this.currentCompetition);
+            using (svpEntities context = new svpEntities())
+            {
+                context.SaveChanges();
+
+            }
         }
     }
 }
