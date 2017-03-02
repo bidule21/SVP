@@ -196,10 +196,14 @@ namespace SVP
         private void btnEditCompetition_Click(object sender, EventArgs e)
         {
             AddCompetitionWizard wizard = new AddCompetitionWizard(this.currentCompetition);
-            using (svpEntities context = new svpEntities())
+            if (wizard.ShowDialog() == DialogResult.OK)
             {
-                context.SaveChanges();
+                using (svpEntities context = new svpEntities())
+                {
+                    context.SaveChanges();
 
+                }
+                reload_Controls();
             }
         }
     }

@@ -30,6 +30,12 @@ namespace SVP
         {
             if (txtCompetitionName.Text.Length == 0)
                 e.Cancel = true;
+            else if (myCompetition != null)
+            {
+                myCompetition.group_competition = rbGroupCompetition.Checked;
+                myCompetition.name = txtCompetitionName.Text;
+                startPage.NextPage = competitionOverviewPage;
+            }
             else
             {
                 myCompetition = new competition();
@@ -43,7 +49,7 @@ namespace SVP
             if(txtPriceName.Text.Length > 0 && cbEvaluation.SelectedIndex >= 0)
             {
                 price p = new price() { name = txtPriceName.Text };
-                p.evaluation = ((evaluation)cbEvaluation.SelectedItem);
+                p.evaluation_id = ((evaluation)cbEvaluation.SelectedItem).id;
                 myCompetition.price.Add(p);
                 cbEvaluation.SelectedIndex = -1;
                 txtPriceName.Text = "";
@@ -112,11 +118,20 @@ namespace SVP
         {
             if(myCompetition != null)
             {
-                wizardControl1.NextPage(competitionOverviewPage);
+                //wizardControl1.NextPage(competitionOverviewPage);
             }
             using (svpEntities context = new svpEntities())
             {
                 cbEvaluation.Items.AddRange(context.evaluation.ToArray());
+            }
+        }
+
+        private void startPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
+        {
+            if (myCompetition != null)
+            {
+                txtCompetitionName.Text = myCompetition.name;
+                rbGroupCompetition.Checked = myCompetition.group_competition.Value;
             }
         }
     }

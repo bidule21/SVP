@@ -35,6 +35,8 @@
             this.rbGroupCompetition = new System.Windows.Forms.RadioButton();
             this.rbSingleCompetition = new System.Windows.Forms.RadioButton();
             this.addPricePage = new AeroWizard.WizardPage();
+            this.cbEvaluation = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.txtPriceName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.competitionOverviewPage = new AeroWizard.WizardPage();
@@ -47,8 +49,6 @@
             this.addAwardPage = new AeroWizard.WizardPage();
             this.txtAwardName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cbEvaluation = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
             this.startPage.SuspendLayout();
             this.addPricePage.SuspendLayout();
@@ -84,6 +84,7 @@
             this.startPage.TabIndex = 0;
             this.startPage.Text = "Was möchtest du tun?";
             this.startPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.startPage_Commit);
+            this.startPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.startPage_Initialize);
             // 
             // txtCompetitionName
             // 
@@ -135,6 +136,24 @@
             this.addPricePage.TabIndex = 1;
             this.addPricePage.Text = "Einen Pokal hinzufügen";
             this.addPricePage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.addPricePage_Commit);
+            // 
+            // cbEvaluation
+            // 
+            this.cbEvaluation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEvaluation.FormattingEnabled = true;
+            this.cbEvaluation.Location = new System.Drawing.Point(85, 55);
+            this.cbEvaluation.Name = "cbEvaluation";
+            this.cbEvaluation.Size = new System.Drawing.Size(242, 23);
+            this.cbEvaluation.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(23, 58);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(56, 15);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Wertung:";
             // 
             // txtPriceName
             // 
@@ -256,24 +275,6 @@
             this.label1.Size = new System.Drawing.Size(84, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "Name / Motiv:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(23, 58);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 15);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Wertung:";
-            // 
-            // cbEvaluation
-            // 
-            this.cbEvaluation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEvaluation.FormattingEnabled = true;
-            this.cbEvaluation.Location = new System.Drawing.Point(85, 55);
-            this.cbEvaluation.Name = "cbEvaluation";
-            this.cbEvaluation.Size = new System.Drawing.Size(242, 23);
-            this.cbEvaluation.TabIndex = 3;
             // 
             // AddCompetitionWizard
             // 
