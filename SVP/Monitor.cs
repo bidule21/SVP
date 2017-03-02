@@ -13,7 +13,7 @@ namespace SVP
     public partial class Monitor : Form
     {
         private static Monitor MyMonitor;
-        private DisplayResult currentResult;
+        private sequence currentResult;
         private int currentShot = 0;
         public bool ShowNames { get; set; }
         private Timer timer;
@@ -47,11 +47,12 @@ namespace SVP
             pbTarget.Location = new Point(0, 0);
             pbTarget.Height = (int)(this.Width * 0.5);
             pbTarget.Width = (int)(this.Width * 0.5);
-            dgResultList.Location = new Point((int)(this.Width * 0.5), 0);
-            dgResultList.Width = (int)(this.Width * 0.5);
-            dgResultList.Height = this.Height;
             lbResults.Location = new Point(3, (int)(this.Width * 0.5));
             rtResults.Location = new Point(3, (int)(this.Width * 0.5) + 40);
+            rtResults.Width = this.Width;
+            dgResultList.Location = new Point((int)(this.Width * 0.5), 0);
+            dgResultList.Width = (int)(this.Width * 0.5);
+            dgResultList.Height = this.rtResults.Location.Y;
             lbCurrentResult.Location = new Point((int)(this.Width * 0.5) - 100, (int)(this.Width * 0.5));
             timer = new Timer();
             timer.Interval = 5000;
@@ -63,7 +64,7 @@ namespace SVP
         {
             if(currentResult != null)
             {
-                if (currentShot == currentResult.Results.Count)
+                if (currentShot == currentResult.shot.Count)
                 {
                     DisplayAllShots();
                     currentShot = 0;
@@ -71,51 +72,51 @@ namespace SVP
                 }
                 else
                 {
-                    DisplayShot(currentResult.Results[currentShot]);
+                    DisplayShot(currentResult.shot.ElementAt(currentShot));
                     currentShot++;
                 }
             }
         }
 
-        internal void AddResult(DisplayResult result)
+        internal void AddResult(sequence result)
         {
             this.currentResult = result;
             currentShot = 0;
-            lbResults.Text = this.ShowNames ? result.Name : SVP.Properties.Settings.Default.DefaultName;
-            dgResultList.Rows.Add(lbResults.Text, result.ResultSum.ToString());
+            lbResults.Text = this.ShowNames ? result.member.ToString() : SVP.Properties.Settings.Default.DefaultName;
+            dgResultList.Rows.Add(lbResults.Text, result.shot.Sum(x => x.value).ToString(), result.profile);
             dgResultList.FirstDisplayedScrollingRowIndex = dgResultList.RowCount - 1;
             timer.Start();
         }
 
-        private void DrawShot(RMResult shot, Graphics graphics, Brush brush)
+        private void DrawShot(shot shot, Graphics graphics, Brush brush)
         {
             int size = (int)(pbTarget.Width / 11.5);
             int x = pbTarget.Width / 2;
             int y = pbTarget.Width / 2;
-            double factor = (shot.FactorValue / 2300) * (pbTarget.Width / 2);
-            double angle = shot.Angle * (Math.PI / 180);
+            double factor = (shot.factor_value / 2300) * (pbTarget.Width / 2);
+            double angle = shot.angle * (Math.PI / 180);
             angle += (1.5 * Math.PI);
             x += (int)(Math.Cos(angle) * factor);
             y += (int)(Math.Sin(angle) * factor);
             graphics.FillEllipse(brush, x - (size / 2), y - (size / 2), size, size);
         }
 
-        internal void DisplayShot(RMResult shot)
+        internal void DisplayShot(shot shot)
         {
             string shots = "";
-            foreach(RMResult result in currentResult.Results)
+            foreach(shot result in currentResult.shot)
             {
                 if(result == shot)
                 {
-                    shots += "     " + @"\cf1 " + result.Rings.ToString();
+                    shots += "     " + @"\cf1 " + result.value.ToString();
                 }
                 else
                 {
-                    shots += "     \\cf0 " + result.Rings.ToString();
+                    shots += "     \\cf0 " + result.value.ToString();
                 }
             }
             rtResults.Rtf = @"{\rtf1\ansi {\colortbl; \red255\green0\blue0;}" + shots + "}";
-            lbCurrentResult.Text = shot.Rings.ToString();
+            lbCurrentResult.Text = shot.value.ToString();
             pbTarget.Refresh();
             Graphics graphics = pbTarget.CreateGraphics();
             DrawShot(shot, graphics, Brushes.Red);
@@ -124,21 +125,21 @@ namespace SVP
         internal void DisplayAllShots()
         {
             string shots = "";
-            foreach (RMResult result in currentResult.Results)
-                shots += "     " + result.Rings.ToString();
+            foreach (shot result in currentResult.shot)
+                shots += "     " + result.value.ToString();
 
             rtResults.Rtf = @"{\rtf1\ansi" + shots + "}";
-            lbCurrentResult.Text = currentResult.ResultSum.ToString();
+            lbCurrentResult.Text = currentResult.shot.Sum(x => x.value).ToString();
             pbTarget.Refresh();
             Graphics graphics = pbTarget.CreateGraphics();
-            for(int i = 0; i < currentResult.Results.Count;i++)
+            for(int i = 0; i < currentResult.shot.Count;i++)
             {
                 if (i == 0)
-                    DrawShot(currentResult.Results[i], graphics, Brushes.Green);
-                else if (i == currentResult.Results.Count - 1)
-                    DrawShot(currentResult.Results[i], graphics, Brushes.Blue);
+                    DrawShot(currentResult.shot.ElementAt(i), graphics, Brushes.Green);
+                else if (i == currentResult.shot.Count - 1)
+                    DrawShot(currentResult.shot.ElementAt(i), graphics, Brushes.Blue);
                 else
-                    DrawShot(currentResult.Results[i], graphics, Brushes.Red);
+                    DrawShot(currentResult.shot.ElementAt(i), graphics, Brushes.Red);
             }
             graphics.Dispose();
         }

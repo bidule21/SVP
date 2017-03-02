@@ -105,7 +105,6 @@
     <Compile Include="disagprofile.cs">
       <DependentUpon>svpModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DisplayResult.cs" />
     <Compile Include="evaluation.cs">
       <DependentUpon>svpModel.tt</DependentUpon>
     </Compile>
@@ -162,12 +161,6 @@
     </Compile>
     <Compile Include="group.cs">
       <DependentUpon>svpModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MainWizard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainWizard.Designer.cs">
-      <DependentUpon>MainWizard.cs</DependentUpon>
     </Compile>
     <Compile Include="manualprofile.cs">
       <DependentUpon>svpModel.tt</DependentUpon>
@@ -246,9 +239,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ProfileWizard.resx">
       <DependentUpon>ProfileWizard.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainWizard.resx">
-      <DependentUpon>MainWizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Monitor.resx">
       <DependentUpon>Monitor.cs</DependentUpon>
