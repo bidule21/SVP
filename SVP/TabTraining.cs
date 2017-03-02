@@ -134,7 +134,7 @@ namespace SVP
 
         private void TabTraining_Load(object sender, EventArgs e)
         {
-            reload_Controls();
+            //reload_Controls();
         }
     }
 }

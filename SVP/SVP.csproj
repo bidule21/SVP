@@ -49,6 +49,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>targetAim.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AeroWizard, Version=2.1.7.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
       <HintPath>..\packages\AeroWizard.2.1.7\lib\net40\AeroWizard.dll</HintPath>
@@ -130,6 +133,12 @@
     <Compile Include="AddCompetitionWizard.Designer.cs">
       <DependentUpon>AddCompetitionWizard.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmWinner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWinner.Designer.cs">
+      <DependentUpon>frmWinner.cs</DependentUpon>
+    </Compile>
     <Compile Include="group.part.cs" />
     <Compile Include="member.part.cs" />
     <Compile Include="Monitor.cs">
@@ -210,6 +219,9 @@
     <EmbeddedResource Include="AddCompetitionWizard.resx">
       <DependentUpon>AddCompetitionWizard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmWinner.resx">
+      <DependentUpon>frmWinner.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWizard.resx">
       <DependentUpon>MainWizard.cs</DependentUpon>
     </EmbeddedResource>
@@ -256,6 +268,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="targetAim.ico" />
     <None Include="Resources\Zielscheibe.png" />
     <Content Include="svpModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

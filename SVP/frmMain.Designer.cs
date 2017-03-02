@@ -30,6 +30,7 @@ namespace SVP
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpTraining = new System.Windows.Forms.TabPage();
             this.tpCompetition = new System.Windows.Forms.TabPage();
@@ -60,7 +61,7 @@ namespace SVP
             this.tpTraining.UseVisualStyleBackColor = true;
             // 
             // tpCompetition
-            //
+            // 
             this.tpCompetition.Controls.Add(new TabCompetition());
             this.tpCompetition.Location = new System.Drawing.Point(4, 22);
             this.tpCompetition.Name = "tpCompetition";
@@ -76,8 +77,11 @@ namespace SVP
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(836, 595);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmMain";
-            this.Text = "frmMain";
+            this.Text = "SVP";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);

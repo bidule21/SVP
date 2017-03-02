@@ -291,6 +291,7 @@
             this.btnEndCompetition.TabIndex = 2;
             this.btnEndCompetition.Text = "Pokalschießen beenden";
             this.btnEndCompetition.UseVisualStyleBackColor = true;
+            this.btnEndCompetition.Click += new System.EventHandler(this.btnEndCompetition_Click);
             // 
             // dvCompetition
             // 

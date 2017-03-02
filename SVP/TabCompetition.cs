@@ -206,5 +206,13 @@ namespace SVP
                 reload_Controls();
             }
         }
+
+        private void btnEndCompetition_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("Willst du das Pokalschießen wirklich beenden? Ein weiteres fortführen ist nicht möglich.", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                
+            }
+        }
     }
 }
