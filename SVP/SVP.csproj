@@ -146,6 +146,13 @@
       <DependentUpon>frmWinner.cs</DependentUpon>
     </Compile>
     <Compile Include="group.part.cs" />
+    <Compile Include="profile.part.cs" />
+    <Compile Include="ProfileWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProfileWizard.Designer.cs">
+      <DependentUpon>ProfileWizard.cs</DependentUpon>
+    </Compile>
     <Compile Include="member.part.cs" />
     <Compile Include="Monitor.cs">
       <SubType>Form</SubType>
@@ -207,6 +214,12 @@
     <Compile Include="TabCompetition.Designer.cs">
       <DependentUpon>TabCompetition.cs</DependentUpon>
     </Compile>
+    <Compile Include="TabSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabSettings.Designer.cs">
+      <DependentUpon>TabSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabTraining.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -231,6 +244,9 @@
     <EmbeddedResource Include="frmWinner.resx">
       <DependentUpon>frmWinner.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProfileWizard.resx">
+      <DependentUpon>ProfileWizard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWizard.resx">
       <DependentUpon>MainWizard.cs</DependentUpon>
     </EmbeddedResource>
@@ -249,6 +265,9 @@
     </Compile>
     <EmbeddedResource Include="TabCompetition.resx">
       <DependentUpon>TabCompetition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabSettings.resx">
+      <DependentUpon>TabSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabTraining.resx">
       <DependentUpon>TabTraining.cs</DependentUpon>

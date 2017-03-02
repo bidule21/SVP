@@ -81,6 +81,7 @@ namespace SVP
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            //if(cbMember.SelectedIndex >=)
             gbRead.Enabled = true;
             lblClub.Text = cbClub.SelectedItem.ToString();
             lblMember.Text = cbMember.SelectedItem.ToString();
@@ -129,12 +130,18 @@ namespace SVP
                 dvResults.Rows.Add(row);
                 context.sequence.Add(sequence);
                 context.SaveChanges();
+                //Monitor.GetMonitor().AddResult(ta.Result);
             }
         }
 
         private void TabTraining_Load(object sender, EventArgs e)
         {
             //reload_Controls();
+        }
+
+        private void cbMember_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnStart.Enabled = (cbMember.SelectedIndex >= 0);
         }
     }
 }

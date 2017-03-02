@@ -146,6 +146,7 @@
             // 
             // btnStart
             // 
+            this.btnStart.Enabled = false;
             this.btnStart.Location = new System.Drawing.Point(313, 65);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(93, 23);
@@ -183,6 +184,7 @@
             this.cbMember.Name = "cbMember";
             this.cbMember.Size = new System.Drawing.Size(195, 21);
             this.cbMember.TabIndex = 13;
+            this.cbMember.SelectedIndexChanged += new System.EventHandler(this.cbMember_SelectedIndexChanged);
             // 
             // label2
             // 
