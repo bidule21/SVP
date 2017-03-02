@@ -131,7 +131,7 @@ namespace SVP
             if (myCompetition != null)
             {
                 txtCompetitionName.Text = myCompetition.name;
-                rbGroupCompetition.Checked = myCompetition.group_competition.Value;
+                rbGroupCompetition.Checked = myCompetition.group_competition;
             }
         }
     }

@@ -36,7 +36,8 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="date" Type="date" Nullable="false" />
-          <Property Name="group_competition" Type="bool" />
+          <Property Name="group_competition" Type="bool" Nullable="false" />
+          <Property Name="sealed" Type="bool" Nullable="false" />
         </EntityType>
         <EntityType Name="disagprofile">
           <Key>
@@ -53,6 +54,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="key" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="is_group" Type="bool" Nullable="false" />
         </EntityType>
         <EntityType Name="group">
           <Key>
@@ -119,6 +121,7 @@
           <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="competition_id" Type="int" Nullable="false" />
           <Property Name="evaluation_id" Type="int" Nullable="false" />
+          <Property Name="profile_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="price_has_winner">
           <Key>
@@ -380,6 +383,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_price_profile1">
+          <End Role="profile" Type="Self.profile" Multiplicity="1" />
+          <End Role="price" Type="Self.price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profile">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="price">
+              <PropertyRef Name="profile_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_sequence_has_sequence_sequence1">
           <End Role="sequence" Type="Self.sequence" Multiplicity="1" />
           <End Role="sequence_has_newsequence" Type="Self.sequence_has_newsequence" Multiplicity="*" />
@@ -532,6 +547,10 @@
             <End Role="price" EntitySet="price" />
             <End Role="price_has_winner" EntitySet="price_has_winner" />
           </AssociationSet>
+          <AssociationSet Name="fk_price_profile1" Association="Self.fk_price_profile1">
+            <End Role="profile" EntitySet="profile" />
+            <End Role="price" EntitySet="price" />
+          </AssociationSet>
           <AssociationSet Name="fk_sequence_has_sequence_sequence1" Association="Self.fk_sequence_has_sequence_sequence1">
             <End Role="sequence" EntitySet="sequence" />
             <End Role="sequence_has_newsequence" EntitySet="sequence_has_newsequence" />
@@ -585,8 +604,9 @@
           <NavigationProperty Name="award" Relationship="Self.fk_award_competition1" FromRole="competition" ToRole="award" />
           <NavigationProperty Name="group" Relationship="Self.fk_group_competition1" FromRole="competition" ToRole="group" />
           <NavigationProperty Name="price" Relationship="Self.fk_price_competition1" FromRole="competition" ToRole="price" />
-          <Property Name="group_competition" Type="Boolean" />
+          <Property Name="group_competition" Type="Boolean" Nullable="false" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="sealed" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="disagprofile">
           <Key>
@@ -605,6 +625,7 @@
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="key" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="price" Relationship="Self.fk_price_evaluation1" FromRole="evaluation" ToRole="price" />
+          <Property Name="is_group" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="group">
           <Key>
@@ -663,6 +684,8 @@
           <NavigationProperty Name="competition" Relationship="Self.fk_price_competition1" FromRole="price" ToRole="competition" />
           <NavigationProperty Name="evaluation" Relationship="Self.fk_price_evaluation1" FromRole="price" ToRole="evaluation" />
           <NavigationProperty Name="participant" Relationship="Self.price_has_winner" FromRole="price" ToRole="participant" />
+          <Property Name="profile_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="profile" Relationship="svpModel.fk_price_profile1" FromRole="price" ToRole="profile" />
         </EntityType>
         <EntityType Name="profile">
           <Key>
@@ -673,6 +696,7 @@
           <NavigationProperty Name="disagprofile" Relationship="Self.fk_disagProfile_profile1" FromRole="profile" ToRole="disagprofile" />
           <NavigationProperty Name="manualprofile" Relationship="Self.fk_manualProfile_profile1" FromRole="profile" ToRole="manualprofile" />
           <NavigationProperty Name="sequence" Relationship="Self.fk_shot_profile1" FromRole="profile" ToRole="sequence" />
+          <NavigationProperty Name="price" Relationship="svpModel.fk_price_profile1" FromRole="profile" ToRole="price" />
         </EntityType>
         <EntityType Name="sequence">
           <Key>
@@ -940,7 +964,23 @@
             <End Role="sequence" EntitySet="sequence" />
             <End Role="sequence1" EntitySet="sequence" />
           </AssociationSet>
+          <AssociationSet Name="fk_price_profile1" Association="svpModel.fk_price_profile1">
+            <End Role="profile" EntitySet="profile" />
+            <End Role="price" EntitySet="price" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="fk_price_profile1">
+          <End Type="svpModel.profile" Role="profile" Multiplicity="1" />
+          <End Type="svpModel.price" Role="price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profile">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="price">
+              <PropertyRef Name="profile_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -968,6 +1008,7 @@
           <EntitySetMapping Name="competition">
             <EntityTypeMapping TypeName="svpModel.competition">
               <MappingFragment StoreEntitySet="competition">
+                <ScalarProperty Name="sealed" ColumnName="sealed" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="group_competition" ColumnName="group_competition" />
                 <ScalarProperty Name="id" ColumnName="id" />
@@ -987,6 +1028,7 @@
           <EntitySetMapping Name="evaluation">
             <EntityTypeMapping TypeName="svpModel.evaluation">
               <MappingFragment StoreEntitySet="evaluation">
+                <ScalarProperty Name="is_group" ColumnName="is_group" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="key" ColumnName="key" />
@@ -1033,6 +1075,7 @@
           <EntitySetMapping Name="price">
             <EntityTypeMapping TypeName="svpModel.price">
               <MappingFragment StoreEntitySet="price">
+                <ScalarProperty Name="profile_id" ColumnName="profile_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="competition_id" ColumnName="competition_id" />
