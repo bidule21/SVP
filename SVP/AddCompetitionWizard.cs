@@ -44,8 +44,7 @@ namespace SVP
             {
                 price p = new price() { name = txtPriceName.Text };
                 p.evaluation = ((evaluation)cbEvaluation.SelectedItem);
-                p.competition = myCompetition;
-                //myCompetition.price.Add(p);
+                myCompetition.price.Add(p);
                 cbEvaluation.SelectedIndex = -1;
                 txtPriceName.Text = "";
             }
