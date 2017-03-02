@@ -21,6 +21,7 @@ namespace SVP
         private void frmMain_Load(object sender, EventArgs e)
         {
             Monitor.GetMonitor().Show();
+            tpCompetition.Controls[0].Enabled = false;
         }
     }
 }
