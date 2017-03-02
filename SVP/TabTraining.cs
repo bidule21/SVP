@@ -127,16 +127,28 @@ namespace SVP
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.member.ToString() });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.shot.Sum(s => s.value) });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.profile.ToString()});
+                Button displayButton = new Button() { Text = "Anzeigen", Name = "btnDisplay" + sequence.id, Tag = sequence.id };
+                displayButton.Click += btnDisplayShot_Click;
+                row.Cells.Add(new DataGridViewButtonCell() { Value = displayButton });
                 dvResults.Rows.Add(row);
                 context.sequence.Add(sequence);
                 context.SaveChanges();
-                //Monitor.GetMonitor().AddResult(ta.Result);
+                Monitor.GetMonitor().AddResult(sequence);
+            }
+        }
+
+        private void btnDisplayShot_Click(object sender, EventArgs e)
+        {
+            using (svpEntities context = new svpEntities())
+            {
+                var sequence = context.sequence.Where(x => x.id == ((sequence)((Button)sender).Tag).id).FirstOrDefault();
+                Monitor.GetMonitor().DisplaySequence(sequence);
             }
         }
 
         private void TabTraining_Load(object sender, EventArgs e)
         {
-            //reload_Controls();
+            reload_Controls();
         }
 
         private void cbMember_SelectedIndexChanged(object sender, EventArgs e)

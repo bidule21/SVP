@@ -80,11 +80,16 @@ namespace SVP
 
         internal void AddResult(sequence result)
         {
+            dgResultList.Rows.Add(lbResults.Text, result.shot.Sum(x => x.value).ToString(), result.profile);
+            dgResultList.FirstDisplayedScrollingRowIndex = dgResultList.RowCount - 1;
+            DisplaySequence(result);
+        }
+
+        internal void DisplaySequence(sequence result)
+        {
             this.currentResult = result;
             currentShot = 0;
             lbResults.Text = this.ShowNames ? result.member.ToString() : SVP.Properties.Settings.Default.DefaultName;
-            dgResultList.Rows.Add(lbResults.Text, result.shot.Sum(x => x.value).ToString(), result.profile);
-            dgResultList.FirstDisplayedScrollingRowIndex = dgResultList.RowCount - 1;
             timer.Start();
         }
 

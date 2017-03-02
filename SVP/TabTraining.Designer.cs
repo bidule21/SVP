@@ -48,6 +48,7 @@
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.profile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.display = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbRead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvResults)).BeginInit();
             this.SuspendLayout();
@@ -223,7 +224,8 @@
             this.dvResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.name,
             this.value,
-            this.profile});
+            this.profile,
+            this.display});
             this.dvResults.Dock = System.Windows.Forms.DockStyle.Right;
             this.dvResults.Location = new System.Drawing.Point(447, 0);
             this.dvResults.Name = "dvResults";
@@ -243,12 +245,19 @@
             this.value.HeaderText = "Ringe";
             this.value.Name = "value";
             this.value.ReadOnly = true;
+            this.value.Width = 50;
             // 
             // profile
             // 
             this.profile.HeaderText = "Profile";
             this.profile.Name = "profile";
             this.profile.ReadOnly = true;
+            // 
+            // display
+            // 
+            this.display.HeaderText = "Anzeigen";
+            this.display.Name = "display";
+            this.display.ReadOnly = true;
             // 
             // TabTraining
             // 
@@ -297,5 +306,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn value;
         private System.Windows.Forms.DataGridViewTextBoxColumn profile;
+        private System.Windows.Forms.DataGridViewTextBoxColumn display;
     }
 }
