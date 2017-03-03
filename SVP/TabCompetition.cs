@@ -117,6 +117,8 @@ namespace SVP
             if (cbMember.SelectedIndex >= 0)
             {
                 gbRead.Enabled = true;
+                btnReRead.Enabled = false;
+                btnRead.Enabled = true;
                 lblClub.Text = cbClubGroup.SelectedItem.ToString();
                 lblMember.Text = cbMember.SelectedItem.ToString();
                 profile p = null;
@@ -162,9 +164,13 @@ namespace SVP
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.member.ToString() });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.shot.Sum(s => s.value) });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.profile.ToString() });
+                row.Cells.Add(new DataGridViewButtonCell() { UseColumnTextForButtonValue = true, Value = sequence});
+                
                 dvResults.Rows.Add(row);
                 context.sequence.Add(sequence);
                 context.SaveChanges();
+                btnRead.Enabled = false;
+                btnReRead.Enabled = true;
             }
         }
 
@@ -212,6 +218,19 @@ namespace SVP
             if(MessageBox.Show("Willst du das Pokalschießen wirklich beenden? Ein weiteres fortführen ist nicht möglich.", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 
+            }
+        }
+
+        private void btnReRead_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dvResults_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex == 3)
+            {
+                Monitor.GetMonitor().DisplaySequence((sequence)dvResults.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
             }
         }
     }

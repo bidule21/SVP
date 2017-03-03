@@ -45,9 +45,6 @@
             this.lblClubGroup = new System.Windows.Forms.Label();
             this.cbClubGroup = new System.Windows.Forms.ComboBox();
             this.dvResults = new System.Windows.Forms.DataGridView();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.profile = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbCompetition = new System.Windows.Forms.GroupBox();
             this.lblCompetitionName = new System.Windows.Forms.Label();
             this.btnEndCompetition = new System.Windows.Forms.Button();
@@ -58,6 +55,10 @@
             this.btnCreateCompetition = new System.Windows.Forms.Button();
             this.btnContinueCompetition = new System.Windows.Forms.Button();
             this.gbMember = new System.Windows.Forms.GroupBox();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.profile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.show = new System.Windows.Forms.DataGridViewButtonColumn();
             this.gbRead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvResults)).BeginInit();
             this.gbCompetition.SuspendLayout();
@@ -92,6 +93,7 @@
             this.btnReRead.TabIndex = 13;
             this.btnReRead.Text = "Nachwertung";
             this.btnReRead.UseVisualStyleBackColor = true;
+            this.btnReRead.Click += new System.EventHandler(this.btnReRead_Click);
             // 
             // btnRead
             // 
@@ -234,7 +236,8 @@
             this.dvResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.name,
             this.value,
-            this.profile});
+            this.profile,
+            this.show});
             this.dvResults.Dock = System.Windows.Forms.DockStyle.Right;
             this.dvResults.Location = new System.Drawing.Point(447, 0);
             this.dvResults.Name = "dvResults";
@@ -242,24 +245,7 @@
             this.dvResults.RowHeadersVisible = false;
             this.dvResults.Size = new System.Drawing.Size(381, 569);
             this.dvResults.TabIndex = 18;
-            // 
-            // name
-            // 
-            this.name.HeaderText = "Name";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            // 
-            // value
-            // 
-            this.value.HeaderText = "Ringe";
-            this.value.Name = "value";
-            this.value.ReadOnly = true;
-            // 
-            // profile
-            // 
-            this.profile.HeaderText = "Profile";
-            this.profile.Name = "profile";
-            this.profile.ReadOnly = true;
+            this.dvResults.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvResults_CellClick);
             // 
             // gbCompetition
             // 
@@ -369,6 +355,30 @@
             this.gbMember.TabStop = false;
             this.gbMember.Text = "Schütze / Schützin";
             // 
+            // name
+            // 
+            this.name.HeaderText = "Name";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
+            // value
+            // 
+            this.value.HeaderText = "Ringe";
+            this.value.Name = "value";
+            this.value.ReadOnly = true;
+            // 
+            // profile
+            // 
+            this.profile.HeaderText = "Profile";
+            this.profile.Name = "profile";
+            this.profile.ReadOnly = true;
+            // 
+            // show
+            // 
+            this.show.HeaderText = "Anzeigen";
+            this.show.Name = "show";
+            this.show.ReadOnly = true;
+            // 
             // TabCompetition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -414,9 +424,6 @@
         private System.Windows.Forms.Label lblClubGroup;
         private System.Windows.Forms.ComboBox cbClubGroup;
         private System.Windows.Forms.DataGridView dvResults;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn value;
-        private System.Windows.Forms.DataGridViewTextBoxColumn profile;
         private System.Windows.Forms.GroupBox gbCompetition;
         private System.Windows.Forms.Button btnEndCompetition;
         private System.Windows.Forms.DataGridView dvCompetition;
@@ -427,5 +434,9 @@
         private System.Windows.Forms.Label lblCompetitionName;
         private System.Windows.Forms.DataGridViewTextBoxColumn PriceName;
         private System.Windows.Forms.DataGridViewTextBoxColumn PriceKind;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn value;
+        private System.Windows.Forms.DataGridViewTextBoxColumn profile;
+        private System.Windows.Forms.DataGridViewButtonColumn show;
     }
 }
