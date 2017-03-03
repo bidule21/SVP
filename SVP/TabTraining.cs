@@ -94,6 +94,7 @@ namespace SVP
 
         private void btnRead_Click(object sender, EventArgs e)
         {
+            sequence sequence;
             using (svpEntities context = new svpEntities())
             {
                 disagprofile profile = context.disagprofile.Where(x => x.profile_id == ((ComboboxItem)cbProfile.SelectedItem).Id).First();
@@ -107,7 +108,7 @@ namespace SVP
                     btnRead.Enabled = true;
                     return;
                 }
-                sequence sequence = new sequence();
+                sequence = new sequence();
                 sequence.date = DateTime.Now;
                 sequence.member_id = ((ComboboxItem)cbMember.SelectedItem).Id;
                 sequence.profile_id = ((ComboboxItem)cbProfile.SelectedItem).Id;
@@ -122,19 +123,27 @@ namespace SVP
                     s.valid = (result.Validity == ValidFlag.Valid);
                     sequence.shot.Add(s);
                 }
-                DataGridViewRow row = new DataGridViewRow();
-                row.Tag = sequence.id;
-                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.member.ToString() });
-                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.shot.Sum(s => s.value) });
-                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.profile.ToString()});
-                Button displayButton = new Button() { Text = "Anzeigen", Name = "btnDisplay" + sequence.id, Tag = sequence.id };
-                displayButton.Click += btnDisplayShot_Click;
-                row.Cells.Add(new DataGridViewButtonCell() { Value = displayButton });
-                dvResults.Rows.Add(row);
                 context.sequence.Add(sequence);
                 context.SaveChanges();
-                Monitor.GetMonitor().AddResult(sequence);
+                sequence = context.sequence.Where(x => x.id == sequence.id).FirstOrDefault();
+                member member = context.member.Where(x => x.id == sequence.member_id).FirstOrDefault();
+                profile pro = context.profile.Where(x => x.id == sequence.profile_id).FirstOrDefault();
+                DataGridViewRow row = new DataGridViewRow();
+                row.Tag = sequence.id;
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = member.ToString() });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.shot.Sum(s => s.value) });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = pro.ToString() });
+                Button displayButton = new Button() { Text = "Anzeigen", Name = "btnDisplay" + sequence.id, Tag = sequence.id };
+                displayButton.Click += btnDisplayShot_Click;
+                DataGridViewButtonCell button = new DataGridViewButtonCell() { Value = "test" };
+               
+                row.Cells.Add(button);
+                dvResults.Rows.Add(row);
             }
+            
+            
+
+            Monitor.GetMonitor().AddResult(sequence);
         }
 
         private void btnDisplayShot_Click(object sender, EventArgs e)

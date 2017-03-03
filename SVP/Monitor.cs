@@ -28,6 +28,7 @@ namespace SVP
         private Monitor()
         {
             InitializeComponent();
+            ShowNames = true;
             this.StartPosition = FormStartPosition.Manual;
             if (Screen.AllScreens.Length > 1)
             {
@@ -80,7 +81,8 @@ namespace SVP
 
         internal void AddResult(sequence result)
         {
-            dgResultList.Rows.Add(lbResults.Text, result.shot.Sum(x => x.value).ToString(), result.profile);
+            string name = this.ShowNames ? result.member.ToString() : SVP.Properties.Settings.Default.DefaultName;
+            dgResultList.Rows.Add(name, result.shot.Sum(x => x.value).ToString(), result.profile);
             dgResultList.FirstDisplayedScrollingRowIndex = dgResultList.RowCount - 1;
             DisplaySequence(result);
         }
@@ -108,6 +110,8 @@ namespace SVP
 
         internal void DisplayShot(shot shot)
         {
+            if (shot.valid == false)
+                return;
             string shots = "";
             foreach(shot result in currentResult.shot)
             {
@@ -139,6 +143,8 @@ namespace SVP
             Graphics graphics = pbTarget.CreateGraphics();
             for(int i = 0; i < currentResult.shot.Count;i++)
             {
+                if (currentResult.shot.ElementAt(i).valid == false)
+                    continue;
                 if (i == 0)
                     DrawShot(currentResult.shot.ElementAt(i), graphics, Brushes.Green);
                 else if (i == currentResult.shot.Count - 1)
