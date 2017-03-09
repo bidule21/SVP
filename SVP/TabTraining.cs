@@ -133,11 +133,7 @@ namespace SVP
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = member.ToString() });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.shot.Sum(s => s.value) });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = pro.ToString() });
-                Button displayButton = new Button() { Text = "Anzeigen", Name = "btnDisplay" + sequence.id, Tag = sequence.id };
-                displayButton.Click += btnDisplayShot_Click;
-                DataGridViewButtonCell button = new DataGridViewButtonCell() { Value = "test" };
-               
-                row.Cells.Add(button);
+				row.Cells.Add(new DataGridViewButtonCell() { UseColumnTextForButtonValue = true, Tag = sequence.id});
                 dvResults.Rows.Add(row);
             }
             
@@ -158,6 +154,22 @@ namespace SVP
         private void TabTraining_Load(object sender, EventArgs e)
         {
             reload_Controls();
+			using (svpEntities context = new svpEntities())
+			{
+				var sequences = context.sequence.Where(x => (x.date.Value.Date == DateTime.Now.Date));
+				foreach (var sequence in sequences)
+				{
+					DataGridViewRow row = new DataGridViewRow();
+					row.Tag = sequence.id;
+					row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.member.ToString() });
+					row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.shot.Sum(s => s.value) });
+					row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.profile.ToString() });
+					DataGridViewButtonCell button = new DataGridViewButtonCell() { Value = "test" };
+					row.Cells.Add(button);
+					dvResults.Rows.Add(row);
+				}
+			}
+				 
         }
 
         private void cbMember_SelectedIndexChanged(object sender, EventArgs e)
