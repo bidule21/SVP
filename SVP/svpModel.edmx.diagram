@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="dc272d32a49944718d9280b7782f6d14" Name="Diagram1">
+      <Diagram DiagramId="dc272d32a49944718d9280b7782f6d14" Name="Diagram1" ZoomLevel="88">
         <EntityTypeShape EntityType="svpModel.award" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="svpModel.club" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="svpModel.competition" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="svpModel.disagprofile" Width="1.5" PointX="9.75" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="svpModel.evaluation" Width="1.5" PointX="10.5" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="svpModel.evaluation" Width="1.5" PointX="12.5" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="svpModel.group" Width="1.5" PointX="9.75" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="svpModel.manualprofile" Width="1.5" PointX="9.75" PointY="14.25" IsExpanded="true" />
         <EntityTypeShape EntityType="svpModel.member" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
@@ -23,7 +23,6 @@
         <AssociationConnector Association="svpModel.fk_group_competition1" ManuallyRouted="false" />
         <AssociationConnector Association="svpModel.fk_price_competition1" ManuallyRouted="false" />
         <AssociationConnector Association="svpModel.fk_disagProfile_profile1" ManuallyRouted="false" />
-        <AssociationConnector Association="svpModel.fk_price_evaluation1" ManuallyRouted="false" />
         <AssociationConnector Association="svpModel.fk_group_participant1" ManuallyRouted="false" />
         <AssociationConnector Association="svpModel.fk_manualProfile_profile1" ManuallyRouted="false" />
         <AssociationConnector Association="svpModel.fk_shot_member1" ManuallyRouted="false" />
@@ -35,6 +34,8 @@
         <AssociationConnector Association="svpModel.participant_has_sequence" ManuallyRouted="false" />
         <AssociationConnector Association="svpModel.price_has_winner" ManuallyRouted="false" />
         <AssociationConnector Association="svpModel.sequence_has_newsequence" ManuallyRouted="false" />
+        <AssociationConnector Association="svpModel.fk_price_profile1" />
+        <AssociationConnector Association="svpModel.price_has_evaluation" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

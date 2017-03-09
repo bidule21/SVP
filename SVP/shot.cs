@@ -17,6 +17,10 @@ namespace SVP
         public int id { get; set; }
         public double value { get; set; }
         public int sequence_id { get; set; }
+        public int shot_number { get; set; }
+        public double factor_value { get; set; }
+        public double angle { get; set; }
+        public bool valid { get; set; }
     
         public virtual sequence sequence { get; set; }
     }

@@ -20,21 +20,19 @@ namespace SVP
             this.disagprofile = new HashSet<disagprofile>();
             this.manualprofile = new HashSet<manualprofile>();
             this.sequence = new HashSet<sequence>();
+            this.price = new HashSet<price>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
-
-        public override string ToString()
-        {
-            return name;
-        }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<disagprofile> disagprofile { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<manualprofile> manualprofile { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<sequence> sequence { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<price> price { get; set; }
     }
 }

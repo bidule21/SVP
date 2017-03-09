@@ -49,5 +49,14 @@ namespace SVP.Properties {
                 return ((string)(this["DefaultName"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int DefaultProfile {
+            get {
+                return ((int)(this["DefaultProfile"]));
+            }
+        }
     }
 }

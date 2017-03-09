@@ -49,6 +49,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>targetAim.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AeroWizard, Version=2.1.7.0, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
       <HintPath>..\packages\AeroWizard.2.1.7\lib\net40\AeroWizard.dll</HintPath>
@@ -93,17 +96,63 @@
     <Compile Include="club.cs">
       <DependentUpon>svpModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="club.part.cs" />
     <Compile Include="ComboboxItem.cs" />
     <Compile Include="competition.cs">
       <DependentUpon>svpModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="competition.part.cs" />
     <Compile Include="disagprofile.cs">
       <DependentUpon>svpModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DisplayResult.cs" />
     <Compile Include="evaluation.cs">
       <DependentUpon>svpModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="frmChooseCompetition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChooseCompetition.Designer.cs">
+      <DependentUpon>frmChooseCompetition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddUserWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddUserWizard.Designer.cs">
+      <DependentUpon>AddUserWizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddClubWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddClubWizard.Designer.cs">
+      <DependentUpon>AddClubWizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddCompetitionWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddCompetitionWizard.Designer.cs">
+      <DependentUpon>AddCompetitionWizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmWinner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWinner.Designer.cs">
+      <DependentUpon>frmWinner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="group.part.cs" />
+    <Compile Include="profile.part.cs" />
+    <Compile Include="ProfileWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProfileWizard.Designer.cs">
+      <DependentUpon>ProfileWizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="member.part.cs" />
     <Compile Include="Monitor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,12 +161,6 @@
     </Compile>
     <Compile Include="group.cs">
       <DependentUpon>svpModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MainWizard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainWizard.Designer.cs">
-      <DependentUpon>MainWizard.cs</DependentUpon>
     </Compile>
     <Compile Include="manualprofile.cs">
       <DependentUpon>svpModel.tt</DependentUpon>
@@ -158,8 +201,44 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>svpModel.edmx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="MainWizard.resx">
-      <DependentUpon>MainWizard.cs</DependentUpon>
+    <Compile Include="TabCompetition.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabCompetition.Designer.cs">
+      <DependentUpon>TabCompetition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabSettings.Designer.cs">
+      <DependentUpon>TabSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabTraining.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabTraining.Designer.cs">
+      <DependentUpon>TabTraining.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="frmChooseCompetition.resx">
+      <DependentUpon>frmChooseCompetition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddUserWizard.resx">
+      <DependentUpon>AddUserWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddClubWizard.resx">
+      <DependentUpon>AddClubWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddCompetitionWizard.resx">
+      <DependentUpon>AddCompetitionWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWinner.resx">
+      <DependentUpon>frmWinner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProfileWizard.resx">
+      <DependentUpon>ProfileWizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Monitor.resx">
       <DependentUpon>Monitor.cs</DependentUpon>
@@ -174,7 +253,18 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TabCompetition.resx">
+      <DependentUpon>TabCompetition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabSettings.resx">
+      <DependentUpon>TabSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabTraining.resx">
+      <DependentUpon>TabTraining.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
+    <Compile Include="evaluation.part.cs" />
+    <None Include="doc\SVPModel.mwb" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -197,6 +287,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="doc\SVPModel.sql" />
+    <Content Include="targetAim.ico" />
     <None Include="Resources\Zielscheibe.png" />
     <Content Include="svpModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -37,6 +37,7 @@
             this.rtResults = new System.Windows.Forms.RichTextBox();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.result = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.profile = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgResultList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTarget)).BeginInit();
             this.SuspendLayout();
@@ -60,7 +61,8 @@
             this.dgResultList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgResultList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.name,
-            this.result});
+            this.result,
+            this.profile});
             this.dgResultList.Location = new System.Drawing.Point(618, 12);
             this.dgResultList.MultiSelect = false;
             this.dgResultList.Name = "dgResultList";
@@ -132,6 +134,13 @@
             this.result.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.result.Width = 135;
             // 
+            // profile
+            // 
+            this.profile.HeaderText = "Wertungsprofil";
+            this.profile.Name = "profile";
+            this.profile.ReadOnly = true;
+            this.profile.Width = 194;
+            // 
             // Monitor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -165,6 +174,7 @@
         private System.Windows.Forms.RichTextBox rtResults;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn result;
+        private System.Windows.Forms.DataGridViewTextBoxColumn profile;
     }
 }
 
