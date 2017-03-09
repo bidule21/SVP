@@ -18,18 +18,19 @@ namespace SVP
         public price()
         {
             this.participant = new HashSet<participant>();
+            this.evaluation = new HashSet<evaluation>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
         public int competition_id { get; set; }
-        public int evaluation_id { get; set; }
         public int profile_id { get; set; }
     
         public virtual competition competition { get; set; }
-        public virtual evaluation evaluation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<participant> participant { get; set; }
         public virtual profile profile { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<evaluation> evaluation { get; set; }
     }
 }

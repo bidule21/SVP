@@ -54,7 +54,6 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="key" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="is_group" Type="bool" Nullable="false" />
         </EntityType>
         <EntityType Name="group">
           <Key>
@@ -120,8 +119,15 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="competition_id" Type="int" Nullable="false" />
-          <Property Name="evaluation_id" Type="int" Nullable="false" />
           <Property Name="profile_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="price_has_evaluation">
+          <Key>
+            <PropertyRef Name="price_id" />
+            <PropertyRef Name="evaluation_id" />
+          </Key>
+          <Property Name="price_id" Type="int" Nullable="false" />
+          <Property Name="evaluation_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="price_has_winner">
           <Key>
@@ -347,15 +353,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_price_evaluation1">
+        <Association Name="fk_price_has_evaluation_evaluation1">
           <End Role="evaluation" Type="Self.evaluation" Multiplicity="1" />
-          <End Role="price" Type="Self.price" Multiplicity="*" />
+          <End Role="price_has_evaluation" Type="Self.price_has_evaluation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="evaluation">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="price">
+            <Dependent Role="price_has_evaluation">
               <PropertyRef Name="evaluation_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_price_has_evaluation_price1">
+          <End Role="price" Type="Self.price" Multiplicity="1" />
+          <End Role="price_has_evaluation" Type="Self.price_has_evaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="price">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="price_has_evaluation">
+              <PropertyRef Name="price_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -470,6 +488,7 @@
           <EntitySet Name="participant_has_member" EntityType="Self.participant_has_member" Schema="svp" store:Type="Tables" />
           <EntitySet Name="participant_has_sequence" EntityType="Self.participant_has_sequence" Schema="svp" store:Type="Tables" />
           <EntitySet Name="price" EntityType="Self.price" Schema="svp" store:Type="Tables" />
+          <EntitySet Name="price_has_evaluation" EntityType="Self.price_has_evaluation" Schema="svp" store:Type="Tables" />
           <EntitySet Name="price_has_winner" EntityType="Self.price_has_winner" Schema="svp" store:Type="Tables" />
           <EntitySet Name="profile" EntityType="Self.profile" Schema="svp" store:Type="Tables" />
           <EntitySet Name="sequence" EntityType="Self.sequence" Schema="svp" store:Type="Tables" />
@@ -535,9 +554,13 @@
             <End Role="competition" EntitySet="competition" />
             <End Role="price" EntitySet="price" />
           </AssociationSet>
-          <AssociationSet Name="fk_price_evaluation1" Association="Self.fk_price_evaluation1">
+          <AssociationSet Name="fk_price_has_evaluation_evaluation1" Association="Self.fk_price_has_evaluation_evaluation1">
             <End Role="evaluation" EntitySet="evaluation" />
+            <End Role="price_has_evaluation" EntitySet="price_has_evaluation" />
+          </AssociationSet>
+          <AssociationSet Name="fk_price_has_evaluation_price1" Association="Self.fk_price_has_evaluation_price1">
             <End Role="price" EntitySet="price" />
+            <End Role="price_has_evaluation" EntitySet="price_has_evaluation" />
           </AssociationSet>
           <AssociationSet Name="fk_price_has_participant_participant1" Association="Self.fk_price_has_participant_participant1">
             <End Role="participant" EntitySet="participant" />
@@ -624,8 +647,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="key" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="price" Relationship="Self.fk_price_evaluation1" FromRole="evaluation" ToRole="price" />
-          <Property Name="is_group" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="price" Relationship="svpModel.price_has_evaluation" FromRole="evaluation" ToRole="price" />
         </EntityType>
         <EntityType Name="group">
           <Key>
@@ -680,12 +702,11 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="competition_id" Type="Int32" Nullable="false" />
-          <Property Name="evaluation_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="competition" Relationship="Self.fk_price_competition1" FromRole="price" ToRole="competition" />
-          <NavigationProperty Name="evaluation" Relationship="Self.fk_price_evaluation1" FromRole="price" ToRole="evaluation" />
           <NavigationProperty Name="participant" Relationship="Self.price_has_winner" FromRole="price" ToRole="participant" />
           <Property Name="profile_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="profile" Relationship="svpModel.fk_price_profile1" FromRole="price" ToRole="profile" />
+          <NavigationProperty Name="evaluation" Relationship="svpModel.price_has_evaluation" FromRole="price" ToRole="evaluation" />
         </EntityType>
         <EntityType Name="profile">
           <Key>
@@ -783,18 +804,6 @@
             </Principal>
             <Dependent Role="disagprofile">
               <PropertyRef Name="profile_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_price_evaluation1">
-          <End Role="evaluation" Type="Self.evaluation" Multiplicity="1" />
-          <End Role="price" Type="Self.price" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="evaluation">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="price">
-              <PropertyRef Name="evaluation_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -916,10 +925,6 @@
             <End Role="profile" EntitySet="profile" />
             <End Role="disagprofile" EntitySet="disagprofile" />
           </AssociationSet>
-          <AssociationSet Name="fk_price_evaluation1" Association="Self.fk_price_evaluation1">
-            <End Role="evaluation" EntitySet="evaluation" />
-            <End Role="price" EntitySet="price" />
-          </AssociationSet>
           <AssociationSet Name="fk_group_participant1" Association="Self.fk_group_participant1">
             <End Role="participant" EntitySet="participant" />
             <End Role="group" EntitySet="group" />
@@ -968,6 +973,10 @@
             <End Role="profile" EntitySet="profile" />
             <End Role="price" EntitySet="price" />
           </AssociationSet>
+          <AssociationSet Name="price_has_evaluation" Association="svpModel.price_has_evaluation">
+            <End Role="evaluation" EntitySet="evaluation" />
+            <End Role="price" EntitySet="price" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="fk_price_profile1">
           <End Type="svpModel.profile" Role="profile" Multiplicity="1" />
@@ -980,6 +989,10 @@
               <PropertyRef Name="profile_id" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <Association Name="price_has_evaluation">
+          <End Type="svpModel.evaluation" Role="evaluation" Multiplicity="*" />
+          <End Type="svpModel.price" Role="price" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1028,7 +1041,6 @@
           <EntitySetMapping Name="evaluation">
             <EntityTypeMapping TypeName="svpModel.evaluation">
               <MappingFragment StoreEntitySet="evaluation">
-                <ScalarProperty Name="is_group" ColumnName="is_group" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="key" ColumnName="key" />
@@ -1079,7 +1091,6 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="competition_id" ColumnName="competition_id" />
-                <ScalarProperty Name="evaluation_id" ColumnName="evaluation_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1160,6 +1171,14 @@
             </EndProperty>
             <EndProperty Name="sequence1">
               <ScalarProperty Name="id" ColumnName="newSequence_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="price_has_evaluation" TypeName="svpModel.price_has_evaluation" StoreEntitySet="price_has_evaluation">
+            <EndProperty Name="price">
+              <ScalarProperty Name="id" ColumnName="price_id" />
+            </EndProperty>
+            <EndProperty Name="evaluation">
+              <ScalarProperty Name="id" ColumnName="evaluation_id" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

@@ -23,7 +23,6 @@ namespace SVP
         public int id { get; set; }
         public string name { get; set; }
         public string key { get; set; }
-        public bool is_group { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<price> price { get; set; }
