@@ -18,6 +18,7 @@ namespace SVP
         public svpEntities()
             : base("name=svpEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

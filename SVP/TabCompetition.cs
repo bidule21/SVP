@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DisagLib;
+using System.Linq.Expressions;
 
 namespace SVP
 {
@@ -21,13 +22,13 @@ namespace SVP
         private void reload_Controls()
         {
             cbClubGroup.Items.Clear();
-            cbProfile.Items.Clear();
+            cbPrice.Items.Clear();
             using (svpEntities context = new svpEntities())
             {
                 cbClubGroup.Items.AddRange(context.club.ToArray());
                 foreach (var p in context.profile)
                 {
-                    cbProfile.Items.Add(new ComboboxItem(p.name, p.id));
+                    cbPrice.Items.Add(new ComboboxItem(p.name, p.id));
                 }
             }
             gbCompetition.Enabled = (currentCompetition != null);
@@ -125,11 +126,25 @@ namespace SVP
                 btnRead.Enabled = true;
                 lblClub.Text = cbClubGroup.SelectedItem.ToString();
                 lblMember.Text = cbMember.SelectedItem.ToString();
-                profile p = null;
-                using (svpEntities context = new svpEntities())
-                    p = context.profile.Where(x => x.id == SVP.Properties.Settings.Default.DefaultProfile).FirstOrDefault();
-                if (p != null)
-                    cbProfile.SelectedIndex = cbProfile.FindStringExact(p.name);
+                cbPrice.Items.Clear();
+                foreach (var price in currentCompetition.price)
+                {
+                    if (currentCompetition.group_competition)
+                    {
+                    }
+                    else
+                    {
+                        bool isInParticipants = false;
+                        foreach (var participant in ((member)cbMember.SelectedItem).participant)
+                        {
+                            if (price.participant.Contains(participant))
+                                isInParticipants = true;
+                        }
+                        if (!isInParticipants)
+                            cbPrice.Items.Add(price);
+                    }
+                }
+                cbPrice.SelectedIndex = 0;
             }
         }
 
@@ -137,7 +152,7 @@ namespace SVP
         {
             using (svpEntities context = new svpEntities())
             {
-                disagprofile profile = context.disagprofile.Where(x => x.profile_id == ((ComboboxItem)cbProfile.SelectedItem).Id).First();
+                disagprofile profile = ((price)cbPrice.SelectedItem).profile.disagprofile.FirstOrDefault();
                 System.Threading.Tasks.Task<List<RMResult>> ta = System.Threading.Tasks.Task.Factory.StartNew<List<RMResult>>(() => readShots(profile.value));
                 while (!ta.IsCompleted)
                 {
@@ -148,10 +163,17 @@ namespace SVP
                     btnRead.Enabled = true;
                     return;
                 }
+                participant p = new participant();
+                p.member.Add((member)cbMember.SelectedItem);
+
                 sequence sequence = new sequence();
                 sequence.date = DateTime.Now;
                 sequence.member_id = ((ComboboxItem)cbMember.SelectedItem).Id;
-                sequence.profile_id = ((ComboboxItem)cbProfile.SelectedItem).Id;
+                sequence.profile_id = profile.profile_id;
+                sequence.participant.Add(p);
+
+                price pr = (price)cbPrice.SelectedItem;
+                pr.participant.Add(p);
 
                 foreach (RMResult result in ta.Result)
                 {
@@ -192,7 +214,8 @@ namespace SVP
                 {
                     context.competition.Add(wizard.Competition);
                     context.SaveChanges();
-                    currentCompetition = wizard.Competition;
+                    
+                    currentCompetition = context.competition.Include("price.profile").Where(x => x.id == wizard.Competition.id).FirstOrDefault();
                 }
                 reload_Controls();
             }
@@ -236,6 +259,11 @@ namespace SVP
             {
                 Monitor.GetMonitor().DisplaySequence((sequence)dvResults.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
             }
+        }
+
+        private void cbPrice_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lblProfile.Text = ((price)cbPrice.SelectedItem).profile.ToString();
         }
     }
 }

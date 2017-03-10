@@ -891,7 +891,7 @@
           <End Role="sequence" Type="Self.sequence" Multiplicity="*" />
           <End Role="sequence1" Type="Self.sequence" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="svpEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="svpEntities" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="award" EntityType="Self.award" />
           <EntitySet Name="club" EntityType="Self.club" />
           <EntitySet Name="competition" EntityType="Self.competition" />

@@ -21,7 +21,7 @@ namespace SVP
         private void frmMain_Load(object sender, EventArgs e)
         {
             Monitor.GetMonitor().Show();
-            tpCompetition.Controls[0].Enabled = false;
+            //tpCompetition.Controls[0].Enabled = false;
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)

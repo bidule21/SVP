@@ -87,7 +87,15 @@ namespace DisagLib
 
         private byte readByte()
         {
-            return (byte)_serialport.ReadByte();
+            try
+            {
+                return (byte)_serialport.ReadByte();
+            }
+            catch(Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+            return 0;
         }
 
         private string readReply()

@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.gbRead = new System.Windows.Forms.GroupBox();
+            this.lblProfile = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnReRead = new System.Windows.Forms.Button();
             this.btnRead = new System.Windows.Forms.Button();
             this.lblMember = new System.Windows.Forms.Label();
@@ -36,7 +38,7 @@
             this.lblClub = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.cbProfile = new System.Windows.Forms.ComboBox();
+            this.cbPrice = new System.Windows.Forms.ComboBox();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnNewMember = new System.Windows.Forms.Button();
             this.btnNewClubGroup = new System.Windows.Forms.Button();
@@ -45,6 +47,10 @@
             this.lblClubGroup = new System.Windows.Forms.Label();
             this.cbClubGroup = new System.Windows.Forms.ComboBox();
             this.dvResults = new System.Windows.Forms.DataGridView();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.profile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.show = new System.Windows.Forms.DataGridViewButtonColumn();
             this.gbCompetition = new System.Windows.Forms.GroupBox();
             this.lblCompetitionName = new System.Windows.Forms.Label();
             this.btnEndCompetition = new System.Windows.Forms.Button();
@@ -55,10 +61,6 @@
             this.btnCreateCompetition = new System.Windows.Forms.Button();
             this.btnContinueCompetition = new System.Windows.Forms.Button();
             this.gbMember = new System.Windows.Forms.GroupBox();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.profile = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.show = new System.Windows.Forms.DataGridViewButtonColumn();
             this.gbRead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvResults)).BeginInit();
             this.gbCompetition.SuspendLayout();
@@ -68,6 +70,8 @@
             // 
             // gbRead
             // 
+            this.gbRead.Controls.Add(this.lblProfile);
+            this.gbRead.Controls.Add(this.label1);
             this.gbRead.Controls.Add(this.btnReRead);
             this.gbRead.Controls.Add(this.btnRead);
             this.gbRead.Controls.Add(this.lblMember);
@@ -75,7 +79,7 @@
             this.gbRead.Controls.Add(this.lblClub);
             this.gbRead.Controls.Add(this.label4);
             this.gbRead.Controls.Add(this.label3);
-            this.gbRead.Controls.Add(this.cbProfile);
+            this.gbRead.Controls.Add(this.cbPrice);
             this.gbRead.Enabled = false;
             this.gbRead.Location = new System.Drawing.Point(6, 385);
             this.gbRead.Name = "gbRead";
@@ -83,6 +87,24 @@
             this.gbRead.TabIndex = 17;
             this.gbRead.TabStop = false;
             this.gbRead.Text = "Einlesen";
+            // 
+            // lblProfile
+            // 
+            this.lblProfile.AutoSize = true;
+            this.lblProfile.Location = new System.Drawing.Point(113, 54);
+            this.lblProfile.Name = "lblProfile";
+            this.lblProfile.Size = new System.Drawing.Size(10, 13);
+            this.lblProfile.TabIndex = 15;
+            this.lblProfile.Text = "-";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 54);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(33, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Profil:";
             // 
             // btnReRead
             // 
@@ -108,7 +130,7 @@
             // lblMember
             // 
             this.lblMember.AutoSize = true;
-            this.lblMember.Location = new System.Drawing.Point(113, 86);
+            this.lblMember.Location = new System.Drawing.Point(113, 106);
             this.lblMember.Name = "lblMember";
             this.lblMember.Size = new System.Drawing.Size(10, 13);
             this.lblMember.TabIndex = 11;
@@ -117,7 +139,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 86);
+            this.label5.Location = new System.Drawing.Point(6, 106);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(101, 13);
             this.label5.TabIndex = 10;
@@ -126,7 +148,7 @@
             // lblClub
             // 
             this.lblClub.AutoSize = true;
-            this.lblClub.Location = new System.Drawing.Point(113, 60);
+            this.lblClub.Location = new System.Drawing.Point(113, 80);
             this.lblClub.Name = "lblClub";
             this.lblClub.Size = new System.Drawing.Size(10, 13);
             this.lblClub.TabIndex = 7;
@@ -135,7 +157,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 60);
+            this.label4.Location = new System.Drawing.Point(6, 80);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 13);
             this.label4.TabIndex = 6;
@@ -146,18 +168,19 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(6, 27);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(33, 13);
+            this.label3.Size = new System.Drawing.Size(34, 13);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Profil:";
+            this.label3.Text = "Pokal";
             // 
-            // cbProfile
+            // cbPrice
             // 
-            this.cbProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbProfile.FormattingEnabled = true;
-            this.cbProfile.Location = new System.Drawing.Point(116, 24);
-            this.cbProfile.Name = "cbProfile";
-            this.cbProfile.Size = new System.Drawing.Size(185, 21);
-            this.cbProfile.TabIndex = 0;
+            this.cbPrice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPrice.FormattingEnabled = true;
+            this.cbPrice.Location = new System.Drawing.Point(116, 24);
+            this.cbPrice.Name = "cbPrice";
+            this.cbPrice.Size = new System.Drawing.Size(185, 21);
+            this.cbPrice.TabIndex = 0;
+            this.cbPrice.SelectedIndexChanged += new System.EventHandler(this.cbPrice_SelectedIndexChanged);
             // 
             // btnStart
             // 
@@ -246,6 +269,30 @@
             this.dvResults.Size = new System.Drawing.Size(381, 569);
             this.dvResults.TabIndex = 18;
             this.dvResults.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvResults_CellClick);
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Name";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
+            // value
+            // 
+            this.value.HeaderText = "Ringe";
+            this.value.Name = "value";
+            this.value.ReadOnly = true;
+            // 
+            // profile
+            // 
+            this.profile.HeaderText = "Profile";
+            this.profile.Name = "profile";
+            this.profile.ReadOnly = true;
+            // 
+            // show
+            // 
+            this.show.HeaderText = "Anzeigen";
+            this.show.Name = "show";
+            this.show.ReadOnly = true;
             // 
             // gbCompetition
             // 
@@ -355,30 +402,6 @@
             this.gbMember.TabStop = false;
             this.gbMember.Text = "Schütze / Schützin";
             // 
-            // name
-            // 
-            this.name.HeaderText = "Name";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            // 
-            // value
-            // 
-            this.value.HeaderText = "Ringe";
-            this.value.Name = "value";
-            this.value.ReadOnly = true;
-            // 
-            // profile
-            // 
-            this.profile.HeaderText = "Profile";
-            this.profile.Name = "profile";
-            this.profile.ReadOnly = true;
-            // 
-            // show
-            // 
-            this.show.HeaderText = "Anzeigen";
-            this.show.Name = "show";
-            this.show.ReadOnly = true;
-            // 
             // TabCompetition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -415,7 +438,7 @@
         private System.Windows.Forms.Label lblClub;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cbProfile;
+        private System.Windows.Forms.ComboBox cbPrice;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnNewMember;
         private System.Windows.Forms.Button btnNewClubGroup;
@@ -438,5 +461,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn value;
         private System.Windows.Forms.DataGridViewTextBoxColumn profile;
         private System.Windows.Forms.DataGridViewButtonColumn show;
+        private System.Windows.Forms.Label lblProfile;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -145,6 +145,7 @@
       <DependentUpon>frmWinner.cs</DependentUpon>
     </Compile>
     <Compile Include="group.part.cs" />
+    <Compile Include="price.part.cs" />
     <Compile Include="profile.part.cs" />
     <Compile Include="ProfileWizard.cs">
       <SubType>Form</SubType>

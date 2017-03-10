@@ -46,12 +46,12 @@ namespace SVP
 
         private void addPricePage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
         {
-            if(txtPriceName.Text.Length > 0 && cbEvaluation.SelectedIndex >= 0)
+            if(txtPriceName.Text.Length > 0 && cbProfile.SelectedIndex >= 0)
             {
                 price p = new price() { name = txtPriceName.Text };
-                //p.evaluation_id = ((evaluation)cbEvaluation.SelectedItem).id;
+                p.profile_id = ((profile)cbProfile.SelectedItem).id;
                 myCompetition.price.Add(p);
-                cbEvaluation.SelectedIndex = -1;
+                cbProfile.SelectedIndex = -1;
                 txtPriceName.Text = "";
             }
             else
@@ -116,13 +116,9 @@ namespace SVP
 
         private void AddCompetitionWizard_Load(object sender, EventArgs e)
         {
-            if(myCompetition != null)
-            {
-                //wizardControl1.NextPage(competitionOverviewPage);
-            }
             using (svpEntities context = new svpEntities())
             {
-                cbEvaluation.Items.AddRange(context.evaluation.ToArray());
+                cbProfile.Items.AddRange(context.profile.ToArray());
             }
         }
 
