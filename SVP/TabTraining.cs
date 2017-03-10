@@ -38,8 +38,12 @@ namespace SVP
             try
             {
                 machine.Start(SVP.Properties.Settings.Default.ComPort);
-                List<RMResult> results = machine.GetShots(profile);
-                return results;
+                Task<List<RMResult>> ta = Task.Factory.StartNew<List<RMResult>>(() => machine.GetShots(profile));
+                ta.Wait(30000); //30 Sec
+                if (ta.IsCompleted)
+                    return ta.Result;
+                else
+                    throw new Exception("Die Maschine hat nicht schnell genug geantwortet");
             }
             catch (Exception e)
             {
@@ -98,7 +102,7 @@ namespace SVP
             using (svpEntities context = new svpEntities())
             {
                 disagprofile profile = context.disagprofile.Where(x => x.profile_id == ((ComboboxItem)cbProfile.SelectedItem).Id).First();
-                System.Threading.Tasks.Task<List<RMResult>> ta = System.Threading.Tasks.Task.Factory.StartNew<List<RMResult>>(() => readShots(profile.value));
+                Task<List<RMResult>> ta = Task.Factory.StartNew<List<RMResult>>(() => readShots(profile.value));
                 while (!ta.IsCompleted)
                 {
                     Application.DoEvents();
