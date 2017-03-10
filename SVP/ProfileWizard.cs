@@ -174,19 +174,19 @@ namespace SVP
                     switch (value[0])
                     {
                         case "SCH":
-                            cbSch.SelectedItem = SCH_Values.Where(x => x.Value == value[1]);
+                            cbSch.SelectedItem = SCH_Values.Where(x => x.Value == value[1]).FirstOrDefault();
                             break;
                         case "RIA":
-                            cbRia.SelectedItem = RIA_Values.Where(x => x.Value == value[1]);
+                            cbRia.SelectedItem = RIA_Values.Where(x => x.Value == value[1]).FirstOrDefault();
                             break;
                         case "KAL":
-                            cbKal.SelectedItem = KAL_Values.Where(x => x.Value == value[1]);
+                            cbKal.SelectedItem = KAL_Values.Where(x => x.Value == value[1]).FirstOrDefault();
                             break;
                         case "RIB":
-                            cbRib.SelectedItem = RIB_Values.Where(x => x.Value == value[1]);
+                            cbRib.SelectedItem = RIB_Values.Where(x => x.Value == value[1]).FirstOrDefault();
                             break;
                         case "TEA":
-                            cbTea.SelectedItem = TEA_Values.Where(x => x.Value == value[1]);
+                            cbTea.SelectedItem = TEA_Values.Where(x => x.Value == value[1]).FirstOrDefault();
                             break;
                         case "SSC":
                             numSsc.Value = int.Parse(value[1]);

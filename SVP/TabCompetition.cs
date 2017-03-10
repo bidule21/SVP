@@ -71,8 +71,12 @@ namespace SVP
             try
             {
                 machine.Start(SVP.Properties.Settings.Default.ComPort);
-                List<RMResult> results = machine.GetShots(profile);
-                return results;
+                Task<List<RMResult>> ta = Task.Factory.StartNew<List<RMResult>>(() => machine.GetShots(profile));
+                ta.Wait(30000); //30 Sec
+                if (ta.IsCompleted)
+                    return ta.Result;
+                else
+                    throw new Exception("Die Maschine hat nicht schnell genug geantwortet");
             }
             catch (Exception e)
             {

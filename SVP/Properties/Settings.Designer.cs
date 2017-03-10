@@ -25,15 +25,6 @@ namespace SVP.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("COM7")]
-        public string ComPort {
-            get {
-                return ((string)(this["ComPort"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("172.16.2.178")]
         public string MonitorIP {
             get {
@@ -56,6 +47,15 @@ namespace SVP.Properties {
         public int DefaultProfile {
             get {
                 return ((int)(this["DefaultProfile"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM1")]
+        public string ComPort {
+            get {
+                return ((string)(this["ComPort"]));
             }
         }
     }
