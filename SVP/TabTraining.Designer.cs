@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.gbRead = new System.Windows.Forms.GroupBox();
-            this.btnReRead = new System.Windows.Forms.Button();
             this.btnRead = new System.Windows.Forms.Button();
             this.lblMember = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -49,13 +48,14 @@
             this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.profile = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.display = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pBar = new System.Windows.Forms.ProgressBar();
             this.gbRead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvResults)).BeginInit();
             this.SuspendLayout();
             // 
             // gbRead
             // 
-            this.gbRead.Controls.Add(this.btnReRead);
+            this.gbRead.Controls.Add(this.pBar);
             this.gbRead.Controls.Add(this.btnRead);
             this.gbRead.Controls.Add(this.lblMember);
             this.gbRead.Controls.Add(this.label5);
@@ -70,16 +70,6 @@
             this.gbRead.TabIndex = 17;
             this.gbRead.TabStop = false;
             this.gbRead.Text = "Einlesen";
-            // 
-            // btnReRead
-            // 
-            this.btnReRead.Enabled = false;
-            this.btnReRead.Location = new System.Drawing.Point(301, 139);
-            this.btnReRead.Name = "btnReRead";
-            this.btnReRead.Size = new System.Drawing.Size(93, 23);
-            this.btnReRead.TabIndex = 13;
-            this.btnReRead.Text = "Nachwertung";
-            this.btnReRead.UseVisualStyleBackColor = true;
             // 
             // btnRead
             // 
@@ -259,6 +249,15 @@
             this.display.Name = "display";
             this.display.ReadOnly = true;
             // 
+            // pBar
+            // 
+            this.pBar.Location = new System.Drawing.Point(9, 139);
+            this.pBar.Name = "pBar";
+            this.pBar.Size = new System.Drawing.Size(385, 23);
+            this.pBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.pBar.TabIndex = 19;
+            this.pBar.Visible = false;
+            // 
             // TabTraining
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -276,6 +275,7 @@
             this.Name = "TabTraining";
             this.Size = new System.Drawing.Size(828, 569);
             this.Load += new System.EventHandler(this.TabTraining_Load);
+            this.Enter += new System.EventHandler(this.TabTraining_Enter);
             this.gbRead.ResumeLayout(false);
             this.gbRead.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvResults)).EndInit();
@@ -287,7 +287,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox gbRead;
-        private System.Windows.Forms.Button btnReRead;
         private System.Windows.Forms.Button btnRead;
         private System.Windows.Forms.Label lblMember;
         private System.Windows.Forms.Label label5;
@@ -307,5 +306,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn value;
         private System.Windows.Forms.DataGridViewTextBoxColumn profile;
         private System.Windows.Forms.DataGridViewTextBoxColumn display;
+        private System.Windows.Forms.ProgressBar pBar;
     }
 }
