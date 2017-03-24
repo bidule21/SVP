@@ -186,5 +186,18 @@ namespace SVP
         {
             reload_Controls();
         }
+
+        private void dvResults_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex == 3)
+            {
+                int sequence_id = (int)dvResults.Rows[e.RowIndex].Cells[3].Tag;
+                using (svpEntities context = new svpEntities())
+                {
+                    sequence seq = context.sequence.Where(x => x.id == sequence_id).FirstOrDefault();
+                    Monitor.GetMonitor().DisplaySequence(seq);
+                }
+            }
+        }
     }
 }

@@ -44,11 +44,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cbClub = new System.Windows.Forms.ComboBox();
             this.dvResults = new System.Windows.Forms.DataGridView();
+            this.pBar = new System.Windows.Forms.ProgressBar();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.profile = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.display = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pBar = new System.Windows.Forms.ProgressBar();
+            this.display = new System.Windows.Forms.DataGridViewButtonColumn();
             this.gbRead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvResults)).BeginInit();
             this.SuspendLayout();
@@ -223,6 +223,16 @@
             this.dvResults.RowHeadersVisible = false;
             this.dvResults.Size = new System.Drawing.Size(381, 569);
             this.dvResults.TabIndex = 18;
+            this.dvResults.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvResults_CellClick);
+            // 
+            // pBar
+            // 
+            this.pBar.Location = new System.Drawing.Point(9, 139);
+            this.pBar.Name = "pBar";
+            this.pBar.Size = new System.Drawing.Size(385, 23);
+            this.pBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.pBar.TabIndex = 19;
+            this.pBar.Visible = false;
             // 
             // name
             // 
@@ -248,15 +258,9 @@
             this.display.HeaderText = "Anzeigen";
             this.display.Name = "display";
             this.display.ReadOnly = true;
-            // 
-            // pBar
-            // 
-            this.pBar.Location = new System.Drawing.Point(9, 139);
-            this.pBar.Name = "pBar";
-            this.pBar.Size = new System.Drawing.Size(385, 23);
-            this.pBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.pBar.TabIndex = 19;
-            this.pBar.Visible = false;
+            this.display.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.display.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.display.UseColumnTextForButtonValue = true;
             // 
             // TabTraining
             // 
@@ -302,10 +306,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbClub;
         private System.Windows.Forms.DataGridView dvResults;
+        private System.Windows.Forms.ProgressBar pBar;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn value;
         private System.Windows.Forms.DataGridViewTextBoxColumn profile;
-        private System.Windows.Forms.DataGridViewTextBoxColumn display;
-        private System.Windows.Forms.ProgressBar pBar;
+        private System.Windows.Forms.DataGridViewButtonColumn display;
     }
 }
