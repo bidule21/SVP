@@ -25,44 +25,49 @@ namespace SVP
             cbPrice.Items.Clear();
             using (svpEntities context = new svpEntities())
             {
-                cbClubGroup.Items.AddRange(context.club.ToArray());
                 foreach (var p in context.profile)
                 {
                     cbPrice.Items.Add(new ComboboxItem(p.name, p.id));
                 }
-            }
-            gbCompetition.Enabled = (currentCompetition != null);
-            gbMember.Enabled = (currentCompetition != null);
-            if (currentCompetition != null)
-            {
-                lblCompetitionName.Text = currentCompetition.name;
-                dvCompetition.Rows.Clear();
-                foreach (award a in currentCompetition.award)
+
+                gbCompetition.Enabled = (currentCompetition != null);
+                gbMember.Enabled = (currentCompetition != null);
+                if (currentCompetition != null)
                 {
-                    DataGridViewRow row = new DataGridViewRow();
-                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = a.name });
-                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = "Ehrenscheibe" });
-                    dvCompetition.Rows.Add(row);
-                }
-                foreach (price p in currentCompetition.price)
-                {
-                    DataGridViewRow row = new DataGridViewRow();
-                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = p.name });
-                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = "Pokal" });
-                    dvCompetition.Rows.Add(row);
-                }
-                if (currentCompetition.group_competition == true)
-                {
-                    lblClubGroup.Text = "Gruppe: ";
-                    btnNewClubGroup.Text = "Neue Gruppe";
+                    lblCompetitionName.Text = currentCompetition.name;
+                    dvCompetition.Rows.Clear();
+                    foreach (award a in currentCompetition.award)
+                    {
+                        DataGridViewRow row = new DataGridViewRow();
+                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = a.name });
+                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = "Ehrenscheibe" });
+                        dvCompetition.Rows.Add(row);
+                    }
+                    foreach (price p in currentCompetition.price)
+                    {
+                        DataGridViewRow row = new DataGridViewRow();
+                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = p.name });
+                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = "Pokal" });
+                        dvCompetition.Rows.Add(row);
+                    }
+                    if (currentCompetition.group_competition == true)
+                    {
+                        lblClubGroup.Text = "Gruppe: ";
+                        btnNewClubGroup.Text = "Neue Gruppe";
+                        cbClubGroup.Items.AddRange(context.group.Where(x => x.competition_id == currentCompetition.id).ToArray());
+                    }
+                    else
+                    {
+                        lblClubGroup.Text = "Verein: ";
+                        btnNewClubGroup.Text = "Neuer Verein";
+                        cbClubGroup.Items.AddRange(context.club.ToArray());
+                    }
                 }
                 else
                 {
-                    lblClubGroup.Text = "Verein: ";
-                    btnNewClubGroup.Text = "Neuer Verein";
+                    cbClubGroup.Items.AddRange(context.club.ToArray());
                 }
             }
-
         }
 
 
@@ -99,20 +104,47 @@ namespace SVP
 
         private void btnNewClub_Click(object sender, EventArgs e)
         {
-            AddClubWizard wizard = new AddClubWizard();
-            wizard.ShowDialog();
-            reload_Controls();
+            if (!currentCompetition.group_competition)
+            {
+                AddClubWizard wizard = new AddClubWizard();
+                wizard.ShowDialog();
+                reload_Controls();
+            }
+            else
+            {
+                AddGroupWizard wizard = new AddGroupWizard();
+                wizard.ShowDialog();
+                using (svpEntities context = new svpEntities())
+                {
+                    var group = wizard.Group;
+                    group.competition_id = currentCompetition.id;
+                    group.participant = new participant();
+                    context.group.Add(group);
+                    context.SaveChanges();
+                    Console.WriteLine(group.id);
+                }
+                    reload_Controls();
+            }
         }
 
         private void cbClub_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbClubGroup.SelectedIndex >= 0)
             {
+                cbMember.Items.Clear();
                 using (svpEntities context = new svpEntities())
                 {
-                    cbMember.Items.Clear();
-                    foreach (member m in context.member.Where(x => x.club_id == ((club)(cbClubGroup.SelectedItem)).id))
-                        cbMember.Items.Add(new ComboboxItem(m.ToString(), m.id));
+                    if (currentCompetition.group_competition)
+                    {
+                        var group = context.group.Where(x => x.id == ((group)(cbClubGroup.SelectedItem)).id).First();
+                        foreach (member m in group.member)
+                            cbMember.Items.Add(m);
+                    }
+                    else
+                    {
+                        foreach (member m in context.member.Where(x => x.club_id == ((club)(cbClubGroup.SelectedItem)).id))
+                            cbMember.Items.Add(m);
+                    }
                 }
             }
         }
@@ -122,7 +154,6 @@ namespace SVP
             if (cbMember.SelectedIndex >= 0)
             {
                 gbRead.Enabled = true;
-                btnReRead.Enabled = false;
                 btnRead.Enabled = true;
                 lblClub.Text = cbClubGroup.SelectedItem.ToString();
                 lblMember.Text = cbMember.SelectedItem.ToString();
@@ -150,6 +181,9 @@ namespace SVP
 
         private void btnRead_Click(object sender, EventArgs e)
         {
+            btnRead.Enabled = false;
+            pBar.Visible = true;
+            cbPrice.Enabled = false;
             using (svpEntities context = new svpEntities())
             {
                 disagprofile profile = ((price)cbPrice.SelectedItem).profile.disagprofile.FirstOrDefault();
@@ -160,9 +194,12 @@ namespace SVP
                 }
                 if (ta.Result == null)
                 {
+                    pBar.Visible = false;
+                    cbPrice.Enabled = true;
                     btnRead.Enabled = true;
                     return;
                 }
+                cbPrice.Items.Remove(cbPrice.SelectedItem);
                 participant p = new participant();
                 p.member.Add((member)cbMember.SelectedItem);
 
@@ -190,13 +227,15 @@ namespace SVP
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.member.ToString() });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.shot.Sum(s => s.value) });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.profile.ToString() });
-                row.Cells.Add(new DataGridViewButtonCell() { UseColumnTextForButtonValue = true, Value = sequence});
-                
+                row.Cells.Add(new DataGridViewButtonCell() { UseColumnTextForButtonValue = true, Value = sequence });
+
                 dvResults.Rows.Add(row);
                 context.sequence.Add(sequence);
                 context.SaveChanges();
-                btnRead.Enabled = false;
-                btnReRead.Enabled = true;
+                gbRead.Enabled = (cbPrice.Items.Count > 0);
+                btnRead.Enabled = true;
+                pBar.Visible = false;
+                cbPrice.Enabled = true;
             }
         }
 
@@ -214,8 +253,8 @@ namespace SVP
                 {
                     context.competition.Add(wizard.Competition);
                     context.SaveChanges();
-                    
-                    currentCompetition = context.competition.Include("price.profile").Where(x => x.id == wizard.Competition.id).FirstOrDefault();
+
+                    currentCompetition = context.competition.Include("price.profile.disagprofile").Where(x => x.id == wizard.Competition.id).FirstOrDefault();
                 }
                 reload_Controls();
             }
@@ -242,9 +281,9 @@ namespace SVP
 
         private void btnEndCompetition_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("Willst du das Pokalschießen wirklich beenden? Ein weiteres fortführen ist nicht möglich.", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Willst du das Pokalschießen wirklich beenden? Ein weiteres fortführen ist nicht möglich.", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                
+
             }
         }
 
@@ -255,7 +294,7 @@ namespace SVP
 
         private void dvResults_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex == 3)
+            if (e.ColumnIndex == 3)
             {
                 Monitor.GetMonitor().DisplaySequence((sequence)dvResults.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
             }

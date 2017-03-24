@@ -31,7 +31,6 @@
             this.gbRead = new System.Windows.Forms.GroupBox();
             this.lblProfile = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnReRead = new System.Windows.Forms.Button();
             this.btnRead = new System.Windows.Forms.Button();
             this.lblMember = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -61,6 +60,7 @@
             this.btnCreateCompetition = new System.Windows.Forms.Button();
             this.btnContinueCompetition = new System.Windows.Forms.Button();
             this.gbMember = new System.Windows.Forms.GroupBox();
+            this.pBar = new System.Windows.Forms.ProgressBar();
             this.gbRead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvResults)).BeginInit();
             this.gbCompetition.SuspendLayout();
@@ -70,9 +70,9 @@
             // 
             // gbRead
             // 
+            this.gbRead.Controls.Add(this.pBar);
             this.gbRead.Controls.Add(this.lblProfile);
             this.gbRead.Controls.Add(this.label1);
-            this.gbRead.Controls.Add(this.btnReRead);
             this.gbRead.Controls.Add(this.btnRead);
             this.gbRead.Controls.Add(this.lblMember);
             this.gbRead.Controls.Add(this.label5);
@@ -105,17 +105,6 @@
             this.label1.Size = new System.Drawing.Size(33, 13);
             this.label1.TabIndex = 14;
             this.label1.Text = "Profil:";
-            // 
-            // btnReRead
-            // 
-            this.btnReRead.Enabled = false;
-            this.btnReRead.Location = new System.Drawing.Point(313, 139);
-            this.btnReRead.Name = "btnReRead";
-            this.btnReRead.Size = new System.Drawing.Size(93, 23);
-            this.btnReRead.TabIndex = 13;
-            this.btnReRead.Text = "Nachwertung";
-            this.btnReRead.UseVisualStyleBackColor = true;
-            this.btnReRead.Click += new System.EventHandler(this.btnReRead_Click);
             // 
             // btnRead
             // 
@@ -402,6 +391,15 @@
             this.gbMember.TabStop = false;
             this.gbMember.Text = "Schütze / Schützin";
             // 
+            // pBar
+            // 
+            this.pBar.Location = new System.Drawing.Point(9, 139);
+            this.pBar.Name = "pBar";
+            this.pBar.Size = new System.Drawing.Size(397, 23);
+            this.pBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.pBar.TabIndex = 16;
+            this.pBar.Visible = false;
+            // 
             // TabCompetition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -431,7 +429,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox gbRead;
-        private System.Windows.Forms.Button btnReRead;
         private System.Windows.Forms.Button btnRead;
         private System.Windows.Forms.Label lblMember;
         private System.Windows.Forms.Label label5;
@@ -463,5 +460,6 @@
         private System.Windows.Forms.DataGridViewButtonColumn show;
         private System.Windows.Forms.Label lblProfile;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ProgressBar pBar;
     }
 }
