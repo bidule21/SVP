@@ -19,6 +19,7 @@ namespace SVP
         {
             this.participant = new HashSet<participant>();
             this.evaluation = new HashSet<evaluation>();
+            this.sequence = new HashSet<sequence>();
         }
     
         public int id { get; set; }
@@ -32,5 +33,7 @@ namespace SVP
         public virtual profile profile { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<evaluation> evaluation { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<sequence> sequence { get; set; }
     }
 }

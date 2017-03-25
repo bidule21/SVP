@@ -152,24 +152,13 @@ namespace SVP
                 {
                     foreach (var price in currentCompetition.price)
                     {
-                        if (currentCompetition.group_competition)
-                        {
-                            group currentGroup = context.group.Include("participant.sequence").First(x => x.id == ((group)cbClubGroup.SelectedItem).id);
-                            //participant part = currentGroup.participant.
-                            //group.participant.sequences.Where member_id = current_member
-
-                    }
-                        else
-                        {
-                            bool isInParticipants = false;
-                            foreach (var participant in ((member)cbMember.SelectedItem).participant)
-                            {
-                                if (price.participant.Contains(participant))
-                                    isInParticipants = true;
-                            }
-                            if (!isInParticipants)
+                            bool hasShotYet = false;
+                            var sequences = context.price.Include("sequence").First(x => x.id == price.id).sequence;
+                            foreach (var sequence in sequences)
+                                if (sequence.member_id == ((member)cbMember.SelectedItem).id)
+                                    hasShotYet = true;
+                            if (!hasShotYet)
                                 cbPrice.Items.Add(price);
-                        }
                     }
                 }
                 cbPrice.SelectedIndex = 0;
@@ -197,17 +186,16 @@ namespace SVP
                     return;
                 }
                 cbPrice.Items.Remove(cbPrice.SelectedItem);
-                participant p = new participant();
-                p.member.Add((member)cbMember.SelectedItem);
-
+                if (!currentCompetition.group_competition)
+                {
+                    participant p = new participant();
+                    p.member.Add((member)cbMember.SelectedItem);
+                }
                 sequence sequence = new sequence();
                 sequence.date = DateTime.Now;
                 sequence.member_id = ((ComboboxItem)cbMember.SelectedItem).Id;
                 sequence.profile_id = profile.profile_id;
-                sequence.participant.Add(p);
-
-                price pr = (price)cbPrice.SelectedItem;
-                pr.participant.Add(p);
+                sequence.price.Add((price)cbPrice.SelectedItem);
 
                 foreach (RMResult result in ta.Result)
                 {
