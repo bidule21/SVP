@@ -36,6 +36,7 @@
         <AssociationConnector Association="svpModel.sequence_has_newsequence" ManuallyRouted="false" />
         <AssociationConnector Association="svpModel.fk_price_profile1" />
         <AssociationConnector Association="svpModel.price_has_evaluation" />
+        <AssociationConnector Association="svpModel.price_has_sequence" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

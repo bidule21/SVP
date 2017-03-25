@@ -44,7 +44,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="value" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="value" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="profile_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="evaluation">
@@ -128,6 +128,14 @@
           </Key>
           <Property Name="price_id" Type="int" Nullable="false" />
           <Property Name="evaluation_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="price_has_sequence">
+          <Key>
+            <PropertyRef Name="price_id" />
+            <PropertyRef Name="sequence_id" />
+          </Key>
+          <Property Name="price_id" Type="int" Nullable="false" />
+          <Property Name="sequence_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="price_has_winner">
           <Key>
@@ -401,6 +409,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_price_has_sequence_price1">
+          <End Role="price" Type="Self.price" Multiplicity="1" />
+          <End Role="price_has_sequence" Type="Self.price_has_sequence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="price">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="price_has_sequence">
+              <PropertyRef Name="price_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_price_has_sequence_sequence1">
+          <End Role="sequence" Type="Self.sequence" Multiplicity="1" />
+          <End Role="price_has_sequence" Type="Self.price_has_sequence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sequence">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="price_has_sequence">
+              <PropertyRef Name="sequence_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_price_profile1">
           <End Role="profile" Type="Self.profile" Multiplicity="1" />
           <End Role="price" Type="Self.price" Multiplicity="*" />
@@ -489,6 +521,7 @@
           <EntitySet Name="participant_has_sequence" EntityType="Self.participant_has_sequence" Schema="svp" store:Type="Tables" />
           <EntitySet Name="price" EntityType="Self.price" Schema="svp" store:Type="Tables" />
           <EntitySet Name="price_has_evaluation" EntityType="Self.price_has_evaluation" Schema="svp" store:Type="Tables" />
+          <EntitySet Name="price_has_sequence" EntityType="Self.price_has_sequence" Schema="svp" store:Type="Tables" />
           <EntitySet Name="price_has_winner" EntityType="Self.price_has_winner" Schema="svp" store:Type="Tables" />
           <EntitySet Name="profile" EntityType="Self.profile" Schema="svp" store:Type="Tables" />
           <EntitySet Name="sequence" EntityType="Self.sequence" Schema="svp" store:Type="Tables" />
@@ -569,6 +602,14 @@
           <AssociationSet Name="fk_price_has_participant_price1" Association="Self.fk_price_has_participant_price1">
             <End Role="price" EntitySet="price" />
             <End Role="price_has_winner" EntitySet="price_has_winner" />
+          </AssociationSet>
+          <AssociationSet Name="fk_price_has_sequence_price1" Association="Self.fk_price_has_sequence_price1">
+            <End Role="price" EntitySet="price" />
+            <End Role="price_has_sequence" EntitySet="price_has_sequence" />
+          </AssociationSet>
+          <AssociationSet Name="fk_price_has_sequence_sequence1" Association="Self.fk_price_has_sequence_sequence1">
+            <End Role="sequence" EntitySet="sequence" />
+            <End Role="price_has_sequence" EntitySet="price_has_sequence" />
           </AssociationSet>
           <AssociationSet Name="fk_price_profile1" Association="Self.fk_price_profile1">
             <End Role="profile" EntitySet="profile" />
@@ -707,6 +748,7 @@
           <Property Name="profile_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="profile" Relationship="svpModel.fk_price_profile1" FromRole="price" ToRole="profile" />
           <NavigationProperty Name="evaluation" Relationship="svpModel.price_has_evaluation" FromRole="price" ToRole="evaluation" />
+          <NavigationProperty Name="sequence" Relationship="svpModel.price_has_sequence" FromRole="price" ToRole="sequence" />
         </EntityType>
         <EntityType Name="profile">
           <Key>
@@ -733,6 +775,7 @@
           <NavigationProperty Name="participant" Relationship="Self.participant_has_sequence" FromRole="sequence" ToRole="participant" />
           <NavigationProperty Name="sequence1" Relationship="Self.sequence_has_newsequence" FromRole="sequence" ToRole="sequence1" />
           <NavigationProperty Name="sequence2" Relationship="Self.sequence_has_newsequence" FromRole="sequence1" ToRole="sequence" />
+          <NavigationProperty Name="price" Relationship="svpModel.price_has_sequence" FromRole="sequence" ToRole="price" />
         </EntityType>
         <EntityType Name="shot">
           <Key>
@@ -977,6 +1020,10 @@
             <End Role="evaluation" EntitySet="evaluation" />
             <End Role="price" EntitySet="price" />
           </AssociationSet>
+          <AssociationSet Name="price_has_sequence" Association="svpModel.price_has_sequence">
+            <End Role="price" EntitySet="price" />
+            <End Role="sequence" EntitySet="sequence" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="fk_price_profile1">
           <End Type="svpModel.profile" Role="profile" Multiplicity="1" />
@@ -993,6 +1040,10 @@
         <Association Name="price_has_evaluation">
           <End Type="svpModel.evaluation" Role="evaluation" Multiplicity="*" />
           <End Type="svpModel.price" Role="price" Multiplicity="*" />
+        </Association>
+        <Association Name="price_has_sequence">
+          <End Type="svpModel.price" Role="price" Multiplicity="*" />
+          <End Type="svpModel.sequence" Role="sequence" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1179,6 +1230,14 @@
             </EndProperty>
             <EndProperty Name="evaluation">
               <ScalarProperty Name="id" ColumnName="evaluation_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="price_has_sequence" TypeName="svpModel.price_has_sequence" StoreEntitySet="price_has_sequence">
+            <EndProperty Name="sequence">
+              <ScalarProperty Name="id" ColumnName="sequence_id" />
+            </EndProperty>
+            <EndProperty Name="price">
+              <ScalarProperty Name="id" ColumnName="price_id" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

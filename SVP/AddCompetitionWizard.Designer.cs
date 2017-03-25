@@ -71,6 +71,7 @@
             this.wizardControl1.Size = new System.Drawing.Size(574, 415);
             this.wizardControl1.TabIndex = 0;
             this.wizardControl1.Title = "Schießstand Verwaltungs Programm";
+            this.wizardControl1.Cancelling += new System.ComponentModel.CancelEventHandler(this.wizardControl1_Cancelling);
             // 
             // startPage
             // 
@@ -281,6 +282,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(574, 415);
+            this.ControlBox = false;
             this.Controls.Add(this.wizardControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "AddCompetitionWizard";

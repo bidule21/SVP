@@ -15,15 +15,18 @@ namespace SVP
     {
         private group myGroup;
         public group Group { get { return myGroup; } }
-        public AddGroupWizard()
+        competition currentCompetition;
+        public AddGroupWizard(competition competition)
         {
             InitializeComponent();
+            this.currentCompetition = competition;
         }
 
-        public AddGroupWizard(group group)
+        public AddGroupWizard(competition competition, group group)
         {
             InitializeComponent();
             myGroup = group;
+            this.currentCompetition = competition;
         }
 
         private void startPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
@@ -64,12 +67,25 @@ namespace SVP
 
         private void GroupOverview_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
         {
+            if(dvMember.Rows.Count == 0)
+            {
+                e.Cancel = true;
+                return;
+            }
             using (svpEntities context = new svpEntities())
             {
+                myGroup.competition_id = currentCompetition.id;
+                myGroup.participant = new participant();
+                context.group.Add(myGroup);
+                context.SaveChanges();
+                Console.WriteLine(myGroup.id);
                 foreach (DataGridViewRow row in dvMember.Rows)
                 {
-                    myGroup.member.Add(context.member.Where(x => x.id == (int)row.Tag).First());
+                    var member = context.member.Where(x => x.id == (int)row.Tag).First();
+                    myGroup.member.Add(member);
                 }
+                context.SaveChanges();
+
             }
         }
 
@@ -130,6 +146,11 @@ namespace SVP
                     }
                 }
             }
+        }
+
+        private void wizardControl1_Cancelling(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            myGroup = null;
         }
     }
 }

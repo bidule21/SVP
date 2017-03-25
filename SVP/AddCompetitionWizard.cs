@@ -130,5 +130,10 @@ namespace SVP
                 rbGroupCompetition.Checked = myCompetition.group_competition;
             }
         }
+
+        private void wizardControl1_Cancelling(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            myCompetition = null;
+        }
     }
 }

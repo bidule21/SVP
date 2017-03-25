@@ -108,23 +108,13 @@ namespace SVP
             {
                 AddClubWizard wizard = new AddClubWizard();
                 wizard.ShowDialog();
-                reload_Controls();
             }
             else
             {
-                AddGroupWizard wizard = new AddGroupWizard();
+                AddGroupWizard wizard = new AddGroupWizard(currentCompetition);
                 wizard.ShowDialog();
-                using (svpEntities context = new svpEntities())
-                {
-                    var group = wizard.Group;
-                    group.competition_id = currentCompetition.id;
-                    group.participant = new participant();
-                    context.group.Add(group);
-                    context.SaveChanges();
-                    Console.WriteLine(group.id);
-                }
-                    reload_Controls();
             }
+            reload_Controls();
         }
 
         private void cbClub_SelectedIndexChanged(object sender, EventArgs e)
@@ -136,7 +126,7 @@ namespace SVP
                 {
                     if (currentCompetition.group_competition)
                     {
-                        var group = context.group.Where(x => x.id == ((group)(cbClubGroup.SelectedItem)).id).First();
+                        var group = context.group.Include("member").First(x => x.id == ((group)(cbClubGroup.SelectedItem)).id);
                         foreach (member m in group.member)
                             cbMember.Items.Add(m);
                     }
@@ -158,21 +148,28 @@ namespace SVP
                 lblClub.Text = cbClubGroup.SelectedItem.ToString();
                 lblMember.Text = cbMember.SelectedItem.ToString();
                 cbPrice.Items.Clear();
-                foreach (var price in currentCompetition.price)
+                using (svpEntities context = new svpEntities())
                 {
-                    if (currentCompetition.group_competition)
+                    foreach (var price in currentCompetition.price)
                     {
-                    }
-                    else
-                    {
-                        bool isInParticipants = false;
-                        foreach (var participant in ((member)cbMember.SelectedItem).participant)
+                        if (currentCompetition.group_competition)
                         {
-                            if (price.participant.Contains(participant))
-                                isInParticipants = true;
+                            group currentGroup = context.group.Include("participant.sequence").First(x => x.id == ((group)cbClubGroup.SelectedItem).id);
+                            //participant part = currentGroup.participant.
+                            //group.participant.sequences.Where member_id = current_member
+
+                    }
+                        else
+                        {
+                            bool isInParticipants = false;
+                            foreach (var participant in ((member)cbMember.SelectedItem).participant)
+                            {
+                                if (price.participant.Contains(participant))
+                                    isInParticipants = true;
+                            }
+                            if (!isInParticipants)
+                                cbPrice.Items.Add(price);
                         }
-                        if (!isInParticipants)
-                            cbPrice.Items.Add(price);
                     }
                 }
                 cbPrice.SelectedIndex = 0;
@@ -285,11 +282,6 @@ namespace SVP
             {
 
             }
-        }
-
-        private void btnReRead_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void dvResults_CellClick(object sender, DataGridViewCellEventArgs e)
