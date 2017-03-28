@@ -141,7 +141,7 @@ namespace SVP
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            if (cbMember.SelectedIndex >= 0 && cbClubGroup.SelectedIndex >= 0)
+            if (cbMember.SelectedIndex >= 0)
             {
                 gbRead.Enabled = true;
                 btnRead.Enabled = true;
