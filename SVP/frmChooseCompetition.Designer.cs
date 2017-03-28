@@ -59,6 +59,7 @@
             this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Abbrechen";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // frmChooseCompetition
             // 
@@ -71,6 +72,8 @@
             this.Controls.Add(this.lbCompetitions);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "frmChooseCompetition";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Pokalschießen auswählen";
             this.Load += new System.EventHandler(this.frmChooseCompetition_Load);
             this.ResumeLayout(false);

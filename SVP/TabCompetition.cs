@@ -247,7 +247,10 @@ namespace SVP
 
         private void btnContinueCompetition_Click(object sender, EventArgs e)
         {
-
+            frmChooseCompetition choose = new frmChooseCompetition();
+            choose.ShowDialog();
+            currentCompetition = choose.Competition;
+            reload_Controls();
         }
 
         private void btnEditCompetition_Click(object sender, EventArgs e)
