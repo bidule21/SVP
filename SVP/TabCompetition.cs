@@ -271,7 +271,30 @@ namespace SVP
         {
             if (MessageBox.Show("Willst du das Pokalschießen wirklich beenden? Ein weiteres fortführen ist nicht möglich.", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
+                using (svpEntities context = new svpEntities())
+                {
+                    foreach(price p in currentCompetition.price)
+                    {
+                        var bestResult = context.sequence.Where(x => x.price.First().id == p.id).Max(x => x.shot.Sum(y => y.value));
+                        var listWinnerSequences = context.sequence.Where(x => x.price.First().id == p.id).Where(y => y.shot.Sum(z => z.value) == bestResult);
+                        if(listWinnerSequences.Count() == 1)
+                        {
 
+                        }
+                        else
+                        {
+
+                        }
+                        if (!currentCompetition.group_competition)
+                        {
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                }
             }
         }
 

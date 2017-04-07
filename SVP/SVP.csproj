@@ -150,6 +150,12 @@
     <Compile Include="frmWinner.Designer.cs">
       <DependentUpon>frmWinner.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmWinnerHazard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWinnerHazard.Designer.cs">
+      <DependentUpon>frmWinnerHazard.cs</DependentUpon>
+    </Compile>
     <Compile Include="group.part.cs" />
     <Compile Include="price.part.cs" />
     <Compile Include="profile.part.cs" />
@@ -246,6 +252,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmWinner.resx">
       <DependentUpon>frmWinner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWinnerHazard.resx">
+      <DependentUpon>frmWinnerHazard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProfileWizard.resx">
       <DependentUpon>ProfileWizard.cs</DependentUpon>
