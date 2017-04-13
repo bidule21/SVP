@@ -169,7 +169,7 @@ namespace SVP
 					row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.member.ToString() });
 					row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.shot.Sum(s => s.value) });
 					row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.profile.ToString() });
-					DataGridViewButtonCell button = new DataGridViewButtonCell() { Value = "Anzeigen" };
+					DataGridViewButtonCell button = new DataGridViewButtonCell() { UseColumnTextForButtonValue = true, Value = "Anzeigen" };
 					row.Cells.Add(button);
 					dvResults.Rows.Add(row);
 				}
