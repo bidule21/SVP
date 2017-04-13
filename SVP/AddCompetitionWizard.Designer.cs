@@ -35,7 +35,7 @@
             this.rbGroupCompetition = new System.Windows.Forms.RadioButton();
             this.rbSingleCompetition = new System.Windows.Forms.RadioButton();
             this.addPricePage = new AeroWizard.WizardPage();
-            this.cbEvaluation = new System.Windows.Forms.ComboBox();
+            this.cbProfile = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtPriceName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -71,6 +71,7 @@
             this.wizardControl1.Size = new System.Drawing.Size(574, 415);
             this.wizardControl1.TabIndex = 0;
             this.wizardControl1.Title = "Schießstand Verwaltungs Programm";
+            this.wizardControl1.Cancelling += new System.ComponentModel.CancelEventHandler(this.wizardControl1_Cancelling);
             // 
             // startPage
             // 
@@ -126,7 +127,7 @@
             // 
             // addPricePage
             // 
-            this.addPricePage.Controls.Add(this.cbEvaluation);
+            this.addPricePage.Controls.Add(this.cbProfile);
             this.addPricePage.Controls.Add(this.label4);
             this.addPricePage.Controls.Add(this.txtPriceName);
             this.addPricePage.Controls.Add(this.label2);
@@ -137,14 +138,14 @@
             this.addPricePage.Text = "Einen Pokal hinzufügen";
             this.addPricePage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.addPricePage_Commit);
             // 
-            // cbEvaluation
+            // cbProfile
             // 
-            this.cbEvaluation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEvaluation.FormattingEnabled = true;
-            this.cbEvaluation.Location = new System.Drawing.Point(85, 55);
-            this.cbEvaluation.Name = "cbEvaluation";
-            this.cbEvaluation.Size = new System.Drawing.Size(242, 23);
-            this.cbEvaluation.TabIndex = 3;
+            this.cbProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProfile.FormattingEnabled = true;
+            this.cbProfile.Location = new System.Drawing.Point(85, 55);
+            this.cbProfile.Name = "cbProfile";
+            this.cbProfile.Size = new System.Drawing.Size(242, 23);
+            this.cbProfile.TabIndex = 3;
             // 
             // label4
             // 
@@ -281,6 +282,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(574, 415);
+            this.ControlBox = false;
             this.Controls.Add(this.wizardControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "AddCompetitionWizard";
@@ -320,7 +322,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PriceKind;
         private System.Windows.Forms.TextBox txtCompetitionName;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cbEvaluation;
+        private System.Windows.Forms.ComboBox cbProfile;
         private System.Windows.Forms.Label label4;
     }
 }

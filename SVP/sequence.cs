@@ -21,6 +21,7 @@ namespace SVP
             this.participant = new HashSet<participant>();
             this.sequence1 = new HashSet<sequence>();
             this.sequence2 = new HashSet<sequence>();
+            this.price = new HashSet<price>();
         }
     
         public int id { get; set; }
@@ -38,5 +39,7 @@ namespace SVP
         public virtual ICollection<sequence> sequence1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<sequence> sequence2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<price> price { get; set; }
     }
 }

@@ -23,8 +23,8 @@ namespace SVP
             cbProfile.Items.Clear();
             using (svpEntities context = new svpEntities())
             {
-                cbClub.Items.AddRange(context.club.ToArray());
-                foreach (var p in context.profile)
+                cbClub.Items.AddRange(context.club.OrderBy(x => x.name).ToArray());
+                foreach (var p in context.profile.OrderBy(x => x.name))
                 {
                     cbProfile.Items.Add(new ComboboxItem(p.name, p.id));
                 }
@@ -77,7 +77,7 @@ namespace SVP
                 using (svpEntities context = new svpEntities())
                 {
                     cbMember.Items.Clear();
-                    foreach (member m in context.member.Where(x => x.club_id == ((club)(cbClub.SelectedItem)).id))
+                    foreach (member m in context.member.Where(x => x.club_id == ((club)(cbClub.SelectedItem)).id).OrderBy(x => x.name))
                         cbMember.Items.Add(new ComboboxItem(m.ToString(), m.id));
                 }
             }
@@ -85,8 +85,8 @@ namespace SVP
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            //if(cbMember.SelectedIndex >=)
             gbRead.Enabled = true;
+            btnRead.Enabled = true;
             lblClub.Text = cbClub.SelectedItem.ToString();
             lblMember.Text = cbMember.SelectedItem.ToString();
             profile p = null;
@@ -99,6 +99,8 @@ namespace SVP
         private void btnRead_Click(object sender, EventArgs e)
         {
             sequence sequence;
+            btnRead.Enabled = false;
+            pBar.Visible = true;
             using (svpEntities context = new svpEntities())
             {
                 disagprofile profile = context.disagprofile.Where(x => x.profile_id == ((ComboboxItem)cbProfile.SelectedItem).Id).First();
@@ -109,6 +111,7 @@ namespace SVP
                 }
                 if (ta.Result == null)
                 {
+                    pBar.Visible = false;
                     btnRead.Enabled = true;
                     return;
                 }
@@ -140,9 +143,7 @@ namespace SVP
 				row.Cells.Add(new DataGridViewButtonCell() { UseColumnTextForButtonValue = true, Tag = sequence.id});
                 dvResults.Rows.Add(row);
             }
-            
-            
-
+            pBar.Visible = false;
             Monitor.GetMonitor().AddResult(sequence);
         }
 
@@ -160,18 +161,18 @@ namespace SVP
             reload_Controls();
 			using (svpEntities context = new svpEntities())
 			{
-				//var sequences = context.sequence.Where(x => (x.date.Value.Date == DateTime.Now.Date));
-				//foreach (var sequence in sequences)
-				//{
-				//	DataGridViewRow row = new DataGridViewRow();
-				//	row.Tag = sequence.id;
-				//	row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.member.ToString() });
-				//	row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.shot.Sum(s => s.value) });
-				//	row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.profile.ToString() });
-				//	DataGridViewButtonCell button = new DataGridViewButtonCell() { Value = "test" };
-				//	row.Cells.Add(button);
-				//	dvResults.Rows.Add(row);
-				//}
+				var sequences = context.sequence.Include("shot").Include("profile").Include("member").Where(x => (x.date.Value.Date == DateTime.Now.Date));
+				foreach (var sequence in sequences)
+				{
+					DataGridViewRow row = new DataGridViewRow();
+					row.Tag = sequence.id;
+					row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.member.ToString() });
+					row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.shot.Sum(s => s.value) });
+					row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.profile.ToString() });
+					DataGridViewButtonCell button = new DataGridViewButtonCell() { UseColumnTextForButtonValue = true, Value = "Anzeigen" };
+					row.Cells.Add(button);
+					dvResults.Rows.Add(row);
+				}
 			}
 				 
         }
@@ -179,6 +180,24 @@ namespace SVP
         private void cbMember_SelectedIndexChanged(object sender, EventArgs e)
         {
             btnStart.Enabled = (cbMember.SelectedIndex >= 0);
+        }
+
+        private void TabTraining_Enter(object sender, EventArgs e)
+        {
+            reload_Controls();
+        }
+
+        private void dvResults_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex == 3)
+            {
+                int sequence_id = (int)dvResults.Rows[e.RowIndex].Cells[3].Tag;
+                using (svpEntities context = new svpEntities())
+                {
+                    sequence seq = context.sequence.Where(x => x.id == sequence_id).FirstOrDefault();
+                    Monitor.GetMonitor().DisplaySequence(seq);
+                }
+            }
         }
     }
 }

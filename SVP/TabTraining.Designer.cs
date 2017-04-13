@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.gbRead = new System.Windows.Forms.GroupBox();
-            this.btnReRead = new System.Windows.Forms.Button();
             this.btnRead = new System.Windows.Forms.Button();
             this.lblMember = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -45,17 +44,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cbClub = new System.Windows.Forms.ComboBox();
             this.dvResults = new System.Windows.Forms.DataGridView();
+            this.pBar = new System.Windows.Forms.ProgressBar();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.profile = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.display = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.display = new System.Windows.Forms.DataGridViewButtonColumn();
             this.gbRead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvResults)).BeginInit();
             this.SuspendLayout();
             // 
             // gbRead
             // 
-            this.gbRead.Controls.Add(this.btnReRead);
+            this.gbRead.Controls.Add(this.pBar);
             this.gbRead.Controls.Add(this.btnRead);
             this.gbRead.Controls.Add(this.lblMember);
             this.gbRead.Controls.Add(this.label5);
@@ -70,16 +70,6 @@
             this.gbRead.TabIndex = 17;
             this.gbRead.TabStop = false;
             this.gbRead.Text = "Einlesen";
-            // 
-            // btnReRead
-            // 
-            this.btnReRead.Enabled = false;
-            this.btnReRead.Location = new System.Drawing.Point(301, 139);
-            this.btnReRead.Name = "btnReRead";
-            this.btnReRead.Size = new System.Drawing.Size(93, 23);
-            this.btnReRead.TabIndex = 13;
-            this.btnReRead.Text = "Nachwertung";
-            this.btnReRead.UseVisualStyleBackColor = true;
             // 
             // btnRead
             // 
@@ -233,6 +223,16 @@
             this.dvResults.RowHeadersVisible = false;
             this.dvResults.Size = new System.Drawing.Size(381, 569);
             this.dvResults.TabIndex = 18;
+            this.dvResults.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvResults_CellClick);
+            // 
+            // pBar
+            // 
+            this.pBar.Location = new System.Drawing.Point(9, 139);
+            this.pBar.Name = "pBar";
+            this.pBar.Size = new System.Drawing.Size(385, 23);
+            this.pBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.pBar.TabIndex = 19;
+            this.pBar.Visible = false;
             // 
             // name
             // 
@@ -258,6 +258,9 @@
             this.display.HeaderText = "Anzeigen";
             this.display.Name = "display";
             this.display.ReadOnly = true;
+            this.display.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.display.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.display.UseColumnTextForButtonValue = true;
             // 
             // TabTraining
             // 
@@ -276,6 +279,7 @@
             this.Name = "TabTraining";
             this.Size = new System.Drawing.Size(828, 569);
             this.Load += new System.EventHandler(this.TabTraining_Load);
+            this.Enter += new System.EventHandler(this.TabTraining_Enter);
             this.gbRead.ResumeLayout(false);
             this.gbRead.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvResults)).EndInit();
@@ -287,7 +291,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox gbRead;
-        private System.Windows.Forms.Button btnReRead;
         private System.Windows.Forms.Button btnRead;
         private System.Windows.Forms.Label lblMember;
         private System.Windows.Forms.Label label5;
@@ -303,9 +306,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbClub;
         private System.Windows.Forms.DataGridView dvResults;
+        private System.Windows.Forms.ProgressBar pBar;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn value;
         private System.Windows.Forms.DataGridViewTextBoxColumn profile;
-        private System.Windows.Forms.DataGridViewTextBoxColumn display;
+        private System.Windows.Forms.DataGridViewButtonColumn display;
     }
 }
