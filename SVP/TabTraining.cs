@@ -161,9 +161,11 @@ namespace SVP
             reload_Controls();
 			using (svpEntities context = new svpEntities())
 			{
-				var sequences = context.sequence.Include("shot").Include("profile").Include("member").Where(x => (x.date.Value.Date == DateTime.Now.Date));
+				var sequences = context.sequence.Include("shot").Include("profile").Include("member");
 				foreach (var sequence in sequences)
 				{
+                    if (sequence.date.Value.Date != DateTime.Today)
+                        continue;
 					DataGridViewRow row = new DataGridViewRow();
 					row.Tag = sequence.id;
 					row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.member.ToString() });
