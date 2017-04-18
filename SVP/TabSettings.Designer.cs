@@ -110,6 +110,7 @@
 			// 
 			// btnApplayDisplaySetting
 			// 
+			this.btnApplayDisplaySetting.Enabled = false;
 			this.btnApplayDisplaySetting.Location = new System.Drawing.Point(183, 120);
 			this.btnApplayDisplaySetting.Name = "btnApplayDisplaySetting";
 			this.btnApplayDisplaySetting.Size = new System.Drawing.Size(81, 23);

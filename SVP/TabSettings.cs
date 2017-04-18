@@ -38,6 +38,7 @@ namespace SVP
 				Monitor.GetMonitor().SetDisplaySetting(DisplaySetting.ShotImageWithPoints);
 			else if (rbDisplayShotImage.Checked)
 				Monitor.GetMonitor().SetDisplaySetting(DisplaySetting.ShotImage);
+			btnApplayDisplaySetting.Enabled = false;
 		}
 	}
 }
