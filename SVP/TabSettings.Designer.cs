@@ -30,11 +30,11 @@
         {
 			this.btnManageProfile = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.btnApplayDisplaySetting = new System.Windows.Forms.Button();
 			this.rbDisplayShotImage = new System.Windows.Forms.RadioButton();
 			this.rbDisplayShotImageWithPoints = new System.Windows.Forms.RadioButton();
 			this.rbDisplayEverythingAnonym = new System.Windows.Forms.RadioButton();
 			this.rbDisplayEverything = new System.Windows.Forms.RadioButton();
-			this.btnApplayDisplaySetting = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -61,6 +61,17 @@
 			this.groupBox1.TabIndex = 1;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Monitor Einstellungen";
+			// 
+			// btnApplayDisplaySetting
+			// 
+			this.btnApplayDisplaySetting.Enabled = false;
+			this.btnApplayDisplaySetting.Location = new System.Drawing.Point(183, 120);
+			this.btnApplayDisplaySetting.Name = "btnApplayDisplaySetting";
+			this.btnApplayDisplaySetting.Size = new System.Drawing.Size(81, 23);
+			this.btnApplayDisplaySetting.TabIndex = 4;
+			this.btnApplayDisplaySetting.Text = "Übernehmen";
+			this.btnApplayDisplaySetting.UseVisualStyleBackColor = true;
+			this.btnApplayDisplaySetting.Click += new System.EventHandler(this.btnApplayDisplaySetting_Click);
 			// 
 			// rbDisplayShotImage
 			// 
@@ -108,17 +119,6 @@
 			this.rbDisplayEverything.UseVisualStyleBackColor = true;
 			this.rbDisplayEverything.CheckedChanged += new System.EventHandler(this.rbDisplay_CheckedChanged);
 			// 
-			// btnApplayDisplaySetting
-			// 
-			this.btnApplayDisplaySetting.Enabled = false;
-			this.btnApplayDisplaySetting.Location = new System.Drawing.Point(183, 120);
-			this.btnApplayDisplaySetting.Name = "btnApplayDisplaySetting";
-			this.btnApplayDisplaySetting.Size = new System.Drawing.Size(81, 23);
-			this.btnApplayDisplaySetting.TabIndex = 4;
-			this.btnApplayDisplaySetting.Text = "Übernehmen";
-			this.btnApplayDisplaySetting.UseVisualStyleBackColor = true;
-			this.btnApplayDisplaySetting.Click += new System.EventHandler(this.btnApplayDisplaySetting_Click);
-			// 
 			// TabSettings
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -127,6 +127,7 @@
 			this.Controls.Add(this.btnManageProfile);
 			this.Name = "TabSettings";
 			this.Size = new System.Drawing.Size(844, 477);
+			this.Load += new System.EventHandler(this.TabSettings_Load);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.ResumeLayout(false);

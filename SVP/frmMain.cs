@@ -21,6 +21,10 @@ namespace SVP
         private void frmMain_Load(object sender, EventArgs e)
         {
             Monitor.GetMonitor().Show();
+			DisplaySetting setting;
+			if (!Enum.TryParse<DisplaySetting>(SVP.Properties.Settings.Default.MonitorDisplaySetting, out setting))
+				setting = DisplaySetting.Everything;
+			Monitor.GetMonitor().SetDisplaySetting(setting);
             tpCompetition.Controls[0].Enabled = false;
         }
 

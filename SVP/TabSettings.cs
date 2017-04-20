@@ -39,6 +39,30 @@ namespace SVP
 			else if (rbDisplayShotImage.Checked)
 				Monitor.GetMonitor().SetDisplaySetting(DisplaySetting.ShotImage);
 			btnApplayDisplaySetting.Enabled = false;
+			SVP.Properties.Settings.Default.MonitorDisplaySetting = Monitor.GetMonitor().DisplaySetting.ToString();
+			SVP.Properties.Settings.Default.Save();
+		}
+
+		private void TabSettings_Load(object sender, EventArgs e)
+		{
+			switch (Monitor.GetMonitor().DisplaySetting)
+			{
+				case DisplaySetting.Everything:
+					rbDisplayEverything.Checked = true;
+					break;
+				case DisplaySetting.EverythingAnonym:
+					rbDisplayEverythingAnonym.Checked = true;
+					break;
+				case DisplaySetting.ShotImageWithPoints:
+					rbDisplayShotImageWithPoints.Checked = true;
+					break;
+				case DisplaySetting.ShotImage:
+					rbDisplayShotImage.Checked = true;
+					break;
+				default:
+					rbDisplayEverything.Checked = true;
+					break;
+			}
 		}
 	}
 }

@@ -40,6 +40,7 @@ namespace SVP
 				lbResults.Text = "";
 				dgResultList.Rows.Clear();
 			}
+			this.DisplaySetting = setting;
 		}
 
         private Monitor()
