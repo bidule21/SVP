@@ -23,7 +23,9 @@ namespace SVP
         private sequence currentResult;
         private int currentShot = 0;
         private Timer timer;
+		private List<sequence> sequenceList;
 		public DisplaySetting DisplaySetting { get; private set; }
+
 		public static Monitor GetMonitor()
         {
             if (MyMonitor == null)
@@ -40,12 +42,30 @@ namespace SVP
 				lbResults.Text = "";
 				dgResultList.Rows.Clear();
 			}
+			switch (DisplaySetting)
+			{
+				case DisplaySetting.Everything:
+					foreach(sequence result in sequenceList)
+						dgResultList.Rows.Add(result.member.ToString(), result.shot.Sum(x => x.value).ToString(), result.profile);
+					break;
+				case DisplaySetting.EverythingAnonym:
+					foreach (sequence result in sequenceList)
+						dgResultList.Rows.Add(SVP.Properties.Settings.Default.DefaultName, result.shot.Sum(x => x.value).ToString(), result.profile);
+					break;
+				case DisplaySetting.ShotImageWithPoints:
+					break;
+				case DisplaySetting.ShotImage:
+					break;
+				default:
+					break;
+			}
 			this.DisplaySetting = setting;
 		}
 
         private Monitor()
         {
             InitializeComponent();
+			sequenceList = new List<sequence>();
 			DisplaySetting = DisplaySetting.Everything;
             this.StartPosition = FormStartPosition.Manual;
             if (Screen.AllScreens.Length > 1)
@@ -99,6 +119,7 @@ namespace SVP
 
         internal void AddResult(sequence result)
         {
+			sequenceList.Add(result);
 			if (DisplaySetting == DisplaySetting.Everything || DisplaySetting == DisplaySetting.EverythingAnonym)
 			{
 				string name = (this.DisplaySetting == DisplaySetting.Everything) ? result.member.ToString() : SVP.Properties.Settings.Default.DefaultName;
