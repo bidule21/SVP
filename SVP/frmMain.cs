@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -26,6 +27,7 @@ namespace SVP
 				setting = DisplaySetting.Everything;
 			Monitor.GetMonitor().SetDisplaySetting(setting);
             tpCompetition.Controls[0].Enabled = false;
+            this.Text = this.Text + " Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
