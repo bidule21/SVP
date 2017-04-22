@@ -94,10 +94,14 @@ namespace SVP
                 p = context.profile.Where(x => x.id == SVP.Properties.Settings.Default.DefaultProfile).FirstOrDefault();
             if (p != null)
                 cbProfile.SelectedIndex = cbProfile.FindStringExact(p.name);
+            else
+                cbProfile.SelectedIndex = 0;
         }
 
         private void btnRead_Click(object sender, EventArgs e)
         {
+            if (cbProfile.SelectedIndex < 0)
+                return;
             sequence sequence;
             btnRead.Enabled = false;
             pBar.Visible = true;
