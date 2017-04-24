@@ -94,10 +94,14 @@ namespace SVP
                 p = context.profile.Where(x => x.id == SVP.Properties.Settings.Default.DefaultProfile).FirstOrDefault();
             if (p != null)
                 cbProfile.SelectedIndex = cbProfile.FindStringExact(p.name);
+            else
+                cbProfile.SelectedIndex = 0;
         }
 
         private void btnRead_Click(object sender, EventArgs e)
         {
+            if (cbProfile.SelectedIndex < 0)
+                return;
             sequence sequence;
             btnRead.Enabled = false;
             pBar.Visible = true;
@@ -161,9 +165,11 @@ namespace SVP
             reload_Controls();
 			using (svpEntities context = new svpEntities())
 			{
-				var sequences = context.sequence.Include("shot").Include("profile").Include("member").Where(x => (x.date.Value.Date == DateTime.Now.Date));
+				var sequences = context.sequence.Include("shot").Include("profile").Include("member");
 				foreach (var sequence in sequences)
 				{
+                    if (sequence.date.Value.Date != DateTime.Today)
+                        continue;
 					DataGridViewRow row = new DataGridViewRow();
 					row.Tag = sequence.id;
 					row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.member.ToString() });

@@ -10,25 +10,63 @@ using System.Windows.Forms;
 
 namespace SVP
 {
+	public enum DisplaySetting
+	{
+		Everything,
+		EverythingAnonym,
+		ShotImageWithPoints,
+		ShotImage
+	}
     public partial class Monitor : Form
     {
         private static Monitor MyMonitor;
         private sequence currentResult;
         private int currentShot = 0;
-        public bool ShowNames { get; set; }
         private Timer timer;
+		private List<sequence> sequenceList;
+		public DisplaySetting DisplaySetting { get; private set; }
 
-        public static Monitor GetMonitor()
+		public static Monitor GetMonitor()
         {
             if (MyMonitor == null)
                 MyMonitor = new Monitor();
             return MyMonitor;
         }
 
+		public void SetDisplaySetting(DisplaySetting setting)
+		{
+			if(setting != DisplaySetting.Everything)
+			{
+				lbCurrentResult.Text = "";
+				rtResults.Text = "";
+				lbResults.Text = "";
+				dgResultList.Rows.Clear();
+			}
+			switch (DisplaySetting)
+			{
+				case DisplaySetting.Everything:
+					foreach(sequence result in sequenceList)
+						dgResultList.Rows.Add(result.member.ToString(), result.shot.Sum(x => x.value).ToString(), result.profile);
+					break;
+				case DisplaySetting.EverythingAnonym:
+					foreach (sequence result in sequenceList)
+						dgResultList.Rows.Add(SVP.Properties.Settings.Default.DefaultName, result.shot.Sum(x => x.value).ToString(), result.profile);
+					break;
+				case DisplaySetting.ShotImageWithPoints:
+					break;
+				case DisplaySetting.ShotImage:
+					break;
+				default:
+					break;
+			}
+			this.DisplaySetting = setting;
+		}
+
         private Monitor()
         {
             InitializeComponent();
-            ShowNames = true;
+			sequenceList = new List<sequence>();
+			DisplaySetting = DisplaySetting.Everything;
             this.StartPosition = FormStartPosition.Manual;
             if (Screen.AllScreens.Length > 1)
             {
@@ -81,9 +119,13 @@ namespace SVP
 
         internal void AddResult(sequence result)
         {
-            string name = this.ShowNames ? result.member.ToString() : SVP.Properties.Settings.Default.DefaultName;
-            dgResultList.Rows.Add(name, result.shot.Sum(x => x.value).ToString(), result.profile);
-            dgResultList.FirstDisplayedScrollingRowIndex = dgResultList.RowCount - 1;
+			sequenceList.Add(result);
+			if (DisplaySetting == DisplaySetting.Everything || DisplaySetting == DisplaySetting.EverythingAnonym)
+			{
+				string name = (this.DisplaySetting == DisplaySetting.Everything) ? result.member.ToString() : SVP.Properties.Settings.Default.DefaultName;
+				dgResultList.Rows.Add(name, result.shot.Sum(x => x.value).ToString(), result.profile);
+				dgResultList.FirstDisplayedScrollingRowIndex = dgResultList.RowCount - 1;
+			}
             DisplaySequence(result);
         }
 
@@ -91,7 +133,7 @@ namespace SVP
         {
             this.currentResult = result;
             currentShot = 0;
-            lbResults.Text = this.ShowNames ? result.member.ToString() : SVP.Properties.Settings.Default.DefaultName;
+            lbResults.Text = (this.DisplaySetting == DisplaySetting.Everything) ? result.member.ToString() : SVP.Properties.Settings.Default.DefaultName;
             timer.Start();
         }
 
@@ -124,8 +166,11 @@ namespace SVP
                     shots += "     \\cf0 " + result.value.ToString();
                 }
             }
-            rtResults.Rtf = @"{\rtf1\ansi {\colortbl; \red255\green0\blue0;}" + shots + "}";
-            lbCurrentResult.Text = shot.value.ToString();
+			if (DisplaySetting != DisplaySetting.ShotImage)
+			{
+				rtResults.Rtf = @"{\rtf1\ansi {\colortbl; \red255\green0\blue0;}" + shots + "}";
+				lbCurrentResult.Text = shot.value.ToString();
+			}
             pbTarget.Refresh();
             Graphics graphics = pbTarget.CreateGraphics();
             DrawShot(shot, graphics, Brushes.Red);
@@ -137,8 +182,11 @@ namespace SVP
             foreach (shot result in currentResult.shot)
                 shots += "     " + result.value.ToString();
 
-            rtResults.Rtf = @"{\rtf1\ansi" + shots + "}";
-            lbCurrentResult.Text = currentResult.shot.Sum(x => x.value).ToString();
+			if (DisplaySetting != DisplaySetting.ShotImage)
+			{
+				rtResults.Rtf = @"{\rtf1\ansi" + shots + "}";
+				lbCurrentResult.Text = currentResult.shot.Sum(x => x.value).ToString();
+			}
             pbTarget.Refresh();
             Graphics graphics = pbTarget.CreateGraphics();
             for(int i = 0; i < currentResult.shot.Count;i++)

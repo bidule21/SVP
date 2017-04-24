@@ -152,7 +152,6 @@ namespace SVP
                 profile += "SGE=" + numSge.Value + ";";
             if (numSzi.Value != -1)
                 profile += "SZI=" + numSsc.Value + ";";
-
             if (!cbKsd.Checked)
                 profile += "KSD;";
             if (cbTem.Checked)
