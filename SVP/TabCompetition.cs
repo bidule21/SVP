@@ -275,8 +275,10 @@ namespace SVP
                 {
                     foreach(price p in currentCompetition.price)
                     {
-                        var bestResult = context.sequence.Where(x => x.price.First().id == p.id).Max(x => x.shot.Sum(y => y.value));
-                        var listWinnerSequences = context.sequence.Where(x => x.price.First().id == p.id).Where(y => y.shot.Sum(z => z.value) == bestResult);
+                        if (context.price.Include("sequence").FirstOrDefault(x => x.id == p.id).sequence.Count() == 0)
+                            continue;
+                        var bestResult = context.price.Include("sequence").FirstOrDefault(x => x.id == p.id).sequence.Max(x => x.shot.Sum(y => y.value));
+                        var listWinnerSequences = context.price.Include("sequence").FirstOrDefault(x => x.id == p.id).sequence.Where(y => y.shot.Sum(z => z.value) == bestResult);
                         if(listWinnerSequences.Count() == 1)
                         {
 

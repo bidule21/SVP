@@ -21,9 +21,12 @@ namespace SVP
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            using (svpEntities context = new svpEntities())
+            if (lbCompetitions.SelectedIndex >= 0)
             {
-                myCompetition = context.competition.Include("award").Include("price.profile.disagprofile").FirstOrDefault(x => x.id == ((ComboboxItem)lbCompetitions.SelectedItem).Id);
+                using (svpEntities context = new svpEntities())
+                {
+                    myCompetition = context.competition.Include("award").Include("price.profile.disagprofile").FirstOrDefault(x => x.id == ((ComboboxItem)lbCompetitions.SelectedItem).Id);
+                }
             }
             this.Close();
         }
