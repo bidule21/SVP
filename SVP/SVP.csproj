@@ -146,6 +146,12 @@
     <Compile Include="AddCompetitionWizard.Designer.cs">
       <DependentUpon>AddCompetitionWizard.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmReevaluate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReevaluate.Designer.cs">
+      <DependentUpon>frmReevaluate.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmWinner.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -251,6 +257,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddCompetitionWizard.resx">
       <DependentUpon>AddCompetitionWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReevaluate.resx">
+      <DependentUpon>frmReevaluate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmWinner.resx">
       <DependentUpon>frmWinner.cs</DependentUpon>
