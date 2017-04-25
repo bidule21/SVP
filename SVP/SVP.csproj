@@ -122,6 +122,12 @@
     <Compile Include="frmChooseCompetition.Designer.cs">
       <DependentUpon>frmChooseCompetition.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDetermineWinner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDetermineWinner.Designer.cs">
+      <DependentUpon>frmDetermineWinner.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -245,6 +251,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmChooseCompetition.resx">
       <DependentUpon>frmChooseCompetition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDetermineWinner.resx">
+      <DependentUpon>frmDetermineWinner.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
