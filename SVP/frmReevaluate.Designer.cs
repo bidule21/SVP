@@ -38,6 +38,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.dvSequences = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pBar = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.dvSequences)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -50,10 +51,11 @@
             this.btnRead.TabIndex = 17;
             this.btnRead.Text = "Einlesen";
             this.btnRead.UseVisualStyleBackColor = true;
+            this.btnRead.Click += new System.EventHandler(this.btnRead_Click);
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(236, 394);
+            this.btnOk.Location = new System.Drawing.Point(236, 430);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(93, 23);
             this.btnOk.TabIndex = 18;
@@ -86,7 +88,7 @@
             this.cbMember.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbMember.FormattingEnabled = true;
             this.cbMember.Location = new System.Drawing.Point(110, 38);
-            this.cbMember.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbMember.Margin = new System.Windows.Forms.Padding(2);
             this.cbMember.Name = "cbMember";
             this.cbMember.Size = new System.Drawing.Size(190, 21);
             this.cbMember.TabIndex = 21;
@@ -96,7 +98,7 @@
             this.cbProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbProfile.FormattingEnabled = true;
             this.cbProfile.Location = new System.Drawing.Point(110, 63);
-            this.cbProfile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbProfile.Margin = new System.Windows.Forms.Padding(2);
             this.cbProfile.Name = "cbProfile";
             this.cbProfile.Size = new System.Drawing.Size(190, 21);
             this.cbProfile.TabIndex = 22;
@@ -146,17 +148,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Einlesen";
             // 
+            // pBar
+            // 
+            this.pBar.Location = new System.Drawing.Point(12, 394);
+            this.pBar.Name = "pBar";
+            this.pBar.Size = new System.Drawing.Size(317, 23);
+            this.pBar.TabIndex = 27;
+            this.pBar.Visible = false;
+            // 
             // frmReevaluate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(337, 426);
+            this.ClientSize = new System.Drawing.Size(337, 465);
             this.ControlBox = false;
+            this.Controls.Add(this.pBar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dvSequences);
             this.Controls.Add(this.btnOk);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmReevaluate";
             this.ShowInTaskbar = false;
             this.Text = "Gewinner feststellen";
@@ -180,5 +191,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView dvSequences;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ProgressBar pBar;
     }
 }

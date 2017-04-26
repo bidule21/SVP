@@ -106,6 +106,7 @@
     </Compile>
     <Compile Include="club.part.cs" />
     <Compile Include="ComboboxItem.cs" />
+    <Compile Include="Common.cs" />
     <Compile Include="competition.cs">
       <DependentUpon>svpModel.tt</DependentUpon>
     </Compile>

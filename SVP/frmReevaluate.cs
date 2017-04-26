@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DisagLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,15 +14,10 @@ namespace SVP
     public partial class frmReevaluate : Form
     {
         private price price;
-        public frmReevaluate()
+        public frmReevaluate(price p)
         {
             InitializeComponent();
-        }
-
-        public void ShowDialog(price p)
-        {
             price = p;
-            base.ShowDialog();
         }
 
         private void reloadControls()
@@ -45,6 +41,33 @@ namespace SVP
         private void frmReevaluate_Load(object sender, EventArgs e)
         {
             reloadControls();
+        }
+
+        private void btnRead_Click(object sender, EventArgs e)
+        {
+            if (cbMember.SelectedIndex < 0 || cbProfile.SelectedIndex < 0)
+                return;
+            using (svpEntities context = new svpEntities())
+            {
+                disagprofile profile = context.disagprofile.Where(x => x.profile_id == ((ComboboxItem)cbProfile.SelectedItem).Id).First();
+                Task<List<RMResult>> ta = Task.Factory.StartNew<List<RMResult>>(() => Common.readShots(profile.value));
+                while (!ta.IsCompleted)
+                {
+                    Application.DoEvents();
+                }
+                if (ta.Result == null)
+                {
+                    pBar.Visible = false;
+                    btnRead.Enabled = true;
+                    return;
+                }
+                sequence sequence = new sequence();
+                sequence.date = DateTime.Now;
+                sequence.member_id = ((ComboboxItem)cbMember.SelectedItem).Id;
+                sequence.profile_id = ((ComboboxItem)cbProfile.SelectedItem).Id;
+                //ToDo add new Sequence to old Sequence and update controls
+            }
+
         }
     }
 }
