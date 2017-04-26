@@ -23,5 +23,10 @@ namespace SVP
             InitializeComponent();
             this.Text += " " + a.name;
         }
+
+        private void frmDetermineWinner_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
