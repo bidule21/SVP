@@ -98,24 +98,21 @@
     <Compile Include="AddGroupWizard.Designer.cs">
       <DependentUpon>AddGroupWizard.cs</DependentUpon>
     </Compile>
-    <Compile Include="award.cs">
-      <DependentUpon>svpModel.tt</DependentUpon>
+    <Compile Include="Award.cs">
+      <DependentUpon>SVPEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="club.cs">
-      <DependentUpon>svpModel.tt</DependentUpon>
+    <Compile Include="Club.cs">
+      <DependentUpon>SVPEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="club.part.cs" />
+    <Compile Include="Club.part.cs" />
     <Compile Include="ComboboxItem.cs" />
     <Compile Include="Common.cs" />
-    <Compile Include="competition.cs">
-      <DependentUpon>svpModel.tt</DependentUpon>
+    <Compile Include="Competition.cs">
+      <DependentUpon>SVPEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="competition.part.cs" />
-    <Compile Include="disagprofile.cs">
-      <DependentUpon>svpModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="evaluation.cs">
-      <DependentUpon>svpModel.tt</DependentUpon>
+    <Compile Include="Competition.part.cs" />
+    <Compile Include="Evaluation.cs">
+      <DependentUpon>SVPEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="frmChooseCompetition.cs">
       <SubType>Form</SubType>
@@ -171,63 +168,66 @@
     <Compile Include="frmWinnerHazard.Designer.cs">
       <DependentUpon>frmWinnerHazard.cs</DependentUpon>
     </Compile>
-    <Compile Include="group.part.cs" />
-    <Compile Include="price.part.cs" />
-    <Compile Include="profile.part.cs" />
+    <Compile Include="Group.cs">
+      <DependentUpon>SVPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Group.part.cs" />
+    <Compile Include="GroupCompetition.cs">
+      <DependentUpon>SVPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Member.cs">
+      <DependentUpon>SVPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Participant.cs">
+      <DependentUpon>SVPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Price.cs">
+      <DependentUpon>SVPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Price.part.cs" />
+    <Compile Include="Profile.cs">
+      <DependentUpon>SVPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Profile.part.cs" />
     <Compile Include="ProfileWizard.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ProfileWizard.Designer.cs">
       <DependentUpon>ProfileWizard.cs</DependentUpon>
     </Compile>
-    <Compile Include="member.part.cs" />
+    <Compile Include="Member.part.cs" />
     <Compile Include="Monitor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Monitor.Designer.cs">
       <DependentUpon>Monitor.cs</DependentUpon>
     </Compile>
-    <Compile Include="group.cs">
-      <DependentUpon>svpModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="manualprofile.cs">
-      <DependentUpon>svpModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="member.cs">
-      <DependentUpon>svpModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="participant.cs">
-      <DependentUpon>svpModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="price.cs">
-      <DependentUpon>svpModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="profile.cs">
-      <DependentUpon>svpModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="sequence.cs">
-      <DependentUpon>svpModel.tt</DependentUpon>
+    <Compile Include="Sequence.cs">
+      <DependentUpon>SVPEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
-    <Compile Include="shot.cs">
-      <DependentUpon>svpModel.tt</DependentUpon>
+    <Compile Include="Shot.cs">
+      <DependentUpon>SVPEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="svpModel.Context.cs">
+    <Compile Include="SingleCompetition.cs">
+      <DependentUpon>SVPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SVPEntities.Context.cs">
+      <DependentUpon>SVPEntities.Context.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>svpModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="svpModel.cs">
+    <Compile Include="SVPEntities.cs">
+      <DependentUpon>SVPEntities.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>svpModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="svpModel.Designer.cs">
+    <Compile Include="SVPEntities.Designer.cs">
+      <DependentUpon>SVPEntities.edmx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>svpModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="TabCompetition.cs">
       <SubType>UserControl</SubType>
@@ -315,12 +315,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EntityDeploy Include="svpModel.edmx">
+    <EntityDeploy Include="SVPEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>svpModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>SVPEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="svpModel.edmx.diagram">
-      <DependentUpon>svpModel.edmx</DependentUpon>
+    <None Include="SVPEntities.edmx.diagram">
+      <DependentUpon>SVPEntities.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -328,18 +328,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="doc\SVPModel.sql" />
+    <Content Include="SVPEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SVPEntities.edmx</DependentUpon>
+      <LastGenOutput>SVPEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SVPEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SVPEntities.edmx</DependentUpon>
+      <LastGenOutput>SVPEntities.cs</LastGenOutput>
+    </Content>
     <Content Include="targetAim.ico" />
     <None Include="Resources\Zielscheibe.png" />
-    <Content Include="svpModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>svpModel.edmx</DependentUpon>
-      <LastGenOutput>svpModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="svpModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>svpModel.edmx</DependentUpon>
-      <LastGenOutput>svpModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DisagLib\DisagLib.csproj">

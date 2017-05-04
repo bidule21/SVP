@@ -12,15 +12,16 @@ namespace SVP
     using System;
     using System.Collections.Generic;
     
-    public partial class Shot
+    public partial class SingleCompetition : Competition
     {
-        public int Id { get; set; }
-        public double Value { get; set; }
-        public short ShotNumber { get; set; }
-        public double FactorValue { get; set; }
-        public double Angle { get; set; }
-        public bool Valid { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public SingleCompetition()
+        {
+            this.Members = new HashSet<Member>();
+        }
     
-        public virtual Sequence Sequence { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Member> Members { get; set; }
     }
 }

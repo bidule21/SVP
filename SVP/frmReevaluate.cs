@@ -13,8 +13,8 @@ namespace SVP
 {
     public partial class frmReevaluate : Form
     {
-        private price price;
-        public frmReevaluate(price p)
+        private Price price;
+        public frmReevaluate(Price p)
         {
             InitializeComponent();
             price = p;
@@ -24,16 +24,17 @@ namespace SVP
         {
             cbProfile.Items.Clear();
             cbMember.Items.Clear();
-            using (svpEntities context = new svpEntities())
+            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                cbProfile.Items.AddRange(context.profile.Where(x => x.id != price.profile_id).ToArray());
-                var bestResult = context.price.Include("sequence").FirstOrDefault(x => x.id == price.id).sequence.Max(x => x.shot.Sum(y => y.value));
-                var listWinnerSequences = context.price.Include("sequence").Include("member").FirstOrDefault(x => x.id == price.id).sequence.Where(y => y.shot.Sum(z => z.value) == bestResult);
-                foreach (sequence s in listWinnerSequences)
+                cbProfile.Items.AddRange(context.Profiles.Where(x => x.Id != price.Profile.Id).ToArray());
+                var bestResult = context.Prices.Include("Sequence").FirstOrDefault(x => x.Id == price.Id).Sequences.Max(x => x.Shots.Sum(y => y.Value));
+                var listWinnerSequences = context.Prices.Include("Sequence").Include("Member").FirstOrDefault(x => x.Id == price.Id).Sequences.Where(y => y.Shots.Sum(z => z.Value) == bestResult);
+                foreach (Sequence s in listWinnerSequences)
                 { 
-                    if (s.sequence2 != null)
-                        continue;
-                    cbMember.Items.Add(s.member);
+                    //ToDo: Change Database Schema sequence <--> sequence
+                    //if (s. != null)
+                    //    continue;
+                    //cbMember.Items.Add(s.member);
                 }
             }
         }
@@ -47,10 +48,10 @@ namespace SVP
         {
             if (cbMember.SelectedIndex < 0 || cbProfile.SelectedIndex < 0)
                 return;
-            using (svpEntities context = new svpEntities())
+            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                disagprofile profile = context.disagprofile.Where(x => x.profile_id == ((ComboboxItem)cbProfile.SelectedItem).Id).First();
-                Task<List<RMResult>> ta = Task.Factory.StartNew<List<RMResult>>(() => Common.readShots(profile.value));
+                Profile profile = context.Profiles.Where(x => x.Id == ((ComboboxItem)cbProfile.SelectedItem).Id).First();
+                Task<List<RMResult>> ta = Task.Factory.StartNew<List<RMResult>>(() => Common.readShots(profile.Value));
                 while (!ta.IsCompleted)
                 {
                     Application.DoEvents();
@@ -61,10 +62,10 @@ namespace SVP
                     btnRead.Enabled = true;
                     return;
                 }
-                sequence sequence = new sequence();
-                sequence.date = DateTime.Now;
-                sequence.member_id = ((ComboboxItem)cbMember.SelectedItem).Id;
-                sequence.profile_id = ((ComboboxItem)cbProfile.SelectedItem).Id;
+                Sequence sequence = new Sequence();
+                sequence.Date = DateTime.Now;
+                sequence.Member.Id = ((ComboboxItem)cbMember.SelectedItem).Id;
+                sequence.Profile.Id= ((ComboboxItem)cbProfile.SelectedItem).Id;
                 //ToDo add new Sequence to old Sequence and update controls
             }
 

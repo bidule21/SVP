@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SVP
 {
-    public partial class member
+    public partial class Member
     {
         public override string ToString()
         {
-            return this.name + ", " + this.firstname;
+            return this.Name + ", " + this.Firstname;
         }
     }
 }

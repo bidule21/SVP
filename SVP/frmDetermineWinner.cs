@@ -12,32 +12,32 @@ namespace SVP
 {
     public partial class frmDetermineWinner : Form
     {
-        private price price;
-        public frmDetermineWinner(price p)
+        private Price price;
+        public frmDetermineWinner(Price p)
         {
             InitializeComponent();
-            this.Text += " " + p.name;
+            this.Text += " " + p.Name;
             this.price = p;
         }
-
-        public frmDetermineWinner(award a)
+        
+        public frmDetermineWinner(Award a)
         {
             InitializeComponent();
-            this.Text += " " + a.name;
+            this.Text += " " + a.Name;
         }
 
         //TODO: swap member with participant to add group support
         private void frmDetermineWinner_Load(object sender, EventArgs e)
         {
-            using (svpEntities context = new svpEntities())
+            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                var bestResult = context.price.Include("sequence").FirstOrDefault(x => x.id == price.id).sequence.Max(x => x.shot.Sum(y => y.value));
-                int count = context.price.Include("sequence").FirstOrDefault(x => x.id == price.id).sequence.Where(x => x.shot.Sum(y => y.value) == bestResult).Count();
+                var bestResult = context.Prices.Include("Sequence").FirstOrDefault(x => x.Id == price.Id).Sequences.Max(x => x.Shots.Sum(y => y.Value));
+                int count = context.Prices.Include("Sequence").FirstOrDefault(x => x.Id == price.Id).Sequences.Where(x => x.Shots.Sum(y => y.Value) == bestResult).Count();
                 int place = 1;
-                foreach (var sequence in context.price.Include("sequence").Include("member").Include("shot").FirstOrDefault(x => x.id == price.id).sequence.OrderBy(x => x.shot.Sum(y => y.value)))
+                foreach (var sequence in context.Prices.Include("Sequence").Include("Member").Include("Shot").FirstOrDefault(x => x.Id == price.Id).Sequences.OrderBy(x => x.Shots.Sum(y => y.Value)))
                 {
                     bool reevaluateSeq = false;
-                    sequence seq = (sequence.sequence1.Count() == 0) ? sequence : sequence.sequence1.First();
+                    //Sequence seq = (sequence.sequence1.Count() == 0) ? sequence : sequence.sequence1.First();
                     if(count > 1)
                     {
                         reevaluateSeq = true;
@@ -46,14 +46,14 @@ namespace SVP
                         throw new Exception("Something really weird happend: found no Sequences with the Best Result");
                     }
                     DataGridViewRow row = new DataGridViewRow();
-                    row.Tag = sequence.id;
+                    row.Tag = sequence.Id;
                     row.Cells.Add(new DataGridViewTextBoxCell() { Value = place++ });
-                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.member.name });
-                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.shot.Sum(x => x.value )});
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Member.Name });
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Shots.Sum(x => x.Value )});
                     row.Cells.Add(new DataGridViewCheckBoxCell() { Value = reevaluateSeq });
                     dvResultList.Rows.Add(row);
                 }
-
+            
             }
         }
 

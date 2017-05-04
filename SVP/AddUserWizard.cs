@@ -21,12 +21,9 @@ namespace SVP
 
         private void addMemberPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
         {
-            using (svpEntities context = new svpEntities())
+            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                foreach (var c in context.club)
-                {
-                    cbMemberClub.Items.Add(new ComboboxItem(c.name, c.id));
-                }
+                cbMemberClub.Items.AddRange(context.Clubs.ToArray());
             }
         }
 
@@ -34,19 +31,19 @@ namespace SVP
         {
             if (txtMemberFirstname.TextLength > 0 && txtMemberName.TextLength > 0 && txtMemberShortName.TextLength > 0 && cbMemberClub.SelectedIndex >= 0)
             {
-                using (svpEntities context = new svpEntities())
+                using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                 {
-                    member newMember = new member();
-                    newMember.firstname = txtMemberFirstname.Text;
-                    newMember.name = txtMemberName.Text;
-                    newMember.birthday = dtMemberBirthday.Value;
-                    newMember.club_id = ((ComboboxItem)cbMemberClub.SelectedItem).Id;
+                    Member newMember = new Member();
+                    newMember.Firstname = txtMemberFirstname.Text;
+                    newMember.Name = txtMemberName.Text;
+                    newMember.Birthday = dtMemberBirthday.Value;
+                    newMember.Club = ((Club)cbMemberClub.SelectedItem);
                     cbMemberClub.SelectedIndex = -1;
                     txtMemberFirstname.Text = "";
                     txtMemberName.Text = "";
                     txtMemberShortName.Text = "";
                     cbMemberClub.Items.Clear();
-                    context.member.Add(newMember);
+                    context.Participants.Add(newMember);
                     context.SaveChanges();
                 }
             }

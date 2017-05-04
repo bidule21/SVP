@@ -13,16 +13,16 @@ namespace SVP
 {
     public partial class AddGroupWizard : Form
     {
-        private group myGroup;
-        public group Group { get { return myGroup; } }
-        competition currentCompetition;
-        public AddGroupWizard(competition competition)
+        private Group myGroup;
+        public Group Group { get { return myGroup; } }
+        Competition currentCompetition;
+        public AddGroupWizard(Competition competition)
         {
             InitializeComponent();
             this.currentCompetition = competition;
         }
 
-        public AddGroupWizard(competition competition, group group)
+        public AddGroupWizard(Competition competition, Group group)
         {
             InitializeComponent();
             myGroup = group;
@@ -35,19 +35,19 @@ namespace SVP
                 e.Cancel = true;
             else if (myGroup != null)
             {
-                myGroup.name = txtGroupName.Text;
+                myGroup.Name = txtGroupName.Text;
             }
             else
             {
-                myGroup = new group();
-                myGroup.name = txtGroupName.Text;
+                myGroup = new Group();
+                myGroup.Name = txtGroupName.Text;
             }
         }
 
         private void startPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
         {
             if (myGroup != null)
-                txtGroupName.Text = myGroup.name;
+                txtGroupName.Text = myGroup.Name;
         }
 
         private void wizardControl1_SelectedPageChanged(object sender, EventArgs e)
@@ -57,11 +57,11 @@ namespace SVP
 
         private void reloadControls()
         {
-            using (svpEntities context = new svpEntities())
+            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
                 cbClub.Items.Clear();
                 cbMember.Items.Clear();
-                cbClub.Items.AddRange(context.club.ToArray());
+                cbClub.Items.AddRange(context.Clubs.ToArray());
             }
         }
 
@@ -72,20 +72,19 @@ namespace SVP
                 e.Cancel = true;
                 return;
             }
-            using (svpEntities context = new svpEntities())
+            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                myGroup.competition_id = currentCompetition.id;
-                myGroup.participant = new participant();
-                context.group.Add(myGroup);
+                myGroup.GroupCompetition = (GroupCompetition)currentCompetition;
+                context.Participants.Add(myGroup);
                 context.SaveChanges();
-                Console.WriteLine(myGroup.id);
+                Console.WriteLine(myGroup.Id);
                 foreach (DataGridViewRow row in dvMember.Rows)
                 {
-                    var member = context.member.Where(x => x.id == (int)row.Tag).First();
-                    myGroup.member.Add(member);
+                    var member = context.Participants.OfType<Member>().Where(x => x.Id == (int)row.Tag).First();
+                    myGroup.Member.Add(member);
                 }
                 context.SaveChanges();
-
+            
             }
         }
 
@@ -93,10 +92,10 @@ namespace SVP
         {
             if (cbClub.SelectedIndex >= 0)
             {
-                using (svpEntities context = new svpEntities())
+                using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                 {
                     cbMember.Items.Clear();
-                    cbMember.Items.AddRange(context.member.Include("club").Where(x => x.club_id == ((club)(cbClub.SelectedItem)).id).ToArray());
+                    cbMember.Items.AddRange(context.Participants.Include("club").OfType<Member>().Where(x => x.Club.Id == ((Club)(cbClub.SelectedItem)).Id).ToArray());
                 }
             }
         }
@@ -120,12 +119,12 @@ namespace SVP
             if (cbMember.SelectedIndex >= 0)
             {
                 foreach (DataGridViewRow vrow in dvMember.Rows)
-                    if ((int)vrow.Tag == ((member)cbMember.SelectedItem).id)
+                    if ((int)vrow.Tag == ((Member)cbMember.SelectedItem).Id)
                         return;
                 DataGridViewRow row = new DataGridViewRow();
-                row.Cells.Add(new DataGridViewTextBoxCell() { Value = ((member)cbMember.SelectedItem).ToString() });
-                row.Cells.Add(new DataGridViewTextBoxCell() { Value = ((member)cbMember.SelectedItem).club.ToString() });
-                row.Tag = ((member)cbMember.SelectedItem).id;
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = ((Member)cbMember.SelectedItem).ToString() });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = ((Member)cbMember.SelectedItem).Club.ToString() });
+                row.Tag = ((Member)cbMember.SelectedItem).Id;
                 dvMember.Rows.Add(row);
             }
         }
@@ -134,14 +133,14 @@ namespace SVP
         {
             if (myGroup != null)
             {
-                using (svpEntities context = new svpEntities())
+                using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                 {
-                    foreach (member member in myGroup.member)
+                    foreach (Member member in myGroup.Member)
                     {
                         DataGridViewRow row = new DataGridViewRow();
                         row.Cells.Add(new DataGridViewTextBoxCell() { Value = member.ToString() });
-                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = member.club.ToString() });
-                        row.Tag = member.id;
+                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = member.Club.ToString() });
+                        row.Tag = member.Id;
                         dvMember.Rows.Add(row);
                     }
                 }

@@ -13,14 +13,14 @@ namespace SVP
 {
     public partial class AddCompetitionWizard : Form
     {
-        private competition myCompetition;
-        public competition Competition { get { return myCompetition; } }
+        private Competition myCompetition;
+        public Competition Competition { get { return myCompetition; } }
         public AddCompetitionWizard()
         {
             InitializeComponent();
         }
 
-        public AddCompetitionWizard(competition competition)
+        public AddCompetitionWizard(Competition competition)
         {
             InitializeComponent();
             myCompetition = competition;
@@ -32,15 +32,16 @@ namespace SVP
                 e.Cancel = true;
             else if (myCompetition != null)
             {
-                myCompetition.group_competition = rbGroupCompetition.Checked;
-                myCompetition.name = txtCompetitionName.Text;
+                myCompetition.Name = txtCompetitionName.Text;
                 startPage.NextPage = competitionOverviewPage;
             }
             else
             {
-                myCompetition = new competition();
-                myCompetition.group_competition = rbGroupCompetition.Checked;
-                myCompetition.name = txtCompetitionName.Text;
+                if (rbGroupCompetition.Checked)
+                    myCompetition = new GroupCompetition();
+                else
+                    myCompetition = new SingleCompetition();
+                myCompetition.Name = txtCompetitionName.Text;
             }
         }
 
@@ -48,9 +49,9 @@ namespace SVP
         {
             if(txtPriceName.Text.Length > 0 && cbProfile.SelectedIndex >= 0)
             {
-                price p = new price() { name = txtPriceName.Text };
-                p.profile_id = ((profile)cbProfile.SelectedItem).id;
-                myCompetition.price.Add(p);
+                Price p = new Price() { Name = txtPriceName.Text };
+                p.Id = ((Profile)cbProfile.SelectedItem).Id;
+                myCompetition.Prices.Add(p);
                 cbProfile.SelectedIndex = -1;
                 txtPriceName.Text = "";
             }
@@ -64,7 +65,7 @@ namespace SVP
         {
             if (txtAwardName.Text.Length > 0)
             {
-                myCompetition.award.Add(new award() { name = txtAwardName.Text });
+                myCompetition.Awards.Add(new Award() { Name = txtAwardName.Text });
                 txtAwardName.Text = "";
             }
             else
@@ -98,17 +99,17 @@ namespace SVP
         private void competitionOverviewPage_Enter(object sender, EventArgs e)
         {
             dvCompetition.Rows.Clear();
-            foreach (award a in myCompetition.award)
+            foreach (Award a in myCompetition.Awards)
             {
                 DataGridViewRow row = new DataGridViewRow();
-                row.Cells.Add(new DataGridViewTextBoxCell() { Value = a.name });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = a.Name });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = "Ehrenscheibe" });
                 dvCompetition.Rows.Add(row);
             }
-            foreach (price p in myCompetition.price)
+            foreach (Price p in myCompetition.Prices)
             {
                 DataGridViewRow row = new DataGridViewRow();
-                row.Cells.Add(new DataGridViewTextBoxCell() { Value = p.name });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = p.Name });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = "Pokal" });
                 dvCompetition.Rows.Add(row);
             }
@@ -116,9 +117,9 @@ namespace SVP
 
         private void AddCompetitionWizard_Load(object sender, EventArgs e)
         {
-            using (svpEntities context = new svpEntities())
+            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                cbProfile.Items.AddRange(context.profile.ToArray());
+                cbProfile.Items.AddRange(context.Profiles.ToArray());
             }
         }
 
@@ -126,8 +127,9 @@ namespace SVP
         {
             if (myCompetition != null)
             {
-                txtCompetitionName.Text = myCompetition.name;
-                rbGroupCompetition.Checked = myCompetition.group_competition;
+                txtCompetitionName.Text = myCompetition.Name;
+                rbGroupCompetition.Checked = myCompetition is GroupCompetition;
+                rbGroupCompetition.Enabled = false;
             }
         }
 
