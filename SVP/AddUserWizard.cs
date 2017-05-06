@@ -37,13 +37,14 @@ namespace SVP
                     newMember.Firstname = txtMemberFirstname.Text;
                     newMember.Name = txtMemberName.Text;
                     newMember.Birthday = dtMemberBirthday.Value;
-                    newMember.Club = ((Club)cbMemberClub.SelectedItem);
+                    newMember.Shortname = txtMemberShortName.Text;
+                    var club = context.Clubs.FirstOrDefault(x => x.Id == ((Club)cbMemberClub.SelectedItem).Id);
                     cbMemberClub.SelectedIndex = -1;
                     txtMemberFirstname.Text = "";
                     txtMemberName.Text = "";
                     txtMemberShortName.Text = "";
                     cbMemberClub.Items.Clear();
-                    context.Participants.Add(newMember);
+                    club.Members.Add(newMember);
                     context.SaveChanges();
                 }
             }

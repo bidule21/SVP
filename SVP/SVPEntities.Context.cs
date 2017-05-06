@@ -32,7 +32,6 @@ namespace SVP
         public virtual DbSet<Competition> Competitions { get; set; }
         public virtual DbSet<Award> Awards { get; set; }
         public virtual DbSet<Price> Prices { get; set; }
-        public virtual DbSet<Evaluation> Evaluations { get; set; }
         public virtual DbSet<Participant> Participants { get; set; }
     }
 }

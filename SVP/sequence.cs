@@ -28,5 +28,7 @@ namespace SVP
         public virtual ICollection<Shot> Shots { get; set; }
         public virtual Member Member { get; set; }
         public virtual Price Price { get; set; }
+        public virtual Sequence NextSequence { get; set; }
+        public virtual Sequence PreviousSequence { get; set; }
     }
 }

@@ -111,9 +111,6 @@
       <DependentUpon>SVPEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Competition.part.cs" />
-    <Compile Include="Evaluation.cs">
-      <DependentUpon>SVPEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="frmChooseCompetition.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -303,7 +300,6 @@
       <DependentUpon>TabTraining.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
-    <Compile Include="evaluation.part.cs" />
     <None Include="doc\SVPModel.mwb" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -333,6 +329,7 @@
       <DependentUpon>SVPEntities.edmx</DependentUpon>
       <LastGenOutput>SVPEntities.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="SVPEntities.edmx.sql" />
     <Content Include="SVPEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SVPEntities.edmx</DependentUpon>

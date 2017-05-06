@@ -13,7 +13,6 @@
     <EntitySet Name="Competitions" EntityType="SVPEntities.Store.Competitions" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Awards" EntityType="SVPEntities.Store.Awards" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Prices" EntityType="SVPEntities.Store.Prices" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Evaluations" EntityType="SVPEntities.Store.Evaluations" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Participants" EntityType="SVPEntities.Store.Participants" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Participants_Member" EntityType="SVPEntities.Store.Participants_Member" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Participants_Group" EntityType="SVPEntities.Store.Participants_Group" store:Type="Tables" Schema="dbo" />
@@ -62,10 +61,6 @@
     </AssociationSet>
     <AssociationSet Name="CompetitionPrice" Association="SVPEntities.Store.CompetitionPrice">
       <End Role="Competition" EntitySet="Competitions" />
-      <End Role="Price" EntitySet="Prices" />
-    </AssociationSet>
-    <AssociationSet Name="EvaluationPrice" Association="SVPEntities.Store.EvaluationPrice">
-      <End Role="Evaluation" EntitySet="Evaluations" />
       <End Role="Price" EntitySet="Prices" />
     </AssociationSet>
     <AssociationSet Name="PriceParticipant" Association="SVPEntities.Store.PriceParticipant">
@@ -158,18 +153,10 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="longtext" Nullable="false" />
+    <Property Name="Evaluation" Type="guid" Nullable="true" />
     <Property Name="Competition_Id" Type="int" Nullable="false" />
-    <Property Name="Evaluation_Id" Type="int" Nullable="false" />
     <Property Name="Winner_Id" Type="int" Nullable="true" />
     <Property Name="Profile_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Evaluations">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="longtext" Nullable="false" />
-    <Property Name="Key" Type="guid" Nullable="false" />
   </EntityType>
   <EntityType Name="Participants">
     <Key>
@@ -322,18 +309,6 @@
       </Principal>
       <Dependent Role="Price">
         <PropertyRef Name="Competition_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="EvaluationPrice">
-    <End Role="Evaluation" Type="SVPEntities.Store.Evaluations" Multiplicity="1" />
-    <End Role="Price" Type="SVPEntities.Store.Prices" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Evaluation">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Price">
-        <PropertyRef Name="Evaluation_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -505,11 +480,6 @@
             <End Role="Competition" EntitySet="Competitions" />
             <End Role="Price" EntitySet="Prices" />
           </AssociationSet>
-          <EntitySet Name="Evaluations" EntityType="SVPEntities.Evaluation" />
-          <AssociationSet Name="EvaluationPrice" Association="SVPEntities.EvaluationPrice">
-            <End Role="Evaluation" EntitySet="Evaluations" />
-            <End Role="Price" EntitySet="Prices" />
-          </AssociationSet>
           <EntitySet Name="Participants" EntityType="SVPEntities.Participant" />
           <AssociationSet Name="PriceParticipant" Association="SVPEntities.PriceParticipant">
             <End Role="Price" EntitySet="Prices" />
@@ -522,6 +492,10 @@
           <AssociationSet Name="ProfilePrice" Association="SVPEntities.ProfilePrice">
             <End Role="Profile" EntitySet="Profiles" />
             <End Role="Price" EntitySet="Prices" />
+          </AssociationSet>
+          <AssociationSet Name="SequenceSequence" Association="SVPEntities.SequenceSequence">
+            <End Role="Sequence" EntitySet="Sequences" />
+            <End Role="Sequence1" EntitySet="Sequences" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Member" BaseType="SVPEntities.Participant">
@@ -567,6 +541,8 @@
           <NavigationProperty Name="Shots" Relationship="SVPEntities.SequenceShot" FromRole="Sequence" ToRole="Shot" />
           <NavigationProperty Name="Member" Relationship="SVPEntities.MemberSequence" FromRole="Sequence" ToRole="Member" />
           <NavigationProperty Name="Price" Relationship="SVPEntities.PriceSequence" FromRole="Sequence" ToRole="Price" />
+          <NavigationProperty Name="NextSequence" Relationship="SVPEntities.SequenceSequence" FromRole="Sequence" ToRole="Sequence1" />
+          <NavigationProperty Name="PreviousSequence" Relationship="SVPEntities.SequenceSequence" FromRole="Sequence1" ToRole="Sequence" />
         </EntityType>
         <Association Name="ProfileSequence">
           <End Type="SVPEntities.Profile" Role="Profile" Multiplicity="1" />
@@ -650,26 +626,13 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
           <NavigationProperty Name="Competition" Relationship="SVPEntities.CompetitionPrice" FromRole="Price" ToRole="Competition" />
-          <NavigationProperty Name="Evaluation" Relationship="SVPEntities.EvaluationPrice" FromRole="Price" ToRole="Evaluation" />
           <NavigationProperty Name="Winner" Relationship="SVPEntities.PriceParticipant" FromRole="Price" ToRole="Participant" />
           <NavigationProperty Name="Sequences" Relationship="SVPEntities.PriceSequence" FromRole="Price" ToRole="Sequence" />
           <NavigationProperty Name="Profile" Relationship="SVPEntities.ProfilePrice" FromRole="Price" ToRole="Profile" />
+          <Property Name="Evaluation" Type="Guid" Nullable="true" />
         </EntityType>
         <Association Name="CompetitionPrice">
           <End Type="SVPEntities.Competition" Role="Competition" Multiplicity="1" />
-          <End Type="SVPEntities.Price" Role="Price" Multiplicity="*" />
-        </Association>
-        <EntityType Name="Evaluation">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Key" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Prices" Relationship="SVPEntities.EvaluationPrice" FromRole="Evaluation" ToRole="Price" />
-        </EntityType>
-        <Association Name="EvaluationPrice">
-          <End Type="SVPEntities.Evaluation" Role="Evaluation" Multiplicity="1" />
           <End Type="SVPEntities.Price" Role="Price" Multiplicity="*" />
         </Association>
         <EntityType Name="Participant">
@@ -690,6 +653,10 @@
         <Association Name="ProfilePrice">
           <End Type="SVPEntities.Profile" Role="Profile" Multiplicity="1" />
           <End Type="SVPEntities.Price" Role="Price" Multiplicity="*" />
+        </Association>
+        <Association Name="SequenceSequence">
+          <End Type="SVPEntities.Sequence" Role="Sequence" Multiplicity="0..1" />
+          <End Type="SVPEntities.Sequence" Role="Sequence1" Multiplicity="0..1" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -767,15 +734,7 @@
         <MappingFragment StoreEntitySet="Prices">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Evaluations">
-      <EntityTypeMapping TypeName="IsTypeOf(SVPEntities.Evaluation)">
-        <MappingFragment StoreEntitySet="Evaluations">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Key" ColumnName="Key" />
+          <ScalarProperty Name="Evaluation" ColumnName="Evaluation" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -878,14 +837,6 @@
     <AssociationSetMapping Name="CompetitionPrice" TypeName="SVPEntities.CompetitionPrice" StoreEntitySet="Prices">
       <EndProperty Name="Competition">
         <ScalarProperty Name="Id" ColumnName="Competition_Id" />
-      </EndProperty>
-      <EndProperty Name="Price">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="EvaluationPrice" TypeName="SVPEntities.EvaluationPrice" StoreEntitySet="Prices">
-      <EndProperty Name="Evaluation">
-        <ScalarProperty Name="Id" ColumnName="Evaluation_Id" />
       </EndProperty>
       <EndProperty Name="Price">
         <ScalarProperty Name="Id" ColumnName="Id" />

@@ -29,7 +29,7 @@ namespace SVP
                 {
                     cbPrice.Items.Add(new ComboboxItem(p.Name, p.Id));
                 }
-        
+
                 gbCompetition.Enabled = (currentCompetition != null);
                 gbMember.Enabled = (currentCompetition != null);
                 if (currentCompetition != null)
@@ -152,21 +152,24 @@ namespace SVP
                 {
                     foreach (var price in currentCompetition.Prices)
                     {
-                            bool hasShotYet = false;
-                            var sequences = context.Prices.Include("sequence").First(x => x.Id == price.Id).Sequences;
-                            foreach (var sequence in sequences)
-                                if (sequence.Member.Id == ((Member)cbMember.SelectedItem).Id)
-                                    hasShotYet = true;
-                            if (!hasShotYet)
-                                cbPrice.Items.Add(price);
+                        bool hasShotYet = false;
+                        var sequences = context.Prices.Include("Sequences").First(x => x.Id == price.Id).Sequences;
+                        foreach (var sequence in sequences)
+                            if (sequence.Member.Id == ((Member)cbMember.SelectedItem).Id)
+                                hasShotYet = true;
+                        if (!hasShotYet)
+                            cbPrice.Items.Add(price);
                     }
                 }
-                cbPrice.SelectedIndex = 0;
+                if(cbPrice.Items.Count > 0)
+                    cbPrice.SelectedIndex = 0;
             }
         }
 
         private void btnRead_Click(object sender, EventArgs e)
         {
+            if (cbPrice.SelectedIndex < 0)
+                return;
             btnRead.Enabled = false;
             pBar.Visible = true;
             cbPrice.Enabled = false;
@@ -185,13 +188,16 @@ namespace SVP
                     btnRead.Enabled = true;
                     return;
                 }
-                cbPrice.Items.Remove(cbPrice.SelectedItem);
+                
                 Sequence sequence = new Sequence();
                 sequence.Date = DateTime.Now;
-                sequence.Member.Id = ((ComboboxItem)cbMember.SelectedItem).Id;
-                sequence.Profile.Id = profile.Id;
+                sequence.Member = ((Member)cbMember.SelectedItem);
+                sequence.Profile = profile;
                 sequence.Price = ((Price)cbPrice.SelectedItem);
-            
+                context.Participants.Attach(sequence.Member);
+                context.Profiles.Attach(sequence.Profile);
+                context.Prices.Attach(sequence.Price);
+                cbPrice.Items.Remove(cbPrice.SelectedItem);
                 foreach (RMResult result in ta.Result)
                 {
                     Shot s = new Shot();
@@ -208,7 +214,7 @@ namespace SVP
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Shots.Sum(s => s.Value) });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Profile.ToString() });
                 row.Cells.Add(new DataGridViewButtonCell() { UseColumnTextForButtonValue = true, Value = sequence });
-            
+
                 dvResults.Rows.Add(row);
                 context.Sequences.Add(sequence);
                 context.SaveChanges();
@@ -231,10 +237,12 @@ namespace SVP
             {
                 using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                 {
+                    foreach (var price in wizard.Competition.Prices)
+                        context.Profiles.Attach(price.Profile);
                     context.Competitions.Add(wizard.Competition);
                     context.SaveChanges();
-            
-                    currentCompetition = context.Competitions.Include("price.profile.disagprofile").Where(x => x.Id == wizard.Competition.Id).FirstOrDefault();
+
+                    currentCompetition = context.Competitions.Include("Prices.Profile").Where(x => x.Id == wizard.Competition.Id).FirstOrDefault();
                 }
                 reload_Controls();
             }
@@ -245,6 +253,18 @@ namespace SVP
             frmChooseCompetition choose = new frmChooseCompetition();
             choose.ShowDialog();
             currentCompetition = choose.Competition;
+            foreach (Price p in currentCompetition.Prices)
+                foreach (Sequence s in p.Sequences)
+                {
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.Tag = s.Id;
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = s.Member.ToString() });
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = s.Shots.Sum(shot => shot.Value) });
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = s.Profile.ToString() });
+                    row.Cells.Add(new DataGridViewButtonCell() { UseColumnTextForButtonValue = true, Value = s });
+
+                    dvResults.Rows.Add(row);
+                }
             reload_Controls();
         }
 
@@ -256,7 +276,7 @@ namespace SVP
                 using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                 {
                     context.SaveChanges(); //ToDo: Check if this is right.
-            
+
                 }
                 reload_Controls();
             }
@@ -268,28 +288,10 @@ namespace SVP
             {
                 using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                 {
-                    foreach(Price p in currentCompetition.Prices)
+                    foreach (Price p in currentCompetition.Prices)
                     {
-                        if (context.Prices.Include("sequence").FirstOrDefault(x => x.Id == p.Id).Sequences.Count() == 0)
-                            continue;
-                        var bestResult = context.Prices.Include("sequence").FirstOrDefault(x => x.Id == p.Id).Sequences.Max(x => x.Shots.Sum(y => y.Value));
-                        var listWinnerSequences = context.Prices.Include("sequence").FirstOrDefault(x => x.Id == p.Id).Sequences.Where(y => y.Shots.Sum(z => z.Value) == bestResult);
-                        if(listWinnerSequences.Count() == 1)
-                        {
-            
-                        }
-                        else
-                        {
-            
-                        }
-                        if (currentCompetition.GetType() != typeof(GroupCompetition))
-                        {
-            
-                        }
-                        else
-                        {
-            
-                        }
+                        frmDetermineWinner frmwinner = new frmDetermineWinner(p);
+                        frmwinner.ShowDialog();
                     }
                 }
             }

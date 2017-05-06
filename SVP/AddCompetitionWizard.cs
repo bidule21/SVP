@@ -50,7 +50,7 @@ namespace SVP
             if(txtPriceName.Text.Length > 0 && cbProfile.SelectedIndex >= 0)
             {
                 Price p = new Price() { Name = txtPriceName.Text };
-                p.Id = ((Profile)cbProfile.SelectedItem).Id;
+                p.Profile = ((Profile)cbProfile.SelectedItem);
                 myCompetition.Prices.Add(p);
                 cbProfile.SelectedIndex = -1;
                 txtPriceName.Text = "";

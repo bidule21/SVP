@@ -96,19 +96,19 @@ namespace SVP
 
         private void addProfilePage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
         {
-            if (rbAddProfile.Checked && txtProfileName.TextLength > 0)
-            {
-                profile = new Profile();
-                profile.Name = txtProfileName.Text;
-            }
-            else if (rbEditProfile.Checked && cbProfile.SelectedIndex >= 0)
-            {
-                profile = (Profile)cbProfile.SelectedItem;
-            }
-            else
-            {
-                e.Cancel = true;
-            }
+
+                if (rbAddProfile.Checked && txtProfileName.TextLength > 0)
+                {
+                    profile = null;
+                }
+                else if (rbEditProfile.Checked && cbProfile.SelectedIndex >= 0)
+                {
+                    profile = (Profile)cbProfile.SelectedItem;
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
         }
 
         private void addProfilePage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
@@ -217,7 +217,20 @@ namespace SVP
         {
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                this.profile.Value = getProfileString();
+                if(profile == null)
+                {
+                    profile = new Profile();
+                    profile.Name = txtProfileName.Text;
+                    profile.Value = getProfileString();
+                    context.Profiles.Add(profile);
+                }
+                else
+                {
+                    profile = context.Profiles.Find(profile.Id);
+                    profile.Value = getProfileString();
+                }
+                
+                
                 context.SaveChanges();
             }
         }

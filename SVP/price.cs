@@ -22,9 +22,9 @@ namespace SVP
     
         public int Id { get; set; }
         public string Name { get; set; }
+        public Nullable<System.Guid> Evaluation { get; set; }
     
         public virtual Competition Competition { get; set; }
-        public virtual Evaluation Evaluation { get; set; }
         public virtual Participant Winner { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sequence> Sequences { get; set; }

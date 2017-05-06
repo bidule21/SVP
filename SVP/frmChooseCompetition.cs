@@ -25,7 +25,7 @@ namespace SVP
             {
                 using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                 {
-                    myCompetition = context.Competitions.Include("Award").Include("Price.Profile").FirstOrDefault(x => x.Id == ((ComboboxItem)lbCompetitions.SelectedItem).Id);
+                    myCompetition = context.Competitions.Include("Prices.Sequences.Member").Include("Prices.Sequences.Shots").Include("Awards").Include("Prices.Profile").FirstOrDefault(x => x.Id == ((ComboboxItem)lbCompetitions.SelectedItem).Id);
                 }
             }
             this.Close();

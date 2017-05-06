@@ -30,24 +30,26 @@
         {
             this.btnRead = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.cbMember = new System.Windows.Forms.ComboBox();
             this.cbProfile = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.dvSequences = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbRead = new System.Windows.Forms.GroupBox();
             this.pBar = new System.Windows.Forms.ProgressBar();
-            ((System.ComponentModel.ISupportInitialize)(this.dvSequences)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.gbProfile = new System.Windows.Forms.GroupBox();
+            this.dvResults = new System.Windows.Forms.DataGridView();
+            this.btnSetProfile = new System.Windows.Forms.Button();
+            this.gbRead.SuspendLayout();
+            this.gbProfile.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dvResults)).BeginInit();
             this.SuspendLayout();
             // 
             // btnRead
             // 
-            this.btnRead.Location = new System.Drawing.Point(207, 89);
+            this.btnRead.Location = new System.Drawing.Point(308, 63);
+            this.btnRead.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnRead.Name = "btnRead";
-            this.btnRead.Size = new System.Drawing.Size(93, 23);
+            this.btnRead.Size = new System.Drawing.Size(140, 35);
             this.btnRead.TabIndex = 17;
             this.btnRead.Text = "Einlesen";
             this.btnRead.UseVisualStyleBackColor = true;
@@ -55,126 +57,134 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(236, 430);
+            this.btnOk.Enabled = false;
+            this.btnOk.Location = new System.Drawing.Point(353, 598);
+            this.btnOk.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(93, 23);
+            this.btnOk.Size = new System.Drawing.Size(140, 35);
             this.btnOk.TabIndex = 18;
             this.btnOk.Text = "Fertig";
             this.btnOk.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 16);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 13);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Preis: ";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(45, 16);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 20;
-            this.label2.Text = "label2";
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // cbMember
             // 
             this.cbMember.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbMember.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbMember.FormattingEnabled = true;
-            this.cbMember.Location = new System.Drawing.Point(110, 38);
-            this.cbMember.Margin = new System.Windows.Forms.Padding(2);
+            this.cbMember.Location = new System.Drawing.Point(165, 27);
             this.cbMember.Name = "cbMember";
-            this.cbMember.Size = new System.Drawing.Size(190, 21);
+            this.cbMember.Size = new System.Drawing.Size(283, 28);
             this.cbMember.TabIndex = 21;
             // 
             // cbProfile
             // 
             this.cbProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbProfile.FormattingEnabled = true;
-            this.cbProfile.Location = new System.Drawing.Point(110, 63);
-            this.cbProfile.Margin = new System.Windows.Forms.Padding(2);
+            this.cbProfile.Location = new System.Drawing.Point(171, 25);
             this.cbProfile.Name = "cbProfile";
-            this.cbProfile.Size = new System.Drawing.Size(190, 21);
+            this.cbProfile.Size = new System.Drawing.Size(283, 28);
             this.cbProfile.TabIndex = 22;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 41);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(7, 30);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 13);
+            this.label3.Size = new System.Drawing.Size(146, 20);
             this.label3.TabIndex = 23;
             this.label3.Text = "Schütze / Schützin:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(5, 66);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(14, 28);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(33, 13);
+            this.label4.Size = new System.Drawing.Size(48, 20);
             this.label4.TabIndex = 24;
             this.label4.Text = "Profil:";
             // 
-            // dvSequences
+            // gbRead
             // 
-            this.dvSequences.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvSequences.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dvSequences.Location = new System.Drawing.Point(0, 0);
-            this.dvSequences.Name = "dvSequences";
-            this.dvSequences.Size = new System.Drawing.Size(337, 250);
-            this.dvSequences.TabIndex = 25;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.btnRead);
-            this.groupBox1.Controls.Add(this.cbMember);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.cbProfile);
-            this.groupBox1.Location = new System.Drawing.Point(12, 256);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(317, 132);
-            this.groupBox1.TabIndex = 26;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Einlesen";
+            this.gbRead.Controls.Add(this.btnRead);
+            this.gbRead.Controls.Add(this.cbMember);
+            this.gbRead.Controls.Add(this.label3);
+            this.gbRead.Enabled = false;
+            this.gbRead.Location = new System.Drawing.Point(18, 433);
+            this.gbRead.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbRead.Name = "gbRead";
+            this.gbRead.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbRead.Size = new System.Drawing.Size(476, 110);
+            this.gbRead.TabIndex = 26;
+            this.gbRead.TabStop = false;
+            this.gbRead.Text = "Einlesen";
             // 
             // pBar
             // 
-            this.pBar.Location = new System.Drawing.Point(12, 394);
+            this.pBar.Location = new System.Drawing.Point(18, 553);
+            this.pBar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pBar.Name = "pBar";
-            this.pBar.Size = new System.Drawing.Size(317, 23);
+            this.pBar.Size = new System.Drawing.Size(476, 35);
             this.pBar.TabIndex = 27;
             this.pBar.Visible = false;
             // 
+            // gbProfile
+            // 
+            this.gbProfile.Controls.Add(this.btnSetProfile);
+            this.gbProfile.Controls.Add(this.cbProfile);
+            this.gbProfile.Controls.Add(this.label4);
+            this.gbProfile.Location = new System.Drawing.Point(12, 316);
+            this.gbProfile.Name = "gbProfile";
+            this.gbProfile.Size = new System.Drawing.Size(482, 109);
+            this.gbProfile.TabIndex = 28;
+            this.gbProfile.TabStop = false;
+            this.gbProfile.Text = "Profile";
+            // 
+            // dvResults
+            // 
+            this.dvResults.AllowUserToAddRows = false;
+            this.dvResults.AllowUserToDeleteRows = false;
+            this.dvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dvResults.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dvResults.Location = new System.Drawing.Point(0, 0);
+            this.dvResults.Name = "dvResults";
+            this.dvResults.ReadOnly = true;
+            this.dvResults.RowTemplate.Height = 28;
+            this.dvResults.Size = new System.Drawing.Size(506, 271);
+            this.dvResults.TabIndex = 29;
+            // 
+            // btnSetProfile
+            // 
+            this.btnSetProfile.Location = new System.Drawing.Point(314, 61);
+            this.btnSetProfile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnSetProfile.Name = "btnSetProfile";
+            this.btnSetProfile.Size = new System.Drawing.Size(140, 35);
+            this.btnSetProfile.TabIndex = 24;
+            this.btnSetProfile.Text = "&OK";
+            this.btnSetProfile.UseVisualStyleBackColor = true;
+            this.btnSetProfile.Click += new System.EventHandler(this.btnSetProfile_Click);
+            // 
             // frmReevaluate
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(337, 465);
+            this.ClientSize = new System.Drawing.Size(506, 645);
             this.ControlBox = false;
+            this.Controls.Add(this.dvResults);
+            this.Controls.Add(this.gbProfile);
             this.Controls.Add(this.pBar);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.dvSequences);
+            this.Controls.Add(this.gbRead);
             this.Controls.Add(this.btnOk);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmReevaluate";
             this.ShowInTaskbar = false;
             this.Text = "Gewinner feststellen";
             this.Load += new System.EventHandler(this.frmReevaluate_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dvSequences)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbRead.ResumeLayout(false);
+            this.gbRead.PerformLayout();
+            this.gbProfile.ResumeLayout(false);
+            this.gbProfile.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dvResults)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -183,14 +193,14 @@
 
         private System.Windows.Forms.Button btnRead;
         private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbMember;
         private System.Windows.Forms.ComboBox cbProfile;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridView dvSequences;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbRead;
         private System.Windows.Forms.ProgressBar pBar;
+        private System.Windows.Forms.GroupBox gbProfile;
+        private System.Windows.Forms.Button btnSetProfile;
+        private System.Windows.Forms.DataGridView dvResults;
     }
 }

@@ -13,11 +13,14 @@ namespace SVP
 {
     public partial class frmReevaluate : Form
     {
+        private List<Sequence> sequences;
         private Price price;
-        public frmReevaluate(Price p)
+        private Profile profile;
+        public frmReevaluate(Price price, List<Sequence> sequences)
         {
             InitializeComponent();
-            price = p;
+            this.price = price;
+            this.sequences = sequences;
         }
 
         private void reloadControls()
@@ -27,16 +30,14 @@ namespace SVP
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
                 cbProfile.Items.AddRange(context.Profiles.Where(x => x.Id != price.Profile.Id).ToArray());
-                var bestResult = context.Prices.Include("Sequence").FirstOrDefault(x => x.Id == price.Id).Sequences.Max(x => x.Shots.Sum(y => y.Value));
-                var listWinnerSequences = context.Prices.Include("Sequence").Include("Member").FirstOrDefault(x => x.Id == price.Id).Sequences.Where(y => y.Shots.Sum(z => z.Value) == bestResult);
-                foreach (Sequence s in listWinnerSequences)
-                { 
-                    //ToDo: Change Database Schema sequence <--> sequence
-                    //if (s. != null)
-                    //    continue;
-                    //cbMember.Items.Add(s.member);
+                foreach(Sequence s in sequences)
+                {
+                    Sequence seq = context.Sequences.Find(s.Id);
+                    if (seq.NextSequence == null)
+                        cbMember.Items.Add(s.Member);
                 }
             }
+            btnOk.Enabled = cbProfile.Items.Count == 0;
         }
 
         private void frmReevaluate_Load(object sender, EventArgs e)
@@ -50,7 +51,6 @@ namespace SVP
                 return;
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                Profile profile = context.Profiles.Where(x => x.Id == ((ComboboxItem)cbProfile.SelectedItem).Id).First();
                 Task<List<RMResult>> ta = Task.Factory.StartNew<List<RMResult>>(() => Common.readShots(profile.Value));
                 while (!ta.IsCompleted)
                 {
@@ -64,11 +64,35 @@ namespace SVP
                 }
                 Sequence sequence = new Sequence();
                 sequence.Date = DateTime.Now;
-                sequence.Member.Id = ((ComboboxItem)cbMember.SelectedItem).Id;
-                sequence.Profile.Id= ((ComboboxItem)cbProfile.SelectedItem).Id;
-                //ToDo add new Sequence to old Sequence and update controls
+                sequence.Member = ((Member)cbMember.SelectedItem);
+                sequence.Profile = this.profile;
+                context.Participants.Attach(sequence.Member);
+                context.Profiles.Attach(sequence.Profile);
+                foreach(Sequence s in sequences)
+                {
+                    if(s.Member.Id == sequence.Member.Id)
+                    {
+                        Sequence seq = context.Sequences.Find(s.Id);
+                        seq.NextSequence = sequence;
+                    }
+                }
             }
+            reloadControls();
+        }
 
+        private void btnSetProfile_Click(object sender, EventArgs e)
+        {
+            if(cbProfile.SelectedIndex >= 0)
+            {
+                this.profile = (Profile)cbProfile.SelectedItem;
+                gbProfile.Enabled = false;
+                gbRead.Enabled = true;
+            }
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

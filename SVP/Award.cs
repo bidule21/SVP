@@ -12,19 +12,12 @@ namespace SVP
     using System;
     using System.Collections.Generic;
     
-    public partial class Evaluation
+    public partial class Award
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Evaluation()
-        {
-            this.Prices = new HashSet<Price>();
-        }
-    
         public int Id { get; set; }
         public string Name { get; set; }
-        public System.Guid Key { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Price> Prices { get; set; }
+        public virtual Competition Competition { get; set; }
+        public virtual Member Winner { get; set; }
     }
 }

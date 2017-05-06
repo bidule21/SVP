@@ -77,8 +77,9 @@ namespace SVP
                 using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                 {
                     cbMember.Items.Clear();
-                    foreach (Member m in context.Participants.OfType<Member>().Where(x => x.Club.Id == ((Club)(cbClub.SelectedItem)).Id).OrderBy(x => x.Name))
-                        cbMember.Items.Add(new ComboboxItem(m.ToString(), m.Id));
+                    var club = context.Clubs.Include("Members").FirstOrDefault(x => x.Id == ((Club)(cbClub.SelectedItem)).Id);
+                    foreach (Member m in club.Members.OrderBy(x => x.Name))
+                        cbMember.Items.Add(m);
                 }
             }
         }
@@ -94,7 +95,7 @@ namespace SVP
                 p = context.Profiles.Where(x => x.Id == SVP.Properties.Settings.Default.DefaultProfile).FirstOrDefault();
             if (p != null)
                 cbProfile.SelectedIndex = cbProfile.FindStringExact(p.Name);
-            else
+            else if (cbProfile.Items.Count > 0)
                 cbProfile.SelectedIndex = 0;
         }
 
@@ -121,9 +122,10 @@ namespace SVP
                 }
                 sequence = new Sequence();
                 sequence.Date = DateTime.Now;
-                sequence.Member.Id = ((ComboboxItem)cbMember.SelectedItem).Id;
+                sequence.Member = ((Member)cbMember.SelectedItem);
                 sequence.Profile = profile;
 
+                context.Participants.Attach(sequence.Member);
                 foreach (RMResult result in ta.Result)
                 {
                     Shot s = new Shot();
