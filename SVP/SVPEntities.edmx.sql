@@ -1,6 +1,6 @@
-drop database SVP2;
-create database SVP2;
 use SVP2;
+DROP DATABASE SVP2;
+CREATE DATABASE SVP2;
 
 
 
@@ -46,7 +46,7 @@ use SVP2;
 -- -----------------------------------------------------------
 -- Entity Designer DDL Script for MySQL Server 4.1 and higher
 -- -----------------------------------------------------------
--- Date Created: 05/06/2017 13:02:44
+-- Date Created: 05/07/2017 18:16:52
 
 -- Generated from EDMX file: C:\Users\christopher\Source\Repos\SVP\SVP\SVPEntities.edmx
 -- Target version: 3.0.0.0
@@ -162,7 +162,8 @@ CREATE TABLE `Sequences`(
 	`Date` datetime NOT NULL, 
 	`Profile_Id` int NOT NULL, 
 	`Member_Id` int NOT NULL, 
-	`Price_Id` int);
+	`Price_Id` int, 
+	`PreviousSequence_Id` int);
 
 ALTER TABLE `Sequences` ADD PRIMARY KEY (`Id`);
 
@@ -535,6 +536,24 @@ ADD CONSTRAINT `FK_ProfilePrice`
 CREATE INDEX `IX_FK_ProfilePrice`
     ON `Prices`
     (`Profile_Id`);
+
+
+
+-- Creating foreign key on `PreviousSequence_Id` in table 'Sequences'
+
+ALTER TABLE `Sequences`
+ADD CONSTRAINT `FK_SequenceSequence`
+    FOREIGN KEY (`PreviousSequence_Id`)
+    REFERENCES `Sequences`
+        (`Id`)
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SequenceSequence'
+
+CREATE INDEX `IX_FK_SequenceSequence`
+    ON `Sequences`
+    (`PreviousSequence_Id`);
 
 
 

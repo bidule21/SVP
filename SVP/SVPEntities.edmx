@@ -75,6 +75,10 @@
       <End Role="Profile" EntitySet="Profiles" />
       <End Role="Price" EntitySet="Prices" />
     </AssociationSet>
+    <AssociationSet Name="SequenceSequence" Association="SVPEntities.Store.SequenceSequence">
+      <End Role="Sequence" EntitySet="Sequences" />
+      <End Role="Sequence1" EntitySet="Sequences" />
+    </AssociationSet>
     <AssociationSet Name="FK_Member_inherits_Participant" Association="SVPEntities.Store.FK_Member_inherits_Participant">
       <End Role="Participant" EntitySet="Participants" />
       <End Role="Member" EntitySet="Participants_Member" />
@@ -116,6 +120,7 @@
     <Property Name="Profile_Id" Type="int" Nullable="false" />
     <Property Name="Member_Id" Type="int" Nullable="false" />
     <Property Name="Price_Id" Type="int" Nullable="true" />
+    <Property Name="PreviousSequence_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Shots">
     <Key>
@@ -345,6 +350,18 @@
       </Principal>
       <Dependent Role="Price">
         <PropertyRef Name="Profile_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SequenceSequence">
+    <End Role="Sequence" Type="SVPEntities.Store.Sequences" Multiplicity="0..1" />
+    <End Role="Sequence1" Type="SVPEntities.Store.Sequences" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sequence">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sequence1">
+        <PropertyRef Name="PreviousSequence_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -867,6 +884,15 @@
       <EndProperty Name="Price">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SequenceSequence" TypeName="SVPEntities.SequenceSequence" StoreEntitySet="Sequences">
+      <EndProperty Name="Sequence">
+        <ScalarProperty Name="Id" ColumnName="PreviousSequence_Id" />
+      </EndProperty>
+      <EndProperty Name="Sequence1">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="PreviousSequence_Id" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
