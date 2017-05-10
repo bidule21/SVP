@@ -22,22 +22,35 @@ namespace SVP
             this.price = price;
             this.sequences = sequences;
         }
-
-        private void reloadControls()
+        void reloadMembers()
         {
-            cbProfile.Items.Clear();
             cbMember.Items.Clear();
+            cbMember.SelectedIndex = -1;
+            cbMember.Text = null;
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                cbProfile.Items.AddRange(context.Profiles.Where(x => x.Id != price.Profile.Id).ToArray());
-                foreach(Sequence s in sequences)
+                foreach (Sequence s in sequences)
                 {
                     Sequence seq = context.Sequences.Find(s.Id);
                     if (seq.NextSequence == null)
-                        cbMember.Items.Add(s.Member);
+                    {
+                        var sequence = context.Sequences.Find(s.Id);
+                        cbMember.Items.Add(sequence.Member);
+                    }
                 }
             }
-            btnOk.Enabled = cbProfile.Items.Count == 0;
+            
+            btnOk.Enabled = cbMember.Items.Count == 0;
+        }
+        private void reloadControls()
+        {
+            cbProfile.Items.Clear();
+            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
+            {
+                cbProfile.Items.AddRange(context.Profiles.Where(x => x.Id != price.Profile.Id).ToArray());
+            }
+            btnOk.Enabled = cbMember.Items.Count == 0;
+            reloadMembers();
         }
 
         private void frmReevaluate_Load(object sender, EventArgs e)
@@ -47,11 +60,11 @@ namespace SVP
 
         private void btnRead_Click(object sender, EventArgs e)
         {
-            if (cbMember.SelectedIndex < 0 || cbProfile.SelectedIndex < 0)
+            if (cbMember.SelectedIndex < 0)
                 return;
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                Task<List<RMResult>> ta = Task.Factory.StartNew<List<RMResult>>(() => Common.readShots(profile.Value));
+                Task<List<RMResult>> ta = Task.Factory.StartNew<List<RMResult>>(() => Common.readFakeShots(profile.Value));
                 while (!ta.IsCompleted)
                 {
                     Application.DoEvents();
@@ -66,18 +79,35 @@ namespace SVP
                 sequence.Date = DateTime.Now;
                 sequence.Member = ((Member)cbMember.SelectedItem);
                 sequence.Profile = this.profile;
+                foreach(RMResult s in ta.Result)
+                {
+                    Shot shot = new Shot();
+                    shot.Angle = s.Angle;
+                    shot.FactorValue = s.FactorValue;
+                    shot.ShotNumber = (short)s.ShotNumber;
+                    shot.Valid = s.Validity == ValidFlag.Valid;
+                    shot.Value = s.Rings;
+                    sequence.Shots.Add(shot);
+                }
+
+                DataGridViewRow row = new DataGridViewRow();
+                row.Tag = sequence.Id;
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Member.Name });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Shots.Sum(x => x.Value) });
+                dvResults.Rows.Add(row);
                 context.Participants.Attach(sequence.Member);
                 context.Profiles.Attach(sequence.Profile);
                 foreach(Sequence s in sequences)
                 {
-                    if(s.Member.Id == sequence.Member.Id)
+                    Sequence seq = context.Sequences.Find(s.Id);
+                    if(seq.Member.Id == sequence.Member.Id)
                     {
-                        Sequence seq = context.Sequences.Find(s.Id);
                         seq.NextSequence = sequence;
                     }
                 }
+                context.SaveChanges();
             }
-            reloadControls();
+            reloadMembers();
         }
 
         private void btnSetProfile_Click(object sender, EventArgs e)

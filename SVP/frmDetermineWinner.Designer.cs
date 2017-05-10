@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.dvResultList = new System.Windows.Forms.DataGridView();
+            this.btnOk = new System.Windows.Forms.Button();
             this.placement = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.memberName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Points = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Reevaluate = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.btnOk = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dvResultList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,12 +50,20 @@
             this.Reevaluate});
             this.dvResultList.Dock = System.Windows.Forms.DockStyle.Top;
             this.dvResultList.Location = new System.Drawing.Point(0, 0);
-            this.dvResultList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dvResultList.Name = "dvResultList";
-            this.dvResultList.ReadOnly = true;
             this.dvResultList.RowHeadersVisible = false;
-            this.dvResultList.Size = new System.Drawing.Size(1000, 314);
+            this.dvResultList.Size = new System.Drawing.Size(710, 204);
             this.dvResultList.TabIndex = 0;
+            // 
+            // btnOk
+            // 
+            this.btnOk.Location = new System.Drawing.Point(606, 212);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(75, 23);
+            this.btnOk.TabIndex = 1;
+            this.btnOk.Text = "OK";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // placement
             // 
@@ -79,29 +87,16 @@
             // 
             this.Reevaluate.HeaderText = "Erneut werten?";
             this.Reevaluate.Name = "Reevaluate";
-            this.Reevaluate.ReadOnly = true;
-            // 
-            // btnOk
-            // 
-            this.btnOk.Location = new System.Drawing.Point(870, 323);
-            this.btnOk.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(112, 35);
-            this.btnOk.TabIndex = 1;
-            this.btnOk.Text = "OK";
-            this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // frmDetermineWinner
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 375);
+            this.ClientSize = new System.Drawing.Size(710, 255);
             this.ControlBox = false;
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.dvResultList);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmDetermineWinner";
             this.ShowInTaskbar = false;
             this.Text = "Gewinner festlegen";

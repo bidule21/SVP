@@ -23,6 +23,7 @@ namespace SVP
         {
             cbClubGroup.Items.Clear();
             cbPrice.Items.Clear();
+            dvCompetition.Rows.Clear();
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
                 foreach (var p in context.Profiles)
@@ -176,7 +177,7 @@ namespace SVP
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
                 Profile profile = ((Price)cbPrice.SelectedItem).Profile;
-                System.Threading.Tasks.Task<List<RMResult>> ta = System.Threading.Tasks.Task.Factory.StartNew<List<RMResult>>(() => readShots(profile.Value));
+                System.Threading.Tasks.Task<List<RMResult>> ta = System.Threading.Tasks.Task.Factory.StartNew<List<RMResult>>(() => Common.readFakeShots(profile.Value));
                 while (!ta.IsCompleted)
                 {
                     Application.DoEvents();
@@ -252,6 +253,8 @@ namespace SVP
         {
             frmChooseCompetition choose = new frmChooseCompetition();
             choose.ShowDialog();
+            if (choose.Competition == null)
+                return;
             currentCompetition = choose.Competition;
             foreach (Price p in currentCompetition.Prices)
                 foreach (Sequence s in p.Sequences)
@@ -288,10 +291,22 @@ namespace SVP
             {
                 using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                 {
+                    bool allWinnersSet = true;
                     foreach (Price p in currentCompetition.Prices)
                     {
                         frmDetermineWinner frmwinner = new frmDetermineWinner(p);
                         frmwinner.ShowDialog();
+                        Price price = context.Prices.Find(p.Id);
+                        allWinnersSet = allWinnersSet & (price.Winner != null);
+                    }
+                    //ToDo Set Award Winner
+                    if(allWinnersSet)
+                    {
+                        Competition comp = context.Competitions.Find(currentCompetition.Id);
+                        comp.Finished = true;
+                        context.SaveChanges();
+                        currentCompetition = null;
+                        reload_Controls();
                     }
                 }
             }

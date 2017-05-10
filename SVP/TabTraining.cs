@@ -199,10 +199,10 @@ namespace SVP
         {
             if(e.ColumnIndex == 3)
             {
-                int sequence_id = (int)dvResults.Rows[e.RowIndex].Cells[3].Tag;
+                int sequence_id = (int)dvResults.Rows[e.RowIndex].Tag;
                 using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                 {
-                    Sequence seq = context.Sequences.Where(x => x.Id == sequence_id).FirstOrDefault();
+                    Sequence seq = context.Sequences.Include("Shots").Where(x => x.Id == sequence_id).FirstOrDefault();
                     Monitor.GetMonitor().DisplaySequence(seq);
                 }
             }
