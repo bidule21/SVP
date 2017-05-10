@@ -55,18 +55,14 @@ namespace SVP
                     {
                         lblClubGroup.Text = "Gruppe: ";
                         btnNewClubGroup.Text = "Neue Gruppe";
-                        cbClubGroup.Items.AddRange(context.Participants.OfType<Group>().Where(x => x.GroupCompetition.Id == currentCompetition.Id).ToArray());
+                        cbClubGroup.Items.AddRange(context.Participants.OfType<Group>().Where(x => x.GroupCompetition.Id == currentCompetition.Id).OrderBy(x => x.Name).ToArray());
                     }
                     else
                     {
                         lblClubGroup.Text = "Verein: ";
                         btnNewClubGroup.Text = "Neuer Verein";
-                        cbClubGroup.Items.AddRange(context.Clubs.ToArray());
+                        cbClubGroup.Items.AddRange(context.Clubs.OrderBy(x => x.Name).ToArray());
                     }
-                }
-                else
-                {
-                    cbClubGroup.Items.AddRange(context.Clubs.ToArray());
                 }
             }
         }
@@ -128,12 +124,12 @@ namespace SVP
                     if (currentCompetition.GetType() == typeof(GroupCompetition))
                     {
                         var group = context.Participants.Include("member").OfType<Group>().First(x => x.Id == ((Group)(cbClubGroup.SelectedItem)).Id);
-                        foreach (Member m in group.Member)
+                        foreach (Member m in group.Member.OrderBy(x => x.Name))
                             cbMember.Items.Add(m);
                     }
                     else
                     {
-                        foreach (Member m in context.Participants.OfType<Member>().Where(x => x.Club.Id == ((Club)(cbClubGroup.SelectedItem)).Id))
+                        foreach (Member m in context.Participants.OfType<Member>().Where(x => x.Club.Id == ((Club)(cbClubGroup.SelectedItem)).Id).OrderBy(x => x.Name)
                             cbMember.Items.Add(m);
                     }
                 }
