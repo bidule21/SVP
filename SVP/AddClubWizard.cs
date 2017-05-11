@@ -22,12 +22,11 @@ namespace SVP
         {
             if (txtClubName.TextLength > 0)
             {
-                using (svpEntities context = new svpEntities())
+                using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                 {
-                    club newClub = new club();
-                    newClub.name = txtClubName.Text;
-                    newClub.isTemporary = cbClubTemporary.Checked;
-                    context.club.Add(newClub);
+                    Club newClub = new Club();
+                    newClub.Name = txtClubName.Text;
+                    context.Clubs.Add(newClub);
                     context.SaveChanges();
                     txtClubName.Text = "";
                 }

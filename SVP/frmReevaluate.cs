@@ -13,29 +13,44 @@ namespace SVP
 {
     public partial class frmReevaluate : Form
     {
-        private price price;
-        public frmReevaluate(price p)
+        private List<Sequence> sequences;
+        private Price price;
+        private Profile profile;
+        public frmReevaluate(Price price, List<Sequence> sequences)
         {
             InitializeComponent();
-            price = p;
+            this.price = price;
+            this.sequences = sequences;
         }
-
+        void reloadMembers()
+        {
+            cbMember.Items.Clear();
+            cbMember.SelectedIndex = -1;
+            cbMember.Text = null;
+            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
+            {
+                foreach (Sequence s in sequences)
+                {
+                    Sequence seq = context.Sequences.Find(s.Id);
+                    if (seq.NextSequence == null)
+                    {
+                        var sequence = context.Sequences.Find(s.Id);
+                        cbMember.Items.Add(sequence.Member);
+                    }
+                }
+            }
+            
+            btnOk.Enabled = cbMember.Items.Count == 0;
+        }
         private void reloadControls()
         {
             cbProfile.Items.Clear();
-            cbMember.Items.Clear();
-            using (svpEntities context = new svpEntities())
+            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                cbProfile.Items.AddRange(context.profile.Where(x => x.id != price.profile_id).ToArray());
-                var bestResult = context.price.Include("sequence").FirstOrDefault(x => x.id == price.id).sequence.Max(x => x.shot.Sum(y => y.value));
-                var listWinnerSequences = context.price.Include("sequence").Include("member").FirstOrDefault(x => x.id == price.id).sequence.Where(y => y.shot.Sum(z => z.value) == bestResult);
-                foreach (sequence s in listWinnerSequences)
-                { 
-                    if (s.sequence2 != null)
-                        continue;
-                    cbMember.Items.Add(s.member);
-                }
+                cbProfile.Items.AddRange(context.Profiles.Where(x => x.Id != price.Profile.Id).ToArray());
             }
+            btnOk.Enabled = cbMember.Items.Count == 0;
+            reloadMembers();
         }
 
         private void frmReevaluate_Load(object sender, EventArgs e)
@@ -45,12 +60,11 @@ namespace SVP
 
         private void btnRead_Click(object sender, EventArgs e)
         {
-            if (cbMember.SelectedIndex < 0 || cbProfile.SelectedIndex < 0)
+            if (cbMember.SelectedIndex < 0)
                 return;
-            using (svpEntities context = new svpEntities())
+            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                disagprofile profile = context.disagprofile.Where(x => x.profile_id == ((ComboboxItem)cbProfile.SelectedItem).Id).First();
-                Task<List<RMResult>> ta = Task.Factory.StartNew<List<RMResult>>(() => Common.readShots(profile.value));
+                Task<List<RMResult>> ta = Task.Factory.StartNew<List<RMResult>>(() => Common.readFakeShots(profile.Value));
                 while (!ta.IsCompleted)
                 {
                     Application.DoEvents();
@@ -61,13 +75,54 @@ namespace SVP
                     btnRead.Enabled = true;
                     return;
                 }
-                sequence sequence = new sequence();
-                sequence.date = DateTime.Now;
-                sequence.member_id = ((ComboboxItem)cbMember.SelectedItem).Id;
-                sequence.profile_id = ((ComboboxItem)cbProfile.SelectedItem).Id;
-                //ToDo add new Sequence to old Sequence and update controls
-            }
+                Sequence sequence = new Sequence();
+                sequence.Date = DateTime.Now;
+                sequence.Member = ((Member)cbMember.SelectedItem);
+                sequence.Profile = this.profile;
+                foreach(RMResult s in ta.Result)
+                {
+                    Shot shot = new Shot();
+                    shot.Angle = s.Angle;
+                    shot.FactorValue = s.FactorValue;
+                    shot.ShotNumber = (short)s.ShotNumber;
+                    shot.Valid = s.Validity == ValidFlag.Valid;
+                    shot.Value = s.Rings;
+                    sequence.Shots.Add(shot);
+                }
 
+                DataGridViewRow row = new DataGridViewRow();
+                row.Tag = sequence.Id;
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Member.Name });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Shots.Sum(x => x.Value) });
+                dvResults.Rows.Add(row);
+                context.Participants.Attach(sequence.Member);
+                context.Profiles.Attach(sequence.Profile);
+                foreach(Sequence s in sequences)
+                {
+                    Sequence seq = context.Sequences.Find(s.Id);
+                    if(seq.Member.Id == sequence.Member.Id)
+                    {
+                        seq.NextSequence = sequence;
+                    }
+                }
+                context.SaveChanges();
+            }
+            reloadMembers();
+        }
+
+        private void btnSetProfile_Click(object sender, EventArgs e)
+        {
+            if(cbProfile.SelectedIndex >= 0)
+            {
+                this.profile = (Profile)cbProfile.SelectedItem;
+                gbProfile.Enabled = false;
+                gbRead.Enabled = true;
+            }
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

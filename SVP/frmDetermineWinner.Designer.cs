@@ -51,14 +51,13 @@
             this.dvResultList.Dock = System.Windows.Forms.DockStyle.Top;
             this.dvResultList.Location = new System.Drawing.Point(0, 0);
             this.dvResultList.Name = "dvResultList";
-            this.dvResultList.ReadOnly = true;
             this.dvResultList.RowHeadersVisible = false;
-            this.dvResultList.Size = new System.Drawing.Size(667, 204);
+            this.dvResultList.Size = new System.Drawing.Size(710, 204);
             this.dvResultList.TabIndex = 0;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(580, 210);
+            this.btnOk.Location = new System.Drawing.Point(606, 212);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 1;
@@ -88,16 +87,16 @@
             // 
             this.Reevaluate.HeaderText = "Erneut werten?";
             this.Reevaluate.Name = "Reevaluate";
-            this.Reevaluate.ReadOnly = true;
             // 
             // frmDetermineWinner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(667, 244);
+            this.ClientSize = new System.Drawing.Size(710, 255);
             this.ControlBox = false;
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.dvResultList);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmDetermineWinner";
             this.ShowInTaskbar = false;
             this.Text = "Gewinner festlegen";

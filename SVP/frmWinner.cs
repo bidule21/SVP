@@ -12,12 +12,12 @@ namespace SVP
 {
     public partial class frmWinner : Form
     {
-        public frmWinner(price price)
+        public frmWinner(Price price)
         {
             InitializeComponent();
         }
 
-        public frmWinner(award award)
+        public frmWinner(Award award)
         {
             InitializeComponent();
         }

@@ -33,5 +33,21 @@ namespace SVP
             }
             return null;
         }
+        internal static List<RMResult> readFakeShots(string profile)
+        {
+            List<RMResult> result = new List<RMResult>();
+            Random rand = new Random();
+            for(int i = 0;i<10;i++)
+            {
+                RMResult res = new RMResult();
+                res.Angle = 10;
+                res.FactorValue = 10;
+                res.Rings = rand.Next(11);
+                res.ShotNumber = (i + 1);
+                res.Validity = ValidFlag.Valid;
+                result.Add(res);
+            }
+            return result;
+        }
     }
 }
