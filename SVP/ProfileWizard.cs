@@ -18,7 +18,7 @@ namespace SVP
         private List<RMValue> KAL_Values;
         private List<RMValue> RIB_Values;
         private List<RMValue> TEA_Values;
-        private profile profile;
+        private Profile profile;
         public ProfileWizard()
         {
             InitializeComponent();
@@ -96,29 +96,27 @@ namespace SVP
 
         private void addProfilePage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
         {
-            if (rbAddProfile.Checked && txtProfileName.TextLength > 0)
-            {
-                profile = new profile();
-                profile.name = txtProfileName.Text;
-                disagprofile disag = new disagprofile();
-                profile.disagprofile.Add(disag);
-            }
-            else if (rbEditProfile.Checked && cbProfile.SelectedIndex >= 0)
-            {
-                profile = (profile)cbProfile.SelectedItem;
-            }
-            else
-            {
-                e.Cancel = true;
-            }
+
+                if (rbAddProfile.Checked && txtProfileName.TextLength > 0)
+                {
+                    profile = null;
+                }
+                else if (rbEditProfile.Checked && cbProfile.SelectedIndex >= 0)
+                {
+                    profile = (Profile)cbProfile.SelectedItem;
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
         }
 
         private void addProfilePage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
         {
-            using (svpEntities context = new svpEntities())
+            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
                 cbProfile.Items.Clear();
-                cbProfile.Items.AddRange(context.profile.ToArray());
+                cbProfile.Items.AddRange(context.Profiles.ToArray());
             }
         }
 
@@ -217,32 +215,30 @@ namespace SVP
         }
         private void editProfilePage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
         {
-            using (svpEntities context = new svpEntities())
+            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-
-                var disagProfile = context.disagprofile.Where(x => x.profile_id == profile.id).FirstOrDefault();
-                if (disagProfile == null)
+                if(profile == null)
                 {
-                    this.profile.disagprofile.First().value = getProfileString();
-                    context.profile.Add(this.profile);
+                    profile = new Profile();
+                    profile.Name = txtProfileName.Text;
+                    profile.Value = getProfileString();
+                    context.Profiles.Add(profile);
                 }
                 else
                 {
-                    disagProfile.value = getProfileString();
-                    context.Entry((disagprofile)disagProfile).State = System.Data.Entity.EntityState.Modified;
+                    profile = context.Profiles.Find(profile.Id);
+                    profile.Value = getProfileString();
                 }
+                
+                
                 context.SaveChanges();
             }
         }
 
         private void editProfilePage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
         {
-            using (svpEntities context = new svpEntities())
-            {
-                var disag = context.disagprofile.Where(x => x.profile_id == profile.id).FirstOrDefault();
-                if (disag != null)
-                    setProfileString(disag.value);
-            }
+            if (profile != null)
+                setProfileString(profile.Value);
         }
     }
 }

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SVP
 {
-    public partial class group
+    public partial class Group
     {
         public override string ToString()
         {
-            return this.name;
+            return this.Name;
         }
     }
 }
