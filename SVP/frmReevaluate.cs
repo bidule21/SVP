@@ -64,7 +64,7 @@ namespace SVP
                 return;
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                Task<List<RMResult>> ta = Task.Factory.StartNew<List<RMResult>>(() => Common.readFakeShots(profile.Value));
+                Task<List<RMResult>> ta = Task.Factory.StartNew<List<RMResult>>(() => Common.readShots(profile.Value));
                 while (!ta.IsCompleted)
                 {
                     Application.DoEvents();

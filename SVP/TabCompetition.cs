@@ -129,7 +129,7 @@ namespace SVP
                     }
                     else
                     {
-                        foreach (Member m in context.Participants.OfType<Member>().Where(x => x.Club.Id == ((Club)(cbClubGroup.SelectedItem)).Id).OrderBy(x => x.Name)
+                        foreach (Member m in context.Participants.OfType<Member>().Where(x => x.Club.Id == ((Club)(cbClubGroup.SelectedItem)).Id).OrderBy(x => x.Name))
                             cbMember.Items.Add(m);
                     }
                 }
@@ -173,7 +173,7 @@ namespace SVP
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
                 Profile profile = ((Price)cbPrice.SelectedItem).Profile;
-                System.Threading.Tasks.Task<List<RMResult>> ta = System.Threading.Tasks.Task.Factory.StartNew<List<RMResult>>(() => Common.readFakeShots(profile.Value));
+                System.Threading.Tasks.Task<List<RMResult>> ta = System.Threading.Tasks.Task.Factory.StartNew<List<RMResult>>(() => Common.readShots(profile.Value));
                 while (!ta.IsCompleted)
                 {
                     Application.DoEvents();

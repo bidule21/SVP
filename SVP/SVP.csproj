@@ -238,6 +238,12 @@
     <Compile Include="TabSettings.Designer.cs">
       <DependentUpon>TabSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="TabShowCompetition.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabShowCompetition.Designer.cs">
+      <DependentUpon>TabShowCompetition.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabTraining.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -295,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabSettings.resx">
       <DependentUpon>TabSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabShowCompetition.resx">
+      <DependentUpon>TabShowCompetition.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabTraining.resx">
       <DependentUpon>TabTraining.cs</DependentUpon>
