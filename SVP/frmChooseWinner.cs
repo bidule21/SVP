@@ -55,6 +55,7 @@ namespace SVP
                 a.Winner = (Member)winner;
                 context.SaveChanges();
             }
+            this.Close();
         }
     }
 }
