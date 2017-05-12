@@ -29,18 +29,19 @@
         private void InitializeComponent()
         {
             this.gbCompetition = new System.Windows.Forms.GroupBox();
+            this.cbCompetitions = new System.Windows.Forms.ComboBox();
+            this.btnLoad = new System.Windows.Forms.Button();
             this.dvResults = new System.Windows.Forms.DataGridView();
             this.gbExport = new System.Windows.Forms.GroupBox();
+            this.btnShowOnMonitor = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
-            this.btnLoad = new System.Windows.Forms.Button();
-            this.cbCompetition = new System.Windows.Forms.ComboBox();
             this.Competition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Place = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Member = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ReevaluatedValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnShowOnMonitor = new System.Windows.Forms.Button();
             this.gbCompetition.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvResults)).BeginInit();
             this.gbExport.SuspendLayout();
@@ -48,7 +49,7 @@
             // 
             // gbCompetition
             // 
-            this.gbCompetition.Controls.Add(this.cbCompetition);
+            this.gbCompetition.Controls.Add(this.cbCompetitions);
             this.gbCompetition.Controls.Add(this.btnLoad);
             this.gbCompetition.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbCompetition.Location = new System.Drawing.Point(0, 0);
@@ -58,6 +59,25 @@
             this.gbCompetition.TabStop = false;
             this.gbCompetition.Text = "Pokalschießen";
             // 
+            // cbCompetitions
+            // 
+            this.cbCompetitions.FormattingEnabled = true;
+            this.cbCompetitions.Location = new System.Drawing.Point(6, 25);
+            this.cbCompetitions.Name = "cbCompetitions";
+            this.cbCompetitions.Size = new System.Drawing.Size(295, 28);
+            this.cbCompetitions.TabIndex = 17;
+            // 
+            // btnLoad
+            // 
+            this.btnLoad.Location = new System.Drawing.Point(308, 21);
+            this.btnLoad.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(140, 35);
+            this.btnLoad.TabIndex = 16;
+            this.btnLoad.Text = "OK";
+            this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            // 
             // dvResults
             // 
             this.dvResults.AllowUserToAddRows = false;
@@ -66,6 +86,7 @@
             this.dvResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Competition,
             this.Price,
+            this.Type,
             this.Place,
             this.Member,
             this.Value,
@@ -92,6 +113,16 @@
             this.gbExport.TabStop = false;
             this.gbExport.Text = "Exportieren";
             // 
+            // btnShowOnMonitor
+            // 
+            this.btnShowOnMonitor.Location = new System.Drawing.Point(907, 27);
+            this.btnShowOnMonitor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnShowOnMonitor.Name = "btnShowOnMonitor";
+            this.btnShowOnMonitor.Size = new System.Drawing.Size(204, 35);
+            this.btnShowOnMonitor.TabIndex = 16;
+            this.btnShowOnMonitor.Text = "Alle auf Monitor anzeigen";
+            this.btnShowOnMonitor.UseVisualStyleBackColor = true;
+            // 
             // btnExport
             // 
             this.btnExport.Location = new System.Drawing.Point(1119, 27);
@@ -101,24 +132,6 @@
             this.btnExport.TabIndex = 15;
             this.btnExport.Text = "Exportieren";
             this.btnExport.UseVisualStyleBackColor = true;
-            // 
-            // btnLoad
-            // 
-            this.btnLoad.Location = new System.Drawing.Point(308, 21);
-            this.btnLoad.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(140, 35);
-            this.btnLoad.TabIndex = 16;
-            this.btnLoad.Text = "OK";
-            this.btnLoad.UseVisualStyleBackColor = true;
-            // 
-            // cbCompetition
-            // 
-            this.cbCompetition.FormattingEnabled = true;
-            this.cbCompetition.Location = new System.Drawing.Point(6, 25);
-            this.cbCompetition.Name = "cbCompetition";
-            this.cbCompetition.Size = new System.Drawing.Size(295, 28);
-            this.cbCompetition.TabIndex = 17;
             // 
             // Competition
             // 
@@ -134,12 +147,17 @@
             this.Price.ReadOnly = true;
             this.Price.Width = 200;
             // 
+            // Type
+            // 
+            this.Type.HeaderText = "Preis";
+            this.Type.Name = "Type";
+            this.Type.ReadOnly = true;
+            // 
             // Place
             // 
             this.Place.HeaderText = "Platzierung";
             this.Place.Name = "Place";
             this.Place.ReadOnly = true;
-            this.Place.Width = 200;
             // 
             // Member
             // 
@@ -162,16 +180,6 @@
             this.ReevaluatedValue.ReadOnly = true;
             this.ReevaluatedValue.Width = 200;
             // 
-            // btnShowOnMonitor
-            // 
-            this.btnShowOnMonitor.Location = new System.Drawing.Point(907, 27);
-            this.btnShowOnMonitor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnShowOnMonitor.Name = "btnShowOnMonitor";
-            this.btnShowOnMonitor.Size = new System.Drawing.Size(204, 35);
-            this.btnShowOnMonitor.TabIndex = 16;
-            this.btnShowOnMonitor.Text = "Alle auf Monitor anzeigen";
-            this.btnShowOnMonitor.UseVisualStyleBackColor = true;
-            // 
             // TabShowCompetition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -181,6 +189,7 @@
             this.Controls.Add(this.gbCompetition);
             this.Name = "TabShowCompetition";
             this.Size = new System.Drawing.Size(1266, 734);
+            this.Load += new System.EventHandler(this.TabShowCompetition_Load);
             this.gbCompetition.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dvResults)).EndInit();
             this.gbExport.ResumeLayout(false);
@@ -193,15 +202,16 @@
         private System.Windows.Forms.GroupBox gbCompetition;
         private System.Windows.Forms.DataGridView dvResults;
         private System.Windows.Forms.GroupBox gbExport;
-        private System.Windows.Forms.ComboBox cbCompetition;
+        private System.Windows.Forms.ComboBox cbCompetitions;
         private System.Windows.Forms.Button btnLoad;
+        private System.Windows.Forms.Button btnShowOnMonitor;
+        private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.DataGridViewTextBoxColumn Competition;
         private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn Place;
         private System.Windows.Forms.DataGridViewTextBoxColumn Member;
         private System.Windows.Forms.DataGridViewTextBoxColumn Value;
         private System.Windows.Forms.DataGridViewTextBoxColumn ReevaluatedValue;
-        private System.Windows.Forms.Button btnShowOnMonitor;
-        private System.Windows.Forms.Button btnExport;
     }
 }
