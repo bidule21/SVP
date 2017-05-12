@@ -138,14 +138,12 @@
             this.Competition.HeaderText = "Pokalschießen";
             this.Competition.Name = "Competition";
             this.Competition.ReadOnly = true;
-            this.Competition.Width = 200;
             // 
             // Price
             // 
             this.Price.HeaderText = "Pokal / Ehrenscheibe";
             this.Price.Name = "Price";
             this.Price.ReadOnly = true;
-            this.Price.Width = 200;
             // 
             // Type
             // 
@@ -171,14 +169,12 @@
             this.Value.HeaderText = "Ringe";
             this.Value.Name = "Value";
             this.Value.ReadOnly = true;
-            this.Value.Width = 200;
             // 
             // ReevaluatedValue
             // 
             this.ReevaluatedValue.HeaderText = "Nachgewertet";
             this.ReevaluatedValue.Name = "ReevaluatedValue";
             this.ReevaluatedValue.ReadOnly = true;
-            this.ReevaluatedValue.Width = 200;
             // 
             // TabShowCompetition
             // 
@@ -190,6 +186,7 @@
             this.Name = "TabShowCompetition";
             this.Size = new System.Drawing.Size(1266, 734);
             this.Load += new System.EventHandler(this.TabShowCompetition_Load);
+            this.Enter += new System.EventHandler(this.TabShowCompetition_Enter);
             this.gbCompetition.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dvResults)).EndInit();
             this.gbExport.ResumeLayout(false);

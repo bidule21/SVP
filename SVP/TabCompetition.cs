@@ -173,7 +173,7 @@ namespace SVP
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
                 Profile profile = ((Price)cbPrice.SelectedItem).Profile;
-                System.Threading.Tasks.Task<List<RMResult>> ta = System.Threading.Tasks.Task.Factory.StartNew<List<RMResult>>(() => Common.readShots(profile.Value));
+                System.Threading.Tasks.Task<List<RMResult>> ta = System.Threading.Tasks.Task.Factory.StartNew<List<RMResult>>(() => Common.readFakeShots(profile.Value));
                 while (!ta.IsCompleted)
                 {
                     Application.DoEvents();
@@ -215,6 +215,7 @@ namespace SVP
                 dvResults.Rows.Add(row);
                 context.Sequences.Add(sequence);
                 context.SaveChanges();
+                Monitor.GetMonitor().DisplaySequence(context.Sequences.Include("Shots").First(x => x.Id == sequence.Id));
                 gbRead.Enabled = (cbPrice.Items.Count > 0);
                 btnRead.Enabled = true;
                 pBar.Visible = false;

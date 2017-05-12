@@ -90,7 +90,7 @@ namespace SVP
                         DataGridViewRow row = new DataGridViewRow();
                         row.Tag = sequence.Member.Id;
                         row.Cells.Add(new DataGridViewTextBoxCell() { Value = place++ });
-                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Member.Name });
+                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Member });
                         row.Cells.Add(new DataGridViewTextBoxCell() { Value = displayValue });
                         row.Cells.Add(new DataGridViewCheckBoxCell() { Value = reevaluateSeq });
                         dvResultList.Rows.Add(row);
