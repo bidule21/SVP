@@ -45,12 +45,22 @@ namespace SVP
                     row.Cells.Add(new DataGridViewTextBoxCell() { Value = a.Winner });
                     row.Cells.Add(new DataGridViewTextBoxCell());
                     row.Cells.Add(new DataGridViewTextBoxCell());
+                    dvResults.Rows.Add(row);
                 }
                 foreach(Price p in competition.Prices)
                 {
-                    foreach(Sequence seq in p.Sequences.OrderBy(x => x.Shots.Sum(y => y.Value))) //ToDo: ThenBy NextSequence
+                    int place = 1;
+                    foreach (Sequence seq in p.Sequences.OrderBy(x => x.Shots.Sum(y => y.Value))) //ToDo: ThenBy NextSequence
                     {
-
+                        DataGridViewRow row = new DataGridViewRow();
+                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = competition.Name });
+                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = "Pokal" });
+                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = p.Name });
+                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = place++ });
+                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = seq.Member });
+                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = seq.Shots.Sum(x => x.Value)});
+                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = (seq.NextSequence == null) ? "" : seq.NextSequence.Shots.Sum(x => x.Value).ToString() });
+                        dvResults.Rows.Add(row);
                     }
                 }
             }

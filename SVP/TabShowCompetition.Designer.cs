@@ -135,7 +135,7 @@
             // 
             // Competition
             // 
-            this.Competition.HeaderText = "Competition";
+            this.Competition.HeaderText = "Pokalschießen";
             this.Competition.Name = "Competition";
             this.Competition.ReadOnly = true;
             this.Competition.Width = 200;
