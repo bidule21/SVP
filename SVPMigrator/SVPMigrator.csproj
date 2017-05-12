@@ -32,8 +32,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.9.9\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,6 +76,60 @@
     </Compile>
     <Compile Include="member.cs">
       <DependentUpon>SVPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old\award.cs">
+      <DependentUpon>OldSVPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old\club.cs">
+      <DependentUpon>OldSVPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old\competition.cs">
+      <DependentUpon>OldSVPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old\disagprofile.cs">
+      <DependentUpon>OldSVPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old\evaluation.cs">
+      <DependentUpon>OldSVPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old\group.cs">
+      <DependentUpon>OldSVPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old\manualprofile.cs">
+      <DependentUpon>OldSVPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old\member.cs">
+      <DependentUpon>OldSVPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old\OldSVPModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OldSVPModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old\OldSVPModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OldSVPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old\OldSVPModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OldSVPModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Old\participant.cs">
+      <DependentUpon>OldSVPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old\price.cs">
+      <DependentUpon>OldSVPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old\profile.cs">
+      <DependentUpon>OldSVPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old\sequence.cs">
+      <DependentUpon>OldSVPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Old\shot.cs">
+      <DependentUpon>OldSVPModel.tt</DependentUpon>
     </Compile>
     <Compile Include="participant.cs">
       <DependentUpon>SVPEntities.tt</DependentUpon>
@@ -98,6 +169,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="Old\OldSVPModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OldSVPModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Old\OldSVPModel.edmx.diagram">
+      <DependentUpon>OldSVPModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <EntityDeploy Include="SVPEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SVPEntities.Designer.cs</LastGenOutput>
@@ -107,6 +186,19 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Old\OldSVPModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OldSVPModel.edmx</DependentUpon>
+      <LastGenOutput>OldSVPModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Old\OldSVPModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OldSVPModel.edmx</DependentUpon>
+      <LastGenOutput>OldSVPModel.cs</LastGenOutput>
+    </Content>
     <Content Include="SVPEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SVPEntities.edmx</DependentUpon>

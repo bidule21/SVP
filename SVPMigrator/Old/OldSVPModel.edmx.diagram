@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bf42c82d42ee4c4db2c5489af5824c3f" Name="Diagram1">
+        <EntityTypeShape EntityType="svp_oldModel.award" Width="1.5" PointX="1.5" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="svp_oldModel.club" Width="1.5" PointX="1.5" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="svp_oldModel.competition" Width="1.5" PointX="3.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="svp_oldModel.disagprofile" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="svp_oldModel.evaluation" Width="1.5" PointX="3.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="svp_oldModel.group" Width="1.5" PointX="1.5" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="svp_oldModel.manualprofile" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="svp_oldModel.member" Width="1.5" PointX="1.5" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="svp_oldModel.participant" Width="1.5" PointX="3.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="svp_oldModel.price" Width="1.5" PointX="6" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="svp_oldModel.profile" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="svp_oldModel.sequence" Width="1.5" PointX="8.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="svp_oldModel.shot" Width="1.5" PointX="10.5" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="svp_oldModel.fk_award_competition1" ManuallyRouted="false" />
+        <AssociationConnector Association="svp_oldModel.fk_member_club" ManuallyRouted="false" />
+        <AssociationConnector Association="svp_oldModel.fk_group_competition1" ManuallyRouted="false" />
+        <AssociationConnector Association="svp_oldModel.fk_price_competition1" ManuallyRouted="false" />
+        <AssociationConnector Association="svp_oldModel.fk_disagProfile_profile1" ManuallyRouted="false" />
+        <AssociationConnector Association="svp_oldModel.fk_group_participant1" ManuallyRouted="false" />
+        <AssociationConnector Association="svp_oldModel.fk_manualProfile_profile1" ManuallyRouted="false" />
+        <AssociationConnector Association="svp_oldModel.fk_shot_member1" ManuallyRouted="false" />
+        <AssociationConnector Association="svp_oldModel.fk_price_profile1" ManuallyRouted="false" />
+        <AssociationConnector Association="svp_oldModel.fk_shot_profile1" ManuallyRouted="false" />
+        <AssociationConnector Association="svp_oldModel.fk_shot_sequence1" ManuallyRouted="false" />
+        <AssociationConnector Association="svp_oldModel.award_has_winner" ManuallyRouted="false" />
+        <AssociationConnector Association="svp_oldModel.group_has_member" ManuallyRouted="false" />
+        <AssociationConnector Association="svp_oldModel.participant_has_member" ManuallyRouted="false" />
+        <AssociationConnector Association="svp_oldModel.participant_has_sequence" ManuallyRouted="false" />
+        <AssociationConnector Association="svp_oldModel.price_has_evaluation" ManuallyRouted="false" />
+        <AssociationConnector Association="svp_oldModel.price_has_sequence" ManuallyRouted="false" />
+        <AssociationConnector Association="svp_oldModel.price_has_winner" ManuallyRouted="false" />
+        <AssociationConnector Association="svp_oldModel.sequence_has_newsequence" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
