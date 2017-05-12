@@ -12,22 +12,16 @@ namespace SVP
     using System;
     using System.Collections.Generic;
     
-    public partial class Price
+    public partial class GroupCompetition : Competition
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Price()
+        public GroupCompetition()
         {
-            this.Sequences = new HashSet<Sequence>();
+            this.Groups = new HashSet<Group>();
         }
     
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public Nullable<System.Guid> Evaluation { get; set; }
     
-        public virtual Competition Competition { get; set; }
-        public virtual Participant Winner { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sequence> Sequences { get; set; }
-        public virtual Profile Profile { get; set; }
+        public virtual ICollection<Group> Groups { get; set; }
     }
 }
