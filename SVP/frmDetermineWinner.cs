@@ -73,12 +73,12 @@ namespace SVP
                     var bestResult = context.Prices.Include("Sequences").FirstOrDefault(x => x.Id == price.Id).Sequences.Max(x => x.Shots.Sum(y => y.Value));
                     int count = context.Prices.Include("Sequences").FirstOrDefault(x => x.Id == price.Id).Sequences.Where(x => x.Shots.Sum(y => y.Value) == bestResult).Count();
                     int place = 1;
-                    foreach (var sequence in context.Prices.Include("Sequences.Member").Include("Sequences.Shots").FirstOrDefault(x => x.Id == price.Id).Sequences.OrderByDescending(x => x.NextSequence == null ? 0 : x.NextSequence.Shots.Sum(y => y.Value)).ThenByDescending(x => x.Shots.Sum(y => y.Value)))
+                    foreach (var sequence in context.Prices.Include("Sequences.Member").Include("Sequences.Shots").FirstOrDefault(x => x.Id == price.Id).Sequences.OrderByDescending(x => x.Shots.Sum(y => y.Value)).ThenByDescending(x => x.NextSequence == null ? 0 : x.NextSequence.Shots.Sum(y => y.Value)))
                     {
-                        bool reevaluateSeq = false;
+                        bool multileWinners = false;
                         if (count > 1)
                         {
-                            reevaluateSeq = true;
+                            multileWinners = true;
                         }
                         else if (count < 1)
                         {
@@ -92,7 +92,7 @@ namespace SVP
                         row.Cells.Add(new DataGridViewTextBoxCell() { Value = place++ });
                         row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Member });
                         row.Cells.Add(new DataGridViewTextBoxCell() { Value = displayValue });
-                        row.Cells.Add(new DataGridViewCheckBoxCell() { Value = reevaluateSeq });
+                        row.Cells.Add(new DataGridViewCheckBoxCell() { Value = multileWinners && (bestResult == sequence.Shots.Sum(x => x.Value)) });
                         dvResultList.Rows.Add(row);
                     }
                 }

@@ -82,7 +82,7 @@
             this.startPage.Controls.Add(this.rbSingleCompetition);
             this.startPage.Name = "startPage";
             this.startPage.NextPage = this.addPricePage;
-            this.startPage.Size = new System.Drawing.Size(814, 413);
+            this.startPage.Size = new System.Drawing.Size(814, 448);
             this.startPage.TabIndex = 0;
             this.startPage.Text = "Was möchtest du tun?";
             this.startPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.startPage_Commit);
@@ -190,7 +190,7 @@
             this.competitionOverviewPage.Controls.Add(this.rbAddPrice);
             this.competitionOverviewPage.Controls.Add(this.dvCompetition);
             this.competitionOverviewPage.Name = "competitionOverviewPage";
-            this.competitionOverviewPage.Size = new System.Drawing.Size(790, 402);
+            this.competitionOverviewPage.Size = new System.Drawing.Size(814, 448);
             this.competitionOverviewPage.TabIndex = 3;
             this.competitionOverviewPage.Text = "Übersicht";
             this.competitionOverviewPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.competitionOverviewPage_Commit);

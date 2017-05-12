@@ -24,6 +24,7 @@ namespace SVP
             cbClubGroup.Items.Clear();
             cbPrice.Items.Clear();
             dvCompetition.Rows.Clear();
+            dvResults.Rows.Clear();
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
                 foreach (var p in context.Profiles)
@@ -158,7 +159,7 @@ namespace SVP
                             cbPrice.Items.Add(price);
                     }
                 }
-                if(cbPrice.Items.Count > 0)
+                if (cbPrice.Items.Count > 0)
                     cbPrice.SelectedIndex = 0;
             }
         }
@@ -185,7 +186,7 @@ namespace SVP
                     btnRead.Enabled = true;
                     return;
                 }
-                
+
                 Sequence sequence = new Sequence();
                 sequence.Date = DateTime.Now;
                 sequence.Member = ((Member)cbMember.SelectedItem);
@@ -235,6 +236,7 @@ namespace SVP
             {
                 using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                 {
+
                     foreach (var price in wizard.Competition.Prices)
                         context.Profiles.Attach(price.Profile);
                     context.Competitions.Add(wizard.Competition);
@@ -275,7 +277,30 @@ namespace SVP
             {
                 using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                 {
-                    context.SaveChanges(); //ToDo: Check if this is right.
+                    Competition c = context.Competitions.Find(wizard.Competition.Id);
+                    c.Name = wizard.Competition.Name;
+                    foreach (var price in wizard.Competition.Prices)
+                    {
+                        if (price.Id == 0)
+                            c.Prices.Add(price);
+                        else
+                        {
+                            Price p = context.Prices.Find(price.Id);
+                            p.Name = price.Name;
+                            p.Evaluation = p.Evaluation;
+                        }
+                    }
+                    foreach (Award award in wizard.Competition.Awards)
+                    {
+                        if (award.Id == 0)
+                            c.Awards.Add(award);
+                        else
+                        {
+                            Award a = context.Awards.Find(award.Id);
+                            a.Name = award.Name;
+                        }
+                    }
+                    context.SaveChanges();
 
                 }
                 reload_Controls();
