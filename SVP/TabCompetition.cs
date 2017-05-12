@@ -296,8 +296,14 @@ namespace SVP
                         Price price = context.Prices.Find(p.Id);
                         allWinnersSet = allWinnersSet & (price.Winner != null);
                     }
-                    //ToDo Set Award Winner
-                    if(allWinnersSet)
+                    foreach (Award a in currentCompetition.Awards)
+                    {
+                        frmChooseWinner frmWinner = new frmChooseWinner(a);
+                        frmWinner.ShowDialog();
+                        Award award = context.Awards.Find(a.Id);
+                        allWinnersSet = allWinnersSet & (award.Winner != null);
+                    }
+                    if (allWinnersSet)
                     {
                         Competition comp = context.Competitions.Find(currentCompetition.Id);
                         comp.Finished = true;
