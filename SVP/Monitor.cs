@@ -24,6 +24,7 @@ namespace SVP
         private int currentShot = 0;
         private Timer timer;
 		private List<Sequence> sequenceList;
+        private Queue<Sequence> sequencesToDisplay;
 		public DisplaySetting DisplaySetting { get; private set; }
 
 		public static Monitor GetMonitor()
@@ -35,38 +36,39 @@ namespace SVP
 
 		public void SetDisplaySetting(DisplaySetting setting)
 		{
-			if(setting != DisplaySetting.Everything)
+            this.DisplaySetting = setting;
+            if (setting != DisplaySetting.Everything)
 			{
 				lbCurrentResult.Text = "";
 				rtResults.Text = "";
 				lbResults.Text = "";
 				dgResultList.Rows.Clear();
 			}
-			switch (DisplaySetting)
-			{
-				case DisplaySetting.Everything:
-					foreach(Sequence result in sequenceList)
-						dgResultList.Rows.Add(result.Member.ToString(), result.Shots.Sum(x => x.Value).ToString(), result.Profile);
-					break;
-				case DisplaySetting.EverythingAnonym:
-					foreach (Sequence result in sequenceList)
-						dgResultList.Rows.Add(SVP.Properties.Settings.Default.DefaultName, result.Shots.Sum(x => x.Value).ToString(), result.Profile);
-					break;
-				case DisplaySetting.ShotImageWithPoints:
-					break;
-				case DisplaySetting.ShotImage:
-					break;
-				default:
-					break;
-			}
-			this.DisplaySetting = setting;
+            dgResultList.Rows.Clear();
+            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
+            {
+                foreach (Sequence result in sequenceList)
+                {
+                    Sequence seq = context.Sequences.Find(result.Id);
+                    switch (DisplaySetting)
+                    {
+                        case DisplaySetting.Everything:
+                                dgResultList.Rows.Add(seq.Member.ToString(), seq.Shots.Sum(x => x.Value).ToString(), seq.Profile);
+                            break;
+                        case DisplaySetting.EverythingAnonym:
+                            dgResultList.Rows.Add(SVP.Properties.Settings.Default.DefaultName, seq.Shots.Sum(x => x.Value).ToString(), seq.Profile);
+                            break;
+                    }
+                }
+            }
 		}
 
         private Monitor()
         {
             InitializeComponent();
 			sequenceList = new List<Sequence>();
-			DisplaySetting = DisplaySetting.Everything;
+            sequencesToDisplay = new Queue<Sequence>();
+            DisplaySetting = DisplaySetting.Everything;
             this.StartPosition = FormStartPosition.Manual;
             if (Screen.AllScreens.Length > 1)
             {
@@ -107,7 +109,7 @@ namespace SVP
                 {
                     DisplayAllShots();
                     currentShot = 0;
-                    this.timer.Stop();
+                    currentResult = sequencesToDisplay.Dequeue();
                 }
                 else
                 {
@@ -126,7 +128,9 @@ namespace SVP
 				dgResultList.Rows.Add(name, result.Shots.Sum(x => x.Value).ToString(), result.Profile);
 				dgResultList.FirstDisplayedScrollingRowIndex = dgResultList.RowCount - 1;
 			}
-            DisplaySequence(result);
+            sequencesToDisplay.Enqueue(result);
+            if (currentResult == null)
+                currentResult = sequencesToDisplay.Dequeue();
         }
         
         internal void DisplaySequence(Sequence result)
@@ -134,7 +138,6 @@ namespace SVP
             this.currentResult = result;
             currentShot = 0;
             lbResults.Text = (this.DisplaySetting == DisplaySetting.Everything) ? result.Member.ToString() : SVP.Properties.Settings.Default.DefaultName;
-            timer.Start();
         }
         
         private void DrawShot(Shot shot, Graphics graphics, Brush brush)

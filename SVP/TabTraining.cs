@@ -158,7 +158,7 @@ namespace SVP
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
                 var sequence = context.Sequences.Where(x => x.Id == ((Sequence)((Button)sender).Tag).Id).FirstOrDefault();
-                Monitor.GetMonitor().DisplaySequence(sequence);
+                Monitor.GetMonitor().AddResult(sequence);
             }
         }
 

@@ -216,7 +216,7 @@ namespace SVP
                 dvResults.Rows.Add(row);
                 context.Sequences.Add(sequence);
                 context.SaveChanges();
-                Monitor.GetMonitor().DisplaySequence(context.Sequences.Include("Shots").First(x => x.Id == sequence.Id));
+                Monitor.GetMonitor().AddResult(context.Sequences.Include("Shots").First(x => x.Id == sequence.Id));
                 gbRead.Enabled = (cbPrice.Items.Count > 0);
                 btnRead.Enabled = true;
                 pBar.Visible = false;
