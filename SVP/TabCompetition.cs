@@ -174,7 +174,7 @@ namespace SVP
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
                 Profile profile = ((Price)cbPrice.SelectedItem).Profile;
-                System.Threading.Tasks.Task<List<RMResult>> ta = System.Threading.Tasks.Task.Factory.StartNew<List<RMResult>>(() => Common.readFakeShots(profile.Value));
+                System.Threading.Tasks.Task<List<RMResult>> ta = System.Threading.Tasks.Task.Factory.StartNew<List<RMResult>>(() => Common.readShots(profile.Value));
                 while (!ta.IsCompleted)
                 {
                     Application.DoEvents();

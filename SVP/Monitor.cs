@@ -109,7 +109,10 @@ namespace SVP
                 {
                     DisplayAllShots();
                     currentShot = 0;
-                    currentResult = sequencesToDisplay.Dequeue();
+                    if (sequencesToDisplay.Count > 0)
+                        currentResult = sequencesToDisplay.Dequeue();
+                    else
+                        currentResult = null;
                 }
                 else
                 {
@@ -129,7 +132,7 @@ namespace SVP
 				dgResultList.FirstDisplayedScrollingRowIndex = dgResultList.RowCount - 1;
 			}
             sequencesToDisplay.Enqueue(result);
-            if (currentResult == null)
+            if (currentResult == null && sequencesToDisplay.Count > 0)
                 currentResult = sequencesToDisplay.Dequeue();
         }
         

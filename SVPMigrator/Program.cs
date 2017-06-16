@@ -31,11 +31,11 @@ namespace SVPMigrator
                             SVP.Member newMember = new SVP.Member();
                             newMember.Firstname = oldMember.firstname;
                             newMember.Name = oldMember.name;
+                            newMember.Shortname = (oldMember.shortname == null ? "" : oldMember.shortname);
                             if (oldMember.birthday < new DateTime(2017, 1, 1))
                                 newMember.Birthday = oldMember.birthday;
                             else
                                 newMember.Birthday = null;
-                            newMember.Shortname = oldMember.shortname;
                             foreach(Old.sequence oldSeq in oldMember.sequences)
                             {
                                 SVP.Sequence newSeq = new SVP.Sequence();
