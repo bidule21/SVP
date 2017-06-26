@@ -35,6 +35,7 @@ namespace SVP
             this.tpTraining = new System.Windows.Forms.TabPage();
             this.tpCompetition = new System.Windows.Forms.TabPage();
             this.tpShowCompetitions = new System.Windows.Forms.TabPage();
+            this.tpShowMember = new System.Windows.Forms.TabPage();
             this.tpSettings = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
@@ -44,6 +45,7 @@ namespace SVP
             this.tabControl1.Controls.Add(this.tpTraining);
             this.tabControl1.Controls.Add(this.tpCompetition);
             this.tabControl1.Controls.Add(this.tpShowCompetitions);
+            this.tabControl1.Controls.Add(this.tpShowMember);
             this.tabControl1.Controls.Add(this.tpSettings);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -75,7 +77,7 @@ namespace SVP
             this.tpCompetition.Text = "Pokalschießen";
             this.tpCompetition.UseVisualStyleBackColor = true;
             // 
-            // tpCompetition
+            // tpShowCompetition
             // 
             this.tpShowCompetitions.Controls.Add(new TabShowCompetition());
             this.tpShowCompetitions.Location = new System.Drawing.Point(4, 22);
@@ -85,6 +87,17 @@ namespace SVP
             this.tpShowCompetitions.TabIndex = 1;
             this.tpShowCompetitions.Text = "Vergangene Pokalschießen";
             this.tpShowCompetitions.UseVisualStyleBackColor = true;
+            // 
+            // tpShowMember
+            // 
+            this.tpShowMember.Controls.Add(new TabShowMember());
+            this.tpShowMember.Location = new System.Drawing.Point(4, 22);
+            this.tpShowMember.Name = "tpShowMember";
+            this.tpShowMember.Padding = new System.Windows.Forms.Padding(3);
+            this.tpShowMember.Size = new System.Drawing.Size(828, 569);
+            this.tpShowMember.TabIndex = 2;
+            this.tpShowMember.Text = "Mitglieder";
+            this.tpShowMember.UseVisualStyleBackColor = true;
             // 
             // tpSettings
             // 
@@ -121,6 +134,7 @@ namespace SVP
         private System.Windows.Forms.TabPage tpTraining;
         private System.Windows.Forms.TabPage tpCompetition;
         private System.Windows.Forms.TabPage tpShowCompetitions;
+        private System.Windows.Forms.TabPage tpShowMember;
         private System.Windows.Forms.TabPage tpSettings;
     }
 }

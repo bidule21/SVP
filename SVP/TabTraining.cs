@@ -146,7 +146,7 @@ namespace SVP
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = member.ToString() });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Shots.Sum(s => s.Value) });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = pro.ToString() });
-				row.Cells.Add(new DataGridViewButtonCell() { UseColumnTextForButtonValue = true, Tag = sequence.Id});
+                row.Cells.Add(new DataGridViewButtonCell() { UseColumnTextForButtonValue = true, Tag = sequence.Id });
                 dvResults.Rows.Add(row);
             }
             pBar.Visible = false;
@@ -165,24 +165,24 @@ namespace SVP
         private void TabTraining_Load(object sender, EventArgs e)
         {
             reload_Controls();
-			using (SVPEntitiesContainer context = new SVPEntitiesContainer())
-			{
-				var sequences = context.Sequences.Include("Shots").Include("Profile").Include("Member");
-				foreach (var sequence in sequences)
-				{
+            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
+            {
+                var sequences = context.Sequences.Include("Shots").Include("Profile").Include("Member");
+                foreach (var sequence in sequences)
+                {
                     if (sequence.Date.Date != DateTime.Today)
                         continue;
-					DataGridViewRow row = new DataGridViewRow();
-					row.Tag = sequence.Id;
-					row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Member.ToString() });
-					row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Shots.Sum(s => s.Value) });
-					row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Profile.ToString() });
-					DataGridViewButtonCell button = new DataGridViewButtonCell() { UseColumnTextForButtonValue = true};
-					row.Cells.Add(button);
-					dvResults.Rows.Add(row);
-				}
-			}
-				 
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.Tag = sequence.Id;
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Member.ToString() });
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Shots.Sum(s => s.Value) });
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Profile.ToString() });
+                    DataGridViewButtonCell button = new DataGridViewButtonCell() { UseColumnTextForButtonValue = true };
+                    row.Cells.Add(button);
+                    dvResults.Rows.Add(row);
+                }
+            }
+
         }
 
         private void cbMember_SelectedIndexChanged(object sender, EventArgs e)
@@ -197,7 +197,7 @@ namespace SVP
 
         private void dvResults_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex == 3)
+            if (e.ColumnIndex == 3)
             {
                 int sequence_id = (int)dvResults.Rows[e.RowIndex].Tag;
                 using (SVPEntitiesContainer context = new SVPEntitiesContainer())
