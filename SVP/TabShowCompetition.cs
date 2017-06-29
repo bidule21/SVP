@@ -100,36 +100,87 @@ namespace SVP
                         int row = pckg.Workbook.Names["HeaderStart"].Start.Row;
                         int column = pckg.Workbook.Names["HeaderStart"].Start.Column;
                         int shotCount = 10;
-                        pckg.Workbook.Worksheets[1].Cells[row, column].Value = "Vorname";
-                        pckg.Workbook.Worksheets[1].Cells[row, column + 1].Value = "Nachname";
-                        pckg.Workbook.Worksheets[1].Cells[row, column + 2].Value = "Verein";
-                        pckg.Workbook.Worksheets[1].Cells[row, column + 3].Value = "Pokal";
+                        pckg.Workbook.Worksheets[1].Cells[row, column].Value = "Platz";
+                        pckg.Workbook.Worksheets[1].Cells[row, column + 1].Value = "Vorname";
+                        pckg.Workbook.Worksheets[1].Cells[row, column + 2].Value = "Nachname";
+                        pckg.Workbook.Worksheets[1].Cells[row, column + 3].Value = "Verein";
+                        pckg.Workbook.Worksheets[1].Cells[row, column + 4].Value = "Pokal";
+                        pckg.Workbook.Worksheets[1].Cells[row, column].Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
+                        pckg.Workbook.Worksheets[1].Cells[row, column].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Medium;
+                        pckg.Workbook.Worksheets[1].Cells[row, column + 1].Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
+                        pckg.Workbook.Worksheets[1].Cells[row, column + 1].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Medium;
+                        pckg.Workbook.Worksheets[1].Cells[row, column + 2].Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
+                        pckg.Workbook.Worksheets[1].Cells[row, column + 2].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Medium;
+                        pckg.Workbook.Worksheets[1].Cells[row, column + 3].Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
+                        pckg.Workbook.Worksheets[1].Cells[row, column + 3].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Medium;
+                        pckg.Workbook.Worksheets[1].Cells[row, column + 4].Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
+                        pckg.Workbook.Worksheets[1].Cells[row, column + 4].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Medium;
+                        pckg.Workbook.Worksheets[1].Cells[row, column + 5].Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
+                        pckg.Workbook.Worksheets[1].Cells[row, column + 5].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Medium;
                         int i;
                         for (i = 0; i < shotCount; i++)
                         {
-                            pckg.Workbook.Worksheets[1].Cells[row, column + 4 + i].Value = (i + 1) + ".";
+                            pckg.Workbook.Worksheets[1].Cells[row, column + 5 + i].Value = (i + 1) + ".";
+                            pckg.Workbook.Worksheets[1].Cells[row, column + 5 + i].Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
+                            pckg.Workbook.Worksheets[1].Cells[row, column + 5 + i].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Medium;
                         }
-                        pckg.Workbook.Worksheets[1].Cells[row, column + 4 + i].Value = "Summe";
+                        pckg.Workbook.Worksheets[1].Cells[row, column + 5 + i].Value = "Summe";
+                        pckg.Workbook.Worksheets[1].Cells[row, column + 5 + i].Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
+                        pckg.Workbook.Worksheets[1].Cells[row, column + 5 + i].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Medium;
                         row++;
+     
                         foreach (Price p in competition.Prices)
                         {
-                            foreach (Sequence s in p.Sequences.OrderBy(x => x.Shots.Sum(y => y.Value)).ThenByDescending(x => x.NextSequence == null ? 0 : x.NextSequence.Shots.Sum(y => y.Value)))
+                            int place = 1;
+                            double lastResult = 0;
+                            double lastNextResult = 0;
+                            foreach (Sequence s in p.Sequences.OrderByDescending(x => x.Shots.Sum(y => y.Value)).ThenByDescending(x => x.NextSequence == null ? 0 : x.NextSequence.Shots.Sum(y => y.Value)))
                             {
-                                pckg.Workbook.Worksheets[1].Cells[row, column].Value = s.Member.Firstname;
-                                pckg.Workbook.Worksheets[1].Cells[row, column + 1].Value = s.Member.Name;
-                                pckg.Workbook.Worksheets[1].Cells[row, column + 2].Value = s.Member.Club;
-                                pckg.Workbook.Worksheets[1].Cells[row, column + 3].Value = p.Name;
+                                pckg.Workbook.Worksheets[1].Cells[row, column].Value = place.ToString() + ".";
+                                pckg.Workbook.Worksheets[1].Cells[row, column + 1].Value = s.Member.Firstname;
+                                pckg.Workbook.Worksheets[1].Cells[row, column + 2].Value = s.Member.Name;
+                                pckg.Workbook.Worksheets[1].Cells[row, column + 3].Value = s.Member.Club;
+                                pckg.Workbook.Worksheets[1].Cells[row, column + 4].Value = p.Name;
+                                pckg.Workbook.Worksheets[1].Cells[row, column].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+                                pckg.Workbook.Worksheets[1].Cells[row, column].Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
+                                pckg.Workbook.Worksheets[1].Cells[row, column + 1].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+                                pckg.Workbook.Worksheets[1].Cells[row, column + 1].Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
+                                pckg.Workbook.Worksheets[1].Cells[row, column + 2].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+                                pckg.Workbook.Worksheets[1].Cells[row, column + 2].Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
+                                pckg.Workbook.Worksheets[1].Cells[row, column + 3].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+                                pckg.Workbook.Worksheets[1].Cells[row, column + 3].Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
+                                pckg.Workbook.Worksheets[1].Cells[row, column + 4].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+                                pckg.Workbook.Worksheets[1].Cells[row, column + 4].Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
+                                
                                 for (i = 0; i < s.Shots.Count; i++)
                                 {
                                     if (s.NextSequence == null)
-                                        pckg.Workbook.Worksheets[1].Cells[row, column + 4 + i].Value = s.Shots.ElementAt(i).Value.ToString();
+                                        pckg.Workbook.Worksheets[1].Cells[row, column + 5 + i].Value = s.Shots.ElementAt(i).Value.ToString();
                                     else
-                                        pckg.Workbook.Worksheets[1].Cells[row, column + 4 + i].Value = s.Shots.ElementAt(i).Value.ToString() + " (" + s.NextSequence.Shots.ElementAt(i).Value.ToString() + ")";
+                                        pckg.Workbook.Worksheets[1].Cells[row, column + 5 + i].Value = s.Shots.ElementAt(i).Value.ToString() + " (" + s.NextSequence.Shots.ElementAt(i).Value.ToString() + ")";
+                                    pckg.Workbook.Worksheets[1].Cells[row, column + 5 + i].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+                                    pckg.Workbook.Worksheets[1].Cells[row, column + 5 + i].Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
                                 }
                                 if (s.NextSequence == null)
-                                    pckg.Workbook.Worksheets[1].Cells[row, column + 4 + i].Value = s.Shots.Sum(x => x.Value);
+                                    pckg.Workbook.Worksheets[1].Cells[row, column + 5 + i].Value = s.Shots.Sum(x => x.Value);
                                 else
-                                    pckg.Workbook.Worksheets[1].Cells[row, column + 4 + i].Value = s.Shots.Sum(x => x.Value) + " (" + s.NextSequence.Shots.Sum(x => x.Value) + ")";
+                                    pckg.Workbook.Worksheets[1].Cells[row, column + 5 + i].Value = s.Shots.Sum(x => x.Value) + " (" + s.NextSequence.Shots.Sum(x => x.Value) + ")";
+                                pckg.Workbook.Worksheets[1].Cells[row, column + 5 + i].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+                                pckg.Workbook.Worksheets[1].Cells[row, column + 5 + i].Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
+                                if (s.Shots.Sum(x => x.Value) == lastResult)
+                                {
+                                    if (s.NextSequence != null)
+                                    {
+                                        if (s.NextSequence.Shots.Sum(x => x.Value) != lastNextResult)
+                                            place++;
+                                        lastNextResult = s.NextSequence.Shots.Sum(x => x.Value);
+                                    }
+                                }
+                                else
+                                {
+                                    place++;
+                                }
+                                lastResult = s.Shots.Sum(x => x.Value);
                                 row++;
                             }
                         }
@@ -148,6 +199,7 @@ namespace SVP
                             pckg.Workbook.Worksheets[1].Cells[row, column + 3].Value = a.Name;
                             row++;
                         }
+                        pckg.Workbook.Worksheets[1].Cells.AutoFitColumns(3);
                         pckg.Save();
                         MessageBox.Show("Export erfolgreich!");
                     }
