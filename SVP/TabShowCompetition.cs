@@ -82,6 +82,8 @@ namespace SVP
 
         private void btnExport_Click(object sender, EventArgs e)
         {
+            if (cbCompetitions.SelectedIndex < 0)
+                return;
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.AddExtension = true;
             sfd.Filter = "Excel-Datei|*.xlsx";

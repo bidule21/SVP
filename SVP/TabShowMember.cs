@@ -81,7 +81,7 @@ namespace SVP
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            if (cbMember.SelectedIndex == -1)
+            if (cbMember.SelectedIndex < 0)
                 return;
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.AddExtension = true;
