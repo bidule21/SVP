@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SVP", "SVP\SVP.csproj", "{AC5149D2-3CEF-4877-9B6B-2ED26B4E6F39}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisagLib", "DisagLib\DisagLib.csproj", "{6BA4C402-4A4F-41CB-ADF6-519D4ACD0832}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SVPMigrator", "SVPMigrator\SVPMigrator.csproj", "{2A971A94-C97A-432E-9925-C666C2B12AB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6BA4C402-4A4F-41CB-ADF6-519D4ACD0832}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BA4C402-4A4F-41CB-ADF6-519D4ACD0832}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BA4C402-4A4F-41CB-ADF6-519D4ACD0832}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A971A94-C97A-432E-9925-C666C2B12AB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A971A94-C97A-432E-9925-C666C2B12AB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A971A94-C97A-432E-9925-C666C2B12AB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A971A94-C97A-432E-9925-C666C2B12AB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

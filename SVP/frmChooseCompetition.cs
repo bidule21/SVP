@@ -12,8 +12,8 @@ namespace SVP
 {
     public partial class frmChooseCompetition : Form
     {
-        private competition myCompetition;
-        public competition Competition { get { return myCompetition; } }
+        private Competition myCompetition;
+        public Competition Competition { get { return myCompetition; } }
         public frmChooseCompetition()
         {
             InitializeComponent();
@@ -21,21 +21,24 @@ namespace SVP
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            using (svpEntities context = new svpEntities())
+            if (lbCompetitions.SelectedIndex >= 0)
             {
-                myCompetition = context.competition.Include("award").Include("price.profile.disagprofile").FirstOrDefault(x => x.id == ((ComboboxItem)lbCompetitions.SelectedItem).Id);
+                using (SVPEntitiesContainer context = new SVPEntitiesContainer())
+                {
+                    myCompetition = context.Competitions.Include("Prices.Sequences.Member").Include("Prices.Sequences.Shots").Include("Awards").Include("Prices.Profile").FirstOrDefault(x => x.Id == ((ComboboxItem)lbCompetitions.SelectedItem).Id);
+                }
             }
             this.Close();
         }
 
         private void frmChooseCompetition_Load(object sender, EventArgs e)
         {
-            using (svpEntities context = new svpEntities())
+            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                var competitions = context.competition.Where(x => x.@sealed == false);
-                foreach(competition competition in competitions)
+                var competitions = context.Competitions.Where(x => x.Finished == false);
+                foreach(Competition competition in competitions)
                 {
-                    lbCompetitions.Items.Add(new ComboboxItem(competition.name, competition.id));
+                    lbCompetitions.Items.Add(new ComboboxItem(competition.Name, competition.Id));
                 }
             }
         }

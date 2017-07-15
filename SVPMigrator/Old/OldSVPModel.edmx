@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="svpModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="svp_oldModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="award">
           <Key>
             <PropertyRef Name="id" />
@@ -157,7 +157,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="date" Type="datetime" Precision="6" />
+          <Property Name="date" Type="datetime" Precision="0" />
           <Property Name="member_id" Type="int" Nullable="false" />
           <Property Name="profile_id" Type="int" Nullable="false" />
         </EntityType>
@@ -505,28 +505,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="svpModelStoreContainer">
-          <EntitySet Name="award" EntityType="Self.award" Schema="svp" store:Type="Tables" />
-          <EntitySet Name="award_has_winner" EntityType="Self.award_has_winner" Schema="svp" store:Type="Tables" />
-          <EntitySet Name="club" EntityType="Self.club" Schema="svp" store:Type="Tables" />
-          <EntitySet Name="competition" EntityType="Self.competition" Schema="svp" store:Type="Tables" />
-          <EntitySet Name="disagprofile" EntityType="Self.disagprofile" Schema="svp" store:Type="Tables" />
-          <EntitySet Name="evaluation" EntityType="Self.evaluation" Schema="svp" store:Type="Tables" />
-          <EntitySet Name="group" EntityType="Self.group" Schema="svp" store:Type="Tables" />
-          <EntitySet Name="group_has_member" EntityType="Self.group_has_member" Schema="svp" store:Type="Tables" />
-          <EntitySet Name="manualprofile" EntityType="Self.manualprofile" Schema="svp" store:Type="Tables" />
-          <EntitySet Name="member" EntityType="Self.member" Schema="svp" store:Type="Tables" />
-          <EntitySet Name="participant" EntityType="Self.participant" Schema="svp" store:Type="Tables" />
-          <EntitySet Name="participant_has_member" EntityType="Self.participant_has_member" Schema="svp" store:Type="Tables" />
-          <EntitySet Name="participant_has_sequence" EntityType="Self.participant_has_sequence" Schema="svp" store:Type="Tables" />
-          <EntitySet Name="price" EntityType="Self.price" Schema="svp" store:Type="Tables" />
-          <EntitySet Name="price_has_evaluation" EntityType="Self.price_has_evaluation" Schema="svp" store:Type="Tables" />
-          <EntitySet Name="price_has_sequence" EntityType="Self.price_has_sequence" Schema="svp" store:Type="Tables" />
-          <EntitySet Name="price_has_winner" EntityType="Self.price_has_winner" Schema="svp" store:Type="Tables" />
-          <EntitySet Name="profile" EntityType="Self.profile" Schema="svp" store:Type="Tables" />
-          <EntitySet Name="sequence" EntityType="Self.sequence" Schema="svp" store:Type="Tables" />
-          <EntitySet Name="sequence_has_newsequence" EntityType="Self.sequence_has_newsequence" Schema="svp" store:Type="Tables" />
-          <EntitySet Name="shot" EntityType="Self.shot" Schema="svp" store:Type="Tables" />
+        <EntityContainer Name="svp_oldModelStoreContainer">
+          <EntitySet Name="award" EntityType="Self.award" Schema="svp_old" store:Type="Tables" />
+          <EntitySet Name="award_has_winner" EntityType="Self.award_has_winner" Schema="svp_old" store:Type="Tables" />
+          <EntitySet Name="club" EntityType="Self.club" Schema="svp_old" store:Type="Tables" />
+          <EntitySet Name="competition" EntityType="Self.competition" Schema="svp_old" store:Type="Tables" />
+          <EntitySet Name="disagprofile" EntityType="Self.disagprofile" Schema="svp_old" store:Type="Tables" />
+          <EntitySet Name="evaluation" EntityType="Self.evaluation" Schema="svp_old" store:Type="Tables" />
+          <EntitySet Name="group" EntityType="Self.group" Schema="svp_old" store:Type="Tables" />
+          <EntitySet Name="group_has_member" EntityType="Self.group_has_member" Schema="svp_old" store:Type="Tables" />
+          <EntitySet Name="manualprofile" EntityType="Self.manualprofile" Schema="svp_old" store:Type="Tables" />
+          <EntitySet Name="member" EntityType="Self.member" Schema="svp_old" store:Type="Tables" />
+          <EntitySet Name="participant" EntityType="Self.participant" Schema="svp_old" store:Type="Tables" />
+          <EntitySet Name="participant_has_member" EntityType="Self.participant_has_member" Schema="svp_old" store:Type="Tables" />
+          <EntitySet Name="participant_has_sequence" EntityType="Self.participant_has_sequence" Schema="svp_old" store:Type="Tables" />
+          <EntitySet Name="price" EntityType="Self.price" Schema="svp_old" store:Type="Tables" />
+          <EntitySet Name="price_has_evaluation" EntityType="Self.price_has_evaluation" Schema="svp_old" store:Type="Tables" />
+          <EntitySet Name="price_has_sequence" EntityType="Self.price_has_sequence" Schema="svp_old" store:Type="Tables" />
+          <EntitySet Name="price_has_winner" EntityType="Self.price_has_winner" Schema="svp_old" store:Type="Tables" />
+          <EntitySet Name="profile" EntityType="Self.profile" Schema="svp_old" store:Type="Tables" />
+          <EntitySet Name="sequence" EntityType="Self.sequence" Schema="svp_old" store:Type="Tables" />
+          <EntitySet Name="sequence_has_newsequence" EntityType="Self.sequence_has_newsequence" Schema="svp_old" store:Type="Tables" />
+          <EntitySet Name="shot" EntityType="Self.shot" Schema="svp_old" store:Type="Tables" />
           <AssociationSet Name="fk_award_competition1" Association="Self.fk_award_competition1">
             <End Role="competition" EntitySet="competition" />
             <End Role="award" EntitySet="award" />
@@ -636,19 +636,20 @@
             <End Role="shot" EntitySet="shot" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="svpModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="svp_oldModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="award">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="competition_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="competition" Relationship="Self.fk_award_competition1" FromRole="award" ToRole="competition" />
-          <NavigationProperty Name="member" Relationship="Self.award_has_winner" FromRole="award" ToRole="member" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="members" Relationship="Self.award_has_winner" FromRole="award" ToRole="member" />
         </EntityType>
         <EntityType Name="club">
           <Key>
@@ -657,20 +658,20 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="isTemporary" Type="Boolean" />
-          <NavigationProperty Name="member" Relationship="Self.fk_member_club" FromRole="club" ToRole="member" />
+          <NavigationProperty Name="members" Relationship="Self.fk_member_club" FromRole="club" ToRole="member" />
         </EntityType>
         <EntityType Name="competition">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="award" Relationship="Self.fk_award_competition1" FromRole="competition" ToRole="award" />
-          <NavigationProperty Name="group" Relationship="Self.fk_group_competition1" FromRole="competition" ToRole="group" />
-          <NavigationProperty Name="price" Relationship="Self.fk_price_competition1" FromRole="competition" ToRole="price" />
           <Property Name="group_competition" Type="Boolean" Nullable="false" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="sealed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="awards" Relationship="Self.fk_award_competition1" FromRole="competition" ToRole="award" />
+          <NavigationProperty Name="groups" Relationship="Self.fk_group_competition1" FromRole="competition" ToRole="group" />
+          <NavigationProperty Name="prices" Relationship="Self.fk_price_competition1" FromRole="competition" ToRole="price" />
         </EntityType>
         <EntityType Name="disagprofile">
           <Key>
@@ -688,7 +689,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="key" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="price" Relationship="svpModel.price_has_evaluation" FromRole="evaluation" ToRole="price" />
+          <NavigationProperty Name="prices" Relationship="Self.price_has_evaluation" FromRole="evaluation" ToRole="price" />
         </EntityType>
         <EntityType Name="group">
           <Key>
@@ -700,7 +701,7 @@
           <Property Name="participant_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="competition" Relationship="Self.fk_group_competition1" FromRole="group" ToRole="competition" />
           <NavigationProperty Name="participant" Relationship="Self.fk_group_participant1" FromRole="group" ToRole="participant" />
-          <NavigationProperty Name="member" Relationship="Self.group_has_member" FromRole="group" ToRole="member" />
+          <NavigationProperty Name="members" Relationship="Self.group_has_member" FromRole="group" ToRole="member" />
         </EntityType>
         <EntityType Name="manualprofile">
           <Key>
@@ -718,23 +719,23 @@
           <Property Name="firstname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="birthday" Type="DateTime" Nullable="false" />
+          <Property Name="shortname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="club_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="club" Relationship="Self.fk_member_club" FromRole="member" ToRole="club" />
-          <NavigationProperty Name="sequence" Relationship="Self.fk_shot_member1" FromRole="member" ToRole="sequence" />
-          <NavigationProperty Name="award" Relationship="Self.award_has_winner" FromRole="member" ToRole="award" />
-          <NavigationProperty Name="group" Relationship="Self.group_has_member" FromRole="member" ToRole="group" />
-          <NavigationProperty Name="participant" Relationship="Self.participant_has_member" FromRole="member" ToRole="participant" />
-          <Property Name="shortname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="sequences" Relationship="Self.fk_shot_member1" FromRole="member" ToRole="sequence" />
+          <NavigationProperty Name="awards" Relationship="Self.award_has_winner" FromRole="member" ToRole="award" />
+          <NavigationProperty Name="groups" Relationship="Self.group_has_member" FromRole="member" ToRole="group" />
+          <NavigationProperty Name="participants" Relationship="Self.participant_has_member" FromRole="member" ToRole="participant" />
         </EntityType>
         <EntityType Name="participant">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="group" Relationship="Self.fk_group_participant1" FromRole="participant" ToRole="group" />
-          <NavigationProperty Name="member" Relationship="Self.participant_has_member" FromRole="participant" ToRole="member" />
-          <NavigationProperty Name="sequence" Relationship="Self.participant_has_sequence" FromRole="participant" ToRole="sequence" />
-          <NavigationProperty Name="price" Relationship="Self.price_has_winner" FromRole="participant" ToRole="price" />
+          <NavigationProperty Name="groups" Relationship="Self.fk_group_participant1" FromRole="participant" ToRole="group" />
+          <NavigationProperty Name="members" Relationship="Self.participant_has_member" FromRole="participant" ToRole="member" />
+          <NavigationProperty Name="sequences" Relationship="Self.participant_has_sequence" FromRole="participant" ToRole="sequence" />
+          <NavigationProperty Name="prices" Relationship="Self.price_has_winner" FromRole="participant" ToRole="price" />
         </EntityType>
         <EntityType Name="price">
           <Key>
@@ -743,23 +744,23 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="competition_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="competition" Relationship="Self.fk_price_competition1" FromRole="price" ToRole="competition" />
-          <NavigationProperty Name="participant" Relationship="Self.price_has_winner" FromRole="price" ToRole="participant" />
           <Property Name="profile_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="profile" Relationship="svpModel.fk_price_profile1" FromRole="price" ToRole="profile" />
-          <NavigationProperty Name="evaluation" Relationship="svpModel.price_has_evaluation" FromRole="price" ToRole="evaluation" />
-          <NavigationProperty Name="sequence" Relationship="svpModel.price_has_sequence" FromRole="price" ToRole="sequence" />
+          <NavigationProperty Name="competition" Relationship="Self.fk_price_competition1" FromRole="price" ToRole="competition" />
+          <NavigationProperty Name="profile" Relationship="Self.fk_price_profile1" FromRole="price" ToRole="profile" />
+          <NavigationProperty Name="evaluations" Relationship="Self.price_has_evaluation" FromRole="price" ToRole="evaluation" />
+          <NavigationProperty Name="sequences" Relationship="Self.price_has_sequence" FromRole="price" ToRole="sequence" />
+          <NavigationProperty Name="participants" Relationship="Self.price_has_winner" FromRole="price" ToRole="participant" />
         </EntityType>
         <EntityType Name="profile">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="disagprofile" Relationship="Self.fk_disagProfile_profile1" FromRole="profile" ToRole="disagprofile" />
-          <NavigationProperty Name="manualprofile" Relationship="Self.fk_manualProfile_profile1" FromRole="profile" ToRole="manualprofile" />
-          <NavigationProperty Name="sequence" Relationship="Self.fk_shot_profile1" FromRole="profile" ToRole="sequence" />
-          <NavigationProperty Name="price" Relationship="svpModel.fk_price_profile1" FromRole="profile" ToRole="price" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="disagprofiles" Relationship="Self.fk_disagProfile_profile1" FromRole="profile" ToRole="disagprofile" />
+          <NavigationProperty Name="manualprofiles" Relationship="Self.fk_manualProfile_profile1" FromRole="profile" ToRole="manualprofile" />
+          <NavigationProperty Name="prices" Relationship="Self.fk_price_profile1" FromRole="profile" ToRole="price" />
+          <NavigationProperty Name="sequences" Relationship="Self.fk_shot_profile1" FromRole="profile" ToRole="sequence" />
         </EntityType>
         <EntityType Name="sequence">
           <Key>
@@ -771,11 +772,11 @@
           <Property Name="profile_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="member" Relationship="Self.fk_shot_member1" FromRole="sequence" ToRole="member" />
           <NavigationProperty Name="profile" Relationship="Self.fk_shot_profile1" FromRole="sequence" ToRole="profile" />
-          <NavigationProperty Name="shot" Relationship="Self.fk_shot_sequence1" FromRole="sequence" ToRole="shot" />
-          <NavigationProperty Name="participant" Relationship="Self.participant_has_sequence" FromRole="sequence" ToRole="participant" />
+          <NavigationProperty Name="shots" Relationship="Self.fk_shot_sequence1" FromRole="sequence" ToRole="shot" />
+          <NavigationProperty Name="participants" Relationship="Self.participant_has_sequence" FromRole="sequence" ToRole="participant" />
+          <NavigationProperty Name="prices" Relationship="Self.price_has_sequence" FromRole="sequence" ToRole="price" />
           <NavigationProperty Name="sequence1" Relationship="Self.sequence_has_newsequence" FromRole="sequence" ToRole="sequence1" />
-          <NavigationProperty Name="sequence2" Relationship="Self.sequence_has_newsequence" FromRole="sequence1" ToRole="sequence" />
-          <NavigationProperty Name="price" Relationship="svpModel.price_has_sequence" FromRole="sequence" ToRole="price" />
+          <NavigationProperty Name="sequences" Relationship="Self.sequence_has_newsequence" FromRole="sequence1" ToRole="sequence" />
         </EntityType>
         <EntityType Name="shot">
           <Key>
@@ -783,12 +784,12 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="value" Type="Double" Nullable="false" />
-          <Property Name="sequence_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="sequence" Relationship="Self.fk_shot_sequence1" FromRole="shot" ToRole="sequence" />
           <Property Name="shot_number" Type="Int32" Nullable="false" />
           <Property Name="factor_value" Type="Double" Nullable="false" />
           <Property Name="angle" Type="Double" Nullable="false" />
           <Property Name="valid" Type="Boolean" Nullable="false" />
+          <Property Name="sequence_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="sequence" Relationship="Self.fk_shot_sequence1" FromRole="shot" ToRole="sequence" />
         </EntityType>
         <Association Name="fk_award_competition1">
           <End Role="competition" Type="Self.competition" Multiplicity="1" />
@@ -886,6 +887,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_price_profile1">
+          <End Role="profile" Type="Self.profile" Multiplicity="1" />
+          <End Role="price" Type="Self.price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profile">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="price">
+              <PropertyRef Name="profile_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_shot_profile1">
           <End Role="profile" Type="Self.profile" Multiplicity="1" />
           <End Role="sequence" Type="Self.sequence" Multiplicity="*" />
@@ -926,6 +939,14 @@
           <End Role="participant" Type="Self.participant" Multiplicity="*" />
           <End Role="sequence" Type="Self.sequence" Multiplicity="*" />
         </Association>
+        <Association Name="price_has_evaluation">
+          <End Role="evaluation" Type="Self.evaluation" Multiplicity="*" />
+          <End Role="price" Type="Self.price" Multiplicity="*" />
+        </Association>
+        <Association Name="price_has_sequence">
+          <End Role="price" Type="Self.price" Multiplicity="*" />
+          <End Role="sequence" Type="Self.sequence" Multiplicity="*" />
+        </Association>
         <Association Name="price_has_winner">
           <End Role="participant" Type="Self.participant" Multiplicity="*" />
           <End Role="price" Type="Self.price" Multiplicity="*" />
@@ -934,134 +955,114 @@
           <End Role="sequence" Type="Self.sequence" Multiplicity="*" />
           <End Role="sequence1" Type="Self.sequence" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="svpEntities" annotation:LazyLoadingEnabled="false">
-          <EntitySet Name="award" EntityType="Self.award" />
-          <EntitySet Name="club" EntityType="Self.club" />
-          <EntitySet Name="competition" EntityType="Self.competition" />
-          <EntitySet Name="disagprofile" EntityType="Self.disagprofile" />
-          <EntitySet Name="evaluation" EntityType="Self.evaluation" />
-          <EntitySet Name="group" EntityType="Self.group" />
-          <EntitySet Name="manualprofile" EntityType="Self.manualprofile" />
-          <EntitySet Name="member" EntityType="Self.member" />
-          <EntitySet Name="participant" EntityType="Self.participant" />
-          <EntitySet Name="price" EntityType="Self.price" />
-          <EntitySet Name="profile" EntityType="Self.profile" />
-          <EntitySet Name="sequence" EntityType="Self.sequence" />
-          <EntitySet Name="shot" EntityType="Self.shot" />
+        <EntityContainer Name="svp_oldEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="awards" EntityType="Self.award" />
+          <EntitySet Name="clubs" EntityType="Self.club" />
+          <EntitySet Name="competitions" EntityType="Self.competition" />
+          <EntitySet Name="disagprofiles" EntityType="Self.disagprofile" />
+          <EntitySet Name="evaluations" EntityType="Self.evaluation" />
+          <EntitySet Name="groups" EntityType="Self.group" />
+          <EntitySet Name="manualprofiles" EntityType="Self.manualprofile" />
+          <EntitySet Name="members" EntityType="Self.member" />
+          <EntitySet Name="participants" EntityType="Self.participant" />
+          <EntitySet Name="prices" EntityType="Self.price" />
+          <EntitySet Name="profiles" EntityType="Self.profile" />
+          <EntitySet Name="sequences" EntityType="Self.sequence" />
+          <EntitySet Name="shots" EntityType="Self.shot" />
           <AssociationSet Name="fk_award_competition1" Association="Self.fk_award_competition1">
-            <End Role="competition" EntitySet="competition" />
-            <End Role="award" EntitySet="award" />
+            <End Role="competition" EntitySet="competitions" />
+            <End Role="award" EntitySet="awards" />
           </AssociationSet>
           <AssociationSet Name="fk_member_club" Association="Self.fk_member_club">
-            <End Role="club" EntitySet="club" />
-            <End Role="member" EntitySet="member" />
+            <End Role="club" EntitySet="clubs" />
+            <End Role="member" EntitySet="members" />
           </AssociationSet>
           <AssociationSet Name="fk_group_competition1" Association="Self.fk_group_competition1">
-            <End Role="competition" EntitySet="competition" />
-            <End Role="group" EntitySet="group" />
+            <End Role="competition" EntitySet="competitions" />
+            <End Role="group" EntitySet="groups" />
           </AssociationSet>
           <AssociationSet Name="fk_price_competition1" Association="Self.fk_price_competition1">
-            <End Role="competition" EntitySet="competition" />
-            <End Role="price" EntitySet="price" />
+            <End Role="competition" EntitySet="competitions" />
+            <End Role="price" EntitySet="prices" />
           </AssociationSet>
           <AssociationSet Name="fk_disagProfile_profile1" Association="Self.fk_disagProfile_profile1">
-            <End Role="profile" EntitySet="profile" />
-            <End Role="disagprofile" EntitySet="disagprofile" />
+            <End Role="profile" EntitySet="profiles" />
+            <End Role="disagprofile" EntitySet="disagprofiles" />
           </AssociationSet>
           <AssociationSet Name="fk_group_participant1" Association="Self.fk_group_participant1">
-            <End Role="participant" EntitySet="participant" />
-            <End Role="group" EntitySet="group" />
+            <End Role="participant" EntitySet="participants" />
+            <End Role="group" EntitySet="groups" />
           </AssociationSet>
           <AssociationSet Name="fk_manualProfile_profile1" Association="Self.fk_manualProfile_profile1">
-            <End Role="profile" EntitySet="profile" />
-            <End Role="manualprofile" EntitySet="manualprofile" />
+            <End Role="profile" EntitySet="profiles" />
+            <End Role="manualprofile" EntitySet="manualprofiles" />
           </AssociationSet>
           <AssociationSet Name="fk_shot_member1" Association="Self.fk_shot_member1">
-            <End Role="member" EntitySet="member" />
-            <End Role="sequence" EntitySet="sequence" />
+            <End Role="member" EntitySet="members" />
+            <End Role="sequence" EntitySet="sequences" />
+          </AssociationSet>
+          <AssociationSet Name="fk_price_profile1" Association="Self.fk_price_profile1">
+            <End Role="profile" EntitySet="profiles" />
+            <End Role="price" EntitySet="prices" />
           </AssociationSet>
           <AssociationSet Name="fk_shot_profile1" Association="Self.fk_shot_profile1">
-            <End Role="profile" EntitySet="profile" />
-            <End Role="sequence" EntitySet="sequence" />
+            <End Role="profile" EntitySet="profiles" />
+            <End Role="sequence" EntitySet="sequences" />
           </AssociationSet>
           <AssociationSet Name="fk_shot_sequence1" Association="Self.fk_shot_sequence1">
-            <End Role="sequence" EntitySet="sequence" />
-            <End Role="shot" EntitySet="shot" />
+            <End Role="sequence" EntitySet="sequences" />
+            <End Role="shot" EntitySet="shots" />
           </AssociationSet>
           <AssociationSet Name="award_has_winner" Association="Self.award_has_winner">
-            <End Role="award" EntitySet="award" />
-            <End Role="member" EntitySet="member" />
+            <End Role="award" EntitySet="awards" />
+            <End Role="member" EntitySet="members" />
           </AssociationSet>
           <AssociationSet Name="group_has_member" Association="Self.group_has_member">
-            <End Role="group" EntitySet="group" />
-            <End Role="member" EntitySet="member" />
+            <End Role="group" EntitySet="groups" />
+            <End Role="member" EntitySet="members" />
           </AssociationSet>
           <AssociationSet Name="participant_has_member" Association="Self.participant_has_member">
-            <End Role="member" EntitySet="member" />
-            <End Role="participant" EntitySet="participant" />
+            <End Role="member" EntitySet="members" />
+            <End Role="participant" EntitySet="participants" />
           </AssociationSet>
           <AssociationSet Name="participant_has_sequence" Association="Self.participant_has_sequence">
-            <End Role="participant" EntitySet="participant" />
-            <End Role="sequence" EntitySet="sequence" />
+            <End Role="participant" EntitySet="participants" />
+            <End Role="sequence" EntitySet="sequences" />
+          </AssociationSet>
+          <AssociationSet Name="price_has_evaluation" Association="Self.price_has_evaluation">
+            <End Role="evaluation" EntitySet="evaluations" />
+            <End Role="price" EntitySet="prices" />
+          </AssociationSet>
+          <AssociationSet Name="price_has_sequence" Association="Self.price_has_sequence">
+            <End Role="price" EntitySet="prices" />
+            <End Role="sequence" EntitySet="sequences" />
           </AssociationSet>
           <AssociationSet Name="price_has_winner" Association="Self.price_has_winner">
-            <End Role="participant" EntitySet="participant" />
-            <End Role="price" EntitySet="price" />
+            <End Role="participant" EntitySet="participants" />
+            <End Role="price" EntitySet="prices" />
           </AssociationSet>
           <AssociationSet Name="sequence_has_newsequence" Association="Self.sequence_has_newsequence">
-            <End Role="sequence" EntitySet="sequence" />
-            <End Role="sequence1" EntitySet="sequence" />
-          </AssociationSet>
-          <AssociationSet Name="fk_price_profile1" Association="svpModel.fk_price_profile1">
-            <End Role="profile" EntitySet="profile" />
-            <End Role="price" EntitySet="price" />
-          </AssociationSet>
-          <AssociationSet Name="price_has_evaluation" Association="svpModel.price_has_evaluation">
-            <End Role="evaluation" EntitySet="evaluation" />
-            <End Role="price" EntitySet="price" />
-          </AssociationSet>
-          <AssociationSet Name="price_has_sequence" Association="svpModel.price_has_sequence">
-            <End Role="price" EntitySet="price" />
-            <End Role="sequence" EntitySet="sequence" />
+            <End Role="sequence" EntitySet="sequences" />
+            <End Role="sequence1" EntitySet="sequences" />
           </AssociationSet>
         </EntityContainer>
-        <Association Name="fk_price_profile1">
-          <End Type="svpModel.profile" Role="profile" Multiplicity="1" />
-          <End Type="svpModel.price" Role="price" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="profile">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="price">
-              <PropertyRef Name="profile_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="price_has_evaluation">
-          <End Type="svpModel.evaluation" Role="evaluation" Multiplicity="*" />
-          <End Type="svpModel.price" Role="price" Multiplicity="*" />
-        </Association>
-        <Association Name="price_has_sequence">
-          <End Type="svpModel.price" Role="price" Multiplicity="*" />
-          <End Type="svpModel.sequence" Role="sequence" Multiplicity="*" />
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="svpModelStoreContainer" CdmEntityContainer="svpEntities">
-          <EntitySetMapping Name="award">
-            <EntityTypeMapping TypeName="svpModel.award">
+        <EntityContainerMapping StorageEntityContainer="svp_oldModelStoreContainer" CdmEntityContainer="svp_oldEntities1">
+          <EntitySetMapping Name="awards">
+            <EntityTypeMapping TypeName="svp_oldModel.award">
               <MappingFragment StoreEntitySet="award">
-                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="competition_id" ColumnName="competition_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="club">
-            <EntityTypeMapping TypeName="svpModel.club">
+          <EntitySetMapping Name="clubs">
+            <EntityTypeMapping TypeName="svp_oldModel.club">
               <MappingFragment StoreEntitySet="club">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1069,19 +1070,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="competition">
-            <EntityTypeMapping TypeName="svpModel.competition">
+          <EntitySetMapping Name="competitions">
+            <EntityTypeMapping TypeName="svp_oldModel.competition">
               <MappingFragment StoreEntitySet="competition">
-                <ScalarProperty Name="sealed" ColumnName="sealed" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="group_competition" ColumnName="group_competition" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="group_competition" ColumnName="group_competition" />
+                <ScalarProperty Name="sealed" ColumnName="sealed" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="disagprofile">
-            <EntityTypeMapping TypeName="svpModel.disagprofile">
+          <EntitySetMapping Name="disagprofiles">
+            <EntityTypeMapping TypeName="svp_oldModel.disagprofile">
               <MappingFragment StoreEntitySet="disagprofile">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="value" ColumnName="value" />
@@ -1089,8 +1090,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="evaluation">
-            <EntityTypeMapping TypeName="svpModel.evaluation">
+          <EntitySetMapping Name="evaluations">
+            <EntityTypeMapping TypeName="svp_oldModel.evaluation">
               <MappingFragment StoreEntitySet="evaluation">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1098,8 +1099,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="group">
-            <EntityTypeMapping TypeName="svpModel.group">
+          <EntitySetMapping Name="groups">
+            <EntityTypeMapping TypeName="svp_oldModel.group">
               <MappingFragment StoreEntitySet="group">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1108,53 +1109,53 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="manualprofile">
-            <EntityTypeMapping TypeName="svpModel.manualprofile">
+          <EntitySetMapping Name="manualprofiles">
+            <EntityTypeMapping TypeName="svp_oldModel.manualprofile">
               <MappingFragment StoreEntitySet="manualprofile">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="profile_id" ColumnName="profile_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="member">
-            <EntityTypeMapping TypeName="svpModel.member">
+          <EntitySetMapping Name="members">
+            <EntityTypeMapping TypeName="svp_oldModel.member">
               <MappingFragment StoreEntitySet="member">
-                <ScalarProperty Name="shortname" ColumnName="shortname" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="firstname" ColumnName="firstname" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="shortname" ColumnName="shortname" />
                 <ScalarProperty Name="club_id" ColumnName="club_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="participant">
-            <EntityTypeMapping TypeName="svpModel.participant">
+          <EntitySetMapping Name="participants">
+            <EntityTypeMapping TypeName="svp_oldModel.participant">
               <MappingFragment StoreEntitySet="participant">
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="price">
-            <EntityTypeMapping TypeName="svpModel.price">
+          <EntitySetMapping Name="prices">
+            <EntityTypeMapping TypeName="svp_oldModel.price">
               <MappingFragment StoreEntitySet="price">
-                <ScalarProperty Name="profile_id" ColumnName="profile_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="competition_id" ColumnName="competition_id" />
+                <ScalarProperty Name="profile_id" ColumnName="profile_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="profile">
-            <EntityTypeMapping TypeName="svpModel.profile">
+          <EntitySetMapping Name="profiles">
+            <EntityTypeMapping TypeName="svp_oldModel.profile">
               <MappingFragment StoreEntitySet="profile">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sequence">
-            <EntityTypeMapping TypeName="svpModel.sequence">
+          <EntitySetMapping Name="sequences">
+            <EntityTypeMapping TypeName="svp_oldModel.sequence">
               <MappingFragment StoreEntitySet="sequence">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="date" ColumnName="date" />
@@ -1163,20 +1164,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="shot">
-            <EntityTypeMapping TypeName="svpModel.shot">
+          <EntitySetMapping Name="shots">
+            <EntityTypeMapping TypeName="svp_oldModel.shot">
               <MappingFragment StoreEntitySet="shot">
-                <ScalarProperty Name="valid" ColumnName="valid" />
-                <ScalarProperty Name="angle" ColumnName="angle" />
-                <ScalarProperty Name="factor_value" ColumnName="factor_value" />
-                <ScalarProperty Name="shot_number" ColumnName="shot_number" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="shot_number" ColumnName="shot_number" />
+                <ScalarProperty Name="factor_value" ColumnName="factor_value" />
+                <ScalarProperty Name="angle" ColumnName="angle" />
+                <ScalarProperty Name="valid" ColumnName="valid" />
                 <ScalarProperty Name="sequence_id" ColumnName="sequence_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="award_has_winner" TypeName="svpModel.award_has_winner" StoreEntitySet="award_has_winner">
+          <AssociationSetMapping Name="award_has_winner" TypeName="svp_oldModel.award_has_winner" StoreEntitySet="award_has_winner">
             <EndProperty Name="award">
               <ScalarProperty Name="id" ColumnName="award_id" />
             </EndProperty>
@@ -1184,7 +1185,7 @@
               <ScalarProperty Name="id" ColumnName="member_id" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="group_has_member" TypeName="svpModel.group_has_member" StoreEntitySet="group_has_member">
+          <AssociationSetMapping Name="group_has_member" TypeName="svp_oldModel.group_has_member" StoreEntitySet="group_has_member">
             <EndProperty Name="group">
               <ScalarProperty Name="id" ColumnName="group_id" />
             </EndProperty>
@@ -1192,7 +1193,7 @@
               <ScalarProperty Name="id" ColumnName="member_id" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="participant_has_member" TypeName="svpModel.participant_has_member" StoreEntitySet="participant_has_member">
+          <AssociationSetMapping Name="participant_has_member" TypeName="svp_oldModel.participant_has_member" StoreEntitySet="participant_has_member">
             <EndProperty Name="member">
               <ScalarProperty Name="id" ColumnName="member_id" />
             </EndProperty>
@@ -1200,7 +1201,7 @@
               <ScalarProperty Name="id" ColumnName="participant_id" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="participant_has_sequence" TypeName="svpModel.participant_has_sequence" StoreEntitySet="participant_has_sequence">
+          <AssociationSetMapping Name="participant_has_sequence" TypeName="svp_oldModel.participant_has_sequence" StoreEntitySet="participant_has_sequence">
             <EndProperty Name="participant">
               <ScalarProperty Name="id" ColumnName="participant_id" />
             </EndProperty>
@@ -1208,7 +1209,23 @@
               <ScalarProperty Name="id" ColumnName="sequence_id" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="price_has_winner" TypeName="svpModel.price_has_winner" StoreEntitySet="price_has_winner">
+          <AssociationSetMapping Name="price_has_evaluation" TypeName="svp_oldModel.price_has_evaluation" StoreEntitySet="price_has_evaluation">
+            <EndProperty Name="evaluation">
+              <ScalarProperty Name="id" ColumnName="evaluation_id" />
+            </EndProperty>
+            <EndProperty Name="price">
+              <ScalarProperty Name="id" ColumnName="price_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="price_has_sequence" TypeName="svp_oldModel.price_has_sequence" StoreEntitySet="price_has_sequence">
+            <EndProperty Name="price">
+              <ScalarProperty Name="id" ColumnName="price_id" />
+            </EndProperty>
+            <EndProperty Name="sequence">
+              <ScalarProperty Name="id" ColumnName="sequence_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="price_has_winner" TypeName="svp_oldModel.price_has_winner" StoreEntitySet="price_has_winner">
             <EndProperty Name="participant">
               <ScalarProperty Name="id" ColumnName="participant_id" />
             </EndProperty>
@@ -1216,28 +1233,12 @@
               <ScalarProperty Name="id" ColumnName="price_id" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="sequence_has_newsequence" TypeName="svpModel.sequence_has_newsequence" StoreEntitySet="sequence_has_newsequence">
+          <AssociationSetMapping Name="sequence_has_newsequence" TypeName="svp_oldModel.sequence_has_newsequence" StoreEntitySet="sequence_has_newsequence">
             <EndProperty Name="sequence">
               <ScalarProperty Name="id" ColumnName="sequence_id" />
             </EndProperty>
             <EndProperty Name="sequence1">
               <ScalarProperty Name="id" ColumnName="newSequence_id" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="price_has_evaluation" TypeName="svpModel.price_has_evaluation" StoreEntitySet="price_has_evaluation">
-            <EndProperty Name="price">
-              <ScalarProperty Name="id" ColumnName="price_id" />
-            </EndProperty>
-            <EndProperty Name="evaluation">
-              <ScalarProperty Name="id" ColumnName="evaluation_id" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="price_has_sequence" TypeName="svpModel.price_has_sequence" StoreEntitySet="price_has_sequence">
-            <EndProperty Name="sequence">
-              <ScalarProperty Name="id" ColumnName="sequence_id" />
-            </EndProperty>
-            <EndProperty Name="price">
-              <ScalarProperty Name="id" ColumnName="price_id" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>
@@ -1254,7 +1255,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

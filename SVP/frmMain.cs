@@ -26,7 +26,7 @@ namespace SVP
 			if (!Enum.TryParse<DisplaySetting>(SVP.Properties.Settings.Default.MonitorDisplaySetting, out setting))
 				setting = DisplaySetting.Everything;
 			Monitor.GetMonitor().SetDisplaySetting(setting);
-            tpCompetition.Controls[0].Enabled = false;
+            //tpCompetition.Controls[0].Enabled = false;
             this.Text = this.Text + " Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 

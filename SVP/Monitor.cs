@@ -20,10 +20,11 @@ namespace SVP
     public partial class Monitor : Form
     {
         private static Monitor MyMonitor;
-        private sequence currentResult;
+        private Sequence currentResult;
         private int currentShot = 0;
         private Timer timer;
-		private List<sequence> sequenceList;
+		private List<Sequence> sequenceList;
+        private Queue<Sequence> sequencesToDisplay;
 		public DisplaySetting DisplaySetting { get; private set; }
 
 		public static Monitor GetMonitor()
@@ -35,38 +36,39 @@ namespace SVP
 
 		public void SetDisplaySetting(DisplaySetting setting)
 		{
-			if(setting != DisplaySetting.Everything)
+            this.DisplaySetting = setting;
+            if (setting != DisplaySetting.Everything)
 			{
 				lbCurrentResult.Text = "";
 				rtResults.Text = "";
 				lbResults.Text = "";
 				dgResultList.Rows.Clear();
 			}
-			switch (DisplaySetting)
-			{
-				case DisplaySetting.Everything:
-					foreach(sequence result in sequenceList)
-						dgResultList.Rows.Add(result.member.ToString(), result.shot.Sum(x => x.value).ToString(), result.profile);
-					break;
-				case DisplaySetting.EverythingAnonym:
-					foreach (sequence result in sequenceList)
-						dgResultList.Rows.Add(SVP.Properties.Settings.Default.DefaultName, result.shot.Sum(x => x.value).ToString(), result.profile);
-					break;
-				case DisplaySetting.ShotImageWithPoints:
-					break;
-				case DisplaySetting.ShotImage:
-					break;
-				default:
-					break;
-			}
-			this.DisplaySetting = setting;
+            dgResultList.Rows.Clear();
+            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
+            {
+                foreach (Sequence result in sequenceList)
+                {
+                    Sequence seq = context.Sequences.Find(result.Id);
+                    switch (DisplaySetting)
+                    {
+                        case DisplaySetting.Everything:
+                                dgResultList.Rows.Add(seq.Member.ToString(), seq.Shots.Sum(x => x.Value).ToString(), seq.Profile);
+                            break;
+                        case DisplaySetting.EverythingAnonym:
+                            dgResultList.Rows.Add(SVP.Properties.Settings.Default.DefaultName, seq.Shots.Sum(x => x.Value).ToString(), seq.Profile);
+                            break;
+                    }
+                }
+            }
 		}
 
         private Monitor()
         {
             InitializeComponent();
-			sequenceList = new List<sequence>();
-			DisplaySetting = DisplaySetting.Everything;
+			sequenceList = new List<Sequence>();
+            sequencesToDisplay = new Queue<Sequence>();
+            DisplaySetting = DisplaySetting.Everything;
             this.StartPosition = FormStartPosition.Manual;
             if (Screen.AllScreens.Length > 1)
             {
@@ -103,73 +105,77 @@ namespace SVP
         {
             if(currentResult != null)
             {
-                if (currentShot == currentResult.shot.Count)
+                if (currentShot == currentResult.Shots.Count)
                 {
                     DisplayAllShots();
                     currentShot = 0;
-                    this.timer.Stop();
+                    if (sequencesToDisplay.Count > 0)
+                        currentResult = sequencesToDisplay.Dequeue();
+                    else
+                        currentResult = null;
                 }
                 else
                 {
-                    DisplayShot(currentResult.shot.ElementAt(currentShot));
+                    DisplayShot(currentResult.Shots.ElementAt(currentShot));
                     currentShot++;
                 }
             }
         }
 
-        internal void AddResult(sequence result)
+        internal void AddResult(Sequence result)
         {
 			sequenceList.Add(result);
 			if (DisplaySetting == DisplaySetting.Everything || DisplaySetting == DisplaySetting.EverythingAnonym)
 			{
-				string name = (this.DisplaySetting == DisplaySetting.Everything) ? result.member.ToString() : SVP.Properties.Settings.Default.DefaultName;
-				dgResultList.Rows.Add(name, result.shot.Sum(x => x.value).ToString(), result.profile);
+                string name = (this.DisplaySetting == DisplaySetting.Everything) ? result.Member.ToString() : SVP.Properties.Settings.Default.DefaultName;
+				dgResultList.Rows.Add(name, result.Shots.Sum(x => x.Value).ToString(), result.Profile);
 				dgResultList.FirstDisplayedScrollingRowIndex = dgResultList.RowCount - 1;
 			}
-            DisplaySequence(result);
+            sequencesToDisplay.Enqueue(result);
+            if (currentResult == null && sequencesToDisplay.Count > 0)
+                currentResult = sequencesToDisplay.Dequeue();
         }
-
-        internal void DisplaySequence(sequence result)
+        
+        internal void DisplaySequence(Sequence result)
         {
             this.currentResult = result;
             currentShot = 0;
-            lbResults.Text = (this.DisplaySetting == DisplaySetting.Everything) ? result.member.ToString() : SVP.Properties.Settings.Default.DefaultName;
-            timer.Start();
+            lbResults.Text = (this.DisplaySetting == DisplaySetting.Everything) ? result.Member.ToString() : SVP.Properties.Settings.Default.DefaultName;
         }
-
-        private void DrawShot(shot shot, Graphics graphics, Brush brush)
+        
+        private void DrawShot(Shot shot, Graphics graphics, Brush brush)
         {
             int size = (int)(pbTarget.Width / 11.5);
             int x = pbTarget.Width / 2;
             int y = pbTarget.Width / 2;
-            double factor = (shot.factor_value / 2300) * (pbTarget.Width / 2);
-            double angle = shot.angle * (Math.PI / 180);
+            double factor = (shot.FactorValue/ 2300) * (pbTarget.Width / 2);
+            double angle = shot.Angle * (Math.PI / 180);
             angle += (1.5 * Math.PI);
             x += (int)(Math.Cos(angle) * factor);
             y += (int)(Math.Sin(angle) * factor);
             graphics.FillEllipse(brush, x - (size / 2), y - (size / 2), size, size);
         }
-
-        internal void DisplayShot(shot shot)
+        
+        internal void DisplayShot(Shot shot)
         {
-            if (shot.valid == false)
+            if (shot.Valid == false)
                 return;
             string shots = "";
-            foreach(shot result in currentResult.shot)
+            foreach(Shot result in currentResult.Shots)
             {
                 if(result == shot)
                 {
-                    shots += "     " + @"\cf1 " + result.value.ToString();
+                    shots += "     " + @"\cf1 " + result.Value.ToString();
                 }
                 else
                 {
-                    shots += "     \\cf0 " + result.value.ToString();
+                    shots += "     \\cf0 " + result.Value.ToString();
                 }
             }
 			if (DisplaySetting != DisplaySetting.ShotImage)
 			{
 				rtResults.Rtf = @"{\rtf1\ansi {\colortbl; \red255\green0\blue0;}" + shots + "}";
-				lbCurrentResult.Text = shot.value.ToString();
+				lbCurrentResult.Text = shot.Value.ToString();
 			}
             pbTarget.Refresh();
             Graphics graphics = pbTarget.CreateGraphics();
@@ -179,26 +185,26 @@ namespace SVP
         internal void DisplayAllShots()
         {
             string shots = "";
-            foreach (shot result in currentResult.shot)
-                shots += "     " + result.value.ToString();
-
+            foreach (Shot result in currentResult.Shots)
+                shots += "     " + result.Value.ToString();
+        
 			if (DisplaySetting != DisplaySetting.ShotImage)
 			{
 				rtResults.Rtf = @"{\rtf1\ansi" + shots + "}";
-				lbCurrentResult.Text = currentResult.shot.Sum(x => x.value).ToString();
+				lbCurrentResult.Text = currentResult.Shots.Sum(x => x.Value).ToString();
 			}
             pbTarget.Refresh();
             Graphics graphics = pbTarget.CreateGraphics();
-            for(int i = 0; i < currentResult.shot.Count;i++)
+            for(int i = 0; i < currentResult.Shots.Count;i++)
             {
-                if (currentResult.shot.ElementAt(i).valid == false)
+                if (currentResult.Shots.ElementAt(i).Valid == false)
                     continue;
                 if (i == 0)
-                    DrawShot(currentResult.shot.ElementAt(i), graphics, Brushes.Green);
-                else if (i == currentResult.shot.Count - 1)
-                    DrawShot(currentResult.shot.ElementAt(i), graphics, Brushes.Blue);
+                    DrawShot(currentResult.Shots.ElementAt(i), graphics, Brushes.Green);
+                else if (i == currentResult.Shots.Count - 1)
+                    DrawShot(currentResult.Shots.ElementAt(i), graphics, Brushes.Blue);
                 else
-                    DrawShot(currentResult.shot.ElementAt(i), graphics, Brushes.Red);
+                    DrawShot(currentResult.Shots.ElementAt(i), graphics, Brushes.Red);
             }
             graphics.Dispose();
         }
