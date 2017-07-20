@@ -192,18 +192,18 @@
       <DependentUpon>SVPEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Profile.part.cs" />
-    <Compile Include="ProfileWizard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ProfileWizard.Designer.cs">
-      <DependentUpon>ProfileWizard.cs</DependentUpon>
-    </Compile>
     <Compile Include="Member.part.cs" />
     <Compile Include="Monitor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Monitor.Designer.cs">
       <DependentUpon>Monitor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProfileWizard.Designer.cs">
+      <DependentUpon>ProfileWizard.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -295,11 +295,11 @@
     <EmbeddedResource Include="frmWinnerHazard.resx">
       <DependentUpon>frmWinnerHazard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProfileWizard.resx">
-      <DependentUpon>ProfileWizard.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Monitor.resx">
       <DependentUpon>Monitor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProfileWizard.resx">
+      <DependentUpon>ProfileWizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
