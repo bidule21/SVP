@@ -53,17 +53,17 @@ namespace SVP
             }
             if (txtMemberName.TextLength <= 0)
             {
-                MessageBox.Show("Bitte einen Vornamen eingeben!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Bitte einen Nachnamen eingeben!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (txtMemberShortName.TextLength <= 0)
             {
-                MessageBox.Show("Bitte einen Vornamen eingeben!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Bitte einen Kruznamen eingeben!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (cbMemberClub.SelectedIndex < 0)
             {
-                MessageBox.Show("Bitte einen Vornamen eingeben!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Bitte einen Verein auswählen!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             try
