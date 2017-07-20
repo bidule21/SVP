@@ -1,13 +1,12 @@
-﻿using DisagLib;
-using System;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Configuration;
-using System.Web;
-using System.Web.Script.Serialization;
-using System.Diagnostics;
-using System.Net;
 
 namespace SVP
 {
@@ -18,9 +17,14 @@ namespace SVP
             InitializeComponent();
         }
 
-        private void addClubPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
+        private void btnOk_Click(object sender, EventArgs e)
         {
-            if (txtClubName.TextLength > 0)
+            if (txtClubName.TextLength <= 0)
+            {
+                MessageBox.Show("Bitte einen Namen eingeben!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            try
             {
                 using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                 {
@@ -28,13 +32,21 @@ namespace SVP
                     newClub.Name = txtClubName.Text;
                     context.Clubs.Add(newClub);
                     context.SaveChanges();
-                    txtClubName.Text = "";
                 }
             }
-            else
+            catch (Exception ex)
             {
-                e.Cancel = true;
+                MessageBox.Show(string.Format("Fehler beim Speichern des Mitglieds\r\n{0}", ex.Message));
             }
+            finally
+            {
+                this.Close();
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

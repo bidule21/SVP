@@ -92,6 +92,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddClubWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddClubWizard.Designer.cs">
+      <DependentUpon>AddClubWizard.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddGroupWizard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,12 +146,6 @@
     </Compile>
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AddClubWizard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddClubWizard.Designer.cs">
-      <DependentUpon>AddClubWizard.cs</DependentUpon>
     </Compile>
     <Compile Include="AddCompetitionWizard.cs">
       <SubType>Form</SubType>
@@ -262,6 +262,9 @@
     <Compile Include="TabTraining.Designer.cs">
       <DependentUpon>TabTraining.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddClubWizard.resx">
+      <DependentUpon>AddClubWizard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddGroupWizard.resx">
       <DependentUpon>AddGroupWizard.cs</DependentUpon>
     </EmbeddedResource>
@@ -279,9 +282,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AddClubWizard.resx">
-      <DependentUpon>AddClubWizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddCompetitionWizard.resx">
       <DependentUpon>AddCompetitionWizard.cs</DependentUpon>
