@@ -223,7 +223,7 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(448, 393);
+            this.btnOk.Location = new System.Drawing.Point(460, 532);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 11;
@@ -233,7 +233,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(367, 393);
+            this.btnCancel.Location = new System.Drawing.Point(379, 532);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 12;
@@ -244,14 +244,12 @@
             // gbPriceAward
             // 
             this.gbPriceAward.Controls.Add(this.dvCompetition);
-            this.gbPriceAward.Controls.Add(this.btnCancel);
             this.gbPriceAward.Controls.Add(this.gbPrice);
-            this.gbPriceAward.Controls.Add(this.btnOk);
             this.gbPriceAward.Controls.Add(this.gbAward);
             this.gbPriceAward.Enabled = false;
             this.gbPriceAward.Location = new System.Drawing.Point(12, 127);
             this.gbPriceAward.Name = "gbPriceAward";
-            this.gbPriceAward.Size = new System.Drawing.Size(536, 428);
+            this.gbPriceAward.Size = new System.Drawing.Size(536, 399);
             this.gbPriceAward.TabIndex = 13;
             this.gbPriceAward.TabStop = false;
             this.gbPriceAward.Text = "Pokalschießen";
@@ -284,9 +282,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(564, 557);
+            this.ClientSize = new System.Drawing.Size(564, 563);
             this.ControlBox = false;
             this.Controls.Add(this.gbCompetition);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnOk);
             this.Controls.Add(this.gbPriceAward);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "AddCompetitionWizard";

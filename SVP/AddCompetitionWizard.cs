@@ -123,6 +123,16 @@ namespace SVP
         }
         private void btnOk_Click(object sender, EventArgs e)
         {
+            if(this.myCompetition == null)
+            {
+                MessageBox.Show("Bitte Pokalschießen anlegen!");
+                return;
+            }
+            if((this.myCompetition.Awards.Count + this.myCompetition.Prices.Count) == 0)
+            {
+                MessageBox.Show("Bitte Ehrenscheiben/Preise anlegen!");
+                return;
+            }
             this.Close();
         }
     }
