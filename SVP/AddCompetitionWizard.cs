@@ -133,6 +133,7 @@ namespace SVP
                 MessageBox.Show("Bitte Ehrenscheiben/Preise anlegen!");
                 return;
             }
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
     }
