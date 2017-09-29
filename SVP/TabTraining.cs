@@ -86,6 +86,8 @@ namespace SVP
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            if (cbClub.SelectedIndex < 0 || cbMember.SelectedIndex < 0)
+                return;
             gbRead.Enabled = true;
             btnRead.Enabled = true;
             lblClub.Text = cbClub.SelectedItem.ToString();

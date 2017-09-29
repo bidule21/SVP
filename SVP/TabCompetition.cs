@@ -139,8 +139,7 @@ namespace SVP
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            if (cbMember.SelectedIndex >= 0)
-            {
+            if (cbMember.SelectedIndex >= 0 && cbClubGroup.SelectedIndex >= 0){
                 gbRead.Enabled = true;
                 btnRead.Enabled = true;
                 lblClub.Text = cbClubGroup.SelectedItem.ToString();
@@ -239,6 +238,7 @@ namespace SVP
 
                     foreach (var price in wizard.Competition.Prices)
                         context.Profiles.Attach(price.Profile);
+                    wizard.Competition.Date = DateTime.Now;
                     context.Competitions.Add(wizard.Competition);
                     context.SaveChanges();
 
