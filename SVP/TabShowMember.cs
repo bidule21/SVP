@@ -187,5 +187,17 @@ namespace SVP
                 cbMember.Items.AddRange(context.Participants.OfType<Member>().Where(x => x.Club.Id == clubId).ToArray());
             }
         }
+
+        private void btn_editMember_Click(object sender, EventArgs e)
+        {
+            frmUserWizard wizard = new frmUserWizard(((Member)cbMember.SelectedItem));
+            wizard.Show();
+        }
+
+        private void cbMember_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnLoad.Enabled = cbMember.SelectedIndex >= 0;
+            btn_editMember.Enabled = btnLoad.Enabled;
+        }
     }
 }

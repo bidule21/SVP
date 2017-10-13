@@ -110,11 +110,11 @@
     <Compile Include="AddGroupWizard.Designer.cs">
       <DependentUpon>AddGroupWizard.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddUserWizard.cs">
+    <Compile Include="frmUserWizard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddUserWizard.Designer.cs">
-      <DependentUpon>AddUserWizard.cs</DependentUpon>
+    <Compile Include="frmUserWizard.Designer.cs">
+      <DependentUpon>frmUserWizard.cs</DependentUpon>
     </Compile>
     <Compile Include="Award.cs">
       <DependentUpon>SVPEntities.tt</DependentUpon>
@@ -277,8 +277,8 @@
     <EmbeddedResource Include="AddGroupWizard.resx">
       <DependentUpon>AddGroupWizard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddUserWizard.resx">
-      <DependentUpon>AddUserWizard.cs</DependentUpon>
+    <EmbeddedResource Include="frmUserWizard.resx">
+      <DependentUpon>frmUserWizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmChooseCompetition.resx">
       <DependentUpon>frmChooseCompetition.cs</DependentUpon>

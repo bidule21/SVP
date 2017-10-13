@@ -10,24 +10,19 @@ using System.Windows.Forms;
 
 namespace SVP
 {
-    public partial class AddUserWizard : Form
+    public partial class frmUserWizard : Form
     {
         Member member;
-        public AddUserWizard()
+        public frmUserWizard()
         {
             InitializeComponent();
             this.member = null;
         }
 
-        public AddUserWizard(Member member)
+        public frmUserWizard(Member member)
         {
             InitializeComponent();
             this.member = member;
-            txtMemberFirstname.Text = this.member.Firstname;
-            txtMemberName.Text = this.member.Name;
-            dtMemberBirthday.Value = this.member.Birthday.Value;
-            txtMemberShortName.Text = this.member.Shortname;
-            cbMemberClub.SelectedIndex = cbMemberClub.FindStringExact(member.Club.ToString());
         }
 
         private void txtMember_TextChanged(object sender, EventArgs e)
@@ -41,6 +36,14 @@ namespace SVP
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
                 cbMemberClub.Items.AddRange(context.Clubs.ToArray());
+
+                this.member = context.Participants.OfType<Member>().Where(x => x.Id == member.Id).First();
+                txtMemberFirstname.Text = this.member.Firstname;
+                txtMemberName.Text = this.member.Name;
+                dtMemberBirthday.Value = this.member.Birthday.Value;
+                txtMemberShortName.Text = this.member.Shortname;
+                cbMemberClub.SelectedIndex = cbMemberClub.FindStringExact(member.Club.ToString());
+
             }
         }
 

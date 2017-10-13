@@ -72,7 +72,7 @@ namespace SVP
 
         private void btnNewMember_Click(object sender, EventArgs e)
         {
-            AddUserWizard wizard = new AddUserWizard();
+            frmUserWizard wizard = new frmUserWizard();
             wizard.ShowDialog();
             reloadControls();
         }

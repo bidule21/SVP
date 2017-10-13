@@ -29,13 +29,18 @@
         private void InitializeComponent()
         {
             this.gbMember = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_editMember = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cbMember = new System.Windows.Forms.ComboBox();
             this.cbClub = new System.Windows.Forms.ComboBox();
             this.btnLoad = new System.Windows.Forms.Button();
             this.dvResults = new System.Windows.Forms.DataGridView();
+            this.seq_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Profil = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rings = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reevaluate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbExport = new System.Windows.Forms.GroupBox();
             this.btnShowOnMonitor = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
@@ -43,11 +48,6 @@
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PriceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.seq_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Profil = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rings = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reevaluate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbMember.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvResults)).BeginInit();
             this.gbExport.SuspendLayout();
@@ -56,7 +56,7 @@
             // 
             // gbMember
             // 
-            this.gbMember.Controls.Add(this.button1);
+            this.gbMember.Controls.Add(this.btn_editMember);
             this.gbMember.Controls.Add(this.label2);
             this.gbMember.Controls.Add(this.label1);
             this.gbMember.Controls.Add(this.cbMember);
@@ -72,16 +72,17 @@
             this.gbMember.TabStop = false;
             this.gbMember.Text = "Mitglied";
             // 
-            // button1
+            // btn_editMember
             // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(474, 58);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(124, 28);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "Bearbeiten";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_editMember.Enabled = false;
+            this.btn_editMember.Location = new System.Drawing.Point(474, 58);
+            this.btn_editMember.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_editMember.Name = "btn_editMember";
+            this.btn_editMember.Size = new System.Drawing.Size(124, 28);
+            this.btn_editMember.TabIndex = 21;
+            this.btn_editMember.Text = "Bearbeiten";
+            this.btn_editMember.UseVisualStyleBackColor = true;
+            this.btn_editMember.Click += new System.EventHandler(this.btn_editMember_Click);
             // 
             // label2
             // 
@@ -109,6 +110,7 @@
             this.cbMember.Name = "cbMember";
             this.cbMember.Size = new System.Drawing.Size(263, 24);
             this.cbMember.TabIndex = 18;
+            this.cbMember.SelectedIndexChanged += new System.EventHandler(this.cbMember_SelectedIndexChanged);
             // 
             // cbClub
             // 
@@ -122,6 +124,7 @@
             // 
             // btnLoad
             // 
+            this.btnLoad.Enabled = false;
             this.btnLoad.Location = new System.Drawing.Point(342, 58);
             this.btnLoad.Margin = new System.Windows.Forms.Padding(4);
             this.btnLoad.Name = "btnLoad";
@@ -151,6 +154,36 @@
             this.dvResults.RowTemplate.Height = 28;
             this.dvResults.Size = new System.Drawing.Size(1125, 244);
             this.dvResults.TabIndex = 1;
+            // 
+            // seq_date
+            // 
+            this.seq_date.HeaderText = "Datum";
+            this.seq_date.Name = "seq_date";
+            this.seq_date.ReadOnly = true;
+            // 
+            // Price
+            // 
+            this.Price.HeaderText = "Pokal";
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            // 
+            // Profil
+            // 
+            this.Profil.HeaderText = "Profil";
+            this.Profil.Name = "Profil";
+            this.Profil.ReadOnly = true;
+            // 
+            // Rings
+            // 
+            this.Rings.HeaderText = "Ringe";
+            this.Rings.Name = "Rings";
+            this.Rings.ReadOnly = true;
+            // 
+            // Reevaluate
+            // 
+            this.Reevaluate.HeaderText = "Nachgewertet";
+            this.Reevaluate.Name = "Reevaluate";
+            this.Reevaluate.ReadOnly = true;
             // 
             // gbExport
             // 
@@ -224,36 +257,6 @@
             this.Date.Name = "Date";
             this.Date.ReadOnly = true;
             // 
-            // seq_date
-            // 
-            this.seq_date.HeaderText = "Datum";
-            this.seq_date.Name = "seq_date";
-            this.seq_date.ReadOnly = true;
-            // 
-            // Price
-            // 
-            this.Price.HeaderText = "Pokal";
-            this.Price.Name = "Price";
-            this.Price.ReadOnly = true;
-            // 
-            // Profil
-            // 
-            this.Profil.HeaderText = "Profil";
-            this.Profil.Name = "Profil";
-            this.Profil.ReadOnly = true;
-            // 
-            // Rings
-            // 
-            this.Rings.HeaderText = "Ringe";
-            this.Rings.Name = "Rings";
-            this.Rings.ReadOnly = true;
-            // 
-            // Reevaluate
-            // 
-            this.Reevaluate.HeaderText = "Nachgewertet";
-            this.Reevaluate.Name = "Reevaluate";
-            this.Reevaluate.ReadOnly = true;
-            // 
             // TabShowMember
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -286,7 +289,7 @@
         private System.Windows.Forms.Button btnShowOnMonitor;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.ComboBox cbMember;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_editMember;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dvAwards;

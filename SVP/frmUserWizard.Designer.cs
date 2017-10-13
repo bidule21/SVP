@@ -1,6 +1,6 @@
 ﻿namespace SVP
 {
-    partial class AddUserWizard
+    partial class frmUserWizard
     {
         /// <summary>
         /// Required designer variable.
