@@ -92,7 +92,7 @@ namespace SVP
                         row.Cells.Add(new DataGridViewTextBoxCell() { Value = place++ });
                         row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Member });
                         row.Cells.Add(new DataGridViewTextBoxCell() { Value = displayValue });
-                        row.Cells.Add(new DataGridViewCheckBoxCell() { Value = multileWinners && (bestResult == sequence.Shots.Sum(x => x.Value)) });
+                        row.Cells.Add(new DataGridViewCheckBoxCell() { Value = multileWinners && (bestResult == sequence.Shots.Sum(x => x.Value)) && sequence.NextSequence == null });
                         dvResultList.Rows.Add(row);
                     }
                 }

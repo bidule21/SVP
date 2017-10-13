@@ -64,7 +64,7 @@ namespace SVP.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("COM4")]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM5")]
         public string ComPort {
             get {
                 return ((string)(this["ComPort"]));

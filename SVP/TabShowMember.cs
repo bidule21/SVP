@@ -49,6 +49,7 @@ namespace SVP
                     if (s.PreviousSequence != null)
                         continue;
                     DataGridViewRow row = new DataGridViewRow();
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = s.Date.ToShortDateString() });
                     row.Cells.Add(new DataGridViewTextBoxCell() { Value = (s.Price == null) ? "" : s.Price.Name });
                     row.Cells.Add(new DataGridViewTextBoxCell() { Value = s.Profile.Name });
                     row.Cells.Add(new DataGridViewTextBoxCell() { Value = s.Shots.Sum(x => x.Value) });

@@ -111,6 +111,7 @@ namespace SVP
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
                 Profile profile = context.Profiles.Where(x => x.Id == ((ComboboxItem)cbProfile.SelectedItem).Id).First();
+                Member member = context.Participants.OfType<Member>().Where(x => x.Id == ((Member)cbMember.SelectedItem).Id).First();
                 Task<List<RMResult>> ta = Task.Factory.StartNew<List<RMResult>>(() => readShots(profile.Value));
                 while (!ta.IsCompleted)
                 {
@@ -124,7 +125,7 @@ namespace SVP
                 }
                 sequence = new Sequence();
                 sequence.Date = DateTime.Now;
-                sequence.Member = ((Member)cbMember.SelectedItem);
+                sequence.Member = member;
                 sequence.Profile = profile;
 
                 context.Participants.Attach(sequence.Member);
@@ -141,13 +142,11 @@ namespace SVP
                 context.Sequences.Add(sequence);
                 context.SaveChanges();
                 sequence = context.Sequences.Where(x => x.Id == sequence.Id).FirstOrDefault();
-                Member member = (Member)context.Participants.Where(x => x.Id == sequence.Member.Id).FirstOrDefault();
-                Profile pro = context.Profiles.Where(x => x.Id == sequence.Profile.Id).FirstOrDefault();
                 DataGridViewRow row = new DataGridViewRow();
                 row.Tag = sequence.Id;
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = member.ToString() });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Shots.Sum(s => s.Value) });
-                row.Cells.Add(new DataGridViewTextBoxCell() { Value = pro.ToString() });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = profile.ToString() });
                 row.Cells.Add(new DataGridViewButtonCell() { UseColumnTextForButtonValue = true, Tag = sequence.Id });
                 dvResults.Rows.Add(row);
             }

@@ -23,7 +23,7 @@ namespace SVP
             cbCompetitions.Items.Clear();
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                cbCompetitions.Items.AddRange(context.Competitions.ToArray());
+                cbCompetitions.Items.AddRange(context.Competitions.Where(x => x.Finished == true).ToArray());
             }
         }
 

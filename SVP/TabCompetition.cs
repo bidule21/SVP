@@ -52,6 +52,19 @@ namespace SVP
                         row.Cells.Add(new DataGridViewTextBoxCell() { Value = "Pokal" });
                         dvCompetition.Rows.Add(row);
                     }
+                    foreach (Price p in currentCompetition.Prices)
+                        foreach (Sequence s in p.Sequences)
+                        {
+                            DataGridViewRow row = new DataGridViewRow();
+                            row.Tag = s.Id;
+                            row.Cells.Add(new DataGridViewTextBoxCell() { Value = s.Member.ToString() });
+                            row.Cells.Add(new DataGridViewTextBoxCell() { Value = s.Shots.Sum(shot => shot.Value) });
+                            row.Cells.Add(new DataGridViewTextBoxCell() { Value = s.Profile.ToString() });
+                            row.Cells.Add(new DataGridViewTextBoxCell() { Value = s.Price.ToString() });
+                            row.Cells.Add(new DataGridViewButtonCell() { UseColumnTextForButtonValue = true, Value = s });
+
+                            dvResults.Rows.Add(row);
+                        }
                     if (currentCompetition.GetType() == typeof(GroupCompetition))
                     {
                         lblClubGroup.Text = "Gruppe: ";
@@ -210,11 +223,14 @@ namespace SVP
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Member.ToString() });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Shots.Sum(s => s.Value) });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Profile.ToString() });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Price.ToString() });
                 row.Cells.Add(new DataGridViewButtonCell() { UseColumnTextForButtonValue = true, Value = sequence });
 
                 dvResults.Rows.Add(row);
                 context.Sequences.Add(sequence);
                 context.SaveChanges();
+                if (cbPrice.Items.Count > 0)
+                    cbPrice.SelectedIndex = 0;
                 Monitor.GetMonitor().AddResult(context.Sequences.Include("Shots").First(x => x.Id == sequence.Id));
                 gbRead.Enabled = (cbPrice.Items.Count > 0);
                 btnRead.Enabled = true;
@@ -255,18 +271,7 @@ namespace SVP
             if (choose.Competition == null)
                 return;
             currentCompetition = choose.Competition;
-            foreach (Price p in currentCompetition.Prices)
-                foreach (Sequence s in p.Sequences)
-                {
-                    DataGridViewRow row = new DataGridViewRow();
-                    row.Tag = s.Id;
-                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = s.Member.ToString() });
-                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = s.Shots.Sum(shot => shot.Value) });
-                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = s.Profile.ToString() });
-                    row.Cells.Add(new DataGridViewButtonCell() { UseColumnTextForButtonValue = true, Value = s });
-
-                    dvResults.Rows.Add(row);
-                }
+            
             reload_Controls();
         }
 
