@@ -33,17 +33,19 @@ namespace SVP
 
         private void AddUserWizardNew_Load(object sender, EventArgs e)
         {
+
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
                 cbMemberClub.Items.AddRange(context.Clubs.ToArray());
-
-                this.member = context.Participants.OfType<Member>().Where(x => x.Id == member.Id).First();
-                txtMemberFirstname.Text = this.member.Firstname;
-                txtMemberName.Text = this.member.Name;
-                dtMemberBirthday.Value = this.member.Birthday.Value;
-                txtMemberShortName.Text = this.member.Shortname;
-                cbMemberClub.SelectedIndex = cbMemberClub.FindStringExact(member.Club.ToString());
-
+                if (this.member != null)
+                {
+                    this.member = context.Participants.OfType<Member>().Where(x => x.Id == member.Id).First();
+                    txtMemberFirstname.Text = this.member.Firstname;
+                    txtMemberName.Text = this.member.Name;
+                    dtMemberBirthday.Value = this.member.Birthday.Value;
+                    txtMemberShortName.Text = this.member.Shortname;
+                    cbMemberClub.SelectedIndex = cbMemberClub.FindStringExact(member.Club.ToString());
+                }
             }
         }
 
