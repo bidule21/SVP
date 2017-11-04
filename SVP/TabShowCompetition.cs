@@ -23,7 +23,7 @@ namespace SVP
             cbCompetitions.Items.Clear();
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                cbCompetitions.Items.AddRange(context.Competitions.ToArray());
+                cbCompetitions.Items.AddRange(context.Competitions.Where(x => x.Finished == true).ToArray());
             }
         }
 
@@ -133,11 +133,24 @@ namespace SVP
      
                         foreach (Price p in competition.Prices)
                         {
-                            int place = 1;
-                            double lastResult = 0;
-                            double lastNextResult = 0;
+                            int place = 0;
+                            double lastResult = -1;
+                            double lastNextResult = -1;
                             foreach (Sequence s in p.Sequences.OrderByDescending(x => x.Shots.Sum(y => y.Value)).ThenByDescending(x => x.NextSequence == null ? 0 : x.NextSequence.Shots.Sum(y => y.Value)))
                             {
+                                if (s.Shots.Sum(x => x.Value) == lastResult)
+                                {
+                                    if (s.NextSequence != null)
+                                    {
+                                        if (s.NextSequence.Shots.Sum(x => x.Value) != lastNextResult)
+                                            place++;
+                                        lastNextResult = s.NextSequence.Shots.Sum(x => x.Value);
+                                    }
+                                }
+                                else
+                                {
+                                    place++;
+                                }
                                 pckg.Workbook.Worksheets[1].Cells[row, column].Value = place.ToString() + ".";
                                 pckg.Workbook.Worksheets[1].Cells[row, column + 1].Value = s.Member.Firstname;
                                 pckg.Workbook.Worksheets[1].Cells[row, column + 2].Value = s.Member.Name;
@@ -169,19 +182,7 @@ namespace SVP
                                     pckg.Workbook.Worksheets[1].Cells[row, column + 5 + i].Value = s.Shots.Sum(x => x.Value) + " (" + s.NextSequence.Shots.Sum(x => x.Value) + ")";
                                 pckg.Workbook.Worksheets[1].Cells[row, column + 5 + i].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
                                 pckg.Workbook.Worksheets[1].Cells[row, column + 5 + i].Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
-                                if (s.Shots.Sum(x => x.Value) == lastResult)
-                                {
-                                    if (s.NextSequence != null)
-                                    {
-                                        if (s.NextSequence.Shots.Sum(x => x.Value) != lastNextResult)
-                                            place++;
-                                        lastNextResult = s.NextSequence.Shots.Sum(x => x.Value);
-                                    }
-                                }
-                                else
-                                {
-                                    place++;
-                                }
+                                
                                 lastResult = s.Shots.Sum(x => x.Value);
                                 row++;
                             }

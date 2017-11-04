@@ -28,93 +28,59 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.wizardControl1 = new AeroWizard.WizardControl();
-            this.startPage = new AeroWizard.WizardPage();
             this.txtCompetitionName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.rbGroupCompetition = new System.Windows.Forms.RadioButton();
             this.rbSingleCompetition = new System.Windows.Forms.RadioButton();
-            this.addPricePage = new AeroWizard.WizardPage();
+            this.dvCompetition = new System.Windows.Forms.DataGridView();
+            this.PriceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PriceKind = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gbPrice = new System.Windows.Forms.GroupBox();
+            this.btnAddPrice = new System.Windows.Forms.Button();
             this.cbProfile = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtPriceName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.competitionOverviewPage = new AeroWizard.WizardPage();
-            this.rbFinished = new System.Windows.Forms.RadioButton();
-            this.rbAddAward = new System.Windows.Forms.RadioButton();
-            this.rbAddPrice = new System.Windows.Forms.RadioButton();
-            this.dvCompetition = new System.Windows.Forms.DataGridView();
-            this.PriceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PriceKind = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addAwardPage = new AeroWizard.WizardPage();
+            this.gbAward = new System.Windows.Forms.GroupBox();
+            this.btnAddAward = new System.Windows.Forms.Button();
             this.txtAwardName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
-            this.startPage.SuspendLayout();
-            this.addPricePage.SuspendLayout();
-            this.competitionOverviewPage.SuspendLayout();
+            this.btnOk = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.gbPriceAward = new System.Windows.Forms.GroupBox();
+            this.gbCompetition = new System.Windows.Forms.GroupBox();
+            this.btnCreate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dvCompetition)).BeginInit();
-            this.addAwardPage.SuspendLayout();
+            this.gbPrice.SuspendLayout();
+            this.gbAward.SuspendLayout();
+            this.gbPriceAward.SuspendLayout();
+            this.gbCompetition.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // wizardControl1
-            // 
-            this.wizardControl1.BackColor = System.Drawing.Color.White;
-            this.wizardControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wizardControl1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.wizardControl1.Location = new System.Drawing.Point(0, 0);
-            this.wizardControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.wizardControl1.Name = "wizardControl1";
-            this.wizardControl1.Pages.Add(this.startPage);
-            this.wizardControl1.Pages.Add(this.addPricePage);
-            this.wizardControl1.Pages.Add(this.addAwardPage);
-            this.wizardControl1.Pages.Add(this.competitionOverviewPage);
-            this.wizardControl1.Size = new System.Drawing.Size(861, 638);
-            this.wizardControl1.TabIndex = 0;
-            this.wizardControl1.Title = "Schießstand Verwaltungs Programm";
-            this.wizardControl1.Cancelling += new System.ComponentModel.CancelEventHandler(this.wizardControl1_Cancelling);
-            // 
-            // startPage
-            // 
-            this.startPage.Controls.Add(this.txtCompetitionName);
-            this.startPage.Controls.Add(this.label3);
-            this.startPage.Controls.Add(this.rbGroupCompetition);
-            this.startPage.Controls.Add(this.rbSingleCompetition);
-            this.startPage.Name = "startPage";
-            this.startPage.NextPage = this.addPricePage;
-            this.startPage.Size = new System.Drawing.Size(814, 448);
-            this.startPage.TabIndex = 0;
-            this.startPage.Text = "Was möchtest du tun?";
-            this.startPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.startPage_Commit);
-            this.startPage.Initialize += new System.EventHandler<AeroWizard.WizardPageInitEventArgs>(this.startPage_Initialize);
             // 
             // txtCompetitionName
             // 
-            this.txtCompetitionName.Location = new System.Drawing.Point(105, 77);
-            this.txtCompetitionName.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.txtCompetitionName.Location = new System.Drawing.Point(54, 23);
             this.txtCompetitionName.Name = "txtCompetitionName";
-            this.txtCompetitionName.Size = new System.Drawing.Size(352, 31);
-            this.txtCompetitionName.TabIndex = 3;
+            this.txtCompetitionName.Size = new System.Drawing.Size(236, 20);
+            this.txtCompetitionName.TabIndex = 7;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 82);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(6, 26);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 25);
-            this.label3.TabIndex = 2;
+            this.label3.Size = new System.Drawing.Size(38, 13);
+            this.label3.TabIndex = 6;
             this.label3.Text = "Name:";
             // 
             // rbGroupCompetition
             // 
             this.rbGroupCompetition.AutoSize = true;
             this.rbGroupCompetition.Enabled = false;
-            this.rbGroupCompetition.Location = new System.Drawing.Point(38, 166);
-            this.rbGroupCompetition.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.rbGroupCompetition.Location = new System.Drawing.Point(9, 81);
             this.rbGroupCompetition.Name = "rbGroupCompetition";
-            this.rbGroupCompetition.Size = new System.Drawing.Size(415, 29);
-            this.rbGroupCompetition.TabIndex = 1;
+            this.rbGroupCompetition.Size = new System.Drawing.Size(253, 17);
+            this.rbGroupCompetition.TabIndex = 5;
             this.rbGroupCompetition.Text = "Ein Pokalschießen mit Gruppenwertung erstellen";
             this.rbGroupCompetition.UseVisualStyleBackColor = true;
             // 
@@ -122,117 +88,13 @@
             // 
             this.rbSingleCompetition.AutoSize = true;
             this.rbSingleCompetition.Checked = true;
-            this.rbSingleCompetition.Location = new System.Drawing.Point(38, 128);
-            this.rbSingleCompetition.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.rbSingleCompetition.Location = new System.Drawing.Point(9, 56);
             this.rbSingleCompetition.Name = "rbSingleCompetition";
-            this.rbSingleCompetition.Size = new System.Drawing.Size(390, 29);
-            this.rbSingleCompetition.TabIndex = 0;
+            this.rbSingleCompetition.Size = new System.Drawing.Size(240, 17);
+            this.rbSingleCompetition.TabIndex = 4;
             this.rbSingleCompetition.TabStop = true;
             this.rbSingleCompetition.Text = "Ein Pokalschießen mit Einzelwertung erstellen";
             this.rbSingleCompetition.UseVisualStyleBackColor = true;
-            // 
-            // addPricePage
-            // 
-            this.addPricePage.Controls.Add(this.cbProfile);
-            this.addPricePage.Controls.Add(this.label4);
-            this.addPricePage.Controls.Add(this.txtPriceName);
-            this.addPricePage.Controls.Add(this.label2);
-            this.addPricePage.Name = "addPricePage";
-            this.addPricePage.NextPage = this.competitionOverviewPage;
-            this.addPricePage.Size = new System.Drawing.Size(790, 402);
-            this.addPricePage.TabIndex = 1;
-            this.addPricePage.Text = "Einen Pokal hinzufügen";
-            this.addPricePage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.addPricePage_Commit);
-            // 
-            // cbProfile
-            // 
-            this.cbProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbProfile.FormattingEnabled = true;
-            this.cbProfile.Location = new System.Drawing.Point(128, 85);
-            this.cbProfile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbProfile.Name = "cbProfile";
-            this.cbProfile.Size = new System.Drawing.Size(361, 33);
-            this.cbProfile.TabIndex = 3;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(34, 89);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(84, 25);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Wertung:";
-            // 
-            // txtPriceName
-            // 
-            this.txtPriceName.Location = new System.Drawing.Point(128, 40);
-            this.txtPriceName.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.txtPriceName.Name = "txtPriceName";
-            this.txtPriceName.Size = new System.Drawing.Size(361, 31);
-            this.txtPriceName.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(34, 45);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 25);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Name:";
-            // 
-            // competitionOverviewPage
-            // 
-            this.competitionOverviewPage.AllowBack = false;
-            this.competitionOverviewPage.Controls.Add(this.rbFinished);
-            this.competitionOverviewPage.Controls.Add(this.rbAddAward);
-            this.competitionOverviewPage.Controls.Add(this.rbAddPrice);
-            this.competitionOverviewPage.Controls.Add(this.dvCompetition);
-            this.competitionOverviewPage.Name = "competitionOverviewPage";
-            this.competitionOverviewPage.Size = new System.Drawing.Size(814, 448);
-            this.competitionOverviewPage.TabIndex = 3;
-            this.competitionOverviewPage.Text = "Übersicht";
-            this.competitionOverviewPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.competitionOverviewPage_Commit);
-            this.competitionOverviewPage.Enter += new System.EventHandler(this.competitionOverviewPage_Enter);
-            // 
-            // rbFinished
-            // 
-            this.rbFinished.AutoSize = true;
-            this.rbFinished.Location = new System.Drawing.Point(4, 368);
-            this.rbFinished.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbFinished.Name = "rbFinished";
-            this.rbFinished.Size = new System.Drawing.Size(294, 29);
-            this.rbFinished.TabIndex = 3;
-            this.rbFinished.Text = "Keine weiteren Preise hinzufügen";
-            this.rbFinished.UseVisualStyleBackColor = true;
-            this.rbFinished.CheckedChanged += new System.EventHandler(this.rbOverview_CheckedChanged);
-            // 
-            // rbAddAward
-            // 
-            this.rbAddAward.AutoSize = true;
-            this.rbAddAward.Location = new System.Drawing.Point(4, 329);
-            this.rbAddAward.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbAddAward.Name = "rbAddAward";
-            this.rbAddAward.Size = new System.Drawing.Size(270, 29);
-            this.rbAddAward.TabIndex = 2;
-            this.rbAddAward.Text = "Eine Ehrenscheibe hinzufügen";
-            this.rbAddAward.UseVisualStyleBackColor = true;
-            this.rbAddAward.CheckedChanged += new System.EventHandler(this.rbOverview_CheckedChanged);
-            // 
-            // rbAddPrice
-            // 
-            this.rbAddPrice.AutoSize = true;
-            this.rbAddPrice.Checked = true;
-            this.rbAddPrice.Location = new System.Drawing.Point(4, 291);
-            this.rbAddPrice.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbAddPrice.Name = "rbAddPrice";
-            this.rbAddPrice.Size = new System.Drawing.Size(219, 29);
-            this.rbAddPrice.TabIndex = 1;
-            this.rbAddPrice.TabStop = true;
-            this.rbAddPrice.Text = "Einen Pokal hinzufügen";
-            this.rbAddPrice.UseVisualStyleBackColor = true;
-            this.rbAddPrice.CheckedChanged += new System.EventHandler(this.rbOverview_CheckedChanged);
             // 
             // dvCompetition
             // 
@@ -242,13 +104,12 @@
             this.dvCompetition.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.PriceName,
             this.PriceKind});
-            this.dvCompetition.Location = new System.Drawing.Point(4, 5);
-            this.dvCompetition.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dvCompetition.Location = new System.Drawing.Point(6, 19);
             this.dvCompetition.Name = "dvCompetition";
             this.dvCompetition.ReadOnly = true;
             this.dvCompetition.RowHeadersVisible = false;
-            this.dvCompetition.Size = new System.Drawing.Size(782, 277);
-            this.dvCompetition.TabIndex = 0;
+            this.dvCompetition.Size = new System.Drawing.Size(517, 180);
+            this.dvCompetition.TabIndex = 8;
             // 
             // PriceName
             // 
@@ -264,82 +125,209 @@
             this.PriceKind.ReadOnly = true;
             this.PriceKind.Width = 260;
             // 
-            // addAwardPage
+            // gbPrice
             // 
-            this.addAwardPage.Controls.Add(this.txtAwardName);
-            this.addAwardPage.Controls.Add(this.label1);
-            this.addAwardPage.Name = "addAwardPage";
-            this.addAwardPage.NextPage = this.competitionOverviewPage;
-            this.addAwardPage.Size = new System.Drawing.Size(790, 402);
-            this.addAwardPage.TabIndex = 2;
-            this.addAwardPage.Text = "Ehrenscheibe hinzufügen";
-            this.addAwardPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.addAwardPage_Commit);
+            this.gbPrice.Controls.Add(this.btnAddPrice);
+            this.gbPrice.Controls.Add(this.cbProfile);
+            this.gbPrice.Controls.Add(this.label4);
+            this.gbPrice.Controls.Add(this.txtPriceName);
+            this.gbPrice.Controls.Add(this.label2);
+            this.gbPrice.Location = new System.Drawing.Point(7, 205);
+            this.gbPrice.Name = "gbPrice";
+            this.gbPrice.Size = new System.Drawing.Size(516, 88);
+            this.gbPrice.TabIndex = 9;
+            this.gbPrice.TabStop = false;
+            this.gbPrice.Text = "Pokal hinzufügen";
+            // 
+            // btnAddPrice
+            // 
+            this.btnAddPrice.Location = new System.Drawing.Point(435, 59);
+            this.btnAddPrice.Name = "btnAddPrice";
+            this.btnAddPrice.Size = new System.Drawing.Size(75, 23);
+            this.btnAddPrice.TabIndex = 8;
+            this.btnAddPrice.Text = "Hinzufügen";
+            this.btnAddPrice.UseVisualStyleBackColor = true;
+            this.btnAddPrice.Click += new System.EventHandler(this.btnAddPrice_Click);
+            // 
+            // cbProfile
+            // 
+            this.cbProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProfile.FormattingEnabled = true;
+            this.cbProfile.Location = new System.Drawing.Point(68, 51);
+            this.cbProfile.Name = "cbProfile";
+            this.cbProfile.Size = new System.Drawing.Size(242, 21);
+            this.cbProfile.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 54);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(51, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Wertung:";
+            // 
+            // txtPriceName
+            // 
+            this.txtPriceName.Location = new System.Drawing.Point(68, 22);
+            this.txtPriceName.Name = "txtPriceName";
+            this.txtPriceName.Size = new System.Drawing.Size(242, 20);
+            this.txtPriceName.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 25);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(38, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Name:";
+            // 
+            // gbAward
+            // 
+            this.gbAward.Controls.Add(this.btnAddAward);
+            this.gbAward.Controls.Add(this.txtAwardName);
+            this.gbAward.Controls.Add(this.label1);
+            this.gbAward.Location = new System.Drawing.Point(7, 299);
+            this.gbAward.Name = "gbAward";
+            this.gbAward.Size = new System.Drawing.Size(516, 88);
+            this.gbAward.TabIndex = 10;
+            this.gbAward.TabStop = false;
+            this.gbAward.Text = "Ehrenscheibe hinzufügen";
+            // 
+            // btnAddAward
+            // 
+            this.btnAddAward.Location = new System.Drawing.Point(435, 59);
+            this.btnAddAward.Name = "btnAddAward";
+            this.btnAddAward.Size = new System.Drawing.Size(75, 23);
+            this.btnAddAward.TabIndex = 9;
+            this.btnAddAward.Text = "Hinzufügen";
+            this.btnAddAward.UseVisualStyleBackColor = true;
+            this.btnAddAward.Click += new System.EventHandler(this.btnAddAward_Click);
             // 
             // txtAwardName
             // 
-            this.txtAwardName.Location = new System.Drawing.Point(162, 46);
-            this.txtAwardName.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.txtAwardName.Location = new System.Drawing.Point(96, 22);
             this.txtAwardName.Name = "txtAwardName";
-            this.txtAwardName.Size = new System.Drawing.Size(304, 31);
-            this.txtAwardName.TabIndex = 1;
+            this.txtAwardName.Size = new System.Drawing.Size(214, 20);
+            this.txtAwardName.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 51);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(6, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(126, 25);
-            this.label1.TabIndex = 0;
+            this.label1.Size = new System.Drawing.Size(75, 13);
+            this.label1.TabIndex = 2;
             this.label1.Text = "Name / Motiv:";
+            // 
+            // btnOk
+            // 
+            this.btnOk.Location = new System.Drawing.Point(460, 532);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(75, 23);
+            this.btnOk.TabIndex = 11;
+            this.btnOk.Text = "&OK";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(379, 532);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 12;
+            this.btnCancel.Text = "Abbrechen";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // gbPriceAward
+            // 
+            this.gbPriceAward.Controls.Add(this.dvCompetition);
+            this.gbPriceAward.Controls.Add(this.gbPrice);
+            this.gbPriceAward.Controls.Add(this.gbAward);
+            this.gbPriceAward.Enabled = false;
+            this.gbPriceAward.Location = new System.Drawing.Point(12, 127);
+            this.gbPriceAward.Name = "gbPriceAward";
+            this.gbPriceAward.Size = new System.Drawing.Size(536, 399);
+            this.gbPriceAward.TabIndex = 13;
+            this.gbPriceAward.TabStop = false;
+            this.gbPriceAward.Text = "Pokalschießen";
+            // 
+            // gbCompetition
+            // 
+            this.gbCompetition.Controls.Add(this.btnCreate);
+            this.gbCompetition.Controls.Add(this.label3);
+            this.gbCompetition.Controls.Add(this.rbSingleCompetition);
+            this.gbCompetition.Controls.Add(this.txtCompetitionName);
+            this.gbCompetition.Controls.Add(this.rbGroupCompetition);
+            this.gbCompetition.Location = new System.Drawing.Point(12, 12);
+            this.gbCompetition.Name = "gbCompetition";
+            this.gbCompetition.Size = new System.Drawing.Size(536, 109);
+            this.gbCompetition.TabIndex = 14;
+            this.gbCompetition.TabStop = false;
+            this.gbCompetition.Text = "Pokalschießen";
+            // 
+            // btnCreate
+            // 
+            this.btnCreate.Location = new System.Drawing.Point(448, 75);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(75, 23);
+            this.btnCreate.TabIndex = 12;
+            this.btnCreate.Text = "&OK";
+            this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
             // AddCompetitionWizard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AcceptButton = this.btnOk;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(861, 638);
+            this.ClientSize = new System.Drawing.Size(564, 563);
             this.ControlBox = false;
-            this.Controls.Add(this.wizardControl1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Controls.Add(this.gbCompetition);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnOk);
+            this.Controls.Add(this.gbPriceAward);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "AddCompetitionWizard";
-            this.Load += new System.EventHandler(this.AddCompetitionWizard_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).EndInit();
-            this.startPage.ResumeLayout(false);
-            this.startPage.PerformLayout();
-            this.addPricePage.ResumeLayout(false);
-            this.addPricePage.PerformLayout();
-            this.competitionOverviewPage.ResumeLayout(false);
-            this.competitionOverviewPage.PerformLayout();
+            this.Text = "Pokalschießen bearbeiten";
+            this.Load += new System.EventHandler(this.AddCompetitionWizardNew_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dvCompetition)).EndInit();
-            this.addAwardPage.ResumeLayout(false);
-            this.addAwardPage.PerformLayout();
+            this.gbPrice.ResumeLayout(false);
+            this.gbPrice.PerformLayout();
+            this.gbAward.ResumeLayout(false);
+            this.gbAward.PerformLayout();
+            this.gbPriceAward.ResumeLayout(false);
+            this.gbCompetition.ResumeLayout(false);
+            this.gbCompetition.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private AeroWizard.WizardControl wizardControl1;
-        private AeroWizard.WizardPage startPage;
+        private System.Windows.Forms.TextBox txtCompetitionName;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RadioButton rbGroupCompetition;
         private System.Windows.Forms.RadioButton rbSingleCompetition;
-        private AeroWizard.WizardPage addPricePage;
-        private System.Windows.Forms.TextBox txtPriceName;
-        private System.Windows.Forms.Label label2;
-        private AeroWizard.WizardPage addAwardPage;
-        private System.Windows.Forms.TextBox txtAwardName;
-        private System.Windows.Forms.Label label1;
-        private AeroWizard.WizardPage competitionOverviewPage;
-        private System.Windows.Forms.RadioButton rbFinished;
-        private System.Windows.Forms.RadioButton rbAddAward;
-        private System.Windows.Forms.RadioButton rbAddPrice;
         private System.Windows.Forms.DataGridView dvCompetition;
         private System.Windows.Forms.DataGridViewTextBoxColumn PriceName;
         private System.Windows.Forms.DataGridViewTextBoxColumn PriceKind;
-        private System.Windows.Forms.TextBox txtCompetitionName;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox gbPrice;
         private System.Windows.Forms.ComboBox cbProfile;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtPriceName;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnAddPrice;
+        private System.Windows.Forms.GroupBox gbAward;
+        private System.Windows.Forms.Button btnAddAward;
+        private System.Windows.Forms.TextBox txtAwardName;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnOk;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.GroupBox gbPriceAward;
+        private System.Windows.Forms.GroupBox gbCompetition;
+        private System.Windows.Forms.Button btnCreate;
     }
 }
