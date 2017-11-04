@@ -151,7 +151,7 @@ namespace SVP
                 dvResults.Rows.Add(row);
             }
             pBar.Visible = false;
-            Monitor.GetMonitor().AddResult(sequence);
+            Monitor.GetMonitor().AddSequence(sequence);
         }
 
         private void btnDisplayShot_Click(object sender, EventArgs e)
@@ -159,7 +159,7 @@ namespace SVP
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
                 var sequence = context.Sequences.Where(x => x.Id == ((Sequence)((Button)sender).Tag).Id).FirstOrDefault();
-                Monitor.GetMonitor().AddResult(sequence);
+                Monitor.GetMonitor().AddSequence(sequence);
             }
         }
 

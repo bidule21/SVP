@@ -231,7 +231,7 @@ namespace SVP
                 context.SaveChanges();
                 if (cbPrice.Items.Count > 0)
                     cbPrice.SelectedIndex = 0;
-                Monitor.GetMonitor().AddResult(context.Sequences.Include("Shots").First(x => x.Id == sequence.Id));
+                Monitor.GetMonitor().AddSequence(context.Sequences.Include("Shots").First(x => x.Id == sequence.Id));
                 gbRead.Enabled = (cbPrice.Items.Count > 0);
                 btnRead.Enabled = true;
                 pBar.Visible = false;
