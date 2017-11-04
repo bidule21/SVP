@@ -122,7 +122,7 @@ namespace SVP
             }
         }
 
-        internal void AddResult(Sequence result)
+        internal void AddSequence(Sequence result)
         {
 			sequenceList.Add(result);
 			if (DisplaySetting == DisplaySetting.Everything || DisplaySetting == DisplaySetting.EverythingAnonym)
@@ -156,7 +156,7 @@ namespace SVP
             graphics.FillEllipse(brush, x - (size / 2), y - (size / 2), size, size);
         }
         
-        internal void DisplayShot(Shot shot)
+        private void DisplayShot(Shot shot)
         {
             if (shot.Valid == false)
                 return;
@@ -182,7 +182,7 @@ namespace SVP
             DrawShot(shot, graphics, Brushes.Red);
             graphics.Dispose();
         }
-        internal void DisplayAllShots()
+        private void DisplayAllShots()
         {
             string shots = "";
             foreach (Shot result in currentResult.Shots)

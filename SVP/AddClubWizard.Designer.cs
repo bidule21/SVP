@@ -28,86 +28,70 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.wizardControl1 = new AeroWizard.WizardControl();
-            this.addClubPage = new AeroWizard.WizardPage();
-            this.cbClubTemporary = new System.Windows.Forms.CheckBox();
             this.txtClubName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
-            this.addClubPage.SuspendLayout();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnOk = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // wizardControl1
-            // 
-            this.wizardControl1.BackColor = System.Drawing.Color.White;
-            this.wizardControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wizardControl1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.wizardControl1.Location = new System.Drawing.Point(0, 0);
-            this.wizardControl1.Name = "wizardControl1";
-            this.wizardControl1.Pages.Add(this.addClubPage);
-            this.wizardControl1.Size = new System.Drawing.Size(574, 415);
-            this.wizardControl1.TabIndex = 0;
-            this.wizardControl1.Title = "Schießstand Verwaltungs Programm";
-
-            // 
-            // addClubPage
-            // 
-            this.addClubPage.Controls.Add(this.cbClubTemporary);
-            this.addClubPage.Controls.Add(this.txtClubName);
-            this.addClubPage.Controls.Add(this.label5);
-            this.addClubPage.Name = "addClubPage";
-            this.addClubPage.Size = new System.Drawing.Size(527, 261);
-            this.addClubPage.TabIndex = 2;
-            this.addClubPage.Text = "Verein oder Gruppe hinzufügen";
-            this.addClubPage.Commit += new System.EventHandler<AeroWizard.WizardPageConfirmEventArgs>(this.addClubPage_Commit);
-            // 
-            // cbClubTemporary
-            // 
-            this.cbClubTemporary.AutoSize = true;
-            this.cbClubTemporary.Location = new System.Drawing.Point(6, 37);
-            this.cbClubTemporary.Name = "cbClubTemporary";
-            this.cbClubTemporary.Size = new System.Drawing.Size(177, 19);
-            this.cbClubTemporary.TabIndex = 2;
-            this.cbClubTemporary.Text = "Temporäre/r Gruppe / Verein";
-            this.cbClubTemporary.UseVisualStyleBackColor = true;
             // 
             // txtClubName
             // 
-            this.txtClubName.Location = new System.Drawing.Point(54, 8);
+            this.txtClubName.Location = new System.Drawing.Point(63, 6);
             this.txtClubName.Name = "txtClubName";
-            this.txtClubName.Size = new System.Drawing.Size(184, 23);
-            this.txtClubName.TabIndex = 1;
+            this.txtClubName.Size = new System.Drawing.Size(184, 20);
+            this.txtClubName.TabIndex = 4;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 11);
+            this.label5.Location = new System.Drawing.Point(12, 9);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(45, 15);
-            this.label5.TabIndex = 0;
+            this.label5.Size = new System.Drawing.Size(41, 13);
+            this.label5.TabIndex = 3;
             this.label5.Text = "Name: ";
             // 
-            // AddClubWizard
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(100, 50);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 23;
+            this.btnCancel.Text = "Abbrechen";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnOk
+            // 
+            this.btnOk.Location = new System.Drawing.Point(181, 50);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(75, 23);
+            this.btnOk.TabIndex = 22;
+            this.btnOk.Text = "&OK";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
+            // AddClubWizardNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(574, 415);
-            this.Controls.Add(this.wizardControl1);
+            this.ClientSize = new System.Drawing.Size(268, 83);
+            this.ControlBox = false;
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnOk);
+            this.Controls.Add(this.txtClubName);
+            this.Controls.Add(this.label5);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "AddClubWizard";
-            ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).EndInit();
-            this.addClubPage.ResumeLayout(false);
-            this.addClubPage.PerformLayout();
+            this.Name = "AddClubWizardNew";
+            this.Text = "Verein hinzufügen";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private AeroWizard.WizardControl wizardControl1;
-        private AeroWizard.WizardPage addClubPage;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.CheckBox cbClubTemporary;
         private System.Windows.Forms.TextBox txtClubName;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnOk;
     }
 }

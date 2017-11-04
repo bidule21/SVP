@@ -1,13 +1,12 @@
-﻿using DisagLib;
-using System;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Configuration;
-using System.Web;
-using System.Web.Script.Serialization;
-using System.Diagnostics;
-using System.Net;
 
 namespace SVP
 {
@@ -15,46 +14,18 @@ namespace SVP
     {
         private Group myGroup;
         public Group Group { get { return myGroup; } }
-        Competition currentCompetition;
+        private Competition currentCompetition;
         public AddGroupWizard(Competition competition)
         {
             InitializeComponent();
             this.currentCompetition = competition;
         }
-
         public AddGroupWizard(Competition competition, Group group)
         {
             InitializeComponent();
-            myGroup = group;
             this.currentCompetition = competition;
+            this.myGroup = group;
         }
-
-        private void startPage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
-        {
-            if (txtGroupName.Text.Length == 0)
-                e.Cancel = true;
-            else if (myGroup != null)
-            {
-                myGroup.Name = txtGroupName.Text;
-            }
-            else
-            {
-                myGroup = new Group();
-                myGroup.Name = txtGroupName.Text;
-            }
-        }
-
-        private void startPage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
-        {
-            if (myGroup != null)
-                txtGroupName.Text = myGroup.Name;
-        }
-
-        private void wizardControl1_SelectedPageChanged(object sender, EventArgs e)
-        {
-            reloadControls();
-        }
-
         private void reloadControls()
         {
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
@@ -65,37 +36,29 @@ namespace SVP
             }
         }
 
-        private void GroupOverview_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
+        private void AddGroupWizardNew_Load(object sender, EventArgs e)
         {
-            if(dvMember.Rows.Count == 0)
+            reloadControls();
+            if (myGroup != null)
             {
-                e.Cancel = true;
-                return;
-            }
-            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
-            {
-                myGroup.GroupCompetition = (GroupCompetition)currentCompetition;
-                context.Participants.Add(myGroup);
-                context.SaveChanges();
-                Console.WriteLine(myGroup.Id);
-                foreach (DataGridViewRow row in dvMember.Rows)
+                txtGroupName.Text = myGroup.Name;
+                try
                 {
-                    var member = context.Participants.OfType<Member>().Where(x => x.Id == (int)row.Tag).First();
-                    myGroup.Member.Add(member);
+                    using (SVPEntitiesContainer context = new SVPEntitiesContainer())
+                    {
+                        foreach (Member member in myGroup.Member)
+                        {
+                            DataGridViewRow row = new DataGridViewRow();
+                            row.Cells.Add(new DataGridViewTextBoxCell() { Value = member.ToString() });
+                            row.Cells.Add(new DataGridViewTextBoxCell() { Value = member.Club.ToString() });
+                            row.Tag = member.Id;
+                            dvMember.Rows.Add(row);
+                        }
+                    }
                 }
-                context.SaveChanges();
-            
-            }
-        }
-
-        private void cbClub_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbClub.SelectedIndex >= 0)
-            {
-                using (SVPEntitiesContainer context = new SVPEntitiesContainer())
+                catch (Exception ex)
                 {
-                    cbMember.Items.Clear();
-                    cbMember.Items.AddRange(context.Participants.Include("club").OfType<Member>().Where(x => x.Club.Id == ((Club)(cbClub.SelectedItem)).Id).ToArray());
+                    MessageBox.Show(string.Format("Fehler beim Laden der Gruppe\r\n{0}", ex.Message));
                 }
             }
         }
@@ -109,47 +72,85 @@ namespace SVP
 
         private void btnNewMember_Click(object sender, EventArgs e)
         {
-            AddUserWizard wizard = new AddUserWizard();
+            frmUserWizard wizard = new frmUserWizard();
             wizard.ShowDialog();
             reloadControls();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (cbMember.SelectedIndex >= 0)
+            if (cbMember.SelectedIndex < 0)
             {
-                foreach (DataGridViewRow vrow in dvMember.Rows)
-                    if ((int)vrow.Tag == ((Member)cbMember.SelectedItem).Id)
-                        return;
-                DataGridViewRow row = new DataGridViewRow();
-                row.Cells.Add(new DataGridViewTextBoxCell() { Value = ((Member)cbMember.SelectedItem).ToString() });
-                row.Cells.Add(new DataGridViewTextBoxCell() { Value = ((Member)cbMember.SelectedItem).Club.ToString() });
-                row.Tag = ((Member)cbMember.SelectedItem).Id;
-                dvMember.Rows.Add(row);
+                MessageBox.Show("Bitte einen Verein auswählen!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+            foreach (DataGridViewRow vrow in dvMember.Rows)
+                if ((int)vrow.Tag == ((Member)cbMember.SelectedItem).Id)
+                    return;
+            DataGridViewRow row = new DataGridViewRow();
+            row.Cells.Add(new DataGridViewTextBoxCell() { Value = ((Member)cbMember.SelectedItem).ToString() });
+            row.Cells.Add(new DataGridViewTextBoxCell() { Value = ((Member)cbMember.SelectedItem).Club.ToString() });
+            row.Tag = ((Member)cbMember.SelectedItem).Id;
+            dvMember.Rows.Add(row);
         }
 
-        private void GroupOverview_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
+        private void cbClub_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (myGroup != null)
+            if (cbClub.SelectedIndex >= 0)
             {
-                using (SVPEntitiesContainer context = new SVPEntitiesContainer())
+                try
                 {
-                    foreach (Member member in myGroup.Member)
+                    using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                     {
-                        DataGridViewRow row = new DataGridViewRow();
-                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = member.ToString() });
-                        row.Cells.Add(new DataGridViewTextBoxCell() { Value = member.Club.ToString() });
-                        row.Tag = member.Id;
-                        dvMember.Rows.Add(row);
+                        cbMember.Items.Clear();
+                        cbMember.Items.AddRange(context.Participants.Include("club").OfType<Member>().Where(x => x.Club.Id == ((Club)(cbClub.SelectedItem)).Id).ToArray());
                     }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(string.Format("Fehler beim Laden der Mitglieder\r\n{0}", ex.Message));
                 }
             }
         }
 
-        private void wizardControl1_Cancelling(object sender, System.ComponentModel.CancelEventArgs e)
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            if (dvMember.Rows.Count == 0)
+            {
+                MessageBox.Show("Bitte Mitglieder zu der Gruppe hinzufügen!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            try
+            {
+                using (SVPEntitiesContainer context = new SVPEntitiesContainer())
+                {
+                    if (myGroup == null)
+                        myGroup = new Group();
+                    myGroup.Name = txtGroupName.Text;
+                    myGroup.GroupCompetition = (GroupCompetition)currentCompetition;
+                    context.Participants.Add(myGroup);
+                    context.SaveChanges();
+
+                    foreach (DataGridViewRow row in dvMember.Rows)
+                    {
+                        var member = context.Participants.OfType<Member>().Where(x => x.Id == (int)row.Tag).First();
+                        myGroup.Member.Add(member);
+                    }
+                    context.SaveChanges();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("Fehler beim Speichern der Gruppe\r\n{0}", ex.Message));
+            }
+            this.Close();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
         {
             myGroup = null;
+            this.Close();
         }
     }
 }
