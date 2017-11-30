@@ -24,10 +24,7 @@ namespace SVP
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
                 cbClub.Items.AddRange(context.Clubs.OrderBy(x => x.Name).ToArray());
-                foreach (var p in context.Profiles.OrderBy(x => x.Name))
-                {
-                    cbProfile.Items.Add(new ComboboxItem(p.Name, p.Id));
-                }
+                cbProfile.Items.AddRange(context.Profiles.OfType<DisagProfile>().ToArray());
             }
         }
 
@@ -108,7 +105,7 @@ namespace SVP
             pBar.Visible = true;
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                Profile profile = context.Profiles.Where(x => x.Id == ((ComboboxItem)cbProfile.SelectedItem).Id).First();
+                DisagProfile profile = context.Profiles.OfType<DisagProfile>().Where(x => x.Id == ((ComboboxItem)cbProfile.SelectedItem).Id).First();
                 Task<List<RMResult>> ta = Task.Factory.StartNew<List<RMResult>>(() => readShots(profile.Value));
                 while (!ta.IsCompleted)
                 {

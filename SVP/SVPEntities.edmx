@@ -18,6 +18,8 @@
     <EntitySet Name="Participants_Group" EntityType="SVPEntities.Store.Participants_Group" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Competitions_GroupCompetition" EntityType="SVPEntities.Store.Competitions_GroupCompetition" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Competitions_SingleCompetition" EntityType="SVPEntities.Store.Competitions_SingleCompetition" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Profiles_DisagProfile" EntityType="SVPEntities.Store.Profiles_DisagProfile" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Profiles_ManualProfile" EntityType="SVPEntities.Store.Profiles_ManualProfile" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MemberGroup" EntityType="SVPEntities.Store.MemberGroup" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="ClubMember" Association="SVPEntities.Store.ClubMember">
       <End Role="Club" EntitySet="Clubs" />
@@ -95,6 +97,14 @@
       <End Role="Competition" EntitySet="Competitions" />
       <End Role="SingleCompetition" EntitySet="Competitions_SingleCompetition" />
     </AssociationSet>
+    <AssociationSet Name="FK_DisagProfile_inherits_Profile" Association="SVPEntities.Store.FK_DisagProfile_inherits_Profile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="DisagProfile" EntitySet="Profiles_DisagProfile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ManualProfile_inherits_Profile" Association="SVPEntities.Store.FK_ManualProfile_inherits_Profile">
+      <End Role="Profile" EntitySet="Profiles" />
+      <End Role="ManualProfile" EntitySet="Profiles_ManualProfile" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Clubs">
     <Key>
@@ -109,7 +119,6 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="longtext" Nullable="false" />
-    <Property Name="Value" Type="longtext" Nullable="false" />
   </EntityType>
   <EntityType Name="Sequences">
     <Key>
@@ -196,6 +205,19 @@
     <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Competitions_SingleCompetition">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Profiles_DisagProfile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Value" Type="longtext" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Profiles_ManualProfile">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -445,6 +467,34 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DisagProfile_inherits_Profile">
+    <End Role="Profile" Type="SVPEntities.Store.Profiles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DisagProfile" Type="SVPEntities.Store.Profiles_DisagProfile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DisagProfile">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ManualProfile_inherits_Profile">
+    <End Role="Profile" Type="SVPEntities.Store.Profiles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ManualProfile" Type="SVPEntities.Store.Profiles_ManualProfile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Profile">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ManualProfile">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -538,13 +588,12 @@
           <End Type="SVPEntities.Club" Role="Club" Multiplicity="1" />
           <End Type="SVPEntities.Member" Role="Member" Multiplicity="*" />
         </Association>
-        <EntityType Name="Profile">
+        <EntityType Name="Profile" Abstract="true">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Value" Type="String" Nullable="false" />
           <NavigationProperty Name="Sequences" Relationship="SVPEntities.ProfileSequence" FromRole="Profile" ToRole="Sequence" />
           <NavigationProperty Name="Prices" Relationship="SVPEntities.ProfilePrice" FromRole="Profile" ToRole="Price" />
         </EntityType>
@@ -675,6 +724,11 @@
           <End Type="SVPEntities.Sequence" Role="Sequence" Multiplicity="0..1" />
           <End Type="SVPEntities.Sequence" Role="Sequence1" Multiplicity="0..1" />
         </Association>
+        <EntityType Name="DisagProfile" BaseType="SVPEntities.Profile">
+          <Property Name="Value" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ManualProfile" BaseType="SVPEntities.Profile">
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -694,7 +748,17 @@
         <MappingFragment StoreEntitySet="Profiles">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(SVPEntities.DisagProfile)">
+        <MappingFragment StoreEntitySet="Profiles_DisagProfile">
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(SVPEntities.ManualProfile)">
+        <MappingFragment StoreEntitySet="Profiles_ManualProfile">
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

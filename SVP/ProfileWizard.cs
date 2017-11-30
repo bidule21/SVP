@@ -18,7 +18,7 @@ namespace SVP
         private List<RMValue> KAL_Values;
         private List<RMValue> RIB_Values;
         private List<RMValue> TEA_Values;
-        private Profile profile;
+        private DisagProfile profile;
         public ProfileWizard()
         {
             InitializeComponent();
@@ -219,7 +219,7 @@ namespace SVP
             {
                 if(profile == null)
                 {
-                    profile = new Profile();
+                    profile = new DisagProfile();
                     profile.Name = txtProfileName.Text;
                     profile.Value = getProfileString();
                     context.Profiles.Add(profile);

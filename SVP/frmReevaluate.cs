@@ -15,7 +15,7 @@ namespace SVP
     {
         private List<Sequence> sequences;
         private Price price;
-        private Profile profile;
+        private DisagProfile profile;
         public frmReevaluate(Price price, List<Sequence> sequences)
         {
             InitializeComponent();
@@ -47,7 +47,7 @@ namespace SVP
             cbProfile.Items.Clear();
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                cbProfile.Items.AddRange(context.Profiles.Where(x => x.Id != price.Profile.Id).ToArray());
+                cbProfile.Items.AddRange(context.Profiles.OfType<DisagProfile>().Where(x => x.Id != price.Profile.Id).ToArray());
             }
             btnOk.Enabled = cbMember.Items.Count == 0;
             reloadMembers();
@@ -114,7 +114,7 @@ namespace SVP
         {
             if(cbProfile.SelectedIndex >= 0)
             {
-                this.profile = (Profile)cbProfile.SelectedItem;
+                this.profile = (DisagProfile)cbProfile.SelectedItem;
                 gbProfile.Enabled = false;
                 gbRead.Enabled = true;
             }

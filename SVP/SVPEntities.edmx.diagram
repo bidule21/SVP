@@ -4,64 +4,46 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7af4ec3cb52349dcb0df4fed5574f2d2" Name="Diagram1" ZoomLevel="95" >
-        <EntityTypeShape EntityType="SVPEntities.Member" Width="1.5" PointX="3.875" PointY="3" />
-        <EntityTypeShape EntityType="SVPEntities.Club" Width="1.5" PointX="1.125" PointY="3" />
+      <Diagram DiagramId="7af4ec3cb52349dcb0df4fed5574f2d2" Name="Diagram1" ZoomLevel="67" >
+        <EntityTypeShape EntityType="SVPEntities.Member" Width="1.5" PointX="4.875" PointY="3.75" />
+        <EntityTypeShape EntityType="SVPEntities.Club" Width="1.5" PointX="5" PointY="1" />
         <AssociationConnector Association="SVPEntities.ClubMember" />
-        <EntityTypeShape EntityType="SVPEntities.Profile" Width="1.5" PointX="1.125" PointY="7" />
-        <EntityTypeShape EntityType="SVPEntities.Sequence" Width="1.5" PointX="3.875" PointY="7" />
+        <EntityTypeShape EntityType="SVPEntities.Profile" Width="1.5" PointX="5.75" PointY="12.25" />
+        <EntityTypeShape EntityType="SVPEntities.Sequence" Width="1.5" PointX="3.5" PointY="9" />
         <AssociationConnector Association="SVPEntities.ProfileSequence" />
-        <EntityTypeShape EntityType="SVPEntities.Shot" Width="1.5" PointX="3.875" PointY="10" />
+        <EntityTypeShape EntityType="SVPEntities.Shot" Width="1.5" PointX="0.625" PointY="9" />
         <AssociationConnector Association="SVPEntities.SequenceShot" />
         <AssociationConnector Association="SVPEntities.MemberSequence" />
-        <EntityTypeShape EntityType="SVPEntities.Group" Width="1.5" PointX="8" PointY="3" />
+        <EntityTypeShape EntityType="SVPEntities.Group" Width="1.5" PointX="9.625" PointY="3.75" />
         <AssociationConnector Association="SVPEntities.MemberGroup" />
-        <EntityTypeShape EntityType="SVPEntities.Competition" Width="1.5" PointX="11" PointY="6.625" />
-        <EntityTypeShape EntityType="SVPEntities.GroupCompetition" Width="1.5" PointX="11" PointY="3" />
+        <EntityTypeShape EntityType="SVPEntities.Competition" Width="1.5" PointX="10.625" PointY="5.75" />
+        <EntityTypeShape EntityType="SVPEntities.GroupCompetition" Width="1.5" PointX="11.625" PointY="3.625" />
         <InheritanceConnector EntityType="SVPEntities.GroupCompetition" />
         <AssociationConnector Association="SVPEntities.GroupCompetitionGroup" />
-        <EntityTypeShape EntityType="SVPEntities.SingleCompetition" Width="1.5" PointX="8" PointY="7.125" />
+        <EntityTypeShape EntityType="SVPEntities.SingleCompetition" Width="1.5" PointX="7.5" PointY="1.25" />
         <InheritanceConnector EntityType="SVPEntities.SingleCompetition" />
         <AssociationConnector Association="SVPEntities.SingleCompetitionMember" />
-        <EntityTypeShape EntityType="SVPEntities.Award" Width="1.5" PointX="9.375" PointY="5" />
+        <EntityTypeShape EntityType="SVPEntities.Award" Width="1.5" PointX="6.75" PointY="6.375" />
         <AssociationConnector Association="SVPEntities.CompetitionAward" />
         <AssociationConnector Association="SVPEntities.MemberAward" ManuallyRouted="false" >
         </AssociationConnector>
         <EntityTypeShape EntityType="SVPEntities.Price" Width="1.5" PointX="8" PointY="9" />
         <AssociationConnector Association="SVPEntities.CompetitionPrice" />
-        <EntityTypeShape EntityType="SVPEntities.Participant" Width="1.5" PointX="6" PointY="1.25" />
+        <EntityTypeShape EntityType="SVPEntities.Participant" Width="1.5" PointX="7.625" PointY="4.75" />
         <InheritanceConnector EntityType="SVPEntities.Member" />
         <InheritanceConnector EntityType="SVPEntities.Group" />
-        <AssociationConnector Association="SVPEntities.PriceParticipant" ManuallyRouted="true" >
-          <ConnectorPoint PointX="8" PointY="11.364889322916666" />
-          <ConnectorPoint PointX="7.1562525" PointY="36.916887204021869" />
-          <ConnectorPoint PointX="7.1562525" PointY="2.6533821614583339" />
+        <AssociationConnector Association="SVPEntities.PriceParticipant" ManuallyRouted="false" >
         </AssociationConnector>
-        <AssociationConnector Association="SVPEntities.PriceSequence" ManuallyRouted="true" >
-          <ConnectorPoint PointX="8" PointY="9" />
-          <ConnectorPoint PointX="7.625" PointY="8.625" />
-          <ConnectorPoint PointX="7.2395858333333329" PointY="8.625" />
-          <ConnectorPoint PointX="7.0729191666666669" PointY="8.625" />
-          <ConnectorPoint PointX="6.0190057760387159" PointY="8.625" />
-          <ConnectorPoint PointX="6.0190057760387159" PointY="9.547587890625" />
-          <ConnectorPoint PointX="5.75" PointY="9.547587890625" />
-          <ConnectorPoint PointX="5.375" PointY="9.4468753038248678" />
+        <AssociationConnector Association="SVPEntities.PriceSequence" ManuallyRouted="false" >
         </AssociationConnector>
-        <AssociationConnector Association="SVPEntities.ProfilePrice" ManuallyRouted="true" >
-          <ConnectorPoint PointX="1.875" PointY="8.9802864583333335" />
-          <ConnectorPoint PointX="1.875" PointY="9.5862939453125" />
-          <ConnectorPoint PointX="4.3072929166666674" PointY="9.5862939453125" />
-          <ConnectorPoint PointX="4.4739595833333334" PointY="9.5862939453125" />
-          <ConnectorPoint PointX="7.0729191666666669" PointY="9.5862939453125" />
-          <ConnectorPoint PointX="7.2395858333333329" PointY="9.5862939453125" />
-          <ConnectorPoint PointX="8" PointY="9.5862939453125" />
+        <AssociationConnector Association="SVPEntities.ProfilePrice" ManuallyRouted="false" >
         </AssociationConnector>
-        <AssociationConnector Association="SVPEntities.SequenceSequence" ManuallyRouted="true" >
-          <ConnectorPoint PointX="5.375" PointY="8.2785953776041659" />
-          <ConnectorPoint PointX="6.036915133772867" PointY="8.2785953776041659" />
-          <ConnectorPoint PointX="6.036915133772867" PointY="7.5155641990820818" />
-          <ConnectorPoint PointX="5.375" PointY="7.5155641990820818" />
+        <AssociationConnector Association="SVPEntities.SequenceSequence" ManuallyRouted="false" >
         </AssociationConnector>
+        <EntityTypeShape EntityType="SVPEntities.DisagProfile" Width="1.5" PointX="3.625" PointY="14.5" />
+        <EntityTypeShape EntityType="SVPEntities.ManualProfile" Width="1.5" PointX="7.875" PointY="14.5" />
+        <InheritanceConnector EntityType="SVPEntities.DisagProfile" />
+        <InheritanceConnector EntityType="SVPEntities.ManualProfile" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

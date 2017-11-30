@@ -111,6 +111,9 @@
       <DependentUpon>SVPEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Competition.part.cs" />
+    <Compile Include="DisagProfile.cs">
+      <DependentUpon>SVPEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="frmChooseCompetition.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -176,6 +179,9 @@
     </Compile>
     <Compile Include="Group.part.cs" />
     <Compile Include="GroupCompetition.cs">
+      <DependentUpon>SVPEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ManualProfile.cs">
       <DependentUpon>SVPEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Member.cs">
@@ -366,6 +372,8 @@
       <LastGenOutput>SVPEntities.cs</LastGenOutput>
     </Content>
     <Content Include="targetAim.ico" />
+    <Content Include="V1.6__SVPEntities.edmx.mig.sql" />
+    <Content Include="V1.6__SVPEntities.edmx.sql" />
     <None Include="Resources\Zielscheibe.png" />
   </ItemGroup>
   <ItemGroup>
