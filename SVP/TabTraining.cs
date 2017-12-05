@@ -24,6 +24,8 @@ namespace SVP
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
                 cbClub.Items.AddRange(context.Clubs.OrderBy(x => x.Name).ToArray());
+                if (!cbClub.Text.Equals(""))
+                    cbClub.SelectedIndex = cbClub.FindStringExact(cbClub.Text);
                 foreach (var p in context.Profiles.OrderBy(x => x.Name))
                 {
                     cbProfile.Items.Add(new ComboboxItem(p.Name, p.Id));
