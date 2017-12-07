@@ -186,52 +186,65 @@ namespace SVP
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
                 Profile profile = ((Price)cbPrice.SelectedItem).Profile;
-                System.Threading.Tasks.Task<List<RMResult>> ta = System.Threading.Tasks.Task.Factory.StartNew<List<RMResult>>(() => Common.readShots(profile.Value));
-                while (!ta.IsCompleted)
+                ManualProfile manualProfile = context.Profiles.OfType<ManualProfile>().FirstOrDefault(x => x.Id == profile.Id);
+                DisagProfile disagProfile = context.Profiles.OfType<DisagProfile>().FirstOrDefault(x => x.Id == profile.Id);
+                if (disagProfile != null)
                 {
-                    Application.DoEvents();
-                }
-                if (ta.Result == null)
-                {
-                    pBar.Visible = false;
-                    cbPrice.Enabled = true;
-                    btnRead.Enabled = true;
-                    return;
-                }
+                    System.Threading.Tasks.Task<List<RMResult>> ta = System.Threading.Tasks.Task.Factory.StartNew<List<RMResult>>(() => Common.readShots(disagProfile.Value));
+                    while (!ta.IsCompleted)
+                    {
+                        Application.DoEvents();
+                    }
+                    if (ta.Result == null)
+                    {
+                        pBar.Visible = false;
+                        cbPrice.Enabled = true;
+                        btnRead.Enabled = true;
+                        return;
+                    }
 
-                Sequence sequence = new Sequence();
-                sequence.Date = DateTime.Now;
-                sequence.Member = ((Member)cbMember.SelectedItem);
-                sequence.Profile = profile;
-                sequence.Price = ((Price)cbPrice.SelectedItem);
-                context.Participants.Attach(sequence.Member);
-                context.Profiles.Attach(sequence.Profile);
-                context.Prices.Attach(sequence.Price);
-                cbPrice.Items.Remove(cbPrice.SelectedItem);
-                foreach (RMResult result in ta.Result)
-                {
-                    Shot s = new Shot();
-                    s.Value = result.Rings;
-                    s.Angle = result.Angle;
-                    s.FactorValue = result.FactorValue;
-                    s.ShotNumber = (short)result.ShotNumber;
-                    s.Valid = (result.Validity == ValidFlag.Valid);
-                    sequence.Shots.Add(s);
+                    Sequence sequence = new Sequence();
+                    sequence.Date = DateTime.Now;
+                    sequence.Member = ((Member)cbMember.SelectedItem);
+                    sequence.Profile = profile;
+                    sequence.Price = ((Price)cbPrice.SelectedItem);
+                    context.Participants.Attach(sequence.Member);
+                    context.Profiles.Attach(sequence.Profile);
+                    context.Prices.Attach(sequence.Price);
+                    cbPrice.Items.Remove(cbPrice.SelectedItem);
+                    foreach (RMResult result in ta.Result)
+                    {
+                        Shot s = new Shot();
+                        s.Value = result.Rings;
+                        s.Angle = result.Angle;
+                        s.FactorValue = result.FactorValue;
+                        s.ShotNumber = (short)result.ShotNumber;
+                        s.Valid = (result.Validity == ValidFlag.Valid);
+                        sequence.Shots.Add(s);
+                    }
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.Tag = sequence.Id;
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Member.ToString() });
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Shots.Sum(s => s.Value) });
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Profile.ToString() });
+                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Price.ToString() });
+                    row.Cells.Add(new DataGridViewButtonCell() { UseColumnTextForButtonValue = true, Value = sequence });
+                    Monitor.GetMonitor().AddSequence(context.Sequences.Include("Shots").First(x => x.Id == sequence.Id));
+                    dvResults.Rows.Add(row);
+                    context.Sequences.Add(sequence);
+                    context.SaveChanges();
                 }
-                DataGridViewRow row = new DataGridViewRow();
-                row.Tag = sequence.Id;
-                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Member.ToString() });
-                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Shots.Sum(s => s.Value) });
-                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Profile.ToString() });
-                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Price.ToString() });
-                row.Cells.Add(new DataGridViewButtonCell() { UseColumnTextForButtonValue = true, Value = sequence });
-
-                dvResults.Rows.Add(row);
-                context.Sequences.Add(sequence);
-                context.SaveChanges();
+                else if(manualProfile != null)
+                {
+                    //ToDo: Manuelle auswertung
+                }
+                else
+                {
+                    throw new Exception("Found no matching Profile!");
+                }
                 if (cbPrice.Items.Count > 0)
                     cbPrice.SelectedIndex = 0;
-                Monitor.GetMonitor().AddSequence(context.Sequences.Include("Shots").First(x => x.Id == sequence.Id));
+
                 gbRead.Enabled = (cbPrice.Items.Count > 0);
                 btnRead.Enabled = true;
                 pBar.Visible = false;

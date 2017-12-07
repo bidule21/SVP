@@ -18,7 +18,7 @@ namespace SVP
         private List<RMValue> KAL_Values;
         private List<RMValue> RIB_Values;
         private List<RMValue> TEA_Values;
-        private Profile profile;
+        private DisagProfile profile;
         public ProfileWizard()
         {
             InitializeComponent();
@@ -97,7 +97,7 @@ namespace SVP
                     MessageBox.Show("Bitte einen Verein auswählen!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                this.profile = (Profile)cbProfile.SelectedItem;
+                this.profile = (DisagProfile)cbProfile.SelectedItem;
                 setProfileString(this.profile.Value);
                 name = profile.Name;
             }
@@ -227,14 +227,14 @@ namespace SVP
                 {
                     if (this.profile == null)
                     {
-                        this.profile = new Profile();
+                        this.profile = new DisagProfile();
                         this.profile.Name = txtProfileName.Text;
                         this.profile.Value = getProfileString();
                         context.Profiles.Add(this.profile);
                     }
                     else
                     {
-                        this.profile = context.Profiles.Find(this.profile.Id);
+                        this.profile = context.Profiles.OfType<DisagProfile>().FirstOrDefault(x => x.Id == this.profile.Id);
                         this.profile.Value = getProfileString();
                     }
                     context.SaveChanges();
