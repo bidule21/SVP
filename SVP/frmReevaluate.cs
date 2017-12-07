@@ -92,7 +92,7 @@ namespace SVP
 
                 DataGridViewRow row = new DataGridViewRow();
                 row.Tag = sequence.Id;
-                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Member.Name });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Member });
                 row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Shots.Sum(x => x.Value) });
                 dvResults.Rows.Add(row);
                 context.Participants.Attach(sequence.Member);

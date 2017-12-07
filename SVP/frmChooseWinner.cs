@@ -25,7 +25,7 @@ namespace SVP
             lblName.Text = award.Name;
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                cbClub.Items.AddRange(context.Clubs.ToArray());
+                cbClub.Items.AddRange(context.Clubs.OrderBy(x => x.Name).ToArray());
             }
         }
 
@@ -37,7 +37,7 @@ namespace SVP
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
                 var club = context.Clubs.Find(((Club)cbClub.SelectedItem).Id);
-                cbMember.Items.AddRange(club.Members.ToArray());
+                cbMember.Items.AddRange(club.Members.OrderBy(x => x.Name).ThenBy(x => x.Firstname).ToArray());
             }
         }
 

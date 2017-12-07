@@ -15,6 +15,11 @@ namespace SVP
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            if(System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1)
+            {
+                MessageBox.Show("SVP läuft bereits!", "SVP läuft bereits!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             Application.Run(new frmMain());
         }
     }

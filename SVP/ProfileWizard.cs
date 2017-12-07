@@ -1,13 +1,13 @@
 ﻿using DisagLib;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Configuration;
-using System.Web;
-using System.Web.Script.Serialization;
-using System.Diagnostics;
-using System.Net;
 
 namespace SVP
 {
@@ -18,10 +18,11 @@ namespace SVP
         private List<RMValue> KAL_Values;
         private List<RMValue> RIB_Values;
         private List<RMValue> TEA_Values;
-        private DisagProfile profile;
+        private Profile profile;
         public ProfileWizard()
         {
             InitializeComponent();
+            profile = null;
 
             SCH_Values = new List<RMValue>();
             SCH_Values.Add(new RMValue("LG10", "Luftgewehr 10er Band"));
@@ -77,51 +78,55 @@ namespace SVP
             TEA_Values.Add(new RMValue("HT", "Teilerwertung mit hundertstel Teile"));
         }
 
-        private void wizardControl1_SelectedPageChanged(object sender, EventArgs e)
+        private void btnOk_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void rbEditProfile_CheckedChanged(object sender, EventArgs e)
-        {
-            cbProfile.Enabled = rbEditProfile.Checked;
-            txtProfileName.Enabled = rbAddProfile.Checked;
-        }
-
-        private void rbAddProfile_CheckedChanged(object sender, EventArgs e)
-        {
-            cbProfile.Enabled = rbEditProfile.Checked;
-            txtProfileName.Enabled = rbAddProfile.Checked;
-        }
-
-        private void addProfilePage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
-        {
-
-                if (rbAddProfile.Checked && txtProfileName.TextLength > 0)
-                {
-                    profile = null;
-                }
-                else if (rbEditProfile.Checked && cbProfile.SelectedIndex >= 0)
-                {
-                    profile = (Profile)cbProfile.SelectedItem;
-                }
-                else
-                {
-                    e.Cancel = true;
-                }
-        }
-
-        private void addProfilePage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
-        {
-            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
+            string name = "";
+            if(rbAddProfile.Checked)
             {
-                cbProfile.Items.Clear();
-                cbProfile.Items.AddRange(context.Profiles.ToArray());
+                if(txtProfileName.Text.Length <= 0)
+                {
+                    MessageBox.Show("Bitte einen Namen eingeben!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                name = txtProfileName.Text;
             }
+            else
+            {
+                if (cbProfile.SelectedIndex < 0)
+                {
+                    MessageBox.Show("Bitte einen Verein auswählen!", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                this.profile = (Profile)cbProfile.SelectedItem;
+                setProfileString(this.profile.Value);
+                name = profile.Name;
+            }
+            gbProfile.Text = name;
+            gbProfile.Enabled = true;
+            gbMenu.Enabled = false;
         }
 
-        private void MainWizard_Load(object sender, EventArgs e)
+        private void rbProfile_CheckedChanged(object sender, EventArgs e)
         {
+            cbProfile.Enabled = rbEditProfile.Checked;
+            txtProfileName.Enabled = rbAddProfile.Checked;
+        }
+
+        private void ProfileWizardNew_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SVPEntitiesContainer context = new SVPEntitiesContainer())
+                {
+                    cbProfile.Items.Clear();
+                    cbProfile.Items.AddRange(context.Profiles.ToArray());
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(string.Format("Fehler beim Laden der Profile\r\n{0}", ex.Message));
+            }
+            
             cbSch.Items.AddRange(SCH_Values.ToArray());
             cbSch.SelectedIndex = 0;
             cbRia.Items.AddRange(RIA_Values.ToArray());
@@ -213,32 +218,37 @@ namespace SVP
                 }
             }
         }
-        private void editProfilePage_Commit(object sender, AeroWizard.WizardPageConfirmEventArgs e)
+
+        private void btnSave_Click(object sender, EventArgs e)
         {
-            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
+            try
             {
-                if(profile == null)
+                using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                 {
-                    profile = new DisagProfile();
-                    profile.Name = txtProfileName.Text;
-                    profile.Value = getProfileString();
-                    context.Profiles.Add(profile);
+                    if (this.profile == null)
+                    {
+                        this.profile = new Profile();
+                        this.profile.Name = txtProfileName.Text;
+                        this.profile.Value = getProfileString();
+                        context.Profiles.Add(this.profile);
+                    }
+                    else
+                    {
+                        this.profile = context.Profiles.Find(this.profile.Id);
+                        this.profile.Value = getProfileString();
+                    }
+                    context.SaveChanges();
                 }
-                else
-                {
-                    profile = context.Profiles.Find(profile.Id);
-                    profile.Value = getProfileString();
-                }
-                
-                
-                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format("Fehler beim Speichern des Profiles\r\n{0}", ex.Message));
             }
         }
 
-        private void editProfilePage_Initialize(object sender, AeroWizard.WizardPageInitEventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
-            if (profile != null)
-                setProfileString(profile.Value);
+            this.Close();
         }
     }
 }
