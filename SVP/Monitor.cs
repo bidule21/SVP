@@ -53,8 +53,8 @@ namespace SVP
             this.news = newsString;
             lbNews1.Text = newsString;
             lbNews2.Text = newsString;
-            lbNews1.Location = new Point(0, (int)(this.Width * 0.5) + 80);
-            lbNews2.Location = new Point(-lbNews1.Width + 1, (int)(this.Width * 0.5) + 80);
+            lbNews1.Location = new Point(0, lbNews1.Location.Y);
+            lbNews2.Location = new Point(-lbNews1.Width + 1, lbNews2.Location.Y);
         }
 
         public void SetDisplaySetting(DisplaySetting setting)
@@ -112,15 +112,15 @@ namespace SVP
             pbTarget.Location = new Point(0, 0);
             pbTarget.Height = (int)(this.Width * 0.5);
             pbTarget.Width = (int)(this.Width * 0.5);
-            lbResults.Location = new Point(3, (int)(this.Width * 0.5));
-            rtResults.Location = new Point(3, (int)(this.Width * 0.5) + 40);
-            lbNews1.Location = new Point(-30, (int)(this.Width * 0.5) + 80);
-            lbNews2.Location = new Point(-30, (int)(this.Width * 0.5) + 80);
+            lbResults.Location = new Point(3, (int)(this.Width * 0.5) - 40);
+            rtResults.Location = new Point(3, (int)(this.Width * 0.5));
+            lbNews1.Location = new Point(-30, (int)(this.Width * 0.5) + 40);
+            lbNews2.Location = new Point(-30, (int)(this.Width * 0.5) + 40);
             rtResults.Width = this.Width;
             dgResultList.Location = new Point((int)(this.Width * 0.5), 0);
             dgResultList.Width = (int)(this.Width * 0.5);
             dgResultList.Height = this.rtResults.Location.Y;
-            lbCurrentResult.Location = new Point((int)(this.Width * 0.5) - 100, (int)(this.Width * 0.5));
+            lbCurrentResult.Location = new Point((int)(this.Width * 0.5) - 100, (int)(this.Width * 0.5) - 40);
             timer = new Timer();
             timer.Interval = 5000;
             timer.Tick += Timer_Tick;

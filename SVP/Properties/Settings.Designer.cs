@@ -23,21 +23,27 @@ namespace SVP.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Anonym")]
         public string DefaultName {
             get {
                 return ((string)(this["DefaultName"]));
             }
+            set {
+                this["DefaultName"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("-1")]
         public int DefaultProfile {
             get {
                 return ((int)(this["DefaultProfile"]));
+            }
+            set {
+                this["DefaultProfile"] = value;
             }
         }
         
@@ -53,21 +59,15 @@ namespace SVP.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("COM5")]
-        public string ComPort {
-            get {
-                return ((string)(this["ComPort"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("ExportTemplate.xltx")]
         public string ExcelTemplate {
             get {
                 return ((string)(this["ExcelTemplate"]));
+            }
+            set {
+                this["ExcelTemplate"] = value;
             }
         }
         
@@ -80,6 +80,18 @@ namespace SVP.Properties {
             }
             set {
                 this["News"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM7")]
+        public string ComPort {
+            get {
+                return ((string)(this["ComPort"]));
+            }
+            set {
+                this["ComPort"] = value;
             }
         }
     }
