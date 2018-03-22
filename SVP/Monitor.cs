@@ -10,40 +10,58 @@ using System.Windows.Forms;
 
 namespace SVP
 {
-	public enum DisplaySetting
-	{
-		Everything,
-		EverythingAnonym,
-		ShotImageWithPoints,
-		ShotImage
-	}
+    public enum DisplaySetting
+    {
+        Everything,
+        EverythingAnonym,
+        ShotImageWithPoints,
+        ShotImage
+    }
     public partial class Monitor : Form
     {
         private static Monitor MyMonitor;
         private Sequence currentResult;
         private int currentShot = 0;
         private Timer timer;
-		private List<Sequence> sequenceList;
+        private Timer newsTimer;
+        private List<Sequence> sequenceList;
         private Queue<Sequence> sequencesToDisplay;
-		public DisplaySetting DisplaySetting { get; private set; }
+        private string news;
+        private int shiftamount = 0;
+        public DisplaySetting DisplaySetting { get; private set; }
 
-		public static Monitor GetMonitor()
+        public static Monitor GetMonitor()
         {
             if (MyMonitor == null)
                 MyMonitor = new Monitor();
             return MyMonitor;
         }
 
-		public void SetDisplaySetting(DisplaySetting setting)
-		{
+        public void SetDisplayNews(string news)
+        {
+            int width = TextRenderer.MeasureText(news, lbNews1.Font).Width;
+            string newsString = " " + news;
+            while (width < this.Width)
+            {
+                newsString = newsString + " " + news;
+                width = TextRenderer.MeasureText(newsString, lbNews1.Font).Width;
+            }
+            lbNews1.Text = newsString;
+            lbNews2.Text = newsString;
+            lbNews1.Location = new Point(0, (int)(this.Width * 0.5) + 80);
+            lbNews2.Location = new Point(-lbNews1.Width + 1, (int)(this.Width * 0.5) + 80);
+        }
+
+        public void SetDisplaySetting(DisplaySetting setting)
+        {
             this.DisplaySetting = setting;
             if (setting != DisplaySetting.Everything)
-			{
-				lbCurrentResult.Text = "";
-				rtResults.Text = "";
-				lbResults.Text = "";
-				dgResultList.Rows.Clear();
-			}
+            {
+                lbCurrentResult.Text = "";
+                rtResults.Text = "";
+                lbResults.Text = "";
+                dgResultList.Rows.Clear();
+            }
             dgResultList.Rows.Clear();
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
@@ -53,7 +71,7 @@ namespace SVP
                     switch (DisplaySetting)
                     {
                         case DisplaySetting.Everything:
-                                dgResultList.Rows.Add(seq.Member.ToString(), seq.Shots.Sum(x => x.Value).ToString(), seq.Profile);
+                            dgResultList.Rows.Add(seq.Member.ToString(), seq.Shots.Sum(x => x.Value).ToString(), seq.Profile);
                             break;
                         case DisplaySetting.EverythingAnonym:
                             dgResultList.Rows.Add(SVP.Properties.Settings.Default.DefaultName, seq.Shots.Sum(x => x.Value).ToString(), seq.Profile);
@@ -61,12 +79,12 @@ namespace SVP
                     }
                 }
             }
-		}
+        }
 
         private Monitor()
         {
             InitializeComponent();
-			sequenceList = new List<Sequence>();
+            sequenceList = new List<Sequence>();
             sequencesToDisplay = new Queue<Sequence>();
             DisplaySetting = DisplaySetting.Everything;
             this.StartPosition = FormStartPosition.Manual;
@@ -75,7 +93,8 @@ namespace SVP
                 this.DesktopLocation = new Point(Screen.AllScreens[1].WorkingArea.X, Screen.AllScreens[1].WorkingArea.Y);
                 this.Height = Screen.AllScreens[1].WorkingArea.Height;
                 this.Width = Screen.AllScreens[1].WorkingArea.Width;
-            }else
+            }
+            else
             {
                 this.Height = Screen.AllScreens[0].WorkingArea.Height;
                 this.Width = Screen.AllScreens[0].WorkingArea.Width;
@@ -90,6 +109,8 @@ namespace SVP
             pbTarget.Width = (int)(this.Width * 0.5);
             lbResults.Location = new Point(3, (int)(this.Width * 0.5));
             rtResults.Location = new Point(3, (int)(this.Width * 0.5) + 40);
+            lbNews1.Location = new Point(-30, (int)(this.Width * 0.5) + 80);
+            lbNews2.Location = new Point(-30, (int)(this.Width * 0.5) + 80);
             rtResults.Width = this.Width;
             dgResultList.Location = new Point((int)(this.Width * 0.5), 0);
             dgResultList.Width = (int)(this.Width * 0.5);
@@ -99,11 +120,29 @@ namespace SVP
             timer.Interval = 5000;
             timer.Tick += Timer_Tick;
             timer.Start();
+            newsTimer = new Timer();
+            newsTimer.Interval = 10;
+            newsTimer.Tick += newsTimer_Tick;
+            newsTimer.Start();
+        }
+
+        private void newsTimer_Tick(object sender, EventArgs e)
+        {
+            lbNews1.Location = new Point(lbNews1.Location.X + 1, lbNews1.Location.Y);
+            lbNews2.Location = new Point(lbNews2.Location.X + 1, lbNews2.Location.Y);
+            if(lbNews1.Location.X > this.Size.Width)
+            {
+                lbNews1.Location = new Point(lbNews2.Location.X - lbNews1.Width + 1, lbNews1.Location.Y);
+            }
+            if (lbNews2.Location.X > this.Size.Width)
+            {
+                lbNews2.Location = new Point(lbNews1.Location.X - lbNews2.Width + 1, lbNews2.Location.Y);
+            }
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if(currentResult != null)
+            if (currentResult != null)
             {
                 if (currentShot == currentResult.Shots.Count)
                 {
@@ -124,47 +163,47 @@ namespace SVP
 
         internal void AddSequence(Sequence result)
         {
-			sequenceList.Add(result);
-			if (DisplaySetting == DisplaySetting.Everything || DisplaySetting == DisplaySetting.EverythingAnonym)
-			{
+            sequenceList.Add(result);
+            if (DisplaySetting == DisplaySetting.Everything || DisplaySetting == DisplaySetting.EverythingAnonym)
+            {
                 string name = (this.DisplaySetting == DisplaySetting.Everything) ? result.Member.ToString() : SVP.Properties.Settings.Default.DefaultName;
-				dgResultList.Rows.Add(name, result.Shots.Sum(x => x.Value).ToString(), result.Profile);
-				dgResultList.FirstDisplayedScrollingRowIndex = dgResultList.RowCount - 1;
-			}
+                dgResultList.Rows.Add(name, result.Shots.Sum(x => x.Value).ToString(), result.Profile);
+                dgResultList.FirstDisplayedScrollingRowIndex = dgResultList.RowCount - 1;
+            }
             sequencesToDisplay.Enqueue(result);
             if (currentResult == null && sequencesToDisplay.Count > 0)
                 currentResult = sequencesToDisplay.Dequeue();
         }
-        
+
         internal void DisplaySequence(Sequence result)
         {
             this.currentResult = result;
             currentShot = 0;
             lbResults.Text = (this.DisplaySetting == DisplaySetting.Everything) ? result.Member.ToString() : SVP.Properties.Settings.Default.DefaultName;
         }
-        
+
         private void DrawShot(Shot shot, Graphics graphics, Brush brush)
         {
             int size = (int)(pbTarget.Width / 11.5);
             int x = pbTarget.Width / 2;
             int y = pbTarget.Width / 2;
-            double factor = (shot.FactorValue/ 2300) * (pbTarget.Width / 2);
+            double factor = (shot.FactorValue / 2300) * (pbTarget.Width / 2);
             double angle = shot.Angle * (Math.PI / 180);
             angle += (1.5 * Math.PI);
             x += (int)(Math.Cos(angle) * factor);
             y += (int)(Math.Sin(angle) * factor);
             graphics.FillEllipse(brush, x - (size / 2), y - (size / 2), size, size);
         }
-        
+
         private void DisplayShot(Shot shot)
         {
             if (shot.Valid == false)
                 return;
             string shots = "";
-            foreach(Shot result in currentResult.Shots)
+            foreach (Shot result in currentResult.Shots)
             {
                 string value = result.Valid ? result.Value.ToString() : "X";
-                if(result == shot)
+                if (result == shot)
                 {
                     shots += "     " + @"\cf1 " + value;
                 }
@@ -173,14 +212,14 @@ namespace SVP
                     shots += "     \\cf0 " + value;
                 }
             }
-			if (DisplaySetting != DisplaySetting.ShotImage)
-			{
-				rtResults.Rtf = @"{\rtf1\ansi {\colortbl; \red255\green0\blue0;}" + shots + "}";
+            if (DisplaySetting != DisplaySetting.ShotImage)
+            {
+                rtResults.Rtf = @"{\rtf1\ansi {\colortbl; \red255\green0\blue0;}" + shots + "}";
                 if (shot.Valid)
                     lbCurrentResult.Text = shot.Value.ToString();
                 else
                     lbCurrentResult.Text = "X";
-			}
+            }
             pbTarget.Refresh();
             Graphics graphics = pbTarget.CreateGraphics();
             if (shot.Valid)
@@ -192,15 +231,15 @@ namespace SVP
             string shots = "";
             foreach (Shot result in currentResult.Shots)
                 shots += "     " + result.Value.ToString();
-        
-			if (DisplaySetting != DisplaySetting.ShotImage)
-			{
-				rtResults.Rtf = @"{\rtf1\ansi" + shots + "}";
-				lbCurrentResult.Text = currentResult.Shots.Sum(x => x.Value).ToString();
-			}
+
+            if (DisplaySetting != DisplaySetting.ShotImage)
+            {
+                rtResults.Rtf = @"{\rtf1\ansi" + shots + "}";
+                lbCurrentResult.Text = currentResult.Shots.Sum(x => x.Value).ToString();
+            }
             pbTarget.Refresh();
             Graphics graphics = pbTarget.CreateGraphics();
-            for(int i = 0; i < currentResult.Shots.Count;i++)
+            for (int i = 0; i < currentResult.Shots.Count; i++)
             {
                 if (currentResult.Shots.ElementAt(i).Valid == false)
                     continue;
