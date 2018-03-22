@@ -381,6 +381,7 @@
       <LastGenOutput>SVPEntities.cs</LastGenOutput>
     </Content>
     <Content Include="targetAim.ico" />
+    <Content Include="test.sql" />
     <Content Include="V1.6__SVPEntities.edmx.mig.sql" />
     <Content Include="V1.6__SVPEntities.edmx.sql" />
     <None Include="Resources\Zielscheibe.png" />

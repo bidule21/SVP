@@ -137,7 +137,7 @@ namespace SVP
             lbNews2.Visible = !(this.news is null);
             lbNews1.Location = new Point(lbNews1.Location.X + 1, lbNews1.Location.Y);
             lbNews2.Location = new Point(lbNews2.Location.X + 1, lbNews2.Location.Y);
-            if(lbNews1.Location.X > this.Size.Width)
+            if (lbNews1.Location.X > this.Size.Width)
             {
                 lbNews1.Location = new Point(lbNews2.Location.X - lbNews1.Width + 1, lbNews1.Location.Y);
             }
@@ -154,9 +154,12 @@ namespace SVP
                 if (currentShot == currentResult.Shots.Count)
                 {
                     DisplayAllShots();
-                    currentShot = 0;
+                    currentShot++;
+                }
+                else if (currentShot > currentResult.Shots.Count)
+                {
                     if (sequencesToDisplay.Count > 0)
-                        currentResult = sequencesToDisplay.Dequeue();
+                        DisplaySequence(sequencesToDisplay.Dequeue());
                     else
                         currentResult = null;
                 }
@@ -168,21 +171,25 @@ namespace SVP
             }
         }
 
-        internal void AddSequence(Sequence result)
+        internal void AddSequence(Sequence result, bool add=true)
         {
-            sequenceList.Add(result);
+            if (add)
+                sequenceList.Add(result);
             if (DisplaySetting == DisplaySetting.Everything || DisplaySetting == DisplaySetting.EverythingAnonym)
             {
                 string name = (this.DisplaySetting == DisplaySetting.Everything) ? result.Member.ToString() : SVP.Properties.Settings.Default.DefaultName;
-                dgResultList.Rows.Add(name, result.Shots.Sum(x => x.Value).ToString(), result.Profile);
-                dgResultList.FirstDisplayedScrollingRowIndex = dgResultList.RowCount - 1;
+                if (add)
+                {
+                    dgResultList.Rows.Add(name, result.Shots.Sum(x => x.Value).ToString(), result.Profile);
+                    dgResultList.FirstDisplayedScrollingRowIndex = dgResultList.RowCount - 1;
+                }
             }
             sequencesToDisplay.Enqueue(result);
             if (currentResult == null && sequencesToDisplay.Count > 0)
-                currentResult = sequencesToDisplay.Dequeue();
+                DisplaySequence(sequencesToDisplay.Dequeue());
         }
 
-        internal void DisplaySequence(Sequence result)
+        private void DisplaySequence(Sequence result)
         {
             this.currentResult = result;
             currentShot = 0;
@@ -237,8 +244,10 @@ namespace SVP
         {
             string shots = "";
             foreach (Shot result in currentResult.Shots)
-                shots += "     " + result.Value.ToString();
-
+            {
+                string value = result.Valid ? result.Value.ToString() : "X";
+                shots += "     " + value;
+            }
             if (DisplaySetting != DisplaySetting.ShotImage)
             {
                 rtResults.Rtf = @"{\rtf1\ansi" + shots + "}";

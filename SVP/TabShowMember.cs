@@ -13,6 +13,7 @@ namespace SVP
 {
     public partial class TabShowMember : UserControl
     {
+        private Member loadedMember = null;
         public TabShowMember()
         {
             InitializeComponent();
@@ -25,6 +26,7 @@ namespace SVP
             {
                 cbClub.Items.AddRange(context.Clubs.ToArray());
             }
+            btnDelete.Enabled = !(this.loadedMember is null);
         }
 
         private void TabShowCompetition_Load(object sender, EventArgs e)
@@ -36,6 +38,7 @@ namespace SVP
         {
             if (cbMember.SelectedIndex >= 0)
                 LoadMember(((Member)cbMember.SelectedItem).Id);
+            reloadContorls();
         }
 
         internal void LoadMember(int memberId)
@@ -44,6 +47,7 @@ namespace SVP
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
                 var member = context.Participants.OfType<Member>().First(x => x.Id == memberId);
+                loadedMember = member;
                 foreach (Sequence s in member.Sequences)
                 {
                     if (s.PreviousSequence != null)
@@ -198,6 +202,23 @@ namespace SVP
         {
             btnLoad.Enabled = cbMember.SelectedIndex >= 0;
             btn_editMember.Enabled = btnLoad.Enabled;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Not supported yet!");
+            return;
+            if (loadedMember is null)
+                return;
+            if (MessageBox.Show(string.Format("Bist du dir sicher, dass du das Mitglied {0} löschen möchtest?", loadedMember.ToString()), "Mitglied löschen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                using (SVPEntitiesContainer context = new SVPEntitiesContainer())
+                {
+                    context.Participants.Remove(context.Participants.First(x => x.Id == loadedMember.Id));
+                    context.SaveChanges();
+                }
+            }
+            reloadContorls();
         }
     }
 }

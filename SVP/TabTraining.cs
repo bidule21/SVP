@@ -107,7 +107,7 @@ namespace SVP
             pBar.Visible = true;
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                DisagProfile profile = context.Profiles.OfType<DisagProfile>().Where(x => x.Id == ((ComboboxItem)cbProfile.SelectedItem).Id).First();
+                DisagProfile profile = context.Profiles.OfType<DisagProfile>().Where(x => x.Id == ((DisagProfile)cbProfile.SelectedItem).Id).First();
                 Member member = context.Participants.OfType<Member>().Where(x => x.Id == ((Member)cbMember.SelectedItem).Id).First();
                 Task<List<RMResult>> ta = Task.Factory.StartNew<List<RMResult>>(() => readShots(profile.Value));
                 while (!ta.IsCompleted)
@@ -201,7 +201,7 @@ namespace SVP
                 using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                 {
                     Sequence seq = context.Sequences.Include("Shots").Where(x => x.Id == sequence_id).FirstOrDefault();
-                    Monitor.GetMonitor().DisplaySequence(seq);
+                    Monitor.GetMonitor().AddSequence(seq, false);
                 }
             }
         }

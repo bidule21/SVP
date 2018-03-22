@@ -48,6 +48,7 @@
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PriceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.gbMember.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvResults)).BeginInit();
             this.gbExport.SuspendLayout();
@@ -56,6 +57,7 @@
             // 
             // gbMember
             // 
+            this.gbMember.Controls.Add(this.btnDelete);
             this.gbMember.Controls.Add(this.btn_editMember);
             this.gbMember.Controls.Add(this.label2);
             this.gbMember.Controls.Add(this.label1);
@@ -64,10 +66,10 @@
             this.gbMember.Controls.Add(this.btnLoad);
             this.gbMember.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbMember.Location = new System.Drawing.Point(0, 0);
-            this.gbMember.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbMember.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbMember.Name = "gbMember";
-            this.gbMember.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.gbMember.Size = new System.Drawing.Size(828, 94);
+            this.gbMember.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gbMember.Size = new System.Drawing.Size(1104, 116);
             this.gbMember.TabIndex = 0;
             this.gbMember.TabStop = false;
             this.gbMember.Text = "Mitglied";
@@ -75,9 +77,10 @@
             // btn_editMember
             // 
             this.btn_editMember.Enabled = false;
-            this.btn_editMember.Location = new System.Drawing.Point(356, 47);
+            this.btn_editMember.Location = new System.Drawing.Point(475, 58);
+            this.btn_editMember.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_editMember.Name = "btn_editMember";
-            this.btn_editMember.Size = new System.Drawing.Size(93, 23);
+            this.btn_editMember.Size = new System.Drawing.Size(124, 28);
             this.btn_editMember.TabIndex = 21;
             this.btn_editMember.Text = "Bearbeiten";
             this.btn_editMember.UseVisualStyleBackColor = true;
@@ -86,49 +89,48 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 52);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(5, 64);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 13);
+            this.label2.Size = new System.Drawing.Size(60, 17);
             this.label2.TabIndex = 20;
             this.label2.Text = "Mitglied:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 26);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(5, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
+            this.label1.Size = new System.Drawing.Size(53, 17);
             this.label1.TabIndex = 19;
             this.label1.Text = "Verein:";
             // 
             // cbMember
             // 
             this.cbMember.FormattingEnabled = true;
-            this.cbMember.Location = new System.Drawing.Point(54, 50);
-            this.cbMember.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbMember.Location = new System.Drawing.Point(72, 62);
+            this.cbMember.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbMember.Name = "cbMember";
-            this.cbMember.Size = new System.Drawing.Size(198, 21);
+            this.cbMember.Size = new System.Drawing.Size(263, 24);
             this.cbMember.TabIndex = 18;
             this.cbMember.SelectedIndexChanged += new System.EventHandler(this.cbMember_SelectedIndexChanged);
             // 
             // cbClub
             // 
             this.cbClub.FormattingEnabled = true;
-            this.cbClub.Location = new System.Drawing.Point(54, 26);
-            this.cbClub.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbClub.Location = new System.Drawing.Point(72, 32);
+            this.cbClub.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbClub.Name = "cbClub";
-            this.cbClub.Size = new System.Drawing.Size(198, 21);
+            this.cbClub.Size = new System.Drawing.Size(263, 24);
             this.cbClub.TabIndex = 17;
             this.cbClub.SelectedIndexChanged += new System.EventHandler(this.cbClub_SelectedIndexChanged);
             // 
             // btnLoad
             // 
             this.btnLoad.Enabled = false;
-            this.btnLoad.Location = new System.Drawing.Point(256, 47);
+            this.btnLoad.Location = new System.Drawing.Point(341, 58);
+            this.btnLoad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(93, 23);
+            this.btnLoad.Size = new System.Drawing.Size(124, 28);
             this.btnLoad.TabIndex = 16;
             this.btnLoad.Text = "OK";
             this.btnLoad.UseVisualStyleBackColor = true;
@@ -146,13 +148,13 @@
             this.Rings,
             this.Reevaluate});
             this.dvResults.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dvResults.Location = new System.Drawing.Point(0, 94);
-            this.dvResults.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dvResults.Location = new System.Drawing.Point(0, 116);
+            this.dvResults.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dvResults.Name = "dvResults";
             this.dvResults.ReadOnly = true;
             this.dvResults.RowHeadersVisible = false;
             this.dvResults.RowTemplate.Height = 28;
-            this.dvResults.Size = new System.Drawing.Size(828, 198);
+            this.dvResults.Size = new System.Drawing.Size(1104, 244);
             this.dvResults.TabIndex = 1;
             // 
             // seq_date
@@ -190,29 +192,31 @@
             this.gbExport.Controls.Add(this.btnShowOnMonitor);
             this.gbExport.Controls.Add(this.btnExport);
             this.gbExport.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gbExport.Location = new System.Drawing.Point(0, 515);
-            this.gbExport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbExport.Location = new System.Drawing.Point(0, 634);
+            this.gbExport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbExport.Name = "gbExport";
-            this.gbExport.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.gbExport.Size = new System.Drawing.Size(828, 54);
+            this.gbExport.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gbExport.Size = new System.Drawing.Size(1104, 66);
             this.gbExport.TabIndex = 2;
             this.gbExport.TabStop = false;
             this.gbExport.Text = "Exportieren";
             // 
             // btnShowOnMonitor
             // 
-            this.btnShowOnMonitor.Location = new System.Drawing.Point(588, 18);
+            this.btnShowOnMonitor.Location = new System.Drawing.Point(784, 22);
+            this.btnShowOnMonitor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnShowOnMonitor.Name = "btnShowOnMonitor";
-            this.btnShowOnMonitor.Size = new System.Drawing.Size(136, 23);
+            this.btnShowOnMonitor.Size = new System.Drawing.Size(181, 28);
             this.btnShowOnMonitor.TabIndex = 16;
             this.btnShowOnMonitor.Text = "Alle auf Monitor anzeigen";
             this.btnShowOnMonitor.UseVisualStyleBackColor = true;
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(730, 18);
+            this.btnExport.Location = new System.Drawing.Point(973, 22);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(93, 23);
+            this.btnExport.Size = new System.Drawing.Size(124, 28);
             this.btnExport.TabIndex = 15;
             this.btnExport.Text = "Exportieren";
             this.btnExport.UseVisualStyleBackColor = true;
@@ -228,13 +232,13 @@
             this.PriceName,
             this.Date});
             this.dvAwards.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dvAwards.Location = new System.Drawing.Point(0, 292);
-            this.dvAwards.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dvAwards.Location = new System.Drawing.Point(0, 360);
+            this.dvAwards.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dvAwards.Name = "dvAwards";
             this.dvAwards.ReadOnly = true;
             this.dvAwards.RowHeadersVisible = false;
             this.dvAwards.RowTemplate.Height = 28;
-            this.dvAwards.Size = new System.Drawing.Size(828, 127);
+            this.dvAwards.Size = new System.Drawing.Size(1104, 156);
             this.dvAwards.TabIndex = 3;
             // 
             // Type
@@ -255,17 +259,29 @@
             this.Date.Name = "Date";
             this.Date.ReadOnly = true;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Enabled = false;
+            this.btnDelete.Location = new System.Drawing.Point(607, 58);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(124, 28);
+            this.btnDelete.TabIndex = 22;
+            this.btnDelete.Text = "Mitglied löschen";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // TabShowMember
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dvAwards);
             this.Controls.Add(this.gbExport);
             this.Controls.Add(this.dvResults);
             this.Controls.Add(this.gbMember);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "TabShowMember";
-            this.Size = new System.Drawing.Size(828, 569);
+            this.Size = new System.Drawing.Size(1104, 700);
             this.Load += new System.EventHandler(this.TabShowCompetition_Load);
             this.Enter += new System.EventHandler(this.TabShowCompetition_Enter);
             this.gbMember.ResumeLayout(false);
@@ -299,5 +315,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Profil;
         private System.Windows.Forms.DataGridViewTextBoxColumn Rings;
         private System.Windows.Forms.DataGridViewTextBoxColumn Reevaluate;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

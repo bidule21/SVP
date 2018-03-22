@@ -362,7 +362,7 @@ namespace SVP
         {
             if (e.ColumnIndex == 3)
             {
-                Monitor.GetMonitor().DisplaySequence((Sequence)dvResults.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
+                Monitor.GetMonitor().AddSequence((Sequence)dvResults.Rows[e.RowIndex].Cells[e.ColumnIndex].Value, false);
             }
         }
 
