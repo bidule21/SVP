@@ -163,23 +163,28 @@ namespace SVP
             string shots = "";
             foreach(Shot result in currentResult.Shots)
             {
+                string value = result.Valid ? result.Value.ToString() : "X";
                 if(result == shot)
                 {
-                    shots += "     " + @"\cf1 " + result.Value.ToString();
+                    shots += "     " + @"\cf1 " + value;
                 }
                 else
                 {
-                    shots += "     \\cf0 " + result.Value.ToString();
+                    shots += "     \\cf0 " + value;
                 }
             }
 			if (DisplaySetting != DisplaySetting.ShotImage)
 			{
 				rtResults.Rtf = @"{\rtf1\ansi {\colortbl; \red255\green0\blue0;}" + shots + "}";
-				lbCurrentResult.Text = shot.Value.ToString();
+                if (shot.Valid)
+                    lbCurrentResult.Text = shot.Value.ToString();
+                else
+                    lbCurrentResult.Text = "X";
 			}
             pbTarget.Refresh();
             Graphics graphics = pbTarget.CreateGraphics();
-            DrawShot(shot, graphics, Brushes.Red);
+            if (shot.Valid)
+                DrawShot(shot, graphics, Brushes.Red);
             graphics.Dispose();
         }
         private void DisplayAllShots()
