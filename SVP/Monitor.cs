@@ -128,6 +128,8 @@ namespace SVP
 
         private void newsTimer_Tick(object sender, EventArgs e)
         {
+            lbNews1.Visible = !(this.news is null);
+            lbNews2.Visible = !(this.news is null);
             lbNews1.Location = new Point(lbNews1.Location.X + 1, lbNews1.Location.Y);
             lbNews2.Location = new Point(lbNews2.Location.X + 1, lbNews2.Location.Y);
             if(lbNews1.Location.X > this.Size.Width)
