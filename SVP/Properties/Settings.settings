@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SVP.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="MonitorIP" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">172.16.2.178</Value>
-    </Setting>
     <Setting Name="DefaultName" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Anonym</Value>
     </Setting>
@@ -19,6 +16,9 @@
     </Setting>
     <Setting Name="ExcelTemplate" Type="System.String" Scope="Application">
       <Value Profile="(Default)">ExportTemplate.xltx</Value>
+    </Setting>
+    <Setting Name="News" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

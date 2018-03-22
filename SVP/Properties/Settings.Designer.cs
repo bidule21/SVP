@@ -25,15 +25,6 @@ namespace SVP.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("172.16.2.178")]
-        public string MonitorIP {
-            get {
-                return ((string)(this["MonitorIP"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Anonym")]
         public string DefaultName {
             get {
@@ -77,6 +68,18 @@ namespace SVP.Properties {
         public string ExcelTemplate {
             get {
                 return ((string)(this["ExcelTemplate"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string News {
+            get {
+                return ((string)(this["News"]));
+            }
+            set {
+                this["News"] = value;
             }
         }
     }

@@ -27,7 +27,6 @@ namespace SVP
         private List<Sequence> sequenceList;
         private Queue<Sequence> sequencesToDisplay;
         private string news;
-        private int shiftamount = 0;
         public DisplaySetting DisplaySetting { get; private set; }
 
         public static Monitor GetMonitor()
@@ -39,13 +38,19 @@ namespace SVP
 
         public void SetDisplayNews(string news)
         {
+            if (news is null)
+            {
+                this.news = null;
+                return;
+            }
             int width = TextRenderer.MeasureText(news, lbNews1.Font).Width;
-            string newsString = " " + news;
+            string newsString = news;
             while (width < this.Width)
             {
                 newsString = newsString + " " + news;
                 width = TextRenderer.MeasureText(newsString, lbNews1.Font).Width;
             }
+            this.news = newsString;
             lbNews1.Text = newsString;
             lbNews2.Text = newsString;
             lbNews1.Location = new Point(0, (int)(this.Width * 0.5) + 80);

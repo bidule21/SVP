@@ -26,6 +26,8 @@ namespace SVP
 			if (!Enum.TryParse<DisplaySetting>(SVP.Properties.Settings.Default.MonitorDisplaySetting, out setting))
 				setting = DisplaySetting.Everything;
 			Monitor.GetMonitor().SetDisplaySetting(setting);
+            if (!SVP.Properties.Settings.Default.News.Equals(""))
+                Monitor.GetMonitor().SetDisplayNews(SVP.Properties.Settings.Default.News);
             this.Text = this.Text + " Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 

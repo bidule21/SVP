@@ -63,6 +63,17 @@ namespace SVP
 					rbDisplayEverything.Checked = true;
 					break;
 			}
-		}
-	}
+            txtNews.Text = SVP.Properties.Settings.Default.News;
+        }
+
+        private void btnApplyNews_Click(object sender, EventArgs e)
+        {
+            SVP.Properties.Settings.Default.News = txtNews.Text;
+            SVP.Properties.Settings.Default.Save();
+            if (txtNews.Text.Equals(""))
+                Monitor.GetMonitor().SetDisplayNews(null);
+            else
+                Monitor.GetMonitor().SetDisplayNews(txtNews.Text);
+        }
+    }
 }
