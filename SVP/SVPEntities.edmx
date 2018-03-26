@@ -728,6 +728,7 @@
           <Property Name="Value" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="ManualProfile" BaseType="SVPEntities.Profile">
+          <Property Name="ShotCount" Type="Int16" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>

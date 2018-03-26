@@ -14,5 +14,6 @@ namespace SVP
     
     public partial class ManualProfile : Profile
     {
+        public short ShotCount { get; set; }
     }
 }
