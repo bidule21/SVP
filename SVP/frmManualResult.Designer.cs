@@ -28,25 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.dgResults = new System.Windows.Forms.DataGridView();
+            this.shot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgResults)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(197, 201);
+            this.btnOK.Location = new System.Drawing.Point(263, 247);
+            this.btnOK.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.Size = new System.Drawing.Size(100, 28);
             this.btnOK.TabIndex = 1;
             this.btnOK.Text = "&OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -54,34 +49,65 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(116, 201);
+            this.btnCancel.Location = new System.Drawing.Point(155, 247);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(100, 28);
             this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Abbrechen";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // dgResults
+            // 
+            this.dgResults.AllowUserToAddRows = false;
+            this.dgResults.AllowUserToDeleteRows = false;
+            this.dgResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.shot,
+            this.value});
+            this.dgResults.Location = new System.Drawing.Point(12, 12);
+            this.dgResults.Name = "dgResults";
+            this.dgResults.RowHeadersVisible = false;
+            this.dgResults.RowTemplate.Height = 24;
+            this.dgResults.Size = new System.Drawing.Size(355, 228);
+            this.dgResults.TabIndex = 3;
+            // 
+            // shot
+            // 
+            this.shot.HeaderText = "Schuss";
+            this.shot.Name = "shot";
+            this.shot.ReadOnly = true;
+            this.shot.Width = 175;
+            // 
+            // value
+            // 
+            this.value.HeaderText = "Ergebnis";
+            this.value.Name = "value";
+            this.value.Width = 177;
+            // 
             // frmManualResult
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 236);
+            this.ClientSize = new System.Drawing.Size(379, 290);
             this.ControlBox = false;
+            this.Controls.Add(this.dgResults);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmManualResult";
             this.Text = "Manuelles Ergebnis einpflegen";
+            ((System.ComponentModel.ISupportInitialize)(this.dgResults)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.DataGridView dgResults;
+        private System.Windows.Forms.DataGridViewTextBoxColumn shot;
+        private System.Windows.Forms.DataGridViewTextBoxColumn value;
     }
 }

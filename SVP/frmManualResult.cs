@@ -12,39 +12,15 @@ namespace SVP
 {
     public partial class frmManualResult : Form
     {
-        private int shotCount;
-        private Label[] labels;
-        private TextBox[] textboxes;
         private Profile profile;
         private Member member;
-        public frmManualResult(Profile profile, Member member)
+        public frmManualResult(ManualProfile profile, Member member)
         {
             InitializeComponent();
-            labels = new Label[shotCount];
-            textboxes = new TextBox[shotCount];
-            this.shotCount = 10; // Change to profile Value
             this.profile = profile;
-            this.member = member;
-            for (int i = 0;i< shotCount;i++)
-            {
-                int x = i % 10;
-                int y = i / 10;
-                labels[i] = new Label();
-                labels[i].Text = (1 + i).ToString() + ". Schuss:";
-                labels[i].Size = new Size(64, 13);
-                labels[i].Location = new Point(10 + (100 * x), 100 + (50 * y));
-
-                textboxes[i] = new TextBox();
-                textboxes[i].Size = new Size(30, 20);
-                textboxes[i].Location = new Point(74 + (100 * x), 97 + (50 * y));
-                this.Controls.Add(labels[i]);
-                this.Controls.Add(textboxes[i]);
-            }
-            int width = ((shotCount / 10) == 0) ? shotCount : 10;
-            int height = (shotCount / 10) + 1;
-            this.Size = new Size(30 + (100 * width), 160 + (50 * height));
-            btnCancel.Location = new Point(this.Size.Width - 184, this.Size.Height - 74);
-            btnOK.Location = new Point(this.Size.Width - 103, this.Size.Height - 74);
+            this.member = member; //Do we need this?
+            for (int i = 1;i <= profile.ShotCount;i++)
+                dgResults.Rows.Add(string.Format("Schuss {0}", i));
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -57,18 +33,25 @@ namespace SVP
         {
             Sequence seq = new Sequence();
             seq.Date = DateTime.Now;
-            seq.Member = this.member;
-            for (short i = 0;i<this.shotCount;i++)
+            short i = 0;
+            foreach(DataGridViewRow row in dgResults.Rows)
             {
+                i++;
                 double val;
-                if(this.textboxes[i].Text.Equals("") || !double.TryParse(this.textboxes[i].Text, out val))
+                if(row.Cells[1].Value.Equals("") || !double.TryParse(row.Cells[1].Value.ToString(), out val))
                 {
-                    MessageBox.Show("Konnte Schuss Nr. " + (i + 1).ToString() + " nicht lesen!");
+                    MessageBox.Show(string.Format("Konnte {0} nicht lesen!", row.Cells[0].ToString()));
                     return;
                 }else
                 {
-                    seq.Shots.Add(new Shot { ShotNumber = (short)(1 + i), Value = val, Valid = true,  });
+                    seq.Shots.Add(new Shot { ShotNumber = i, Value = val, Valid = true,  });
                 }
+            }
+            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
+            {
+                seq.Member = context.Participants.OfType<Member>().First(x => x.Id == this.member.Id);
+                seq.Profile = context.Profiles.First(x => x.Id == this.profile.Id);
+                context.Sequences.Add(seq);
             }
             this.DialogResult = DialogResult.OK;
             this.Close();

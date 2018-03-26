@@ -236,7 +236,8 @@ namespace SVP
                 }
                 else if(manualProfile != null)
                 {
-                    //ToDo: Manuelle auswertung
+                    frmManualResult manualResult = new frmManualResult(manualProfile, (Member)cbMember.SelectedItem);
+                    manualResult.ShowDialog();
                 }
                 else
                 {
