@@ -221,6 +221,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
+    <Property Name="ShotCount" Type="int" Nullable="false" />
     <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="MemberGroup">
@@ -728,7 +729,7 @@
           <Property Name="Value" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="ManualProfile" BaseType="SVPEntities.Profile">
-          <Property Name="ShotCount" Type="Int16" Nullable="false" />
+          <Property Name="ShotCount" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -760,6 +761,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(SVPEntities.ManualProfile)">
         <MappingFragment StoreEntitySet="Profiles_ManualProfile">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ShotCount" ColumnName="ShotCount" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

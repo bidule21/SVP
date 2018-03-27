@@ -211,6 +211,12 @@
     <Compile Include="Monitor.Designer.cs">
       <DependentUpon>Monitor.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmManualProfileWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManualProfileWizard.Designer.cs">
+      <DependentUpon>frmManualProfileWizard.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProfileWizard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -313,6 +319,9 @@
     <EmbeddedResource Include="Monitor.resx">
       <DependentUpon>Monitor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmManualProfileWizard.resx">
+      <DependentUpon>frmManualProfileWizard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProfileWizard.resx">
       <DependentUpon>ProfileWizard.cs</DependentUpon>
     </EmbeddedResource>
@@ -374,6 +383,8 @@
       <DependentUpon>SVPEntities.edmx</DependentUpon>
       <LastGenOutput>SVPEntities.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="V1.7__SVPEntities.edmx.mig.sql" />
+    <Content Include="V1.7__SVPEntities.edmx.sql" />
     <Content Include="SVPEntities.edmx.sql" />
     <Content Include="SVPEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
