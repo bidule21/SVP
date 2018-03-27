@@ -36,19 +36,19 @@
             this.rbDisplayEverythingAnonym = new System.Windows.Forms.RadioButton();
             this.rbDisplayEverything = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtNews = new System.Windows.Forms.TextBox();
             this.btnApplyNews = new System.Windows.Forms.Button();
+            this.txtNews = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnManageManualProfile = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnManageProfile
             // 
-            this.btnManageProfile.Location = new System.Drawing.Point(0, 4);
-            this.btnManageProfile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnManageProfile.Location = new System.Drawing.Point(0, 3);
             this.btnManageProfile.Name = "btnManageProfile";
-            this.btnManageProfile.Size = new System.Drawing.Size(155, 28);
+            this.btnManageProfile.Size = new System.Drawing.Size(116, 23);
             this.btnManageProfile.TabIndex = 0;
             this.btnManageProfile.Text = "Profile Verwalten";
             this.btnManageProfile.UseVisualStyleBackColor = true;
@@ -61,11 +61,9 @@
             this.groupBox1.Controls.Add(this.rbDisplayShotImageWithPoints);
             this.groupBox1.Controls.Add(this.rbDisplayEverythingAnonym);
             this.groupBox1.Controls.Add(this.rbDisplayEverything);
-            this.groupBox1.Location = new System.Drawing.Point(4, 39);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Location = new System.Drawing.Point(3, 32);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Size = new System.Drawing.Size(360, 183);
+            this.groupBox1.Size = new System.Drawing.Size(270, 149);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Schussanzeige";
@@ -73,10 +71,9 @@
             // btnApplayDisplaySetting
             // 
             this.btnApplayDisplaySetting.Enabled = false;
-            this.btnApplayDisplaySetting.Location = new System.Drawing.Point(244, 148);
-            this.btnApplayDisplaySetting.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnApplayDisplaySetting.Location = new System.Drawing.Point(183, 120);
             this.btnApplayDisplaySetting.Name = "btnApplayDisplaySetting";
-            this.btnApplayDisplaySetting.Size = new System.Drawing.Size(108, 28);
+            this.btnApplayDisplaySetting.Size = new System.Drawing.Size(81, 23);
             this.btnApplayDisplaySetting.TabIndex = 4;
             this.btnApplayDisplaySetting.Text = "Übernehmen";
             this.btnApplayDisplaySetting.UseVisualStyleBackColor = true;
@@ -85,10 +82,9 @@
             // rbDisplayShotImage
             // 
             this.rbDisplayShotImage.AutoSize = true;
-            this.rbDisplayShotImage.Location = new System.Drawing.Point(8, 108);
-            this.rbDisplayShotImage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbDisplayShotImage.Location = new System.Drawing.Point(6, 88);
             this.rbDisplayShotImage.Name = "rbDisplayShotImage";
-            this.rbDisplayShotImage.Size = new System.Drawing.Size(186, 21);
+            this.rbDisplayShotImage.Size = new System.Drawing.Size(142, 17);
             this.rbDisplayShotImage.TabIndex = 3;
             this.rbDisplayShotImage.Text = "Nur Schussbild anzeigen";
             this.rbDisplayShotImage.UseVisualStyleBackColor = true;
@@ -97,10 +93,9 @@
             // rbDisplayShotImageWithPoints
             // 
             this.rbDisplayShotImageWithPoints.AutoSize = true;
-            this.rbDisplayShotImageWithPoints.Location = new System.Drawing.Point(8, 80);
-            this.rbDisplayShotImageWithPoints.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbDisplayShotImageWithPoints.Location = new System.Drawing.Point(6, 65);
             this.rbDisplayShotImageWithPoints.Name = "rbDisplayShotImageWithPoints";
-            this.rbDisplayShotImageWithPoints.Size = new System.Drawing.Size(312, 21);
+            this.rbDisplayShotImageWithPoints.Size = new System.Drawing.Size(237, 17);
             this.rbDisplayShotImageWithPoints.TabIndex = 2;
             this.rbDisplayShotImageWithPoints.Text = "Nur Schussbild und dessen Punkte anzeigen";
             this.rbDisplayShotImageWithPoints.UseVisualStyleBackColor = true;
@@ -109,10 +104,9 @@
             // rbDisplayEverythingAnonym
             // 
             this.rbDisplayEverythingAnonym.AutoSize = true;
-            this.rbDisplayEverythingAnonym.Location = new System.Drawing.Point(8, 52);
-            this.rbDisplayEverythingAnonym.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbDisplayEverythingAnonym.Location = new System.Drawing.Point(6, 42);
             this.rbDisplayEverythingAnonym.Name = "rbDisplayEverythingAnonym";
-            this.rbDisplayEverythingAnonym.Size = new System.Drawing.Size(175, 21);
+            this.rbDisplayEverythingAnonym.Size = new System.Drawing.Size(133, 17);
             this.rbDisplayEverythingAnonym.TabIndex = 1;
             this.rbDisplayEverythingAnonym.Text = "Alles anonym anzeigen";
             this.rbDisplayEverythingAnonym.UseVisualStyleBackColor = true;
@@ -122,10 +116,9 @@
             // 
             this.rbDisplayEverything.AutoSize = true;
             this.rbDisplayEverything.Checked = true;
-            this.rbDisplayEverything.Location = new System.Drawing.Point(8, 23);
-            this.rbDisplayEverything.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbDisplayEverything.Location = new System.Drawing.Point(6, 19);
             this.rbDisplayEverything.Name = "rbDisplayEverything";
-            this.rbDisplayEverything.Size = new System.Drawing.Size(121, 21);
+            this.rbDisplayEverything.Size = new System.Drawing.Size(93, 17);
             this.rbDisplayEverything.TabIndex = 0;
             this.rbDisplayEverything.TabStop = true;
             this.rbDisplayEverything.Text = "Alles anzeigen";
@@ -137,50 +130,63 @@
             this.groupBox2.Controls.Add(this.btnApplyNews);
             this.groupBox2.Controls.Add(this.txtNews);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Location = new System.Drawing.Point(380, 39);
+            this.groupBox2.Location = new System.Drawing.Point(285, 32);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(370, 183);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Size = new System.Drawing.Size(278, 149);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Monitor Laufschrift";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Text:";
-            // 
-            // txtNews
-            // 
-            this.txtNews.Location = new System.Drawing.Point(51, 21);
-            this.txtNews.Name = "txtNews";
-            this.txtNews.Size = new System.Drawing.Size(303, 22);
-            this.txtNews.TabIndex = 1;
-            // 
             // btnApplyNews
             // 
-            this.btnApplyNews.Location = new System.Drawing.Point(255, 148);
-            this.btnApplyNews.Margin = new System.Windows.Forms.Padding(4);
+            this.btnApplyNews.Location = new System.Drawing.Point(191, 120);
             this.btnApplyNews.Name = "btnApplyNews";
-            this.btnApplyNews.Size = new System.Drawing.Size(108, 28);
+            this.btnApplyNews.Size = new System.Drawing.Size(81, 23);
             this.btnApplyNews.TabIndex = 5;
             this.btnApplyNews.Text = "Übernehmen";
             this.btnApplyNews.UseVisualStyleBackColor = true;
             this.btnApplyNews.Click += new System.EventHandler(this.btnApplyNews_Click);
             // 
+            // txtNews
+            // 
+            this.txtNews.Location = new System.Drawing.Point(38, 17);
+            this.txtNews.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNews.Name = "txtNews";
+            this.txtNews.Size = new System.Drawing.Size(228, 20);
+            this.txtNews.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(4, 20);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Text:";
+            // 
+            // btnManageManualProfile
+            // 
+            this.btnManageManualProfile.Location = new System.Drawing.Point(122, 3);
+            this.btnManageManualProfile.Name = "btnManageManualProfile";
+            this.btnManageManualProfile.Size = new System.Drawing.Size(145, 23);
+            this.btnManageManualProfile.TabIndex = 3;
+            this.btnManageManualProfile.Text = "Manuelle Profile Verwalten";
+            this.btnManageManualProfile.UseVisualStyleBackColor = true;
+            this.btnManageManualProfile.Click += new System.EventHandler(this.btnManageManualProfile_Click);
+            // 
             // TabSettings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnManageManualProfile);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnManageProfile);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "TabSettings";
-            this.Size = new System.Drawing.Size(1104, 700);
+            this.Size = new System.Drawing.Size(828, 569);
             this.Load += new System.EventHandler(this.TabSettings_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -203,5 +209,6 @@
         private System.Windows.Forms.Button btnApplyNews;
         private System.Windows.Forms.TextBox txtNews;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnManageManualProfile;
     }
 }

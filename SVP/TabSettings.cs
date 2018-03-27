@@ -75,5 +75,11 @@ namespace SVP
             else
                 Monitor.GetMonitor().SetDisplayNews(txtNews.Text);
         }
+
+        private void btnManageManualProfile_Click(object sender, EventArgs e)
+        {
+            frmManualProfileWizard wizard = new frmManualProfileWizard();
+            wizard.ShowDialog();
+        }
     }
 }

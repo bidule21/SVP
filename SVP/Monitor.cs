@@ -184,7 +184,8 @@ namespace SVP
                     dgResultList.FirstDisplayedScrollingRowIndex = dgResultList.RowCount - 1;
                 }
             }
-            sequencesToDisplay.Enqueue(result);
+            if (result.Profile is DisagProfile)
+                sequencesToDisplay.Enqueue(result);
             if (currentResult == null && sequencesToDisplay.Count > 0)
                 DisplaySequence(sequencesToDisplay.Dequeue());
         }

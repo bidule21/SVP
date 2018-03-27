@@ -92,7 +92,10 @@ namespace SVP
                         row.Cells.Add(new DataGridViewTextBoxCell() { Value = place++ });
                         row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Member });
                         row.Cells.Add(new DataGridViewTextBoxCell() { Value = displayValue });
-                        row.Cells.Add(new DataGridViewCheckBoxCell() { Value = multileWinners && (bestResult == sequence.Shots.Sum(x => x.Value)) && sequence.NextSequence == null });
+                        if (price.Profile is DisagProfile)
+                            row.Cells.Add(new DataGridViewCheckBoxCell() { Value = multileWinners && (bestResult == sequence.Shots.Sum(x => x.Value)) && sequence.NextSequence == null });
+                        else
+                            row.Cells.Add(new DataGridViewTextBoxCell() { Value = "Erneut werten nicht möglich" });
                         dvResultList.Rows.Add(row);
                     }
                 }
@@ -103,9 +106,10 @@ namespace SVP
         private void btnOk_Click(object sender, EventArgs e)
         {
             List<int> idsToReevaluate = new List<int>();
-            foreach (DataGridViewRow row in dvResultList.Rows)
-                if ((bool)row.Cells[3].Value == true)
-                    idsToReevaluate.Add((int)row.Tag);
+            if (price.Profile is DisagProfile)
+                foreach (DataGridViewRow row in dvResultList.Rows)
+                    if ((bool)row.Cells[3].Value == true)
+                        idsToReevaluate.Add((int)row.Tag);
             frmReevaluate reevaluateFrm = null;
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {

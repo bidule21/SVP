@@ -53,9 +53,9 @@
             this.gbCompetition.Controls.Add(this.btnLoad);
             this.gbCompetition.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbCompetition.Location = new System.Drawing.Point(0, 0);
-            this.gbCompetition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbCompetition.Margin = new System.Windows.Forms.Padding(2);
             this.gbCompetition.Name = "gbCompetition";
-            this.gbCompetition.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbCompetition.Padding = new System.Windows.Forms.Padding(2);
             this.gbCompetition.Size = new System.Drawing.Size(828, 50);
             this.gbCompetition.TabIndex = 0;
             this.gbCompetition.TabStop = false;
@@ -65,7 +65,7 @@
             // 
             this.cbCompetitions.FormattingEnabled = true;
             this.cbCompetitions.Location = new System.Drawing.Point(4, 16);
-            this.cbCompetitions.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbCompetitions.Margin = new System.Windows.Forms.Padding(2);
             this.cbCompetitions.Name = "cbCompetitions";
             this.cbCompetitions.Size = new System.Drawing.Size(198, 21);
             this.cbCompetitions.TabIndex = 17;
@@ -95,7 +95,7 @@
             this.ReevaluatedValue});
             this.dvResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dvResults.Location = new System.Drawing.Point(0, 50);
-            this.dvResults.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dvResults.Margin = new System.Windows.Forms.Padding(2);
             this.dvResults.Name = "dvResults";
             this.dvResults.ReadOnly = true;
             this.dvResults.RowHeadersVisible = false;
@@ -152,9 +152,9 @@
             this.gbExport.Controls.Add(this.btnExport);
             this.gbExport.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.gbExport.Location = new System.Drawing.Point(0, 515);
-            this.gbExport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbExport.Margin = new System.Windows.Forms.Padding(2);
             this.gbExport.Name = "gbExport";
-            this.gbExport.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbExport.Padding = new System.Windows.Forms.Padding(2);
             this.gbExport.Size = new System.Drawing.Size(828, 54);
             this.gbExport.TabIndex = 2;
             this.gbExport.TabStop = false;
@@ -168,6 +168,7 @@
             this.btnShowOnMonitor.TabIndex = 16;
             this.btnShowOnMonitor.Text = "Alle auf Monitor anzeigen";
             this.btnShowOnMonitor.UseVisualStyleBackColor = true;
+            this.btnShowOnMonitor.Click += new System.EventHandler(this.btnShowOnMonitor_Click);
             // 
             // btnExport
             // 
@@ -186,7 +187,7 @@
             this.Controls.Add(this.gbExport);
             this.Controls.Add(this.dvResults);
             this.Controls.Add(this.gbCompetition);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "TabShowCompetition";
             this.Size = new System.Drawing.Size(828, 569);
             this.Load += new System.EventHandler(this.TabShowCompetition_Load);

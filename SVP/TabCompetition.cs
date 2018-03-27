@@ -185,9 +185,12 @@ namespace SVP
             cbPrice.Enabled = false;
             using (SVPEntitiesContainer context = new SVPEntitiesContainer())
             {
-                Profile profile = ((Price)cbPrice.SelectedItem).Profile;
+                Profile profile = context.Profiles.FirstOrDefault(x => x.Id == ((Price)cbPrice.SelectedItem).Profile.Id);
+                Member member = context.Participants.OfType<Member>().First(x => x.Id == ((Member)cbMember.SelectedItem).Id);
+                Price price = context.Prices.Find(((Price)cbPrice.SelectedItem).Id);
                 ManualProfile manualProfile = context.Profiles.OfType<ManualProfile>().FirstOrDefault(x => x.Id == profile.Id);
                 DisagProfile disagProfile = context.Profiles.OfType<DisagProfile>().FirstOrDefault(x => x.Id == profile.Id);
+                Sequence sequence = null;
                 if (disagProfile != null)
                 {
                     System.Threading.Tasks.Task<List<RMResult>> ta = System.Threading.Tasks.Task.Factory.StartNew<List<RMResult>>(() => Common.readShots(disagProfile.Value));
@@ -202,16 +205,7 @@ namespace SVP
                         btnRead.Enabled = true;
                         return;
                     }
-
-                    Sequence sequence = new Sequence();
-                    sequence.Date = DateTime.Now;
-                    sequence.Member = ((Member)cbMember.SelectedItem);
-                    sequence.Profile = profile;
-                    sequence.Price = ((Price)cbPrice.SelectedItem);
-                    context.Participants.Attach(sequence.Member);
-                    context.Profiles.Attach(sequence.Profile);
-                    context.Prices.Attach(sequence.Price);
-                    cbPrice.Items.Remove(cbPrice.SelectedItem);
+                    sequence = new Sequence();
                     foreach (RMResult result in ta.Result)
                     {
                         Shot s = new Shot();
@@ -222,27 +216,36 @@ namespace SVP
                         s.Valid = (result.Validity == ValidFlag.Valid);
                         sequence.Shots.Add(s);
                     }
-                    DataGridViewRow row = new DataGridViewRow();
-                    row.Tag = sequence.Id;
-                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Member.ToString() });
-                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Shots.Sum(s => s.Value) });
-                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Profile.ToString() });
-                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Price.ToString() });
-                    row.Cells.Add(new DataGridViewButtonCell() { UseColumnTextForButtonValue = true, Value = sequence });
-                    Monitor.GetMonitor().AddSequence(context.Sequences.Include("Shots").First(x => x.Id == sequence.Id));
-                    dvResults.Rows.Add(row);
-                    context.Sequences.Add(sequence);
-                    context.SaveChanges();
+
                 }
                 else if(manualProfile != null)
                 {
-                    frmManualResult manualResult = new frmManualResult(manualProfile, (Member)cbMember.SelectedItem);
-                    manualResult.ShowDialog();
+                    frmManualResult manualResult = new frmManualResult(manualProfile.ShotCount);
+                    if (manualResult.ShowDialog() != DialogResult.OK)
+                        return;
+                    sequence = manualResult.Sequence;
                 }
                 else
                 {
                     throw new Exception("Found no matching Profile!");
                 }
+                sequence.Date = DateTime.Now;
+                sequence.Member = member;
+                sequence.Profile = profile;
+                sequence.Price = price;
+
+                DataGridViewRow row = new DataGridViewRow();
+                row.Tag = sequence.Id;
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Member.ToString() });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Shots.Sum(s => s.Value) });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Profile.ToString() });
+                row.Cells.Add(new DataGridViewTextBoxCell() { Value = sequence.Price.ToString() });
+                row.Cells.Add(new DataGridViewButtonCell() { UseColumnTextForButtonValue = true, Value = sequence });
+                dvResults.Rows.Add(row);
+                context.Sequences.Add(sequence);
+                context.SaveChanges();
+                Monitor.GetMonitor().AddSequence(context.Sequences.Include("Shots").First(x => x.Id == sequence.Id));
+                cbPrice.Items.Remove(cbPrice.SelectedItem);
                 if (cbPrice.Items.Count > 0)
                     cbPrice.SelectedIndex = 0;
 

@@ -12,14 +12,11 @@ namespace SVP
 {
     public partial class frmManualResult : Form
     {
-        private Profile profile;
-        private Member member;
-        public frmManualResult(ManualProfile profile, Member member)
+        public Sequence Sequence { get; private set; }
+        public frmManualResult(int shotCount)
         {
             InitializeComponent();
-            this.profile = profile;
-            this.member = member; //Do we need this?
-            for (int i = 1;i <= profile.ShotCount;i++)
+            for (int i = 1; i <= shotCount; i++)
                 dgResults.Rows.Add(string.Format("Schuss {0}", i));
         }
 
@@ -34,25 +31,21 @@ namespace SVP
             Sequence seq = new Sequence();
             seq.Date = DateTime.Now;
             short i = 0;
-            foreach(DataGridViewRow row in dgResults.Rows)
+            foreach (DataGridViewRow row in dgResults.Rows)
             {
                 i++;
                 double val;
-                if(row.Cells[1].Value.Equals("") || !double.TryParse(row.Cells[1].Value.ToString(), out val))
+                if ((row.Cells[1].Value is null) || row.Cells[1].Value.Equals("") || !double.TryParse(row.Cells[1].Value.ToString(), out val))
                 {
-                    MessageBox.Show(string.Format("Konnte {0} nicht lesen!", row.Cells[0].ToString()));
+                    MessageBox.Show(string.Format("Konnte {0} nicht lesen!", row.Cells[0].Value.ToString()));
                     return;
-                }else
+                }
+                else
                 {
-                    seq.Shots.Add(new Shot { ShotNumber = i, Value = val, Valid = true,  });
+                    seq.Shots.Add(new Shot { ShotNumber = i, Value = val, Valid = true, });
                 }
             }
-            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
-            {
-                seq.Member = context.Participants.OfType<Member>().First(x => x.Id == this.member.Id);
-                seq.Profile = context.Profiles.First(x => x.Id == this.profile.Id);
-                context.Sequences.Add(seq);
-            }
+            this.Sequence = seq;
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

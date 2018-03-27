@@ -119,7 +119,7 @@ namespace SVP
                 using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                 {
                     cbProfile.Items.Clear();
-                    cbProfile.Items.AddRange(context.Profiles.ToArray());
+                    cbProfile.Items.AddRange(context.Profiles.OfType<DisagProfile>().ToArray());
                 }
             }
             catch(Exception ex)

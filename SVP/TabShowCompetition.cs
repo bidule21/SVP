@@ -213,5 +213,10 @@ namespace SVP
                 }
             }
         }
+
+        private void btnShowOnMonitor_Click(object sender, EventArgs e)
+        {
+            //ToDo: Implement me!
+        }
     }
 }
