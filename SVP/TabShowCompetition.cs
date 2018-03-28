@@ -34,7 +34,7 @@ namespace SVP
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            if(cbCompetitions.SelectedIndex > 0)
+            if(cbCompetitions.SelectedIndex >= 0)
                 LoadCompetition(((Competition)cbCompetitions.SelectedItem).Id);
         }
 
@@ -47,6 +47,7 @@ namespace SVP
                 foreach(Award a in competition.Awards)
                 {
                     DataGridViewRow row = new DataGridViewRow();
+                    row.Tag = -1;
                     row.Cells.Add(new DataGridViewTextBoxCell() { Value = competition.Name });
                     row.Cells.Add(new DataGridViewTextBoxCell() { Value = "Ehrenscheibe"});
                     row.Cells.Add(new DataGridViewTextBoxCell() { Value = a.Name });
@@ -62,6 +63,7 @@ namespace SVP
                     foreach (Sequence seq in p.Sequences.OrderByDescending(x => x.Shots.Sum(y => y.Value)).ThenByDescending(x => (x.NextSequence == null) ? 0 : x.NextSequence.Shots.Sum(y => y.Value)))
                     {
                         DataGridViewRow row = new DataGridViewRow();
+                        row.Tag = seq.Id;
                         row.Cells.Add(new DataGridViewTextBoxCell() { Value = competition.Name });
                         row.Cells.Add(new DataGridViewTextBoxCell() { Value = "Pokal" });
                         row.Cells.Add(new DataGridViewTextBoxCell() { Value = p.Name });
@@ -69,6 +71,7 @@ namespace SVP
                         row.Cells.Add(new DataGridViewTextBoxCell() { Value = seq.Member + ((p.Winner == seq.Member) ? " (Gewinner)" : "") });
                         row.Cells.Add(new DataGridViewTextBoxCell() { Value = seq.Shots.Sum(x => x.Value)});
                         row.Cells.Add(new DataGridViewTextBoxCell() { Value = (seq.NextSequence == null) ? "" : seq.NextSequence.Shots.Sum(x => x.Value).ToString() });
+                        row.Cells.Add(new DataGridViewButtonCell() { Value = "Anzeigen" });
                         dvResults.Rows.Add(row);
                     }
                 }
@@ -227,6 +230,21 @@ namespace SVP
                     {
                         Monitor.GetMonitor().AddSequence(seq, false);
                     }
+                }
+            }
+        }
+
+        private void dvResults_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 7)
+            {
+                int sequence_id = (int)dvResults.Rows[e.RowIndex].Tag;
+                if (sequence_id == -1)
+                    return;
+                using (SVPEntitiesContainer context = new SVPEntitiesContainer())
+                {
+                    Sequence seq = context.Sequences.Include("Shots").Where(x => x.Id == sequence_id).FirstOrDefault();
+                    Monitor.GetMonitor().AddSequence(seq, false);
                 }
             }
         }
