@@ -216,7 +216,19 @@ namespace SVP
 
         private void btnShowOnMonitor_Click(object sender, EventArgs e)
         {
-            //ToDo: Implement me!
+            if (Competition == null)
+                return;
+            using (SVPEntitiesContainer context = new SVPEntitiesContainer())
+            {
+                Competition comp = context.Competitions.Include("Prices.Sequences.Shots").First(x => x.Id == ((Competition)cbCompetitions.SelectedItem).Id);
+                foreach (Price p in comp.Prices)
+                {
+                    foreach (Sequence seq in p.Sequences)
+                    {
+                        Monitor.GetMonitor().AddSequence(seq, false);
+                    }
+                }
+            }
         }
     }
 }
