@@ -152,7 +152,8 @@ namespace SVP
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            if (cbMember.SelectedIndex >= 0 && cbClubGroup.SelectedIndex >= 0){
+            if (cbMember.SelectedIndex >= 0 && cbClubGroup.SelectedIndex >= 0)
+            {
                 gbRead.Enabled = true;
                 btnRead.Enabled = true;
                 lblClub.Text = cbClubGroup.SelectedItem.ToString();
@@ -218,11 +219,16 @@ namespace SVP
                     }
 
                 }
-                else if(manualProfile != null)
+                else if (manualProfile != null)
                 {
                     frmManualResult manualResult = new frmManualResult(manualProfile.ShotCount);
                     if (manualResult.ShowDialog() != DialogResult.OK)
+                    {
+                        pBar.Visible = false;
+                        cbPrice.Enabled = true;
+                        btnRead.Enabled = true;
                         return;
+                    }
                     sequence = manualResult.Sequence;
                 }
                 else
@@ -288,7 +294,7 @@ namespace SVP
             if (choose.Competition == null)
                 return;
             currentCompetition = choose.Competition;
-            
+
             reload_Controls();
         }
 
@@ -331,26 +337,34 @@ namespace SVP
 
         private void btnEndCompetition_Click(object sender, EventArgs e)
         {
+            //TODO: We are using a way to much contexts heres whe should reduce that to one
             if (MessageBox.Show("Willst du das Pokalschießen wirklich beenden? Ein weiteres fortführen ist nicht möglich.", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                using (SVPEntitiesContainer context = new SVPEntitiesContainer())
+
+                bool allWinnersSet = true;
+                foreach (Price p in currentCompetition.Prices)
                 {
-                    bool allWinnersSet = true;
-                    foreach (Price p in currentCompetition.Prices)
+                    frmDetermineWinner frmwinner = new frmDetermineWinner(p);
+                    frmwinner.ShowDialog();
+                    using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                     {
-                        frmDetermineWinner frmwinner = new frmDetermineWinner(p);
-                        frmwinner.ShowDialog();
                         Price price = context.Prices.Find(p.Id);
                         allWinnersSet = allWinnersSet & (price.Winner != null);
                     }
-                    foreach (Award a in currentCompetition.Awards)
+                }
+                foreach (Award a in currentCompetition.Awards)
+                {
+                    frmChooseWinner frmWinner = new frmChooseWinner(a);
+                    frmWinner.ShowDialog();
+                    using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                     {
-                        frmChooseWinner frmWinner = new frmChooseWinner(a);
-                        frmWinner.ShowDialog();
                         Award award = context.Awards.Find(a.Id);
                         allWinnersSet = allWinnersSet & (award.Winner != null);
                     }
-                    if (allWinnersSet)
+                }
+                if (allWinnersSet)
+                {
+                    using (SVPEntitiesContainer context = new SVPEntitiesContainer())
                     {
                         Competition comp = context.Competitions.Find(currentCompetition.Id);
                         comp.Finished = true;
