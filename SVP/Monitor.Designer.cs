@@ -66,7 +66,7 @@
             this.result,
             this.profile});
             this.dgResultList.Location = new System.Drawing.Point(824, 15);
-            this.dgResultList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgResultList.Margin = new System.Windows.Forms.Padding(4);
             this.dgResultList.MultiSelect = false;
             this.dgResultList.Name = "dgResultList";
             this.dgResultList.ReadOnly = true;
@@ -129,7 +129,7 @@
             // 
             this.pbTarget.Image = global::SVP.Properties.Resources.Zielscheibe;
             this.pbTarget.Location = new System.Drawing.Point(16, 15);
-            this.pbTarget.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbTarget.Margin = new System.Windows.Forms.Padding(4);
             this.pbTarget.Name = "pbTarget";
             this.pbTarget.Size = new System.Drawing.Size(731, 471);
             this.pbTarget.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -141,7 +141,7 @@
             this.rtResults.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtResults.Location = new System.Drawing.Point(16, 539);
-            this.rtResults.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rtResults.Margin = new System.Windows.Forms.Padding(4);
             this.rtResults.Name = "rtResults";
             this.rtResults.ReadOnly = true;
             this.rtResults.Size = new System.Drawing.Size(763, 43);
@@ -151,7 +151,7 @@
             // lbNews1
             // 
             this.lbNews1.AutoSize = true;
-            this.lbNews1.BackColor = System.Drawing.Color.Red;
+            this.lbNews1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(40)))));
             this.lbNews1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbNews1.ForeColor = System.Drawing.Color.White;
             this.lbNews1.Location = new System.Drawing.Point(14, 628);
@@ -164,7 +164,7 @@
             // lbNews2
             // 
             this.lbNews2.AutoSize = true;
-            this.lbNews2.BackColor = System.Drawing.Color.Red;
+            this.lbNews2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(40)))));
             this.lbNews2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbNews2.ForeColor = System.Drawing.Color.White;
             this.lbNews2.Location = new System.Drawing.Point(167, 628);
@@ -187,7 +187,7 @@
             this.Controls.Add(this.pbTarget);
             this.Controls.Add(this.dgResultList);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Monitor";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

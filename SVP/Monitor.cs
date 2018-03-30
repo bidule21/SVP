@@ -54,7 +54,7 @@ namespace SVP
             lbNews1.Text = newsString;
             lbNews2.Text = newsString;
             lbNews1.Location = new Point(0, lbNews1.Location.Y);
-            lbNews2.Location = new Point(-lbNews1.Width + 1, lbNews2.Location.Y);
+            lbNews2.Location = new Point(lbNews1.Width - 1, lbNews2.Location.Y);
         }
 
         public void SetDisplaySetting(DisplaySetting setting)
@@ -135,15 +135,15 @@ namespace SVP
         {
             lbNews1.Visible = !(this.news is null);
             lbNews2.Visible = !(this.news is null);
-            lbNews1.Location = new Point(lbNews1.Location.X + 1, lbNews1.Location.Y);
-            lbNews2.Location = new Point(lbNews2.Location.X + 1, lbNews2.Location.Y);
-            if (lbNews1.Location.X > this.Size.Width)
+            lbNews1.Location = new Point(lbNews1.Location.X - 1, lbNews1.Location.Y);
+            lbNews2.Location = new Point(lbNews2.Location.X - 1, lbNews2.Location.Y);
+            if ((lbNews1.Location.X + lbNews1.Size.Width)  < 0)
             {
-                lbNews1.Location = new Point(lbNews2.Location.X - lbNews1.Width + 1, lbNews1.Location.Y);
+                lbNews1.Location = new Point(lbNews2.Location.X + lbNews2.Width - 1, lbNews1.Location.Y);
             }
-            if (lbNews2.Location.X > this.Size.Width)
+            if ((lbNews2.Location.X + lbNews2.Size.Width) < 0)
             {
-                lbNews2.Location = new Point(lbNews1.Location.X - lbNews2.Width + 1, lbNews2.Location.Y);
+                lbNews2.Location = new Point(lbNews1.Location.X + lbNews1.Width - 1, lbNews2.Location.Y);
             }
         }
 
