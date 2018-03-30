@@ -10,17 +10,17 @@ using System.Windows.Forms;
 
 namespace SVP
 {
-    public partial class AddGroupWizard : Form
+    public partial class frmAddGroupWizard : Form
     {
         private Group myGroup;
         public Group Group { get { return myGroup; } }
         private Competition currentCompetition;
-        public AddGroupWizard(Competition competition)
+        public frmAddGroupWizard(Competition competition)
         {
             InitializeComponent();
             this.currentCompetition = competition;
         }
-        public AddGroupWizard(Competition competition, Group group)
+        public frmAddGroupWizard(Competition competition, Group group)
         {
             InitializeComponent();
             this.currentCompetition = competition;
@@ -65,7 +65,7 @@ namespace SVP
 
         private void btnNewClubGroup_Click(object sender, EventArgs e)
         {
-            AddClubWizard wizard = new AddClubWizard();
+            frmAddClubWizard wizard = new frmAddClubWizard();
             wizard.ShowDialog();
             reloadControls();
         }

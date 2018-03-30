@@ -10,15 +10,15 @@ using System.Windows.Forms;
 
 namespace SVP
 {
-    public partial class AddCompetitionWizard : Form
+    public partial class frmAddCompetitionWizard : Form
     {
         private Competition myCompetition;
         public Competition Competition { get { return myCompetition; } }
-        public AddCompetitionWizard()
+        public frmAddCompetitionWizard()
         {
             InitializeComponent();
         }
-        public AddCompetitionWizard(Competition competition)
+        public frmAddCompetitionWizard(Competition competition)
         {
             InitializeComponent();
             myCompetition = competition;

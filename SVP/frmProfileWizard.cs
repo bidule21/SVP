@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace SVP
 {
-    public partial class ProfileWizard : Form
+    public partial class frmProfileWizard : Form
     {
         private List<RMValue> SCH_Values;
         private List<RMValue> RIA_Values;
@@ -19,7 +19,7 @@ namespace SVP
         private List<RMValue> RIB_Values;
         private List<RMValue> TEA_Values;
         private DisagProfile profile;
-        public ProfileWizard()
+        public frmProfileWizard()
         {
             InitializeComponent();
             profile = null;

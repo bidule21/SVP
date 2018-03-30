@@ -1,6 +1,6 @@
 ﻿namespace SVP
 {
-    partial class AddGroupWizard
+    partial class frmAddGroupWizard
     {
         /// <summary>
         /// Required designer variable.

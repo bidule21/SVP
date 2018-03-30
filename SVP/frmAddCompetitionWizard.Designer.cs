@@ -1,6 +1,6 @@
 ﻿namespace SVP
 {
-    partial class AddCompetitionWizard
+    partial class frmAddCompetitionWizard
     {
         /// <summary>
         /// Required designer variable.

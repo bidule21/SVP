@@ -1,6 +1,6 @@
 ﻿namespace SVP
 {
-    partial class AddClubWizard
+    partial class frmAddClubWizard
     {
         /// <summary>
         /// Required designer variable.

@@ -1,6 +1,6 @@
 ﻿namespace SVP
 {
-    partial class ProfileWizard
+    partial class frmProfileWizard
     {
         /// <summary>
         /// Required designer variable.

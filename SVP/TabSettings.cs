@@ -19,7 +19,7 @@ namespace SVP
 
         private void btnManageProfile_Click(object sender, EventArgs e)
         {
-            ProfileWizard wizard = new ProfileWizard();
+            frmProfileWizard wizard = new frmProfileWizard();
             wizard.ShowDialog();
         }
 

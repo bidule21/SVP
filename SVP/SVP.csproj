@@ -92,23 +92,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddClubWizard.cs">
+    <Compile Include="frmAddClubWizard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddClubWizard.Designer.cs">
-      <DependentUpon>AddClubWizard.cs</DependentUpon>
+    <Compile Include="frmAddClubWizard.Designer.cs">
+      <DependentUpon>frmAddClubWizard.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddCompetitionWizard.cs">
+    <Compile Include="frmAddCompetitionWizard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddCompetitionWizard.Designer.cs">
-      <DependentUpon>AddCompetitionWizard.cs</DependentUpon>
+    <Compile Include="frmAddCompetitionWizard.Designer.cs">
+      <DependentUpon>frmAddCompetitionWizard.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddGroupWizard.cs">
+    <Compile Include="frmAddGroupWizard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddGroupWizard.Designer.cs">
-      <DependentUpon>AddGroupWizard.cs</DependentUpon>
+    <Compile Include="frmAddGroupWizard.Designer.cs">
+      <DependentUpon>frmAddGroupWizard.cs</DependentUpon>
     </Compile>
     <Compile Include="frmUserWizard.cs">
       <SubType>Form</SubType>
@@ -217,11 +217,11 @@
     <Compile Include="frmManualProfileWizard.Designer.cs">
       <DependentUpon>frmManualProfileWizard.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProfileWizard.cs">
+    <Compile Include="frmProfileWizard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ProfileWizard.Designer.cs">
-      <DependentUpon>ProfileWizard.cs</DependentUpon>
+    <Compile Include="frmProfileWizard.Designer.cs">
+      <DependentUpon>frmProfileWizard.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -280,14 +280,14 @@
     <Compile Include="TabTraining.Designer.cs">
       <DependentUpon>TabTraining.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddClubWizard.resx">
-      <DependentUpon>AddClubWizard.cs</DependentUpon>
+    <EmbeddedResource Include="frmAddClubWizard.resx">
+      <DependentUpon>frmAddClubWizard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddCompetitionWizard.resx">
-      <DependentUpon>AddCompetitionWizard.cs</DependentUpon>
+    <EmbeddedResource Include="frmAddCompetitionWizard.resx">
+      <DependentUpon>frmAddCompetitionWizard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddGroupWizard.resx">
-      <DependentUpon>AddGroupWizard.cs</DependentUpon>
+    <EmbeddedResource Include="frmAddGroupWizard.resx">
+      <DependentUpon>frmAddGroupWizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUserWizard.resx">
       <DependentUpon>frmUserWizard.cs</DependentUpon>
@@ -322,8 +322,8 @@
     <EmbeddedResource Include="frmManualProfileWizard.resx">
       <DependentUpon>frmManualProfileWizard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProfileWizard.resx">
-      <DependentUpon>ProfileWizard.cs</DependentUpon>
+    <EmbeddedResource Include="frmProfileWizard.resx">
+      <DependentUpon>frmProfileWizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -351,7 +351,6 @@
       <DependentUpon>TabTraining.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="doc\SVPModel.mwb" />
     <None Include="ExportTemplate.xltx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -377,14 +376,13 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="doc\SVPModel.sql" />
     <Content Include="SVPEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SVPEntities.edmx</DependentUpon>
       <LastGenOutput>SVPEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="V1.7__SVPEntities.edmx.mig.sql" />
-    <Content Include="V1.7__SVPEntities.edmx.sql" />
+    <Content Include="db\V1.7__SVPEntities.edmx.mig.sql" />
+    <Content Include="db\V1.7__SVPEntities.edmx.sql" />
     <Content Include="SVPEntities.edmx.sql" />
     <Content Include="SVPEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -392,9 +390,8 @@
       <LastGenOutput>SVPEntities.cs</LastGenOutput>
     </Content>
     <Content Include="targetAim.ico" />
-    <Content Include="test.sql" />
-    <Content Include="V1.6__SVPEntities.edmx.mig.sql" />
-    <Content Include="V1.6__SVPEntities.edmx.sql" />
+    <Content Include="db\V1.6__SVPEntities.edmx.mig.sql" />
+    <Content Include="db\V1.6__SVPEntities.edmx.sql" />
     <None Include="Resources\Zielscheibe.png" />
   </ItemGroup>
   <ItemGroup>

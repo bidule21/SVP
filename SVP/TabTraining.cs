@@ -62,7 +62,7 @@ namespace SVP
 
         private void btnNewClub_Click(object sender, EventArgs e)
         {
-            AddClubWizard wizard = new AddClubWizard();
+            frmAddClubWizard wizard = new frmAddClubWizard();
             wizard.ShowDialog();
             reload_Controls();
         }

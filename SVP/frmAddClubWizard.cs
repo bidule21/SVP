@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SVP
 {
-    public partial class AddClubWizard : Form
+    public partial class frmAddClubWizard : Form
     {
-        public AddClubWizard()
+        public frmAddClubWizard()
         {
             InitializeComponent();
         }

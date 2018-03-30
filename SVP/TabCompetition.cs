@@ -117,12 +117,12 @@ namespace SVP
         {
             if (currentCompetition.GetType() != typeof(GroupCompetition))
             {
-                AddClubWizard wizard = new AddClubWizard();
+                frmAddClubWizard wizard = new frmAddClubWizard();
                 wizard.ShowDialog();
             }
             else
             {
-                AddGroupWizard wizard = new AddGroupWizard(currentCompetition);
+                frmAddGroupWizard wizard = new frmAddGroupWizard(currentCompetition);
                 wizard.ShowDialog();
             }
             reload_Controls();
@@ -269,7 +269,7 @@ namespace SVP
 
         private void btnCreateCompetition_Click(object sender, EventArgs e)
         {
-            AddCompetitionWizard wizard = new AddCompetitionWizard();
+            frmAddCompetitionWizard wizard = new frmAddCompetitionWizard();
             if (wizard.ShowDialog() == DialogResult.OK && wizard.Competition != null)
             {
                 using (SVPEntitiesContainer context = new SVPEntitiesContainer())
@@ -300,7 +300,7 @@ namespace SVP
 
         private void btnEditCompetition_Click(object sender, EventArgs e)
         {
-            AddCompetitionWizard wizard = new AddCompetitionWizard(this.currentCompetition);
+            frmAddCompetitionWizard wizard = new frmAddCompetitionWizard(this.currentCompetition);
             if (wizard.ShowDialog() == DialogResult.OK)
             {
                 using (SVPEntitiesContainer context = new SVPEntitiesContainer())
